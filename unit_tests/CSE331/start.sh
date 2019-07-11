@@ -5,7 +5,7 @@
 # extension is for beta only!
 # Do not edit these parameters!
 version=2.4
-extension=0
+extension=0.1
 beta=true
 version_serversideURL="https://github.com/johnkramorbhz/Scripts/raw/master/versions/CSE331shell_version"
 projectURL="https://github.com/johnkramorbhz/Scripts/"
@@ -234,9 +234,9 @@ fi
 function performance_test(){
 echo -e "INFO: Starting performance test. Please wait... \c"
 STARTTIMEPRGM=`date +%s.%N`
-./$binary_name $case1 >> /dev/null
-./$binary_name $case2 >> /dev/null
-./$binary_name $case5 >> /dev/null
+./$binary_name $case1 > /dev/null 2>&1
+./$binary_name $case2 > /dev/null 2>&1
+./$binary_name $case5 > /dev/null 2>&1
 ENDTIMEPRGM=`date +%s.%N`
 TIMEDIFFPRGM=`echo "$ENDTIMEPRGM - $STARTTIMEPRGM" | bc | awk -F"." '{print $1"."substr($2,1,11)}'`
 echo "done"
