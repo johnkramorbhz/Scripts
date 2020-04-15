@@ -25,24 +25,35 @@ resultsfortherun=[]
 lowerPythonVersion=False
 result=[]
 global ubitname
-ubitname=os.environ["ubitname"]
-personNumber=0
+version="2.2.1_final_opensource"
+if len(sys.argv)>1 and sys.argv[1]=="version":
+    print(version)
+    exit()
+try:
+    ubitname=os.environ["ubitname"]
+    debug=bool(os.environ["debug"])
+    global_timeout=int(os.environ["timeout"])
+    quiet=bool(os.environ["quiet"])
+    shell_version=os.environ["version_number"]
+    personNumber=os.environ["personNumber"]
+except:
+    print("ERROR: You need to launch this program from shell scripts provided with it!")
+    exit(1)
 stdoutsOfProgram=[]
 experimentsData=[]
 unusedVar=[]
 fail=False
-debug=bool(os.environ["debug"])
-suppressHeader=False
-version="2.2.0_final_opensource"
-global_timeout=int(os.environ["timeout"])
-quiet=bool(os.environ["quiet"])
-shell_version=os.environ["version_number"]
+try:
+    suppressHeader=os.environ["suppressHeader"]
+except:
+    # PA1 does not require this option, so set it to False.
+    suppressHeader=False
 # End of static section
 
 # item name is the friendly version of command
 # command must be the same as the PA description said!
-testsTupleFormat=("item_name","command","total_grade_of_this_test","earned_grade","stdout","execution_time","test_status")
-experimentTupleFormat=("messages","loss","corruption","time","window","binary_name")
+# testsTupleFormat=("item_name","command","total_grade_of_this_test","earned_grade","stdout","execution_time","test_status")
+# experimentTupleFormat=("messages","loss","corruption","time","window","binary_name")
 hostnamesForGrading=["stones.cse.buffalo.edu","euston.cse.buffalo.edu","embankment.cse.buffalo.edu","underground.cse.buffalo.edu","highgate.cse.buffalo.edu"]
 def clearAll():
     global grade,passgrade,partialgrade,possible_grade,passed,partialPass,failed,maximumgrade,totaltestsrunned,maximumPossibleGrade
@@ -102,7 +113,7 @@ class colours:
         cyan='\033[46m'
         lightgrey='\033[47m'
 def printGrade():
-    print("Current grade: "+str(round(grade,4))+", passes: "+str(passed)+", partially passes: "+str(partialPass)+", fails: "+str(failed))
+    print("Current grade: "+"{:0.4f}".format(grade)+", passes: "+str(passed)+", partially passes: "+str(partialPass)+", fails: "+str(failed))
 def validUBITname(ubitname):
     if len(ubitname)>8 or len(ubitname)<3:
         return False
@@ -1238,8 +1249,8 @@ elif sys.argv[1]=="compile-PA1":
         print("Make sure UBITname is configured properly!")
         exit(1)
     buildPA1(sys.argv[2])
-elif sys.argv[1]=="version":
-    print(version)
+# elif sys.argv[1]=="version":
+#     print(version)
 elif sys.argv[1]=="pre-auth":
     exit(0)
 elif sys.argv[1]=="check-PA1-grader-cfg":

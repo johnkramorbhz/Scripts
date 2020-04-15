@@ -29,8 +29,8 @@ use_binary=$(python3 $pathofpythonscript determine-whether-binary-is-needed)
 else
 use_binary="false"
 fi
-#use_binary="false" #This option allows a static python library to be used. Hence, no need to worry about the python version
-use_binary="force"
+#use_binary="false" #This line allows a static python library to be used. Hence, no need to worry about the python version
+use_binary="force_script" #Only comment this line if you have compiled binary
 if [ "$use_binary" != "false" ]; then
 python3 $pathofpythonscript prompt
 python3 $pathofpythonscript check-required-software
