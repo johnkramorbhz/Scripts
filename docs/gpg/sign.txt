@@ -1,0 +1,5 @@
+gpg --list-keys
+gpg --gen-key
+git config --global commit.gpgsign true
+# export
+gpg --armor --output public-key.gpg --export username@email.com

@@ -1,0 +1,21 @@
+author,author,0
+startup,startup,5
+IP,ip,5
+port,port,2.5
+list,_list,10
+buffer,buffer,5
+login exception,exception_login,2
+refresh,refresh,5
+send,send,15
+send exception,exception_send,2
+broadcast,broadcast,10
+block,block,5
+block exception,exception_block,2
+blocked,blocked,5
+blocked exception,exception_blocked,2
+unblock,unblock,2.5
+unblock exception,exception_unblock,2
+logout,logout,2.5
+exit,exit,2.5
+stat,statistics,5
+bonus,bonus,20
