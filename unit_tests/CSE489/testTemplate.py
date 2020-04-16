@@ -25,10 +25,10 @@ resultsfortherun=[]
 lowerPythonVersion=False
 result=[]
 global ubitname
-version="2.2.2_final_opensource"
+version="2.2.3_final_opensource"
 if len(sys.argv)>1 and sys.argv[1]=="version":
     print(version)
-    exit()
+    sys.exit()
 try:
     ubitname=os.environ["ubitname"]
     debug=bool(os.environ["debug"])
@@ -38,13 +38,13 @@ try:
     personNumber=os.environ["personNumber"]
 except:
     print("ERROR: You need to launch this program from shell scripts provided with it!")
-    exit(1)
+    sys.exit(1)
 stdoutsOfProgram=[]
 experimentsData=[]
 unusedVar=[]
 fail=False
 try:
-    suppressHeader=os.environ["suppressHeader"]
+    suppressHeader=bool(os.environ["suppressHeader"])
 except:
     # PA1 does not require this option, so set it to False.
     suppressHeader=False
@@ -125,7 +125,7 @@ def ifRunningInLinux():
         print(colours.fg.red+"ERROR: Your system is not Linux based OS, which you should NEVER run this test on!",colours.reset)
         print_info("Your OS: "+sys.platform)
         print_info("Refer to the course website for more details!")
-        exit(1)
+        sys.exit(1)
 
 def pass_test(case,score,stdout,exe_time):
     quote='"'
@@ -230,24 +230,25 @@ def check_result(testcase_input,outputfromshell,PAX,stdout,exe_time):
         print("ERROR: Item does not exist!")
         print("Make sure CSV is loaded before running any tests!")
         print("Inputs: testcase_input'"+testcase_input+"' Output:",outputfromshell,"PAX:",PAX)
-        exit(1)
+        sys.exit(1)
 item_failed=""
 def signalHandlerPA1(signum, frame):
     print(colours.fg.red+"ERROR: Timed out! Killing this process!",colours.reset)
     report("PA1")
     timedoutitems.append(item_failed)
-    exit(1)
+    # It should move to the next item
+    # sys.exit(1)
 def callShellCommandsPA1(command,filename,timeouts,PAX):
     for char in command:
         if char == ";":
             print("ERROR: Command input(command) is contaminated where it might cause security hazard.")
             print("Exiting this program for your safety")
-            exit(1)
+            sys.exit(1)
     for char in filename:
         if char == ";":
             print("ERROR: Command input(filename) is contaminated where it might cause security hazard.")
             print("Exiting this program for your safety")
-            exit(1)
+            sys.exit(1)
     if lowerPythonVersion==False:
         signal.signal(signal.SIGALRM, signalHandlerPA1)
         print_info("Calling '"+command+"' into the system shell with "+str(timeouts)+" seconds limit")
@@ -272,18 +273,19 @@ def signalHandlerPA2(signum, frame):
     print(colours.fg.red+"ERROR: Timed out! Killing this process!",colours.reset)
     report("PA2_fail")
     timedoutitems.append(item_failed)
-    exit(1)
+    # It should move to the next item
+    # sys.exit(1)
 def callShellCommandsPA2(command,filename,timeouts,PAX,testTypes):
     for char in testTypes:
         if char == ";":
             print("ERROR: Command input(testTypes) is contaminated where it might cause security hazard.")
             print("Exiting this program for your safety")
-            exit(1)
+            sys.exit(1)
     for char in filename:
         if char == ";":
             print("ERROR: Command input(filename) is contaminated where it might cause security hazard.")
             print("Exiting this program for your safety")
-            exit(1)
+            sys.exit(1)
     if lowerPythonVersion==False:
         signal.signal(signal.SIGALRM, signalHandlerPA2)
         signal.alarm(timeouts)
@@ -316,25 +318,25 @@ def build_tarPA1(ubitname):
         os.remove("../cse489589_assignment1/"+ubitname+"_pa1.tar")
     if not os.path.exists("../cse489589_assignment1/"+ubitname+"/include/logger.h"):
         print("ERROR: logger.h does not exist!")
-        exit(1)
+        sys.exit(1)
     if not os.path.exists("../cse489589_assignment1/"+ubitname+"/src/logger.cpp") and not os.path.exists("../cse489589_assignment1/"+ubitname+"/src/logger.c"):
         print("ERROR: logger.c or logger.cpp does NOT exist")
-        exit(1)
+        sys.exit(1)
     if not os.path.exists("../cse489589_assignment1/"+ubitname+"/src/"+ubitname+"_assignment1.cpp") and not os.path.exists("../cse489589_assignment1/"+ubitname+"/src/"+ubitname+"_assignment1.c"):
         print("ERROR: "+ubitname+"_assignment1.c or "+ubitname+"_assignment1.cpp does not exist!")
-        exit(1)
+        sys.exit(1)
     if os.system("cd ../cse489589_assignment1/"+ubitname+";make >> /dev/null") !=0:
         print(colours.fg.yellow+"WARNING: Your ./assignment1 seems to be unable to compile. Submitting this copy will earn you 0 points!",colours.reset)
         if debug==False:
             print("Since debug mode is disabled, this program will terminate!")
-            exit(1)
+            sys.exit(1)
     if os.system("cd ../cse489589_assignment1/"+ubitname+";make clean >> /dev/null") !=0:
         print("ERROR: make failed to clean!")
-        exit(1)
+        sys.exit(1)
     print_info("Building...")
     if os.system("cd ../cse489589_assignment1/"+ubitname+"/ && tar --exclude='./scripts' -zcf ../"+ubitname+"_pa1.tar *") !=0:
         print("ERROR: Failed to pack up!")
-        exit(1)
+        sys.exit(1)
     else:
         print("INFO: Packing "+ubitname+"_pa1.tar successfully")
 def buildPA2(ubitname):
@@ -345,7 +347,7 @@ def buildPA2(ubitname):
     if os.system("cd ../cse489589_assignment2/"+ubitname+"; make clean >> /dev/null; make >> /dev/null")!=0:
         print("fail")
         print("ERROR: Failed to compile!")
-        exit(1)
+        sys.exit(1)
     print("done")
 def buildPA1(ubitname):
     ifRunningInLinux()
@@ -355,7 +357,7 @@ def buildPA1(ubitname):
     if os.system("cd ../cse489589_assignment1/"+ubitname+"; make clean >> /dev/null; make >> /dev/null")!=0:
         print("fail")
         print("ERROR: make failed to run!")
-        exit(1)
+        sys.exit(1)
     print("done")
 def build_tarPA2(ubitname):
     ifRunningInLinux()
@@ -395,7 +397,7 @@ def build_tarPA2(ubitname):
         print("ERROR: make failed to clean!")
         fail=True
     if fail:
-        exit(1)
+        sys.exit(1)
     if os.path.exists("../cse489589_assignment2/"+ubitname+"/Analysis_Assignment2.pdf"):
         if os.system("cd ../cse489589_assignment2/"+ubitname+"/ && tar --exclude='./scripts' -zcf ../"+ubitname+"_pa2.tar *")!=0:
             print("ERROR: Failed to pack up!")
@@ -406,7 +408,7 @@ def build_tarPA2(ubitname):
         print("ERROR: "+"cse489589_assignment2/"+ubitname+"/Analysis_Assignment2.pdf"+" does NOT exist! Make sure you have this pdf file before continue")
         fail=True
     if fail:
-        exit(1)
+        sys.exit(1)
 def checkDirs():
     if not os.path.exists("../framework/report"):
         os.makedirs("../framework/report")
@@ -428,7 +430,7 @@ def readCSV(filename):
         clearAll()
     if not os.path.exists(filename):
         print("ERROR: File",filename,"does not exist!")
-        exit(1)
+        sys.exit(1)
     with open(filename,'r') as openfile:
         for lines in openfile:
             temp.append(str(lines).strip('\n'))
@@ -441,13 +443,13 @@ def readCSV(filename):
             if char == ";":
                 print("ERROR:",filename,"has been contaminated where it might trick this program to run extra commands!")
                 print("Exiting this program for your safety")
-                exit(1)
+                sys.exit(1)
     #print("INFO: Input sanity check complete")
 
 def getFileChecksum(filename):
     if not os.path.exists(filename):
         print("ERROR: File",filename,"does not exist!")
-        exit(1)
+        sys.exit(1)
     with open(filename,'rb') as openfile:
         bytesFile = openfile.read()
         readable_hashSHA256 = hashlib.sha256(bytesFile).hexdigest()
@@ -740,7 +742,7 @@ def isHostReachable():
         exitCodeSum+=os.system("ping -c 1 " + hosts+" >> /dev/null")
     if exitCodeSum>0:
         print(colours.fg.red+"ERROR: It seems that at least one of the host is not reachable",colours.reset)
-        exit(1)
+        sys.exit(1)
 def ifFileExecutesPA1(ubitname):
     ifRunningInLinux()
     os.system("cd ../cse489589_assignment1/"+ubitname+";make;./assignment1 c AUTHOR")
@@ -756,7 +758,7 @@ def repeatTest(filename_csv,ubitname,testcase,times,PAX):
         int(times)
     except:
         print("Integer only!")
-        exit(1)
+        sys.exit(1)
     if int(times)>0:
         for x in range(0,int(times)):
             t1_instance_start=time.perf_counter()
@@ -796,7 +798,7 @@ def prompt():
             print()
     else:
         if int(sys.version_info[0])==2:
-            exit(1)
+            sys.exit(1)
         global lowerPythonVersion
         lowerPythonVersion=True
         print("CSE489 Auto Test Program in COMPATIBILITY MODE")
@@ -822,7 +824,7 @@ def getCheckSum(filename):
     if not os.path.exists(filename):
         print(colours.fg.red+"ERROR: file'"+filename+"' does not exist!",colours.reset)
         print("Exiting...")
-        exit(1)
+        sys.exit(1)
     print(colours.fg.lightblue+"Reading: '"+filename+"'",colours.reset)
     with open(filename,'rb') as openfile:
         bytesFile = openfile.read()
@@ -838,11 +840,11 @@ def verify(filenameOfSourceFile,filenameOfChecksumFile):
     if not os.path.exists(filenameOfChecksumFile):
         print(colours.fg.red+"ERROR: file'"+filenameOfChecksumFile+"' does not exist!",colours.reset)
         print("Exiting...")
-        exit(1)
+        sys.exit(1)
     if not os.path.exists(filenameOfSourceFile):
         print(colours.fg.red+"ERROR: file'"+filenameOfSourceFile+"' does not exist!",colours.reset)
         print("Exiting...")
-        exit(1)
+        sys.exit(1)
     with open(filenameOfSourceFile,'rb') as openfile:
         bytesFile = openfile.read()
         readable_hashSHA256 = hashlib.sha256(bytesFile).hexdigest()
@@ -858,7 +860,7 @@ def verify(filenameOfSourceFile,filenameOfChecksumFile):
             print(colours.fg.green+"Verification successful",colours.reset)
             openfile.close()
             openCheckSum.close()
-            exit()
+            sys.exit()
         else:
             print(colours.fg.red+"Verification Failed!",colours.reset)
             print("Submission file MD5:",readable_hashMD5)
@@ -867,19 +869,19 @@ def verify(filenameOfSourceFile,filenameOfChecksumFile):
             print("Correct SHA256:",checksums[1])
             openfile.close()
             openCheckSum.close()
-            exit(1)
+            sys.exit(1)
 def run_experiments(messages,loss,corruption,time,window,binary,outputfile,supressHeader,ubitname):
     checkDirs()
     if supressHeader==True:
         if os.system("../cse489589_assignment2/grader/run_experiments -m "+str(messages)+" -l "+str(loss)+" -c "+str(corruption)+" -t "+str(time)+" -w "+str(window)+" -p ../cse489589_assignment2/"+str(ubitname)+"/"+str(binary)+" -o ../framework/report/PA2_experiments/"+str(outputfile)+" -n") !=0:
             print(colours.fg.red+"ERROR: ./run_experiments returned a non-zero exit code!",colours.reset)
             print("For your safety, this program will terminate!")
-            exit(1)
+            sys.exit(1)
     else:
         if os.system("../cse489589_assignment2/grader/run_experiments -m "+str(messages)+" -l "+str(loss)+" -c "+str(corruption)+" -t "+str(time)+" -w "+str(window)+" -p ../cse489589_assignment2/"+str(ubitname)+"/"+str(binary)+" -o ../framework/report/PA2_experiments/"+str(outputfile)) !=0:
             print(colours.fg.red+"ERROR: ./run_experiments returned a non-zero exit code!",colours.reset)
             print("For your safety, this program will terminate!")
-            exit(1)
+            sys.exit(1)
 def check_software_installed_ubuntu():
     import apt
     sfNotInstalled=[]
@@ -896,24 +898,24 @@ def check_software_installed_ubuntu():
         for sf in sfNotInstalled:
             print(sf+" ",end='')
         print()
-        exit(1)
+        sys.exit(1)
 def check_software_installed_redhat_centos():
-    exit()
+    sys.exit()
 def checkAIStatement():
     print("TODO")
 #Launcher portion
 if len(sys.argv)<2:
     prompt()
     print("Usage can be found in https://github.com/johnkramorbhz/Scripts/blob/master/unit_tests/CSE489/usage.md")
-    exit(1)
+    sys.exit(1)
 if sys.argv[1]=="test-indv-PA1":
     if sys.argv[-1]=="test":
         print(sys.argv)
-        exit()
+        sys.exit()
     if len(sys.argv)!=5:
         print("ERROR: Arguments incorrect for test-indv!")
         print("Usage: ./test.sh --test-indv test_case")
-        exit(1)
+        sys.exit(1)
     t1_start = time.perf_counter()
     readCSV(sys.argv[2])
     #ubitname=sys.argv[3]
@@ -927,12 +929,12 @@ if sys.argv[1]=="test-indv-PA1":
 elif sys.argv[1]=="test-all-PA1":
     if sys.argv[-1]=="test":
         print(sys.argv)
-        exit()
+        sys.exit()
     # Changes needs to be made here since PAX need to select appropriate test functions
     if len(sys.argv)!=5:
         print("ERROR: Arguments incorrect for test-all!")
         print("Usage: ./test.sh --test-all")
-        exit(1)
+        sys.exit(1)
     t1_start = time.perf_counter() 
     isHostReachable()
     #ubitname=sys.argv[3]
@@ -943,11 +945,11 @@ elif sys.argv[1]=="test-all-PA1":
 elif sys.argv[1]=="repeat-PA1":
     if sys.argv[-1]=="test":
         print(sys.argv)
-        exit()
+        sys.exit()
     if len(sys.argv)!=7:
         print("ERROR: Arguments incorrect for repeat!")
         print("Arguments are ./test.sh --repeat test_case times")
-        exit(1)
+        sys.exit(1)
     t1_start = time.perf_counter()
     readCSV(sys.argv[2])
     #ubitname=sys.argv[3]
@@ -957,12 +959,12 @@ elif sys.argv[1]=="repeat-PA1":
 elif sys.argv[1]=="repeat-test-all-PA1":
     if sys.argv[-1]=="test":
         print(sys.argv)
-        exit()
+        sys.exit()
     # Changes needs to be made here since PAX need to select appropriate test functions
     if len(sys.argv)!=6:
         print("ERROR: Arguments incorrect for test-all!")
         print("Usage: ./test.sh --repeat-all times")
-        exit(1)
+        sys.exit(1)
     #ubitname=sys.argv[3]
     try:
         totalRunCount=int(sys.argv[5])
@@ -974,7 +976,7 @@ elif sys.argv[1]=="repeat-test-all-PA1":
     isHostReachable()
     if int(sys.argv[5])<=0:
         print("Enter an integer that is more than 0")
-        exit(1)
+        sys.exit(1)
     # sys.argv[2]= csvlocation [3]=ubitname [4]=PAX [5]=times
     
     for x in range(0,int(sys.argv[5])):
@@ -987,35 +989,35 @@ elif sys.argv[1]=="repeat-test-all-PA1":
 elif sys.argv[1]=="build-PA1":
     if sys.argv[-1]=="test":
         print(sys.argv)
-        exit()
+        sys.exit()
     if len(sys.argv)!=3 or len(sys.argv[2])==0 or len(sys.argv[2])>8:
         print(colours.fg.red+"ERROR: Arguments incorrect for build-PA1!",colours.reset)
         print("Make sure UBITname is configured properly!")
-        exit(1)
+        sys.exit(1)
     build_tarPA1(sys.argv[2])
 elif sys.argv[1]=="build-PA2":
     if sys.argv[-1]=="test":
         print(sys.argv)
-        exit()
+        sys.exit()
     if len(sys.argv)!=3 or len(sys.argv[2])==0 or len(sys.argv[2])>8:
         print(colours.fg.red+"ERROR: Arguments incorrect for build-PA2!",colours.reset)
         print("Make sure UBITname is configured properly!")
-        exit(1)
+        sys.exit(1)
     build_tarPA2(sys.argv[2])
 elif sys.argv[1]=="compile-PA2":
     if sys.argv[-1]=="test":
         print(sys.argv)
-        exit()
+        sys.exit()
     if len(sys.argv)!=3 or len(sys.argv[2])==0 or len(sys.argv[2])>8:
         print(colours.fg.red+"ERROR: Arguments incorrect for build-PA2!",colours.reset)
         print("Make sure UBITname is configured properly!")
-        exit(1)
+        sys.exit(1)
     buildPA2(sys.argv[2])
     #ubitname=sys.argv[2]
 elif sys.argv[1]=="test-all-PA2":
     if sys.argv[-1]=="test":
         print(sys.argv)
-        exit()
+        sys.exit()
     # Changes needs to be made here since PAX need to select appropriate test functions
     t1_start = time.perf_counter() 
     isHostReachable()
@@ -1027,7 +1029,7 @@ elif sys.argv[1]=="test-all-PA2":
 elif sys.argv[1]=="test-file-PA2":
     if sys.argv[-1]=="test":
         print(sys.argv)
-        exit()
+        sys.exit()
     t1_start = time.perf_counter()
     isHostReachable()
     #run_individual_testPA2(filename_csv,ubitname,testcase,testType,PAX)
@@ -1037,11 +1039,11 @@ elif sys.argv[1]=="test-file-PA2":
 elif sys.argv[1]=="test-indv-PA2":
     if sys.argv[-1]=="test":
         print(sys.argv)
-        exit()
+        sys.exit()
     if len(sys.argv)!=6:
         print("ERROR: Arguments incorrect for test-indv!")
         print("Usage: ./test.sh --test-indv category test_case")
-        exit(1)
+        sys.exit(1)
     t1_start = time.perf_counter()
     readCSV(sys.argv[2])
     if item_exist(sys.argv[4]):
@@ -1055,17 +1057,17 @@ elif sys.argv[1]=="test-indv-PA2":
 elif sys.argv[1]=="checksum":
     if sys.argv[-1]=="test":
         print(sys.argv)
-        exit()
+        sys.exit()
     getCheckSum(sys.argv[2])
 elif sys.argv[1]=="verify":
     if sys.argv[-1]=="test":
         print(sys.argv)
-        exit()
+        sys.exit()
     verify(sys.argv[2],sys.argv[3])
 elif sys.argv[1]=="getHost":
     if sys.argv[-1]=="test":
         print(sys.argv)
-        exit()
+        sys.exit()
     if int(sys.argv[2]) % 5 == 0:
         print("embankment.cse.buffalo.edu")
     elif int(sys.argv[2]) % 5 == 1:
@@ -1079,30 +1081,30 @@ elif sys.argv[1]=="getHost":
 elif sys.argv[1]=="check-parameter-PA2":
     if sys.argv[-1]=="test":
         print(sys.argv)
-        exit()
+        sys.exit()
     if len(os.environ["ubitname"])>8 or len(os.environ["ubitname"])<2:
         print("UBITname error!")
-        exit(1)
+        sys.exit(1)
     if len(os.environ["semester"])==0:
         print("semester cannot be blank!")
-        exit(1)
+        sys.exit(1)
     if len(str(sys.argv[4]))<8:
         print("Person number cannot be blank!")
-        exit(1)
+        sys.exit(1)
 elif sys.argv[1]=="check-parameter-PA1":
     if sys.argv[-1]=="test":
         print(sys.argv)
-        exit()
+        sys.exit()
     if len(os.environ["ubitname"])>8 or len(os.environ["ubitname"])<2:
         print("UBITname error!")
-        exit(1)
+        sys.exit(1)
     if len(os.environ["semester"])==0:
         print("semester cannot be blank!")
-        exit(1)
+        sys.exit(1)
 elif sys.argv[1]=="run-experiments-batch":
     if sys.argv[-1]=="test":
         print(sys.argv)
-        exit()
+        sys.exit()
     suppressHeader=bool(os.environ["suppressHeader"])
     buildPA2(os.environ["ubitname"])
     print("ABT binary SHA256:"+getFileChecksum("../cse489589_assignment2/"+os.environ["ubitname"]+"/abt")[0])
@@ -1131,7 +1133,7 @@ elif sys.argv[1]=="run-experiments-batch":
 elif sys.argv[1]=="test-experiment-one":
     if sys.argv[-1]=="test":
         print(sys.argv)
-        exit()
+        sys.exit()
     buildPA2(sys.argv[2])
     print("ABT binary SHA256:"+getFileChecksum("../cse489589_assignment2/"+sys.argv[2]+"/abt")[0])
     print("GBN binary SHA256:"+getFileChecksum("../cse489589_assignment2/"+sys.argv[2]+"/gbn")[0])
@@ -1141,7 +1143,7 @@ elif sys.argv[1]=="test-experiment-one":
 elif sys.argv[1]=="trim-all-reports":
     if sys.argv[-1]=="test":
         print(sys.argv)
-        exit()
+        sys.exit()
     #print(glob.glob("../framework/report/PA2_experiments/*.csv"))
     listoffiles=copy.deepcopy(glob.glob("../framework/report/PA2_experiments/*.csv"))
     if os.path.exists("../framework/report/PA2_experiments/old"):
@@ -1174,7 +1176,7 @@ elif sys.argv[1]=="trim-all-reports":
 elif sys.argv[1]=="trim-all-headers":
     if sys.argv[-1]=="test":
         print(sys.argv)
-        exit()
+        sys.exit()
     #print(glob.glob("../framework/report/PA2_experiments/*.csv"))
     listoffiles=copy.deepcopy(glob.glob("../framework/report/PA2_experiments/*.csv"))
     if os.path.exists("../framework/report/PA2_experiments/old"):
@@ -1203,7 +1205,7 @@ elif sys.argv[1]=="trim-all-headers":
 elif sys.argv[1]=="add-headers-to-all-files":
     if sys.argv[-1]=="test":
         print(sys.argv)
-        exit()
+        sys.exit()
     #print(glob.glob("../framework/report/PA2_experiments/*.csv"))
     listoffiles=copy.deepcopy(glob.glob("../framework/report/PA2_experiments/*.csv"))
     if os.path.exists("../framework/report/PA2_experiments/old"):
@@ -1245,16 +1247,16 @@ elif sys.argv[1]=="clean-all-binaries":
 elif sys.argv[1]=="compile-PA1":
     if sys.argv[-1]=="test":
         print(sys.argv)
-        exit()
+        sys.exit()
     if len(sys.argv)!=3 or len(sys.argv[2])==0 or len(sys.argv[2])>8:
         print(colours.fg.red+"ERROR: Arguments incorrect for compile-PA1!",colours.reset)
         print("Make sure UBITname is configured properly!")
-        exit(1)
+        sys.exit(1)
     buildPA1(sys.argv[2])
 # elif sys.argv[1]=="version":
 #     print(version)
 elif sys.argv[1]=="pre-auth":
-    exit(0)
+    sys.exit(0)
 elif sys.argv[1]=="check-PA1-grader-cfg":
     failedHostCheck=False
     with open("../cse489589_assignment1/grader/grader.cfg",'r') as openfile:
@@ -1267,17 +1269,17 @@ elif sys.argv[1]=="check-PA1-grader-cfg":
                 port_cfg=int(lines.split(" ")[1])
             except:
                 print("ERROR: grader.cfg is not configured for port field!")
-                exit(1)
+                sys.exit(1)
             if port_cfg<=0:
                 print("ERROR: Port is not valid!")
-                exit(1)
+                sys.exit(1)
             print('INFO: "grader.cfg" configuration OK')
             for hosts in hostnamesForGrading:
                 if os.system("nc -zv "+hosts+" "+str(port_cfg)+" >> /dev/null 2>&1")!=0:
                     print("ERROR: Port",port_cfg,"on",hosts,"is unreachable!")
                     failedHostCheck=True
             if failedHostCheck:
-                exit(1)
+                sys.exit(1)
             print("INFO: Port check OK")
 elif sys.argv[1]=="check-PA3-grader-cfg":
     with open("../cse489589_assignment3/grader/grader.cfg",'r') as openfile:
@@ -1298,7 +1300,7 @@ elif sys.argv[1]=="check-PA3-grader-cfg":
                 print("ERROR: grader.cfg is not configured for id field!")
                 fail=True
     if fail:
-            exit(1)
+            sys.exit(1)
 elif sys.argv[1]=="check-software-installed-ubuntu":
     check_software_installed_ubuntu()
 elif sys.argv[1]=="check-software-installed-redhat-centos":
@@ -1324,7 +1326,7 @@ elif sys.argv[1]=="autocompile":
         os.system("pyinstaller -F ../framework/testTemplate.py && mv dist/testTemplate ../framework/testTemplate && rm -rf build dist testTemplate testTemplate.spec ../framework/__pycache__")
     except:
         print("pyinstaller is NOT installed!")
-        exit(1)
+        sys.exit(1)
 elif sys.argv[1]=="determine-whether-binary-is-needed":
     if int(sys.version_info[0])>=3 and int(sys.version_info[1])>=5:
         print("True")
