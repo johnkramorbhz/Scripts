@@ -902,7 +902,7 @@ def check_software_installed_redhat_centos():
 #Launcher portion
 if len(sys.argv)<2:
     prompt()
-    print("Usage can be found in https://github.com/johnkramorbhz/CSE489/tree/master/projects")
+    print("Usage can be found in https://github.com/johnkramorbhz/Scripts/blob/master/unit_tests/CSE489/usage.md")
     exit(1)
 if sys.argv[1]=="test-indv-PA1":
     if sys.argv[-1]=="test":
