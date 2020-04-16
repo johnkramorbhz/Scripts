@@ -26,7 +26,7 @@ use_binary=$(python3 $pathofpythonscript determine-whether-binary-is-needed)
 else
 use_binary="false"
 fi
-#use_binary="false" #This line allows a static python library to be used. Hence, no need to worry about the python version
+#use_binary="false" #Uncomment this line to force binary
 #use_binary="force_script" #Uncomment this line to force Python3 interpreter
 if hash nc 2>/dev/null; then
 echo -e "\c"
@@ -43,10 +43,6 @@ echo "Make sure UBITname, semester are configured!"
 exit 1
 fi
 else
-echo "INFO: Showing the following line means python binary cannot use exit() function"
-echo "NameError: name 'exit' is not defined" 
-echo "INFO: Auto Test will start in 2 seconds"
-sleep 2
 $pathofbinary prompt
 $pathofbinary check-required-software
 $pathofbinary check-parameter-PA1

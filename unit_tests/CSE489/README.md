@@ -24,6 +24,14 @@ cse489589_assignment2/
 framework/
 ```
 
+## Update
+
+Both script version and binary version in this repo supports update from themselves. AFTER go to `framework` directory, use the command below
+
+Script version: `python3 testTemplate.py update`
+
+Binary version: `./testTemplate_bin update`
+
 ## High-level overview
 
 Under `framework/report`, there are reports having name of `PAX_Date_Time`, where date is formatted `YYYY-MM-DD` and time is `HH.MM.SS`
@@ -35,7 +43,7 @@ It is also available in the binary form, which is `testTemplate_bin`. I will man
 It requires `python3` on CentOS 7 and later(e.g. Ubuntu 18.04 and later). If it does not work for whatever reason or you prefer one of the modes, find these lines in the `test.sh`
 
 ```bash
-#use_binary="false" #This line allows a static python library to be used. Hence, no need to worry about the python version
+#use_binary="false" #Uncomment this line to force binary
 #use_binary="force_script" #Uncomment this line to force Python3 interpreter
 ```
 
