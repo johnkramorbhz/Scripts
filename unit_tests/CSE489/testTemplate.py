@@ -27,7 +27,7 @@ result=[]
 global ubitname
 version="2.2.4_final_opensource"
 # For binary auto-update only
-revision=3
+revision=4
 def checkDirs():
     if not os.path.exists("../framework/report"):
         os.makedirs("../framework/report")
@@ -60,8 +60,8 @@ if len(sys.argv)>1 and sys.argv[1]=="install":
     exp2_02URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_experiment2_0.2_ds.csv;"
     exp2_05URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_experiment2_0.5_ds.csv;"
     exp2_08URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_experiment2_0.8_ds.csv;"
-    script_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate.py"
-    binary_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate_bin"
+    script_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate.py;"
+    binary_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate_bin;"
     if not sys.platform.startswith('linux'):
         print("ERROR: Make sure you are running it in Linux")
         sys.exit(1)
