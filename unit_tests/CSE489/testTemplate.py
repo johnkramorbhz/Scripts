@@ -25,7 +25,7 @@ resultsfortherun=[]
 lowerPythonVersion=False
 result=[]
 global ubitname
-version="2.2.5_final_opensource"
+version="2.2.6_final_opensource"
 # For binary auto-update only
 revision=0
 def checkDirs():
@@ -96,7 +96,7 @@ if len(sys.argv)>1 and sys.argv[1]=="update":
     if os.system("wget -q --spider https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate.py")!=0:
         print("ERROR: You do NOT have wget installed or You do NOT have Internet access!")
         sys.exit(1)
-    os.system("rm -rf testTemplate.py testTemplate_bin;wget -O testTemplate.py https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate.py; wget -O testTemplate_bin https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate_bin")
+    os.system("rm -rf testTemplate.py testTemplate_bin;wget -O testTemplate.py https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate.py; wget -O testTemplate_bin https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate_bin; chmod u+x testTemplate_bin")
     sys.exit()        
 try:
     ubitname=os.environ["ubitname"]
