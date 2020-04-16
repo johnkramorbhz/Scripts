@@ -2,7 +2,7 @@
 
 PROVIDED AS IS WITHOUT WARRANTY OR SERVICE.
 
-## [Click here for usage](https://github.com/johnkramorbhz/Scripts/blob/master/unit_tests/CSE489/usage.md)
+### [Click here for usage](https://github.com/johnkramorbhz/Scripts/blob/master/unit_tests/CSE489/usage.md)
 
 ## Installation
 
