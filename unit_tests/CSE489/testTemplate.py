@@ -27,7 +27,7 @@ result=[]
 global ubitname
 version="2.2.4_final_opensource"
 # For binary auto-update only
-revision=6
+revision=7
 def checkDirs():
     if not os.path.exists("../framework/report"):
         os.makedirs("../framework/report")
@@ -96,7 +96,8 @@ if len(sys.argv)>1 and sys.argv[1]=="update":
     if os.system("wget --version")!=0:
         print("ERROR: You do NOT have wget installed!")
         sys.exit(1)
-    os.system("wget -O testTemplate.py https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate.py; wget -O testTemplate_bin https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate_bin")        
+    os.system("wget -O testTemplate.py https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate.py; wget -O testTemplate_bin https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate_bin")
+    sys.exit()        
 try:
     ubitname=os.environ["ubitname"]
     debug=bool(os.environ["debug"])
