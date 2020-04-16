@@ -29,6 +29,8 @@ Under `framework/report`, there are reports having name of `PAX_Date_Time`, wher
 
 `testTemplate.py` is the backend of the `./test.sh` in each Programming Assignment folder
 
+It is also available in the binary form, which is `testTemplate_bin`. I will manually update `testTemplate_bin` because `pyInstaller` does not create a static binary. 
+
 It requires `python3` on CentOS 7 and later(e.g. Ubuntu 18.04 and later). If it is too old, I cannot assure it will work.
 
 ```

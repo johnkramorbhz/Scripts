@@ -25,9 +25,60 @@ resultsfortherun=[]
 lowerPythonVersion=False
 result=[]
 global ubitname
-version="2.2.3_final_opensource"
+version="2.2.4_final_opensource"
+# For binary auto-update only
+revision=1
+def checkDirs():
+    if not os.path.exists("../framework/report"):
+        os.makedirs("../framework/report")
+        os.makedirs("../framework/report/PA1")
+        os.makedirs("../framework/report/PA2")
+        os.makedirs("../framework/report/PA2_experiments")
+        os.makedirs("../framework/report/PA2_fail")
+    if not os.path.exists("../framework/report/PA1"):
+        os.makedirs("../framework/report/PA2")
+    if not os.path.exists("../framework/report/PA2"):
+        os.makedirs("../framework/report/PA2")
+    if not os.path.exists("../framework/report/PA2_experiments"):
+        os.makedirs("../framework/report/PA2_experiments")
+    if not os.path.exists("../framework/report/PA2_fail"):
+        os.makedirs("../framework/report/PA2_fail")
 if len(sys.argv)>1 and sys.argv[1]=="version":
     print(version)
+    #print("revision: "+str(revision))
+    sys.exit()
+if len(sys.argv)>1 and sys.argv[1]=="install":
+    wget_useragent='"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.92 Safari/537.36"'
+    wget_friendly="wget -q -U "+wget_useragent+" "
+    # Filenames
+    pa1CSV_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA1.csv;"
+    pa2bas_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_basic.csv;"
+    pa2adv_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_advanced.csv;"
+    pa2san_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_sanity.csv;"
+    exp1_10URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_experiment1_10_ds.csv;"
+    exp1_50URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_experiment1_50_ds.csv;"
+    exp2_02URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_experiment2_0.2_ds.csv;"
+    exp2_05URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_experiment2_0.5_ds.csv;"
+    exp2_08URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_experiment2_0.8_ds.csv;"
+
+    if not sys.platform.startswith('linux'):
+        print("ERROR: Make sure you are running it in Linux")
+        sys.exit(1)
+    if os.system("wget --version")!=0:
+        print("ERROR: You do NOT have wget installed!")
+        sys.exit(1)
+    print("Populating directories...")
+    os.makedirs("cse489589_assignment1")
+    os.makedirs("cse489589_assignment2")
+    os.makedirs("framework")
+    print("INFO: Running PA1 installing script...")
+    os.system("cd cse489589_assignment1;"+wget_friendly+"https://ubwins.cse.buffalo.edu/cse-489_589/assignment1_init_script.sh; chmod +x assignment1_init_script.sh;"+wget_friendly+"-O test.sh https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA1_test.sh;"+"./assignment1_init_script.sh")
+    print("INFO: Running PA2 installing script...")
+    os.system("cd cse489589_assignment2;"+wget_friendly+"https://ubwins.cse.buffalo.edu/cse-489_589/pa2/assignment2_init_script.sh; chmod +x assignment2_init_script.sh;"+wget_friendly+"-O test.sh https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_test.sh;"+"./assignment2_init_script.sh")
+    print("INFO: Populating framework directory")
+    os.system("cd framework;"+pa1CSV_URL+pa2bas_URL+pa2adv_URL+pa2san_URL+exp1_10URL+exp1_50URL+exp2_02URL+exp2_05URL+exp2_08URL)
+    print("INFO: Generating report folders")
+    checkDirs()
     sys.exit()
 try:
     ubitname=os.environ["ubitname"]
@@ -409,21 +460,6 @@ def build_tarPA2(ubitname):
         fail=True
     if fail:
         sys.exit(1)
-def checkDirs():
-    if not os.path.exists("../framework/report"):
-        os.makedirs("../framework/report")
-        os.makedirs("../framework/report/PA1")
-        os.makedirs("../framework/report/PA2")
-        os.makedirs("../framework/report/PA2_experiments")
-        os.makedirs("../framework/report/PA2_fail")
-    if not os.path.exists("../framework/report/PA1"):
-        os.makedirs("../framework/report/PA2")
-    if not os.path.exists("../framework/report/PA2"):
-        os.makedirs("../framework/report/PA2")
-    if not os.path.exists("../framework/report/PA2_experiments"):
-        os.makedirs("../framework/report/PA2_experiments")
-    if not os.path.exists("../framework/report/PA2_fail"):
-        os.makedirs("../framework/report/PA2_fail")
 def readCSV(filename):
     #print_info("Reading: "+filename)
     if len(tests)>0:
