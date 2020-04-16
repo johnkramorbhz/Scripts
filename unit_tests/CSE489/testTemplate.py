@@ -88,7 +88,7 @@ if len(sys.argv)>1 and sys.argv[1]=="install":
     os.makedirs("framework/report/PA2")
     os.makedirs("framework/report/PA2_experiments")
     os.makedirs("framework/report/PA2_fail")
-    print("Making sure scripts can be executed")
+    print("INFO: Making sure scripts can be executed")
     os.system("cd framework; chmod u+x testTemplate_bin")
     os.system("cd cse489589_assignment1; chmod u+x test.sh")
     os.system("cd cse489589_assignment2; chmod u+x test.sh")
