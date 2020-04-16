@@ -27,7 +27,7 @@ result=[]
 global ubitname
 version="2.2.4_final_opensource"
 # For binary auto-update only
-revision=1
+revision=2
 def checkDirs():
     if not os.path.exists("../framework/report"):
         os.makedirs("../framework/report")
@@ -60,14 +60,19 @@ if len(sys.argv)>1 and sys.argv[1]=="install":
     exp2_02URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_experiment2_0.2_ds.csv;"
     exp2_05URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_experiment2_0.5_ds.csv;"
     exp2_08URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_experiment2_0.8_ds.csv;"
-
+    script_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate.py"
+    binary_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate_bin"
     if not sys.platform.startswith('linux'):
         print("ERROR: Make sure you are running it in Linux")
         sys.exit(1)
     if os.system("wget --version")!=0:
         print("ERROR: You do NOT have wget installed!")
         sys.exit(1)
-    print("Populating directories...")
+    if os.path.exists("framework"):
+        print("WARNING: You should NOT run this script unless you want to REPLACE EVERYTHING!!!")
+        print("Closing this program for your safety")
+        sys.exit(1)
+    print("INFO: Populating directories...")
     os.makedirs("cse489589_assignment1")
     os.makedirs("cse489589_assignment2")
     os.makedirs("framework")
@@ -76,9 +81,15 @@ if len(sys.argv)>1 and sys.argv[1]=="install":
     print("INFO: Running PA2 installing script...")
     os.system("cd cse489589_assignment2;"+wget_friendly+"https://ubwins.cse.buffalo.edu/cse-489_589/pa2/assignment2_init_script.sh; chmod +x assignment2_init_script.sh;"+wget_friendly+"-O test.sh https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_test.sh;"+"./assignment2_init_script.sh")
     print("INFO: Populating framework directory")
-    os.system("cd framework;"+pa1CSV_URL+pa2bas_URL+pa2adv_URL+pa2san_URL+exp1_10URL+exp1_50URL+exp2_02URL+exp2_05URL+exp2_08URL)
+    os.system("cd framework;"+pa1CSV_URL+pa2bas_URL+pa2adv_URL+pa2san_URL+exp1_10URL+exp1_50URL+exp2_02URL+exp2_05URL+exp2_08URL+script_URL+binary_URL)
     print("INFO: Generating report folders")
     checkDirs()
+    print("Making sure scripts can be executed")
+    os.system("cd framework; chmod u+x testTemplate_bin")
+    os.system("cd cse489589_assignment1; chmod u+x test.sh")
+    os.system("cd cse489589_assignment2; chmod u+x test.sh")
+    print("INFO: Cleaning up...")
+    os.system("rm -rf testTemplate.py testTemplate_bin testTemplate")
     sys.exit()
 try:
     ubitname=os.environ["ubitname"]
