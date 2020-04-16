@@ -11,9 +11,9 @@ timeout=200
 # End of personalisation section
 
 filename="${ubitname}_pa2.tar"
-version_number="2.0.4_PA2"
+version_number="2.0.5_PA2_opensource"
 pathofpythonscript="../framework/testTemplate.py"
-pathofbinary="../framework/testTemplate"
+pathofbinary="../framework/testTemplate_bin"
 checksumFile=""
 export ubitname
 export fullname
@@ -30,7 +30,7 @@ else
 use_binary="false"
 fi
 #use_binary="false" #This line allows a static python library to be used. Hence, no need to worry about the python version
-use_binary="force_script" #Only comment this line if you have compiled binary
+#use_binary="force_script" #Uncomment this line to force Python3 interpreter
 if [ "$use_binary" != "false" ]; then
 python3 $pathofpythonscript prompt
 python3 $pathofpythonscript check-required-software

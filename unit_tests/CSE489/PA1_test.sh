@@ -9,10 +9,10 @@ timeout=190
 quiet="" # Put anything inside "" to set it to be true
 # End of personalisation section
 pathofpythonscript="../framework/testTemplate.py"
-pathofbinary="../framework/testTemplate"
+pathofbinary="../framework/testTemplate_bin"
 filename="${ubitname}_pa1.tar"
 csvlocation="../framework/PA1.csv"
-version_number="1.4.2_PA1"
+version_number="1.4.3_PA1_opensource"
 export ubitname
 export fullname
 export semester
@@ -27,7 +27,7 @@ else
 use_binary="false"
 fi
 #use_binary="false" #This line allows a static python library to be used. Hence, no need to worry about the python version
-use_binary="force_script" #Only comment this line if you have compiled binary
+#use_binary="force_script" #Uncomment this line to force Python3 interpreter
 if hash nc 2>/dev/null; then
 echo -e "\c"
 else
