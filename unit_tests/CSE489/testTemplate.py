@@ -25,7 +25,7 @@ resultsfortherun=[]
 lowerPythonVersion=False
 result=[]
 global ubitname
-version="2.2.1_final_opensource"
+version="2.2.2_final_opensource"
 if len(sys.argv)>1 and sys.argv[1]=="version":
     print(version)
     exit()
@@ -899,6 +899,8 @@ def check_software_installed_ubuntu():
         exit(1)
 def check_software_installed_redhat_centos():
     exit()
+def checkAIStatement():
+    print("TODO")
 #Launcher portion
 if len(sys.argv)<2:
     prompt()
