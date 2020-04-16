@@ -25,7 +25,7 @@ resultsfortherun=[]
 lowerPythonVersion=False
 result=[]
 global ubitname
-version="2.2.6_final_opensource"
+version="2.2.7_final_opensource"
 # For binary auto-update only
 revision=0
 def checkDirs():
@@ -830,7 +830,7 @@ def repeatTest(filename_csv,ubitname,testcase,times,PAX):
 def readGeneratedCSV(fileToExport):
     print_info("Reading: "+fileToExport)
 def prompt():
-    if int(sys.version_info[0])>=3 and int(sys.version_info[1])>=5:
+    if int(sys.version_info[0])>=3 and int(sys.version_info[1])>=4:
         print("CSE489 Auto Test Program")
         print("Program Version:",version)
         print("Shell Code Version:",shell_version)
@@ -1382,7 +1382,7 @@ elif sys.argv[1]=="autocompile":
         print("pyinstaller is NOT installed!")
         sys.exit(1)
 elif sys.argv[1]=="determine-whether-binary-is-needed":
-    if int(sys.version_info[0])>=3 and int(sys.version_info[1])>=5:
+    if int(sys.version_info[0])>=3 and int(sys.version_info[1])>=4:
         print("True")
     else:
         print("false")

@@ -8,22 +8,23 @@ PROVIDED AS IS WITHOUT WARRANTY OR SERVICE.
 
 ## Installation
 
-Make a soft link for `PA1_test.sh` and `PA2_test.sh` to each directory respectively.
+If you do not want to use `python3`
 
-e.g. `PA1_test.sh` goes to `../cse489589_assignment1` and `PA2_test.sh` goes to `../cse489589_assignment2`
+`wget https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate_bin; chmod u+x testTemplate_bin; ./testTemplate_bin install`
 
-Where directory structure is
+If you want to use `python3`
+
+`wget https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate.py; python3 testTemplate.py install`
+
+After installation, the directory structure looks like this
 
 ```
-../cse489589_assignment1/
-../cse489589_assignment2/
-../framework/
+cse489589_assignment1/
+cse489589_assignment2/
+framework/
 ```
-`../framework/` contains everything else other and it is where these item goes.
 
 ## High-level overview
-
-By default the `framework/report` folder will be ignored by the git because this repository only serves as a code base.
 
 Under `framework/report`, there are reports having name of `PAX_Date_Time`, where date is formatted `YYYY-MM-DD` and time is `HH.MM.SS`
 
@@ -31,11 +32,11 @@ Under `framework/report`, there are reports having name of `PAX_Date_Time`, wher
 
 It is also available in the binary form, which is `testTemplate_bin`. I will manually update `testTemplate_bin` because `pyInstaller` does not create a static binary. 
 
-It requires `python3` on CentOS 7 and later(e.g. Ubuntu 18.04 and later). If it is too old, I cannot assure it will work.
+It requires `python3` on CentOS 7 and later(e.g. Ubuntu 18.04 and later). If it does not work for whatever reason or you prefer one of the modes, find these lines in the `test.sh`
 
-```
-timberlake {~} > python3 --version
-Python 3.4.3
+```bash
+#use_binary="false" #This line allows a static python library to be used. Hence, no need to worry about the python version
+#use_binary="force_script" #Uncomment this line to force Python3 interpreter
 ```
 
 
