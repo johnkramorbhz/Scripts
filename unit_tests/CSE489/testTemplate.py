@@ -27,7 +27,7 @@ result=[]
 global ubitname
 version="2.2.4_final_opensource"
 # For binary auto-update only
-revision=2
+revision=3
 def checkDirs():
     if not os.path.exists("../framework/report"):
         os.makedirs("../framework/report")
@@ -83,7 +83,11 @@ if len(sys.argv)>1 and sys.argv[1]=="install":
     print("INFO: Populating framework directory")
     os.system("cd framework;"+pa1CSV_URL+pa2bas_URL+pa2adv_URL+pa2san_URL+exp1_10URL+exp1_50URL+exp2_02URL+exp2_05URL+exp2_08URL+script_URL+binary_URL)
     print("INFO: Generating report folders")
-    checkDirs()
+    os.makedirs("framework/report")
+    os.makedirs("framework/report/PA1")
+    os.makedirs("framework/report/PA2")
+    os.makedirs("framework/report/PA2_experiments")
+    os.makedirs("framework/report/PA2_fail")
     print("Making sure scripts can be executed")
     os.system("cd framework; chmod u+x testTemplate_bin")
     os.system("cd cse489589_assignment1; chmod u+x test.sh")
