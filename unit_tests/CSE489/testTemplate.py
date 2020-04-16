@@ -25,7 +25,7 @@ resultsfortherun=[]
 lowerPythonVersion=False
 result=[]
 global ubitname
-version="2.2.7_final_opensource"
+version="2.2.8_final_opensource"
 # For binary auto-update only
 revision=0
 def checkDirs():
@@ -47,6 +47,10 @@ if len(sys.argv)>1 and sys.argv[1]=="version":
     print(version)
     #print("revision: "+str(revision))
     sys.exit()
+if len(sys.argv)>1 and sys.argv[1]=="revision":
+    #print(version)
+    print(revision)
+    sys.exit()
 if len(sys.argv)>1 and sys.argv[1]=="install":
     wget_useragent='"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.92 Safari/537.36"'
     wget_friendly="wget -q -U "+wget_useragent+" "
@@ -62,10 +66,14 @@ if len(sys.argv)>1 and sys.argv[1]=="install":
     exp2_08URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_experiment2_0.8_ds.csv;"
     script_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate.py;"
     binary_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate_bin;"
+    a1_init_sc="https://ubwins.cse.buffalo.edu/cse-489_589/assignment1_init_script.sh; chmod +x assignment1_init_script.sh;"
+    a2_init_sc="https://ubwins.cse.buffalo.edu/cse-489_589/pa2/assignment2_init_script.sh; chmod +x assignment2_init_script.sh;"
+    pa1_test_s="-O test.sh https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA1_test.sh;"
+    pa2_test_s="-O test.sh https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_test.sh;"
     if not sys.platform.startswith('linux'):
         print("ERROR: Make sure you are running it in Linux")
         sys.exit(1)
-    if os.system("wget --version")!=0:
+    if os.system("wget -q --spider https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate.py")!=0:
         print("ERROR: You do NOT have wget installed!")
         sys.exit(1)
     if os.path.exists("framework"):
@@ -77,9 +85,9 @@ if len(sys.argv)>1 and sys.argv[1]=="install":
     os.makedirs("cse489589_assignment2")
     os.makedirs("framework")
     print("INFO: Running PA1 installing script...")
-    os.system("cd cse489589_assignment1;"+wget_friendly+"https://ubwins.cse.buffalo.edu/cse-489_589/assignment1_init_script.sh; chmod +x assignment1_init_script.sh;"+wget_friendly+"-O test.sh https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA1_test.sh;"+"./assignment1_init_script.sh")
+    os.system("cd cse489589_assignment1;"+wget_friendly+pa1_test_s+wget_friendly+a1_init_sc+"./assignment1_init_script.sh")
     print("INFO: Running PA2 installing script...")
-    os.system("cd cse489589_assignment2;"+wget_friendly+"https://ubwins.cse.buffalo.edu/cse-489_589/pa2/assignment2_init_script.sh; chmod +x assignment2_init_script.sh;"+wget_friendly+"-O test.sh https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_test.sh;"+"./assignment2_init_script.sh")
+    os.system("cd cse489589_assignment2;"+wget_friendly+pa2_test_s+wget_friendly+a2_init_sc+"./assignment2_init_script.sh")
     print("INFO: Populating framework directory")
     os.system("cd framework;"+pa1CSV_URL+pa2bas_URL+pa2adv_URL+pa2san_URL+exp1_10URL+exp1_50URL+exp2_02URL+exp2_05URL+exp2_08URL+script_URL+binary_URL)
     print("INFO: Making sure scripts can be executed")
