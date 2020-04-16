@@ -27,7 +27,7 @@ result=[]
 global ubitname
 version="2.2.4_final_opensource"
 # For binary auto-update only
-revision=4
+revision=5
 def checkDirs():
     if not os.path.exists("../framework/report"):
         os.makedirs("../framework/report")
@@ -93,7 +93,7 @@ if len(sys.argv)>1 and sys.argv[1]=="install":
     os.system("cd cse489589_assignment1; chmod u+x test.sh")
     os.system("cd cse489589_assignment2; chmod u+x test.sh")
     print("INFO: Cleaning up...")
-    os.system("rm -rf testTemplate.py testTemplate_bin testTemplate")
+    os.system("rm -rf testTemplate.py testTemplate_bin testTemplate ../framework")
     sys.exit()
 try:
     ubitname=os.environ["ubitname"]
