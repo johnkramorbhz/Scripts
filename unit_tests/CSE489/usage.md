@@ -6,6 +6,20 @@
 
 To compile, you need to have `pyinstaller` `staticx` `patchelf` and these have to be installed from `pip3`
 
+If you want to compile manually
+
+```bash
+pyinstaller -F testTemplate.py
+staticx dist/testTemplate testTemplate_bin
+```
+
+To install `pyinstaller` `staticx` `patchelf`
+
+```bash
+sudo apt install python3-pip
+sudo pip3 install pyinstaller staticx patchelf-wrapper
+```
+
 
 ## Test script usage for PA1
 
