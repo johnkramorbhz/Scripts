@@ -1377,7 +1377,7 @@ elif sys.argv[1]=="autocompile":
     print("Recompiling this script as a blob")
     try:
         #import pyinstaller
-        os.system("pyinstaller -F ../framework/testTemplate.py && mv dist/testTemplate ../framework/testTemplate_bin && rm -rf build dist testTemplate testTemplate.spec ../framework/__pycache__")
+        os.system("pyinstaller -F ../framework/testTemplate.py && staticx dist/testTemplate ../framework/testTemplate_bin && rm -rf build dist testTemplate testTemplate.spec ../framework/__pycache__")
     except:
         print("pyinstaller is NOT installed!")
         sys.exit(1)

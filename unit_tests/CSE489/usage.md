@@ -4,7 +4,7 @@
 
 `./test.sh --compile-binary` It is useful that you made some changes for the python code and you wish to update the binary as well.
 
-To compile, you need to have `pyinstaller` and it has to be installed from `pip3`
+To compile, you need to have `pyinstaller` `staticx` `patchelf` and these have to be installed from `pip3`
 
 
 ## Test script usage for PA1
