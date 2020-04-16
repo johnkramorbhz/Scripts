@@ -25,9 +25,9 @@ resultsfortherun=[]
 lowerPythonVersion=False
 result=[]
 global ubitname
-version="2.2.4_final_opensource"
+version="2.2.5_final_opensource"
 # For binary auto-update only
-revision=7
+revision=0
 def checkDirs():
     if not os.path.exists("../framework/report"):
         os.makedirs("../framework/report")
