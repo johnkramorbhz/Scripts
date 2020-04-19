@@ -505,7 +505,8 @@ def readCSV(filename):
     openfile.close()
     for items in temp:
         # gradMode=False is the old behaviour, which loads undergrad grades
-        # gradMode=True  is the new behaviour, which loads grad grades 
+        # gradMode=True  is the new behaviour, which loads grad grades
+        # As a fail-safe measure(or being lazy), if a CSV entry does not have grad grades, it will load undergrad grades
         if not gradMode:
             tests.append((items.split(",")[0],items.split(",")[1],float(items.split(",")[2]),0.0,"",0.0,"---"))
         else:
@@ -783,22 +784,23 @@ def run_all_testsPA1(filename_csv,ubitname,PAX):
             timedoutitems.remove(items)
             callShellCommandsPA1(items,"../cse489589_assignment1/"+ubitname+"_pa1.tar",global_timeout,PAX)    
     report(PAX)
-def run_file_testPA2(ubitnames,testcase,PAX):
-    #print("ubitname:",ubitname,"case:",testcase,"PAX:",PAX)
-    ifRunningInLinux()
-    buildPA2(ubitname)
-    filenames=[("../framework/PA2_basic.csv","basic"),("../framework/PA2_advanced.csv","advanced"),("../framework/PA2_sanity.csv","sanity")]
-    #filenames=[("../framework/PA2_basic.csv","basic")]
-    for currentTest in filenames:
-        readCSV(currentTest[0])
-        temp_lists=copy.deepcopy(tests)
-        for indv_item in temp_lists:
-            if indv_item[1]==testcase:
-                callShellCommandsPA2(indv_item[1],"../cse489589_assignment2/"+ubitname+"/"+indv_item[1].lower(),global_timeout,PAX,currentTest[1])
-        result.append(copy.deepcopy(tests))
-        clearAll()
-    report("PA2_all")
-
+# Deprecated
+# def run_file_testPA2(ubitnames,testcase,PAX):
+#     #print("ubitname:",ubitname,"case:",testcase,"PAX:",PAX)
+#     ifRunningInLinux()
+#     buildPA2(ubitname)
+#     filenames=[("../framework/PA2_basic.csv","basic"),("../framework/PA2_advanced.csv","advanced"),("../framework/PA2_sanity.csv","sanity")]
+#     #filenames=[("../framework/PA2_basic.csv","basic")]
+#     for currentTest in filenames:
+#         readCSV(currentTest[0])
+#         temp_lists=copy.deepcopy(tests)
+#         for indv_item in temp_lists:
+#             if indv_item[1]==testcase:
+#                 callShellCommandsPA2(indv_item[1],"../cse489589_assignment2/"+ubitname+"/"+indv_item[1].lower(),global_timeout,PAX,currentTest[1])
+#         result.append(copy.deepcopy(tests))
+#         clearAll()
+#     report("PA2_all")
+# End of deprecated function
 def test_all_PA2(ubitname,testType,PAX):
     ifRunningInLinux()
     buildPA2(ubitname)
@@ -1110,16 +1112,16 @@ elif sys.argv[1]=="test-all-PA2":
     test_all_PA2(sys.argv[2],sys.argv[3],"PA2_all")
     t1_end = time.perf_counter()
     print("It takes",str(t1_end-t1_start-float(subtractSeconds))+"(s) to finish this script")
-elif sys.argv[1]=="test-file-PA2":
-    if sys.argv[-1]=="test":
-        print(sys.argv)
-        sys.exit()
-    t1_start = time.perf_counter()
-    isHostReachable()
-    #run_individual_testPA2(filename_csv,ubitname,testcase,testType,PAX)
-    run_file_testPA2(sys.argv[2],sys.argv[3],"PA2")
-    t1_end = time.perf_counter()
-    print("It takes",str(t1_end-t1_start-float(subtractSeconds))+"(s) to finish this script")
+# elif sys.argv[1]=="test-file-PA2":
+#     if sys.argv[-1]=="test":
+#         print(sys.argv)
+#         sys.exit()
+#     t1_start = time.perf_counter()
+#     isHostReachable()
+#     #run_individual_testPA2(filename_csv,ubitname,testcase,testType,PAX)
+#     run_file_testPA2(sys.argv[2],sys.argv[3],"PA2")
+#     t1_end = time.perf_counter()
+#     print("It takes",str(t1_end-t1_start-float(subtractSeconds))+"(s) to finish this script")
 elif sys.argv[1]=="test-indv-PA2":
     if sys.argv[-1]=="test":
         print(sys.argv)

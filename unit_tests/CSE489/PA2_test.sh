@@ -174,8 +174,8 @@ python3 $pathofpythonscript getHost $personNumber $ubitname
 cleanup
 elif [ "$1" = "--get-checksum" ]; then
 python3 $pathofpythonscript checksum "../cse489589_assignment2/$filename" $ubitname
-elif [ "$1" = "--test-file" ]; then
-python3 $pathofpythonscript test-file-PA2 $ubitname $2
+# elif [ "$1" = "--test-file" ]; then
+# python3 $pathofpythonscript test-file-PA2 $ubitname $2
 elif [ "$1" = "--test-experiment" ]; then
 python3 $pathofpythonscript test-experiment-one $ubitname
 elif [ "$1" = "--run-experiment-1" ]; then
