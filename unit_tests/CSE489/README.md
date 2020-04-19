@@ -50,7 +50,7 @@ It requires `python3` on CentOS 7 and later(e.g. Ubuntu 18.04 and later). If it 
 
 For PA1, it is 
 
-`author,author,0` means `friendly name, shell command, undergrad grad and grad grade`
+`author,author,0` means `friendly name, shell command, common grade`
 
 For PA2, some files will have 4 columns instead of 3.
 
