@@ -1,4 +1,4 @@
-# CSE489 Auto Tester Framework
+# CSE489 & CSE589 Auto Tester Framework
 
 PROVIDED AS IS WITHOUT WARRANTY OR SERVICE.
 

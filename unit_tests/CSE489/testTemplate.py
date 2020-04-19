@@ -25,7 +25,7 @@ resultsfortherun=[]
 lowerPythonVersion=False
 result=[]
 global ubitname
-version="2.2.8_final_opensource"
+version="2.2.9_final_opensource"
 # For binary auto-update only, beta features only bump revision number
 revision=2
 def checkDirs():
