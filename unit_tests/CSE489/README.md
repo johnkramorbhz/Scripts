@@ -54,7 +54,7 @@ For PA1, it is
 
 For PA2, some files will have 4 columns instead of 3.
 
-If a CSV file have 4 columns, it means `friendly name,shell command, grad grade`
+If a CSV file have 4 columns, it means `friendly name,shell command,undergrad grade,grad grade`
 
 For PA2 experiments, it is divided by PA2 documentation. LOOK CAREFULLY for what it asks. Even though I don't think he will change anything.
 
