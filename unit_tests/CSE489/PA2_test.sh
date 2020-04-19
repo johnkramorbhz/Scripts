@@ -27,6 +27,7 @@ export timeout
 export personNumber
 export quiet
 export version_number
+export gradMode
 if hash python3 2>/dev/null; then
 use_binary=$(python3 $pathofpythonscript determine-whether-binary-is-needed)
 else
@@ -235,3 +236,4 @@ unset timeout
 unset quiet
 unset personNumber
 unset version_number
+unset gradMode

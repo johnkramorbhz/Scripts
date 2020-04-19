@@ -27,7 +27,7 @@ result=[]
 global ubitname
 version="2.2.8_final_opensource"
 # For binary auto-update only, beta features only bump revision number
-revision=1
+revision=2
 def checkDirs():
     if not os.path.exists("../framework/report"):
         os.makedirs("../framework/report")
@@ -126,7 +126,7 @@ except:
     # PA1 does not require this option, so set it to False.
     suppressHeader=False
 try:
-    gradMode=bool(os.environ(["gradMode"]))
+    gradMode=bool(os.environ["gradMode"])
 except:
     # PA1 have same score regardless undergrad and grad, so set it to False.
     # Also ensures compatibility with older version of scripts
