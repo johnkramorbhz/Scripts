@@ -26,8 +26,8 @@ lowerPythonVersion=False
 result=[]
 global ubitname
 version="2.2.8_final_opensource"
-# For binary auto-update only
-revision=0
+# For binary auto-update only, beta features only bump revision number
+revision=1
 def checkDirs():
     if not os.path.exists("../framework/report"):
         os.makedirs("../framework/report")
@@ -125,6 +125,12 @@ try:
 except:
     # PA1 does not require this option, so set it to False.
     suppressHeader=False
+try:
+    gradMode=bool(os.environ(["gradMode"]))
+except:
+    # PA1 have same score regardless undergrad and grad, so set it to False.
+    # Also ensures compatibility with older version of scripts
+    gradMode=False
 # End of static section
 
 # item name is the friendly version of command
@@ -498,7 +504,17 @@ def readCSV(filename):
             temp.append(str(lines).strip('\n'))
     openfile.close()
     for items in temp:
-        tests.append((items.split(",")[0],items.split(",")[1],float(items.split(",")[2]),0.0,"",0.0,"---"))
+        # gradMode=False is the old behaviour, which loads undergrad grades
+        # gradMode=True  is the new behaviour, which loads grad grades 
+        if not gradMode:
+            tests.append((items.split(",")[0],items.split(",")[1],float(items.split(",")[2]),0.0,"",0.0,"---"))
+        else:
+            try:
+                tests.append((items.split(",")[0],items.split(",")[1],float(items.split(",")[3]),0.0,"",0.0,"---"))
+            except:
+                if debug:
+                    print("DEBUG: Using undergrad grade for",items.split(",")[0])
+                tests.append((items.split(",")[0],items.split(",")[1],float(items.split(",")[2]),0.0,"",0.0,"---"))
     #print("INFO: Reading",filename,"complete")
     for item in temp:
         for char in item[1]:
@@ -839,7 +855,10 @@ def readGeneratedCSV(fileToExport):
     print_info("Reading: "+fileToExport)
 def prompt():
     if int(sys.version_info[0])>=3 and int(sys.version_info[1])>=4:
-        print("CSE489 Auto Test Program")
+        if not gradMode:
+            print("CSE489 Auto Test Program")
+        else:
+            print("CSE589 Auto Test Program")
         print("Program Version:",version)
         print("Shell Code Version:",shell_version)
         print("Copyright sxht4 under MIT Licence")
@@ -863,7 +882,10 @@ def prompt():
             sys.exit(1)
         global lowerPythonVersion
         lowerPythonVersion=True
-        print("CSE489 Auto Test Program in COMPATIBILITY MODE")
+        if not gradMode:
+            print("CSE489 Auto Test Program in COMPATIBILITY MODE")
+        else:
+            print("CSE589 Auto Test Program in COMPATIBILITY MODE")
         print("Program Version:",version)
         print("Shell Code Version:",shell_version)
         print("Copyright sxht4 under MIT Licence")

@@ -1,4 +1,7 @@
 #!/bin/bash
+# Only set gradMode to true if you are taking CSE589 instead of CSE489!
+gradMode="" # Put anything inside "" to set it to be true
+
 # Change it to YOUR UBITName and your full legal name.
 ubitname=""
 fullname=""
@@ -11,7 +14,7 @@ timeout=200
 # End of personalisation section
 
 filename="${ubitname}_pa2.tar"
-version_number="2.0.5_PA2_opensource"
+version_number="2.0.6_PA2_opensource"
 pathofpythonscript="../framework/testTemplate.py"
 pathofbinary="../framework/testTemplate_bin"
 checksumFile=""
