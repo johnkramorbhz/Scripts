@@ -11,7 +11,7 @@ Why here? It will take care of populating PA1 & PA2 for you. In addition, it wil
 ```bash
 ubitname=""
 fullname=""
-semester=""
+semester="" #e.g. semester="Spring_2020"
 personNumber=""
 #PA2 only
 suppressHeader="" # Put anything inside "" to set it to be true
