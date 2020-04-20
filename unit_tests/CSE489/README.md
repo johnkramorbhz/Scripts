@@ -6,6 +6,24 @@ PROVIDED AS IS WITHOUT WARRANTY OR SERVICE. Only work with these projects in the
 
 ## Installation
 
+Why here? It will take care of populating PA1 & PA2 for you. In addition, it will also prepare test scripts for both PA1 and PA2. After installation, you will need to add the following info in these scripts.
+
+```bash
+ubitname=""
+fullname=""
+semester=""
+personNumber=""
+#PA2 only
+suppressHeader="" # Put anything inside "" to set it to be true
+#End of PA2 only
+```
+
+For PA2, if you are grad student, add the following
+
+```bash
+gradMode="" # Put anything inside "" to set it to be true
+```
+
 If you do not want to use `python3` (A backup solution)
 
 `wget https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate_bin; chmod u+x testTemplate_bin; ./testTemplate_bin install`
