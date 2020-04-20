@@ -48,7 +48,7 @@ subversion tar texinfo zlib1g zlib1g-dev git-core gettext libexpat1-dev libssl-d
 python libxml-parser-perl gcc-multilib gconf-editor libxml2-dev g++-multilib gitk libncurses5 mtd-utils \
 libncurses5-dev libvorbis-dev git autopoint autogen sed build-essential intltool libglib2.0-dev \
 xutils-dev lib32z1-dev lib32stdc++6 xsltproc gtk-doc-tools clang gdb valgrind default-jdk ruby-full libglu1-mesa-dev \
-texlive-full texmaker vlc network-manager-openconnect-gnome vpnc open-cobol lua5.3 \
+texlive-full texmaker network-manager-openconnect-gnome vpnc open-cobol lua5.3 \
 network-manager-vpnc network-manager-vpnc-gnome emacs26 nodejs \
 gdebi-core libxmu-dev libxi-dev libglu1-mesa \
 libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev \
@@ -68,7 +68,7 @@ apt upgrade -y
 apt dist-upgrade -y
 apt-get update -y
 apt-get upgrade -y
-add-apt-repository -y ppa:videolan/master-daily
+#add-apt-repository -y ppa:videolan/master-daily
 add-apt-repository -y ppa:wireshark-dev/stable
 add-apt-repository -y ppa:kelleyk/emacs
 add-apt-repository -y universe
@@ -84,7 +84,7 @@ subversion tar texinfo zlib1g zlib1g-dev git-core gettext libexpat1-dev libssl-d
 python libxml-parser-perl gcc-multilib gconf-editor libxml2-dev g++-multilib gitk libncurses5 mtd-utils \
 libncurses5-dev libvorbis-dev git autopoint autogen sed build-essential intltool libelf1:i386 libglib2.0-dev \
 xutils-dev lib32z1-dev lib32stdc++6 xsltproc gtk-doc-tools clang gdb valgrind default-jdk ruby-full libglu1-mesa-dev \
-texlive-full texmaker vlc network-manager-openconnect-gnome vpnc ubuntu-communitheme-session open-cobol lua5.3 \
+texlive-full texmaker network-manager-openconnect-gnome vpnc ubuntu-communitheme-session open-cobol lua5.3 \
 network-manager-vpnc network-manager-vpnc-gnome emacs26 nodejs gnome-tweak-tool gnome-shell-extension-system-monitor \
 filezilla transmission gnome-shell-extensions gdebi-core grub-customizer libxmu-dev libxi-dev libglu1-mesa \
 libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev \
@@ -101,7 +101,8 @@ gdebi --non-interactive google-chrome-stable_current_amd64.deb
 snap install slack --classic
 snap install libreoffice
 snap install code --classic
-npm install -g npm mocha chai mocha-simple-html-reporter
+#npm install -g npm mocha chai mocha-simple-html-reporter
+snap install vlc
 wget https://github.com/kumardeepakr3/PINTOS-Ubuntu/raw/master/pintos_ubuntu.sh
 chmod 777 pintos_ubuntu.sh
 if [ "$1" = "--nvidia" ]; then
