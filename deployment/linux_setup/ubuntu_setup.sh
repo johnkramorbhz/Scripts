@@ -22,6 +22,13 @@ echo "It takes $duration second(s) to finish above operations"
 exit 0
 fi
 echo 'INFO: Installing all needed compilers packages'
+function install_swift(){
+wget https://swift.org/builds/swift-5.2.2-release/ubuntu1804/swift-5.2.2-RELEASE/swift-5.2.2-RELEASE-ubuntu18.04.tar.gz
+tar xzf swift-5.2.2-RELEASE-ubuntu18.04.tar.gz
+mv swift-5.2.2-RELEASE-ubuntu18.04 /usr/share/swift
+echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> ~/.bashrc
+source  ~/.bashrc   
+}
 if [ "$1" = "--no-GUI" ]; then
 echo "INFO: Running in no GUI mode..."
 sleep 3
@@ -47,7 +54,10 @@ gdebi-core libxmu-dev libxi-dev libglu1-mesa \
 libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev \
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
 python-imaging-tk docker.io unattended-upgrades binutils qemu-kvm qemu virt-manager virt-viewer libvirt-bin bochs \
-r-base gdb
+r-base gdb libcurl3 libpython2.7 libpython2.7-dev
+# Go to install_swift()
+install_swift
+# End of install_swift()
 snap install --classic kotlin
 pip3 install --upgrade tensorflow requests
 exit 0
@@ -80,7 +90,10 @@ filezilla transmission gnome-shell-extensions gdebi-core grub-customizer libxmu-
 libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev \
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
 python-imaging-tk docker.io unattended-upgrades binutils qemu-kvm qemu virt-manager virt-viewer libvirt-bin bochs \
-r-base libncurses5-dev libncursesw5-dev libncurses5-dev:i386 libncursesw5-dev:i386 libx11-6:i386 libxpm4:i386 gdb
+r-base libncurses5-dev libncursesw5-dev libncurses5-dev:i386 libncursesw5-dev:i386 libx11-6:i386 libxpm4:i386 gdb libcurl3 libpython2.7 libpython2.7-dev
+# Go to install_swift()
+install_swift
+# End of install_swift()
 snap install --classic kotlin
 pip3 install --upgrade tensorflow requests
 wget -4 https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
