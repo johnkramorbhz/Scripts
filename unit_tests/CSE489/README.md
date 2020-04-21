@@ -26,11 +26,11 @@ gradMode="" # Put anything inside "" to set it to be true
 
 If you do not want to use `python3` (A backup solution)
 
-`wget https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate_bin; chmod u+x testTemplate_bin; ./testTemplate_bin install`
+`wget https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate_bin && chmod u+x testTemplate_bin && ./testTemplate_bin install`
 
 If you want to use `python3` **Preferred**
 
-`wget https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate.py; python3 testTemplate.py install`
+`wget https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate.py && python3 testTemplate.py install`
 
 After installation, the directory structure looks like this
 
