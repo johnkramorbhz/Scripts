@@ -1,6 +1,6 @@
 # CSE489 & CSE589 Auto Tester Framework
 
-PROVIDED AS IS WITHOUT WARRANTY OR SERVICE. Only work with these projects in these links. [Link1](https://docs.google.com/document/u/1/d/135usaNDMnJ5pEDG-UbspZameDPmOH0DmXLrMVrLVJ88/pub) [Link2](https://docs.google.com/document/u/1/d/19I8-TrLNcfaCGX1L-KSx5xFYEoiFAN3F9o_jQlOgsFM/pub) [Link3](https://docs.google.com/document/u/1/d/1_Lm54xrsUxKFc25l54qIxFIlQS3ywIyAEQfa2jTB1JQ/pub)
+PROVIDED AS IS WITHOUT WARRANTY OR SERVICE. Only work with these projects in these links. [Link1](https://docs.google.com/document/u/1/d/135usaNDMnJ5pEDG-UbspZameDPmOH0DmXLrMVrLVJ88/pub) [Link2](https://docs.google.com/document/u/1/d/19I8-TrLNcfaCGX1L-KSx5xFYEoiFAN3F9o_jQlOgsFM/pub)
 
 ### [Click here for usage](https://github.com/johnkramorbhz/Scripts/blob/master/unit_tests/CSE489/usage.md)
 
