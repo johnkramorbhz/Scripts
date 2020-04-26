@@ -40,6 +40,13 @@ cse489589_assignment2/
 framework/
 ```
 
+It requires `python3` on CentOS 7 and later(e.g. Ubuntu 18.04 and later). If it does not work for whatever reason or you prefer one of the modes, find these lines in the `test.sh`
+
+```bash
+#use_binary="false" #Uncomment this line to force binary
+#use_binary="force_script" #Uncomment this line to force Python3 interpreter
+```
+
 ## Update
 
 Both script version and binary version in this repo supports update from themselves. AFTER go to `framework` directory, use the command below
@@ -55,14 +62,6 @@ Under `framework/report`, there are reports having name of `PAX_Date_Time`, wher
 `testTemplate.py` is the backend of the `./test.sh` in each Programming Assignment folder
 
 It is also available in the binary form, which is `testTemplate_bin`. You need `pyInstaller` & `staticx` to create a static binary that works on any Linux machines/servers. [Compile Guide](https://github.com/johnkramorbhz/Scripts/blob/master/unit_tests/CSE489/usage.md#re-compile-binary)
-
-It requires `python3` on CentOS 7 and later(e.g. Ubuntu 18.04 and later). If it does not work for whatever reason or you prefer one of the modes, find these lines in the `test.sh`
-
-```bash
-#use_binary="false" #Uncomment this line to force binary
-#use_binary="force_script" #Uncomment this line to force Python3 interpreter
-```
-
 
 ## Interpret `.csv` files that are used in the readCSV() function
 

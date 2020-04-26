@@ -1,6 +1,6 @@
 import sys,os,math,subprocess,copy,time,random,datetime,signal,hashlib,glob,getpass,platform,socket
 #Don't modify this section!
-sfRequired=['python3','gcc','g++','make']
+sfRequired=['python3','gcc','g++','make','curl','wget']
 grade=0.0
 passgrade=0.0
 partialgrade=0.0
@@ -115,6 +115,7 @@ try:
     personNumber=os.environ["personNumber"]
 except:
     print("ERROR: You need to launch this program from shell scripts provided with it!")
+    print("Usage can be found in https://github.com/johnkramorbhz/Scripts/blob/master/unit_tests/CSE489/usage.md")
     sys.exit(1)
 stdoutsOfProgram=[]
 experimentsData=[]
@@ -129,7 +130,7 @@ try:
     gradMode=bool(os.environ["gradMode"])
 except:
     # PA1 have same score regardless undergrad and grad, so set it to False.
-    # Also ensures compatibility with older version of scripts
+    # Also ensures compatibility with older version of shell scripts
     gradMode=False
 # End of static section
 
@@ -195,21 +196,25 @@ class colours:
         purple='\033[45m'
         cyan='\033[46m'
         lightgrey='\033[47m'
+# This function deal with printing current grade and status.
 def printGrade():
     print("Current grade: "+"{:0.4f}".format(grade)+", passes: "+str(passed)+", partially passes: "+str(partialPass)+", fails: "+str(failed))
+# Make sure the UBITname is actually valid since many functions rely on the correct UBITname
 def validUBITname(ubitname):
     if len(ubitname)>8 or len(ubitname)<3:
         return False
     return True
+# Wrapper function
 def print_info(target_string):
     print(colours.fg.blue+"INFO:    "+target_string,colours.reset)
+# Python is an interpreted language so I need to make sure it is actually running in Linux.
 def ifRunningInLinux():
     if not sys.platform.startswith('linux'):
         print(colours.fg.red+"ERROR: Your system is not Linux based OS, which you should NEVER run this test on!",colours.reset)
         print_info("Your OS: "+sys.platform)
         print_info("Refer to the course website for more details!")
         sys.exit(1)
-
+# If user pass a test, this function deals with re-writing status and current grade in that test case.
 def pass_test(case,score,stdout,exe_time):
     quote='"'
     print(colours.fg.green+"Passed "+quote+case+quote+" and you earned "+str(score)+" points",colours.reset)
@@ -230,6 +235,7 @@ def pass_test(case,score,stdout,exe_time):
             tests.append(tuple(tempmodule))
             printGrade()
             break              
+# PA1 grader give partial credits, so I need to account for that as well.
 def pass_partial_test(case,score,stdout,exe_time):
     quote='"'
     print(colours.fg.yellow+"You earned some partial credits in "+quote+case+quote+", which is",score,"out of",getScore(case),colours.reset)
@@ -250,7 +256,7 @@ def pass_partial_test(case,score,stdout,exe_time):
             tests.append(tuple(tempmodule))
             printGrade()
             break              
-
+# Same as above.
 def fail_test(case,stdout,exe_time):
     print(colours.fg.red+"Failed",case,colours.reset)
     global failed
@@ -265,16 +271,19 @@ def fail_test(case,stdout,exe_time):
             tests.append(tuple(tempmodule))
             printGrade()
             break    
+# Make sure the CSV file defnied this item before countinuing.
 def item_exist(item):
     for items in tests:
         if items[1]==item:
             return True
     return False
+# Get this item's fullmark
 def getScore(case):
     for items in tests:
         if items[1]==case:
             return float(items[2])
-
+# Check and parse grader output
+# testcase_input is the shell command of that item e.g. _list -> list
 def check_result(testcase_input,outputfromshell,PAX,stdout,exe_time):
     if testcase_input=="author" and PAX=="PA1":
         if outputfromshell=="TRUE":
@@ -408,12 +417,12 @@ def build_tarPA1(ubitname):
     if not os.path.exists("../cse489589_assignment1/"+ubitname+"/src/"+ubitname+"_assignment1.cpp") and not os.path.exists("../cse489589_assignment1/"+ubitname+"/src/"+ubitname+"_assignment1.c"):
         print("ERROR: "+ubitname+"_assignment1.c or "+ubitname+"_assignment1.cpp does not exist!")
         sys.exit(1)
-    if os.system("cd ../cse489589_assignment1/"+ubitname+";make >> /dev/null") !=0:
+    if os.system("cd ../cse489589_assignment1/"+ubitname+" && make >> /dev/null") !=0:
         print(colours.fg.yellow+"WARNING: Your ./assignment1 seems to be unable to compile. Submitting this copy will earn you 0 points!",colours.reset)
         if debug==False:
             print("Since debug mode is disabled, this program will terminate!")
             sys.exit(1)
-    if os.system("cd ../cse489589_assignment1/"+ubitname+";make clean >> /dev/null") !=0:
+    if os.system("cd ../cse489589_assignment1/"+ubitname+" && make clean >> /dev/null") !=0:
         print("ERROR: make failed to clean!")
         sys.exit(1)
     print_info("Building...")
@@ -427,7 +436,7 @@ def buildPA2(ubitname):
     print("INFO: Compiling... ",end='')
     if not os.path.exists("../cse489589_assignment2/"+ubitname+"/object"):
         os.makedirs("../cse489589_assignment2/"+ubitname+"/object")
-    if os.system("cd ../cse489589_assignment2/"+ubitname+"; make clean >> /dev/null; make >> /dev/null")!=0:
+    if os.system("cd ../cse489589_assignment2/"+ubitname+" && make clean >> /dev/null && make >> /dev/null")!=0:
         print("fail")
         print("ERROR: Failed to compile!")
         sys.exit(1)
@@ -435,9 +444,11 @@ def buildPA2(ubitname):
 def buildPA1(ubitname):
     ifRunningInLinux()
     print("INFO: Compiling... ",end='')
+    # This folder check is necessary because make will fail to run
+    # Running init script alone will not generate this folder for some reason.
     if not os.path.exists("../cse489589_assignment1/"+ubitname+"/object"):
         os.makedirs("../cse489589_assignment1/"+ubitname+"/object")
-    if os.system("cd ../cse489589_assignment1/"+ubitname+"; make clean >> /dev/null; make >> /dev/null")!=0:
+    if os.system("cd ../cse489589_assignment1/"+ubitname+" &&  make clean >> /dev/null && make >> /dev/null")!=0:
         print("fail")
         print("ERROR: make failed to run!")
         sys.exit(1)
@@ -563,7 +574,7 @@ def generateReportInText(fileToExport,PAX):
             for items in passeditems:
                 openfile.write(str(items[1])+"\n")
     openfile.close()
-
+# PA2_all has a different data structure from every other so I need to put it in a separate function.
 def generateReportInTextPA2ALL(fileToExport):
     checkDirs()
     print_info("Writing: "+fileToExport)
@@ -628,6 +639,9 @@ def generateReportInTextPA2ALL(fileToExport):
                 elif x==2:
                     openfile.write("*********************************\n**End of sanity tests\n")
                     #openfile.write("RAW: "+str(result)+"\n")
+# This functin is to generate a text report because running these tests takes a very long time, which usually lasts an hour.
+# This is very useful when the repeat option is used since it will take hours to run.
+# Execution time is only for debugging purposes so it will not be in the text report.
 def report(PAX):
     global maximumgrade, maximumPossibleGrade, totaltestsrunned,grade,passgrade,partialgrade
     if PAX=="PA2_all":
@@ -784,7 +798,7 @@ def run_all_testsPA1(filename_csv,ubitname,PAX):
             timedoutitems.remove(items)
             callShellCommandsPA1(items,"../cse489589_assignment1/"+ubitname+"_pa1.tar",global_timeout,PAX)    
     report(PAX)
-# Deprecated
+# Deprecated, because test-category replaces this function. It does not seem to work properly as there were many major changes happened.
 # def run_file_testPA2(ubitnames,testcase,PAX):
 #     #print("ubitname:",ubitname,"case:",testcase,"PAX:",PAX)
 #     ifRunningInLinux()
@@ -969,6 +983,7 @@ def run_experiments(messages,loss,corruption,time,window,binary,outputfile,supre
             print("For your safety, this program will terminate!")
             sys.exit(1)
 def check_software_installed_ubuntu():
+    # apt can be imported as a python library so it will be more primitive.
     import apt
     sfNotInstalled=[]
     cache = apt.cache.Cache()
@@ -987,13 +1002,15 @@ def check_software_installed_ubuntu():
         sys.exit(1)
 def check_software_installed_redhat_centos():
     sys.exit()
+# This is to worry about the edge case where author is False but it is not because the program does not run at all.
 def checkAIStatement():
     print("TODO")
 #Launcher portion
-if len(sys.argv)<2:
-    prompt()
-    print("Usage can be found in https://github.com/johnkramorbhz/Scripts/blob/master/unit_tests/CSE489/usage.md")
-    sys.exit(1)
+# Usage moved up
+# if len(sys.argv)<2:
+#     prompt()
+#     print("Usage can be found in https://github.com/johnkramorbhz/Scripts/blob/master/unit_tests/CSE489/usage.md")
+#     sys.exit(1)
 if sys.argv[1]=="test-indv-PA1":
     if sys.argv[-1]=="test":
         print(sys.argv)
@@ -1432,4 +1449,5 @@ elif sys.argv[1]=="test-category-PA2":
                 callShellCommandsPA2(indv_item[1],"../cse489589_assignment2/"+ubitname+"/"+indv_item[1].lower(),global_timeout,"PA2",sys.argv[2])
     report("PA2")    
 else:
+    # This case will only be reached when the user modifies the script, especially the python argument.
     print("ERROR: Backend cannot understand your request!")

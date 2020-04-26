@@ -2,14 +2,17 @@
 
 ## Re-compile binary
 
-`./test.sh --compile-binary` It is useful that you made some changes for the python code and you wish to update the binary as well.
+`./test.sh --compile-binary` It is useful that you made some changes for the python code and you wish to update the binary as well. This command is available in both PA1 and PA2 scripts.
 
-To compile, you need to have `pyinstaller` `staticx` `patchelf` and these have to be installed from `pip3`
+To compile the binary correctly, you need to have `pyinstaller` `staticx` `patchelf` and these have to be installed from `pip3` since this framework does not work with python 2.x and Python foundation dropped 2.x support already.
+
+If the destination system is older than the source system(e.g. Ubuntu 18.04 -> CentOS 7), then the pyInstaller binary will not execute at all.
 
 If you want to compile manually
 
 ```bash
 pyinstaller -F testTemplate.py
+# This step is to ensure the python binary is truly static.
 staticx dist/testTemplate testTemplate_bin
 ```
 
