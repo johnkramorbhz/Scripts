@@ -26,8 +26,8 @@ function install_swift(){
 wget https://swift.org/builds/swift-5.2.2-release/ubuntu1804/swift-5.2.2-RELEASE/swift-5.2.2-RELEASE-ubuntu18.04.tar.gz
 tar xzf swift-5.2.2-RELEASE-ubuntu18.04.tar.gz
 mv swift-5.2.2-RELEASE-ubuntu18.04 /usr/share/swift
-echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> ~/.bashrc
-source  ~/.bashrc   
+echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> $HOME/.bashrc
+source  $HOME/.bashrc   
 }
 if [ "$1" = "--no-GUI" ]; then
 echo "INFO: Running in no GUI mode..."
@@ -103,8 +103,8 @@ snap install libreoffice
 snap install code --classic
 #npm install -g npm mocha chai mocha-simple-html-reporter
 snap install vlc
-wget https://github.com/kumardeepakr3/PINTOS-Ubuntu/raw/master/pintos_ubuntu.sh
-chmod 777 pintos_ubuntu.sh
+# wget https://github.com/kumardeepakr3/PINTOS-Ubuntu/raw/master/pintos_ubuntu.sh
+# chmod 777 pintos_ubuntu.sh
 if [ "$1" = "--nvidia" ]; then
 add-apt-repository -y ppa:graphics-drivers/ppa
 apt update
