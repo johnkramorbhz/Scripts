@@ -11,3 +11,5 @@ It only supports Ubuntu LTS releases for auto setup. Currently, it supports `18.
 Intel and AMD Display Adapter `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/master/deployment/entry.sh && chmod u+x entry.sh && sudo ./entry.sh`
 
 NVIDIA Display Adapter `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/master/deployment/entry.sh && chmod u+x entry.sh && sudo ./entry.sh --nvidia`
+
+WSL & WSL2 `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/master/deployment/entry.sh && chmod u+x entry.sh && sudo ./entry.sh --no-GUI`
