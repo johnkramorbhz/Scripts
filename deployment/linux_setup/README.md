@@ -1,4 +1,4 @@
-# Scripts
+# Linux Setup Scripts
 These are individual scripts for each Linux distribution that I use.
 
 To make things simple, I just divide them into several scripts for different types of Linux distro.
