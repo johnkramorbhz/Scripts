@@ -97,7 +97,7 @@ The python script is unified instead of dividing it into each individual PA test
 
 The main goal of this script is to save time for debugging, and have some estimation of final grade.
 
-## Run Experiments code
+## Run Experiments Code Example
 
 ```python
 def run_experiments(messages,loss,corruption,time,window,binary,outputfile,supressHeader,ubitname):
@@ -114,8 +114,17 @@ def run_experiments(messages,loss,corruption,time,window,binary,outputfile,supre
             sys.exit(1)
 ```
 
-Invoke part
+Invoke part(Python)
 
 ```python
+#Experiment 1
+run_experiments(1000,line[0],0.2,50,line[1],line[2],str(line[2])+"_"+str(line[1])+"_experiment1.csv",suppressHeader,sys.argv[3])
+#Experiment 2
 run_experiments(1000,line[0],0.2,50,line[1],line[2],str(line[2])+"_"+str(line[0])+"_experiment2.csv",suppressHeader,sys.argv[3])
+```
+
+Invoke part(bash)
+
+```bash
+python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment2_0.2_ds.csv" $ubitname 2
 ```
