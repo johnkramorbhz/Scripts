@@ -84,3 +84,38 @@ For PA2 experiments, it is divided by PA2 documentation. LOOK CAREFULLY for what
 ## Interpret `experiments.csv` files
 
 "loss","window","binary_name"
+
+e.g.
+
+`0.1,10,sr`
+
+## High Level Design of This Framework
+
+The `test.sh` in each Programming Assignment directory is a high level abstraction of the python script, because python scripts have many differnt arguments depending on its tasks.
+
+The python script is unified instead of dividing it into each individual PA test script, because the enhancement will benefit both PAs.
+
+The main goal of this script is to save time for debugging, and have some estimation of final grade.
+
+## Run Experiments code
+
+```python
+def run_experiments(messages,loss,corruption,time,window,binary,outputfile,supressHeader,ubitname):
+    checkDirs()
+    if supressHeader==True:
+        if os.system("../cse489589_assignment2/grader/run_experiments -m "+str(messages)+" -l "+str(loss)+" -c "+str(corruption)+" -t "+str(time)+" -w "+str(window)+" -p ../cse489589_assignment2/"+str(ubitname)+"/"+str(binary)+" -o ../framework/report/PA2_experiments/"+str(outputfile)+" -n") !=0:
+            print(colours.fg.red+"ERROR: ./run_experiments returned a non-zero exit code!",colours.reset)
+            print("For your safety, this program will terminate!")
+            sys.exit(1)
+    else:
+        if os.system("../cse489589_assignment2/grader/run_experiments -m "+str(messages)+" -l "+str(loss)+" -c "+str(corruption)+" -t "+str(time)+" -w "+str(window)+" -p ../cse489589_assignment2/"+str(ubitname)+"/"+str(binary)+" -o ../framework/report/PA2_experiments/"+str(outputfile)) !=0:
+            print(colours.fg.red+"ERROR: ./run_experiments returned a non-zero exit code!",colours.reset)
+            print("For your safety, this program will terminate!")
+            sys.exit(1)
+```
+
+Invoke part
+
+```python
+run_experiments(1000,line[0],0.2,50,line[1],line[2],str(line[2])+"_"+str(line[0])+"_experiment2.csv",suppressHeader,sys.argv[3])
+```
