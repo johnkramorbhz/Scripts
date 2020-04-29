@@ -4,6 +4,12 @@ PROVIDED AS IS WITHOUT WARRANTY OR SERVICE. Only work with these projects in the
 
 ### [Click here for usage](https://github.com/johnkramorbhz/Scripts/blob/master/unit_tests/CSE489/usage.md)
 
+## Planned Additional Features
+
+Check AI statement for PA1 locally
+
+Multi-threaded grading for PA2
+
 ## Installation
 
 Why here? It will take care of populating PA1 & PA2 for you. In addition, it will also prepare test scripts for both PA1 and PA2. After installation, you will need to add the following info in these scripts.
