@@ -6,7 +6,7 @@ PROVIDED AS IS WITHOUT WARRANTY OR SERVICE. Only work with these projects in the
 
 ## Planned Additional Features
 
-Check AI statement for PA1 locally
+~Check AI statement for PA1 locally~ (Supported with 2.3.0 release)
 
 Multi-threaded grading for PA2
 
