@@ -25,7 +25,7 @@ resultsfortherun=[]
 lowerPythonVersion=False
 result=[]
 global ubitname
-version="2.2.9_final_opensource"
+version="2.3.0_opensource"
 # For binary auto-update only, beta features only bump revision number
 revision=2
 def checkDirs():
@@ -872,7 +872,7 @@ def readGeneratedCSV(fileToExport):
 def prompt():
     if int(sys.version_info[0])>=3 and int(sys.version_info[1])>=4:
         if not gradMode:
-            print("CSE489 Auto Test Program")
+            print("CSE489/CSE589 Auto Test Program")
         else:
             print("CSE589 Auto Test Program")
         print("Program Version:",version)
@@ -899,7 +899,7 @@ def prompt():
         global lowerPythonVersion
         lowerPythonVersion=True
         if not gradMode:
-            print("CSE489 Auto Test Program in COMPATIBILITY MODE")
+            print("CSE489/CSE589 Auto Test Program in COMPATIBILITY MODE")
         else:
             print("CSE589 Auto Test Program in COMPATIBILITY MODE")
         print("Program Version:",version)
@@ -1003,8 +1003,93 @@ def check_software_installed_ubuntu():
 def check_software_installed_redhat_centos():
     sys.exit()
 # This is to worry about the edge case where author is False but it is not because the program does not run at all.
-def checkAIStatement():
-    print("TODO")
+# It will read log file inside the assignment folder instead of looking at the stdout
+def checkPA1AIStatement():
+    print("INFO: Checking AI statement output...")
+    print("INFO: Running it as the client mode...")
+    clientport=random.randint(1000,9999)
+    serverport=random.randint(1000,9999)
+    try:
+        p1=subprocess.check_output("echo 'AUTHOR' | ../cse489589_assignment1/"+ubitname+"/assignment1 c "+str(clientport),shell=True,timeout=3).decode('ascii')
+    except:
+        print("Process crashed or timed out")
+        #print(p1)
+    print("INFO: Running it as the server mode...")
+    try:
+        p2=subprocess.check_output("echo 'AUTHOR' | ../cse489589_assignment1/"+ubitname+"/assignment1 s "+str(serverport),shell=True,timeout=3).decode('ascii')
+    except:
+        print("Process crashed or timed out")
+        #print(p2)        
+    print("INFO: Checking log output...")
+    common=['[AUTHOR:SUCCESS]','[AUTHOR:END]']
+    serverMode=False
+    clientMode=False
+    #Server
+    if os.path.exists("../cse489589_assignment1/"+ubitname+"/logs/assignment_log__"+str(serverport)):
+        with open("../cse489589_assignment1/"+ubitname+"/logs/assignment_log__"+str(serverport),'r') as openfile:
+            if len(temp)>0:
+                temp.clear()
+            for lines in openfile:
+                temp.append(str(lines).strip('\n'))
+        openfile.close()
+        line1=False
+        line2=False
+        line3=False
+        correct_string="I, "+ubitname+", have read and understood the course academic integrity policy."
+        if temp[0]==common[0]:
+            line1=True
+        if temp[2]==common[1]:
+            line3=True
+        if temp[1]==correct_string:
+            line2=True
+        if line1 and line2 and line3:
+            print(colours.fg.green+"INFO: Server mode AI Statement check out",colours.reset)
+            serverMode=True
+        else:
+            print("INFO: Correct string should look like this")
+            print(correct_string)
+            print("INFO: Your string looks like this")
+            print(temp[1])        
+        #print(temp)
+    else:
+        print("File: "+"../cse489589_assignment1/"+ubitname+"/logs/assignment_log__"+str(serverport)+" does NOT exist!")
+    #Client
+    if os.path.exists("../cse489589_assignment1/"+ubitname+"/logs/assignment_log__"+str(clientport)):
+        with open("../cse489589_assignment1/"+ubitname+"/logs/assignment_log__"+str(clientport),'r') as openfile:
+            if len(temp)>0:
+                temp.clear()
+            for lines in openfile:
+                temp.append(str(lines).strip('\n'))
+        openfile.close()
+        line1=False
+        line2=False
+        line3=False
+        correct_string="I, "+ubitname+", have read and understood the course academic integrity policy."
+        if temp[0]==common[0]:
+            line1=True
+        if temp[2]==common[1]:
+            line3=True
+        if temp[1]==correct_string:
+            line2=True
+        if line1 and line2 and line3:
+            print(colours.fg.green+"INFO: Client mode AI Statement check out",colours.reset)
+            clientMode=True
+        else:
+            print("Correct string should look like this")
+            print(correct_string)
+            print("Your string looks like this")
+            print(temp[1])
+        #print(temp)
+    else:
+        print("File: "+"../cse489589_assignment1/"+ubitname+"/logs/assignment_log__"+str(clientport)+" does NOT exist!")
+    if serverMode and clientMode:
+        print("INFO: Congratulations!!! Both server mode and client mode AI statement are valid")
+    else:
+        if not serverMode:
+            print("INFO: You made an error in Server Mode")
+        if not clientMode:
+            print("INFO: You made an error in Client Mode")
+        sys.exit(1)
 #Launcher portion
 # Usage moved up
 # if len(sys.argv)<2:
@@ -1448,6 +1533,8 @@ elif sys.argv[1]=="test-category-PA2":
             for indv_item in temp_lists:
                 callShellCommandsPA2(indv_item[1],"../cse489589_assignment2/"+ubitname+"/"+indv_item[1].lower(),global_timeout,"PA2",sys.argv[2])
     report("PA2")    
+elif sys.argv[1]=="test-AIS-PA1":
+    checkPA1AIStatement()
 else:
     # This case will only be reached when the user modifies the script, especially the python argument.
     print("ERROR: Backend cannot understand your request!")

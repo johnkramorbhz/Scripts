@@ -12,7 +12,7 @@ pathofpythonscript="../framework/testTemplate.py"
 pathofbinary="../framework/testTemplate_bin"
 filename="${ubitname}_pa1.tar"
 csvlocation="../framework/PA1.csv"
-version_number="1.4.3_PA1_opensource"
+version_number="1.4.4_PA1_opensource"
 export ubitname
 export fullname
 export semester
@@ -51,6 +51,7 @@ echo "Make sure UBITname, semester are configured!"
 exit 1
 fi
 fi
+function config_check(){
 if [ "$use_binary" != "false" ]; then
 python3 $pathofpythonscript check-PA1-grader-cfg
 if [ $? -ne 0 ]; then
@@ -61,7 +62,8 @@ $pathofbinary check-PA1-grader-cfg
 if [ $? -ne 0 ]; then
 exit 1
 fi
-fi
+fi    
+}
 function pinfo(){
     echo -e "\e[36mINFO: $1\e[0m"
 }
@@ -94,6 +96,7 @@ fi
 elif [ "$1" = "--clean" ]; then
 cleanup
 elif [ "$1" = "--test-indv" ]; then
+config_check
 if [ "$use_binary" != "false" ]; then
 python3 $pathofpythonscript test-indv-PA1 $csvlocation $ubitname $2
 cleanup
@@ -106,6 +109,7 @@ echo "INFO: Test finished on:"
 date
 fi
 elif [ "$1" = "--test-score" ]; then
+config_check
 if [ "$use_binary" != "false" ]; then
 python3 $pathofpythonscript test-all-PA1 $csvlocation $ubitname PA1
 cleanup
@@ -118,6 +122,7 @@ echo "INFO: Test finished on:"
 date
 fi
 elif [ "$1" = "--test-all" ]; then
+config_check
 if [ "$use_binary" != "false" ]; then
 python3 $pathofpythonscript test-all-PA1 $csvlocation $ubitname PA1
 cleanup
@@ -130,6 +135,7 @@ echo "INFO: Test finished on:"
 date
 fi
 elif [ "$1" = "--repeat" ]; then
+config_check
 if [ "$use_binary" != "false" ]; then
 python3 $pathofpythonscript repeat-PA1 $csvlocation $ubitname $2 $3 PA1
 cleanup
@@ -142,6 +148,7 @@ echo "INFO: Test finished on:"
 date
 fi
 elif [ "$1" = "--repeat-all" ]; then
+config_check
 if [ "$use_binary" != "false" ]; then
 python3 $pathofpythonscript repeat-test-all-PA1 $csvlocation $ubitname PA1 $2
 cleanup
@@ -169,6 +176,22 @@ $pathofbinary check-PA1-grader-cfg
 fi
 elif [ "$1" = "--compile-binary" ]; then
 python3 $pathofpythonscript autocompile
+elif [ "$1" = "--AIS" ]; then
+if [ "$use_binary" != "false" ]; then
+python3 $pathofpythonscript clean-all-binaries
+else
+$pathofbinary clean-all-binaries
+fi
+if [ "$use_binary" != "false" ]; then
+python3 $pathofpythonscript compile-PA1 $ubitname
+else
+$pathofbinary compile-PA1 $ubitname
+fi
+if [ "$use_binary" != "false" ]; then
+python3 $pathofpythonscript test-AIS-PA1
+else
+$pathofbinary test-AIS-PA1
+fi
 else
 pinfo "Usage can be found in the README file in GitHub"
 fi

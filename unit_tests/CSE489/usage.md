@@ -40,6 +40,8 @@ sudo pip3 install pyinstaller staticx patchelf-wrapper
 
 `./test.sh --repeat-all times` Run `times` times for all test cases to see if grades are stable.
 
+`./test.sh --AIS` Check AI statement locally.
+
 
 ## Test script usage for PA2
 
