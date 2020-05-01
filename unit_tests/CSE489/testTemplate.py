@@ -25,7 +25,7 @@ resultsfortherun=[]
 lowerPythonVersion=False
 result=[]
 global ubitname
-version="2.3.0_opensource"
+version="2.3.1_opensource"
 # For binary auto-update only, beta features only bump revision number
 revision=2
 def checkDirs():
@@ -1538,3 +1538,4 @@ elif sys.argv[1]=="test-AIS-PA1":
 else:
     # This case will only be reached when the user modifies the script, especially the python argument.
     print("ERROR: Backend cannot understand your request!")
+    sys.exit(1)

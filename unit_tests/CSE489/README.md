@@ -1,14 +1,12 @@
 # CSE489 & CSE589 Auto Tester Framework
 
-PROVIDED AS IS WITHOUT WARRANTY OR SERVICE. Only work with these projects in these links. [Link1](https://docs.google.com/document/u/1/d/135usaNDMnJ5pEDG-UbspZameDPmOH0DmXLrMVrLVJ88/pub) [Link2](https://docs.google.com/document/u/1/d/19I8-TrLNcfaCGX1L-KSx5xFYEoiFAN3F9o_jQlOgsFM/pub)
+PROVIDED AS IS WITHOUT WARRANTY OR SERVICE. You may fork this project and continue on your own. However, I will not push any more changes unless it is a bugfix. Only work with these projects in these links. [Link1](https://docs.google.com/document/u/1/d/135usaNDMnJ5pEDG-UbspZameDPmOH0DmXLrMVrLVJ88/pub) [Link2](https://docs.google.com/document/u/1/d/19I8-TrLNcfaCGX1L-KSx5xFYEoiFAN3F9o_jQlOgsFM/pub)
 
 ### [Click here for usage](https://github.com/johnkramorbhz/Scripts/blob/master/unit_tests/CSE489/usage.md)
 
-## Planned Additional Features
+## Please Note
 
-~Check AI statement for PA1 locally~ (Supported with 2.3.0 release)
-
-Multi-threaded grading for PA2
+You can use an older shell script with the new python script or binary but not the other way around. If you have the pre-opensource version, you will have to manually replace all scripts as there are many changes implemented.
 
 ## Installation
 
