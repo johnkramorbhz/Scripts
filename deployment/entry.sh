@@ -42,13 +42,11 @@ exit 1
 fi
 echo "INFO: Replacing entry.sh with what's available on the GitHub"
 echo -e "INFO: Checking Internet connectivity \c"
-wget -q --spider https://hbai.me/stat
-exit_code_stat=$?
 wget -q --spider https://github.com/johnkramorbhz/Scripts/raw/master/deployment/entry.sh
 exit_code_source=$?
 wget -q --spider https://github.com/johnkramorbhz/Scripts/raw/master/deployment/linux_setup/ubuntu_setup.sh
 exit_code_source_link=$?
-if [ "$exit_code_source" -eq 0 ] || [ "$exit_code_stat" -eq 0 ] || [ "$exit_code_source_link" -eq 0 ] ; then
+if [ "$exit_code_source" -eq 0 ] || [ "$exit_code_source_link" -eq 0 ] ; then
 echo -e "\e[32mPass\e[0m"
 else
 echo -e "\e[32mFail\e[0m"
@@ -67,7 +65,6 @@ else
 echo "ERROR: Your Ubuntu release is not supported."
 exit 1
 fi
-wget -q --spider https://hbai.me/deployment-debian
 if [ -e "ubuntu_setup.sh" ]; then
 if [ "$1" = "--nvidia" ]; then
 chmod u+x ubuntu_setup.sh
@@ -106,21 +103,8 @@ rm -rf entry.sh
 rm -rf rhel_setup.sh
 exit 0
 else
-echo "INFO: Failed to download from GitHub. Trying alternative site"
-wget -O rhel_setup.sh https://hbai.me/deployment-rhel-alternative
-if [ -e "rhel_setup.sh" ]; then
-chmod u+x rhel_setup.sh
-./rhel_setup.sh
-echo "INFO: Cleaning up..."
-rm -rf entry.sh
-rm -rf rhel_setup.sh
-exit 0
-else
-echo "ERROR: Failed to download from both GitHub and the alternative site."
-echo "Terminating this script..."
-#rm -rf entry.sh
+echo "INFO: Failed to download from GitHub!"
 exit 1
-fi
 fi
 else
 echo "ERROR: Unsupported Operating Systems"
