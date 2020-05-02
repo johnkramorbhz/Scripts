@@ -61,9 +61,11 @@ echo "INFO: Checking your release..."
 release_name=$(lsb_release -c -s)
 if [ $release_name = "bionic" ]; then
 wget https://github.com/johnkramorbhz/Scripts/raw/master/deployment/linux_setup/ubuntu_setup.sh
-fi
-if [ $release_name = "focal" ]; then
+elif [ $release_name = "focal" ]; then
 wget -O ubuntu_setup.sh https://github.com/johnkramorbhz/Scripts/raw/master/deployment/linux_setup/ubuntu_focal_fossa.sh
+else
+echo "ERROR: Your Ubuntu release is not supported."
+exit 1
 fi
 wget -q --spider https://hbai.me/deployment-debian
 if [ -e "ubuntu_setup.sh" ]; then
@@ -90,30 +92,8 @@ rm -rf entry.sh
 rm -rf ubuntu_setup.sh
 exit 0
 else
-echo "INFO: Failed to download from GitHub. Trying alternative site"
-wget https://github.com/johnkramorbhz/Scripts/raw/master/deployment/linux_setup/ubuntu_setup.sh
-wget -q --spider https://hbai.me/deployment-debian-alternative
-if [ -e "ubuntu_setup.sh" ]; then
-if [ "$1" = "--nvidia" ]; then
-chmod u+x ubuntu_setup.sh
-./ubuntu_setup.sh --nvidia
-echo "INFO: Cleaning up..."
-rm -rf entry.sh
-rm -rf ubuntu_setup.sh
-exit 0
-fi
-chmod u+x ubuntu_setup.sh
-./ubuntu_setup.sh
-echo "INFO: Cleaning up..."
-rm -rf entry.sh
-rm -rf ubuntu_setup.sh
-exit 0
-else
-echo "ERROR: Failed to download from both GitHub and the alternative site."
-echo "Terminating this script..."
-rm -rf $0
+echo "ERROR: Failed to download"
 exit 1
-fi
 fi
 elif [ '$OSID" = "ID="centos"' ] || [ '$OSID" = "ID="rhel"' ]; then
 echo "INFO: Starting installer for Red Hat based Linux systems"

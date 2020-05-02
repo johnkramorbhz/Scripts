@@ -18,7 +18,7 @@ apt upgrade -y
 apt dist-upgrade -y
 apt-get update -y
 apt-get upgrade -y
-add-apt-repository -y ppa:wireshark-dev/stable
+#add-apt-repository -y ppa:wireshark-dev/stable
 add-apt-repository -y ppa:kelleyk/emacs
 apt install -y curl
 curl -sL https://deb.nodesource.com/setup_12.x | bash -
@@ -31,7 +31,7 @@ libncurses5-dev libvorbis-dev git autopoint autogen sed build-essential intltool
 xutils-dev lib32z1-dev lib32stdc++6 xsltproc gtk-doc-tools clang gdb valgrind default-jdk ruby-full libglu1-mesa-dev \
 texlive-full texmaker network-manager-openconnect-gnome vpnc \
 network-manager-vpnc network-manager-vpnc-gnome nodejs \
-gdebi-core libxmu-dev libxi-dev libglu1-mesa \
+gdebi-core libxmu-dev libxi-dev libglu1-mesa python3-pip \
 libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev \
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
 python-imaging-tk docker.io unattended-upgrades binutils bochs \
@@ -67,7 +67,7 @@ network-manager-vpnc network-manager-vpnc-gnome nodejs gnome-tweak-tool gnome-sh
 filezilla transmission gnome-shell-extensions gdebi-core grub-customizer libxmu-dev libxi-dev libglu1-mesa \
 libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev \
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
-python-imaging-tk docker.io unattended-upgrades binutils qemu-kvm qemu virt-manager bochs \
+python-imaging-tk docker.io unattended-upgrades binutils qemu-kvm qemu virt-manager bochs python3-pip \
 r-base libncurses5-dev libncursesw5-dev libncurses5-dev:i386 libncursesw5-dev:i386 libx11-6:i386 libxpm4:i386 gdb
 pip3 install --upgrade tensorflow requests
 wget -4 https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -79,13 +79,11 @@ snap install code --classic
 snap install vlc
 #npm install -g npm mocha chai mocha-simple-html-reporter
 if [ "$1" = "--nvidia" ]; then
-echo "Not supported at this time. Skip!"
-# add-apt-repository -y ppa:graphics-drivers/ppa
-# apt update
-# dpkg --add-architecture i386
-# apt update -y
-# apt install -y build-essential libc6:i386
-# ubuntu-drivers autoinstall
+# echo "Not supported at this time. Skip!"
+add-apt-repository -y ppa:graphics-drivers/ppa
+apt update
+apt install -y build-essential libglvnd-dev pkg-config
+ubuntu-drivers autoinstall
 # echo "INFO: Installing prerequisite packages for Tensorflow GPU"
 # apt install -y gcc-6 g++-6
 # wget -4 http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda_10.2.89_440.33.01_linux.run
