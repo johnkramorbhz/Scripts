@@ -29,6 +29,16 @@ OSID=$(cat /etc/os-release | grep -w "ID")
 OSLIKE=$(cat /etc/os-release | grep -w "ID_LIKE")
 echo -e "\e[32m done \e[0m"
 echo "INFO: Your OS type string: $unameOut, OSID: $OSID, OSLIKE: $OSLIKE"
+function warning_eol(){
+echo "WARNING: This distro is having less than a year of support."
+echo "Process will continue in 5 seconds"
+sleep 5
+}
+function end_of_life(){
+echo "WARNING: This distro is marked as EOL. You should only continue installation if you know what you are doing."
+echo "Press [ENTER] to continue."
+read
+}
 if [ "$1" = "--update" ]; then
 echo "INFO: User choose to update this script to the most current version on the GitHub."
 wget -q --spider https://github.com/johnkramorbhz/Scripts/raw/master/deployment/entry.sh
