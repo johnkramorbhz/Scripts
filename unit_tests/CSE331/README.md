@@ -1,4 +1,7 @@
 # CSE331 Unit Test Script
+
+**Dropped support as of July 2019.**
+
 Automating test process by compiling once then run `Case 1`, `Case 2`, and `Case 5`. After all test case finish running, it will automatically delete the compiled binary.
 ### This shell script only works on C++ version of Atri's CSE331 Q1
 

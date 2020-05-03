@@ -5,7 +5,7 @@
 
 # Interesting project(s) inside this repo
 
-[CSE489 & CSE589 auto-test scripts](https://github.com/johnkramorbhz/Scripts/tree/master/unit_tests/CSE489)
+[CSE489 & CSE589 auto-test scripts](https://github.com/johnkramorbhz/Scripts/tree/master/unit_tests/CSE489) **No longer in an active development**
 
 [Ubuntu automatic setup script](https://github.com/johnkramorbhz/Scripts/tree/master/deployment)
 

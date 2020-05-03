@@ -1,4 +1,4 @@
-# CSE489 Test Scripts usage
+# CSE489 & CSE589 Test Scripts usage
 
 ## Re-compile binary
 
