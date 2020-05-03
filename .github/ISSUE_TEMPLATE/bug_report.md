@@ -1,9 +1,8 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Broken functionality? Incorrect result?
 title: ''
 labels: ''
-assignees: ''
 
 ---
 
@@ -25,7 +24,7 @@ If applicable, add screenshots to help explain your problem.
 
 **Desktop (please complete the following information):**
  - OS: [e.g. Ubuntu]
- - Version [e.g. 19.04]
+ - Version [e.g. 20.04]
 
 **Additional context**
 Add any other context about the problem here.
