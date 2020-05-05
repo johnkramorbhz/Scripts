@@ -31,8 +31,8 @@ echo -e "\e[32m done \e[0m"
 echo "INFO: Your OS type string: $unameOut, OSID: $OSID, OSLIKE: $OSLIKE"
 function warning_eol(){
 echo "WARNING: This distro is having less than a year of support."
-echo "Process will continue in 5 seconds"
-sleep 5
+echo "Process will continue in 15 seconds"
+sleep 15
 }
 function end_of_life(){
 echo "WARNING: This distro is marked as EOL. You should only continue installation if you know what you are doing."
@@ -89,11 +89,15 @@ echo "INFO: Starting installer for Ubuntu systems"
 echo "INFO: Checking your release..."
 release_name=$(lsb_release -c -s)
 if [ $release_name = "bionic" ]; then
+# Ubuntu 18.04 LTS
 wget https://github.com/johnkramorbhz/Scripts/raw/master/deployment/linux_setup/ubuntu_setup.sh
 elif [ $release_name = "focal" ]; then
+# Ubuntu 20.04 LTS
 wget -O ubuntu_setup.sh https://github.com/johnkramorbhz/Scripts/raw/master/deployment/linux_setup/ubuntu_focal_fossa.sh
 else
+# Not supported release
 echo "ERROR: Your Ubuntu release is not supported."
+lsb_release -a
 exit 1
 fi
 if [ -e "ubuntu_setup.sh" ]; then
@@ -118,6 +122,7 @@ chmod u+x ubuntu_setup.sh
 echo "INFO: Cleaning up..."
 rm -rf entry.sh
 rm -rf ubuntu_setup.sh
+rm -rf $0
 exit 0
 else
 echo "ERROR: Failed to download"

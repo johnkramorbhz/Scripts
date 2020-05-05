@@ -24,6 +24,6 @@ WSL & WSL2 `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/master
 
 ## Note
 
-If a distro has less than 1 year of to its EOL, I will put a warning and 5 second delay. If a distro is EOL, then user need to manually continue.
+If a distro has less than 1 year of to its EOL, I will put a warning and 15 second delay. If a distro is EOL, then user need to manually continue.
 
 Once 20.04 hits maturity, the deployment of 18.04 script will move to maintaince mode. If 22.04 hits maturity, then it will be the same case with 20.04 and so on.

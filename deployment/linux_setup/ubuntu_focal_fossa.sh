@@ -41,9 +41,9 @@ apt dist-upgrade -y
 apt-get update -y
 apt-get upgrade -y
 #add-apt-repository -y ppa:wireshark-dev/stable
-add-apt-repository -y ppa:kelleyk/emacs
+#add-apt-repository -y ppa:kelleyk/emacs
 apt install -y curl
-curl -sL https://deb.nodesource.com/setup_12.x | bash -
+curl -sL https://deb.nodesource.com/setup_14.x | bash -
 #apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 apt install -y utop ocaml iverilog wget libtool-bin cmake libproxy-dev uuid-dev liblzo2-dev autoconf automake bash bison \
 bzip2 diffutils file flex m4 g++ gawk groff-base libncurses-dev libtool libslang2 make patch perl pkg-config shtool \
@@ -75,7 +75,7 @@ add-apt-repository -y universe
 #add-apt-repository -y ppa:communitheme/ppa
 #add-apt-repository -y ppa:danielrichter2007/grub-customizer
 apt install -y curl
-curl -sL https://deb.nodesource.com/setup_12.x | bash -
+curl -sL https://deb.nodesource.com/setup_14.x | bash -
 #apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 #add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'
 apt install -y utop ocaml iverilog wget libtool-bin cmake libproxy-dev uuid-dev liblzo2-dev autoconf automake bash bison \
