@@ -43,4 +43,11 @@ curl -sL https://deb.nodesource.com/setup_14.x | bash -
 apt update -y
 apt upgrade -y
 apt install nodejs
+# Update snap packages
+snap refresh
+# Upgrade all pip3 packages
+pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U 
+else
+echo "ERROR: Your distribution is not supported"
+exit 1
 fi
