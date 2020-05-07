@@ -10,7 +10,7 @@ Upgrade nodejs to the latest LTS and force update `pip3` and `apt` packages: `wg
 ## Important notice
 If you want pintos binaries, you have to use 18.04 LTS instead of anything newer than 18.04 LTS that are supported right now, because Ubuntu dropped `i386` packages in 2019.
 
-So the `cse421.sh` will only work with Ubuntu 18.04 LTS(Bionic Beaver).
+So the `cse421.sh` will only work with Ubuntu 18.04 LTS(Bionic Beaver). If you are intent to use this script anyway, you probably already know what you are doing and you probably already inspecting this script.
 
 ## What are these?
 `ubuntu_setup.sh` is the Ubuntu 18.04 install script, which is the first Ubuntu LTS distribution that I support.
