@@ -45,9 +45,9 @@ exit 0
 fi
 echo 'INFO: Installing all needed compilers packages'
 function install_swift(){
-wget https://swift.org/builds/swift-5.2.2-release/ubuntu1804/swift-5.2.2-RELEASE/swift-5.2.2-RELEASE-ubuntu18.04.tar.gz
-tar xzf swift-5.2.2-RELEASE-ubuntu18.04.tar.gz
-mv swift-5.2.2-RELEASE-ubuntu18.04 /usr/share/swift
+wget https://swift.org/builds/swift-5.2.3-release/ubuntu1804/swift-5.2.3-RELEASE/swift-5.2.3-RELEASE-ubuntu18.04.tar.gz
+tar xzf swift-5.2.3-RELEASE-ubuntu18.04.tar.gz
+mv swift-5.2.3-RELEASE-ubuntu18.04 /usr/share/swift
 echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> $HOME/.bashrc
 source  $HOME/.bashrc   
 }
