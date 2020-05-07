@@ -22,6 +22,10 @@ NVIDIA Display Adapter `wget -O entry.sh https://github.com/johnkramorbhz/Script
 
 WSL & WSL2 `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/master/deployment/entry.sh && chmod u+x entry.sh && sudo ./entry.sh --no-GUI`
 
+## If you have older setup scripts that installs older `nodejs`, use the following command to upgrade to the latest LTS.
+
+`wget -O upgrade_nodejs.sh https://github.com/johnkramorbhz/Scripts/raw/master/deployment/linux_setup/upgrade_all.sh && chmod u+x upgrade_all.sh && sudo ./upgrade_all.sh`
+
 ## Note
 
 If a distro has less than 1 year of to its EOL, I will put a warning and 15 second delay. If a distro is EOL, then user need to manually continue.
