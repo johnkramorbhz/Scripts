@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 dt=$(date '+%d %h %Y %H:%M:%S');
-version="1.3"
+version="1.4"
 echo "INFO: Hello there, $USER@$HOSTNAME!"
 echo "INFO: Script started at $dt"
 echo -e "INFO: Getting info about your OS\c"
@@ -70,13 +70,13 @@ check_and_download https://gitee.com/johnkramorbhz/Scripts/raw/master/versions/u
 fi
 else
 # Get version file from GitHub
-check_and_download https://github.com/johnkramorbhz/Scripts/raw/master/versions/upgrader_version https://gihub.com/johnkramorbhz/Scripts/raw/master/deployment/linux_setup/upgrade_all.sh
+check_and_download https://github.com/johnkramorbhz/Scripts/raw/master/versions/upgrader_version https://raw.githubusercontent.com/johnkramorbhz/Scripts/master/deployment/linux_setup/upgrade_all.sh
 fi
 if [ "$OSID" = "ID=ubuntu" ] || [ "$OSID" = "ID=debian" ] || [ "$OSLIKE" = "ID_LIKE=debian" ]; then
 curl -sL https://deb.nodesource.com/setup_14.x | bash -
 apt update -y
 apt upgrade -y
-apt install nodejs
+apt install nodejs -y
 # Update snap packages
 snap refresh
 # Upgrade all pip3 packages
