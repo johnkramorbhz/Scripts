@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 dt=$(date '+%d %h %Y %H:%M:%S');
-version="1.2"
+version="1.3"
 echo "INFO: Hello there, $USER@$HOSTNAME!"
 echo "INFO: Script started at $dt"
 echo -e "INFO: Getting info about your OS\c"
@@ -67,8 +67,6 @@ else
 # Get version file from Gitee
 check_and_download https://gitee.com/johnkramorbhz/Scripts/raw/master/versions/upgrader_version https://gitee.com/johnkramorbhz/Scripts/raw/master/deployment/linux_setup/upgrade_all.sh
 # Endif for "$version_remote" != "$version"
-fi
-# Endif for "INFO: Retrying alternative site"
 fi
 else
 # Get version file from GitHub
