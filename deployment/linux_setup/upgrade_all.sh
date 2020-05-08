@@ -21,6 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 dt=$(date '+%d %h %Y %H:%M:%S');
+version="1.0"
 echo "INFO: Hello there, $USER@$HOSTNAME!"
 echo "INFO: Script started at $dt"
 echo -e "INFO: Getting info about your OS\c"
@@ -37,6 +38,39 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 else
 echo -e "\e[32mYes \e[0m"
+fi
+function check_and_download(){
+#$1 is upgrader URL #$2 is script URL
+version_remote=$(wget -O - -o /dev/null $1)
+if [ "$version_remote" != "$version" ]; then
+#Download newer version script from Gitee and execute the new script
+echo "INFO: There is a newer version available on the remote. Downloading it for you before proceeding..."
+rm -rf $0
+wget -O $0 $2
+chmod u+x $0
+./$0
+exit 0
+}
+#Check if version file exists and reachable
+wget -q --spider https://github.com/johnkramorbhz/Scripts/raw/master/versions/upgrader_version
+if [ $? -ne 0 ]; then
+#Try download from Gitee
+echo "INFO: Retrying alternative site"
+wget -q --spider https://gitee.com/johnkramorbhz/Scripts/raw/master/versions/upgrader_version
+if [ $? -ne 0 ]; then
+#Failed from both sites
+echo "ERROR: It looks like you do not have internet access"
+exit 1
+else
+# Get version file from Gitee
+check_and_download https://gitee.com/johnkramorbhz/Scripts/raw/master/versions/upgrader_version https://gitee.com/johnkramorbhz/Scripts/raw/master/deployment/linux_setup/upgrade_all.sh
+# Endif for "$version_remote" != "$version"
+fi
+# Endif for "INFO: Retrying alternative site"
+fi
+else
+# Get version file from GitHub
+check_and_download https://github.com/johnkramorbhz/Scripts/raw/master/versions/upgrader_version https://gihub.com/johnkramorbhz/Scripts/raw/master/deployment/linux_setup/upgrade_all.sh
 fi
 if [ "$OSID" = "ID=ubuntu" ] || [ "$OSID" = "ID=debian" ] || [ "$OSLIKE" = "ID_LIKE=debian" ]; then
 curl -sL https://deb.nodesource.com/setup_14.x | bash -
