@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 dt=$(date '+%d %h %Y %H:%M:%S');
-version="1.0"
+version="1.1"
 echo "INFO: Hello there, $USER@$HOSTNAME!"
 echo "INFO: Script started at $dt"
 echo -e "INFO: Getting info about your OS\c"
@@ -41,7 +41,8 @@ echo -e "\e[32mYes \e[0m"
 fi
 function check_and_download(){
 #$1 is upgrader URL #$2 is script URL
-version_remote=$(wget -O - -o /dev/null $1)
+URL=$1
+version_remote=$(wget -O - -o /dev/null $URL)
 if [ "$version_remote" != "$version" ]; then
 #Download newer version script from Gitee and execute the new script
 echo "INFO: There is a newer version available on the remote. Downloading it for you before proceeding..."
