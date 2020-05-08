@@ -1,12 +1,14 @@
 # CSE489 & CSE589 Auto Tester Framework
 
-**Dropped support as of 2 May 2020.**
+**Dropped support as of 8 May 2020.**
 
 PROVIDED AS IS WITHOUT WARRANTY OR SERVICE. You may fork this project and continue on your own. However, I will not push any more changes unless it is a bugfix. Only work with these projects in these links. [Link1](https://docs.google.com/document/u/1/d/135usaNDMnJ5pEDG-UbspZameDPmOH0DmXLrMVrLVJ88/pub) [Link2](https://docs.google.com/document/u/1/d/19I8-TrLNcfaCGX1L-KSx5xFYEoiFAN3F9o_jQlOgsFM/pub)
 
 ### [Click here for usage](https://github.com/johnkramorbhz/Scripts/blob/master/unit_tests/CSE489/usage.md)
 
 ## Please Note
+
+Even though the static binary is built from Ubuntu 20.04, running in Ubuntu 20.04 is not formally tested.
 
 *If you have Ubuntu version higher than 18.04, it is not guaranteed that the python script version will work correctly, since python is an interpreted programming language. In this case, you should use the binary instead, and you might need to link them to the script by yourself.*
 

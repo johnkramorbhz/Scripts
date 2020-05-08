@@ -1,6 +1,6 @@
 # MIT License
 
-# Copyright (c) 2020 johnkramorbhz
+# Copyright (c) 2019 johnkramorbhz
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -47,7 +47,7 @@ resultsfortherun=[]
 lowerPythonVersion=False
 result=[]
 global ubitname
-version="2.3.1_opensource"
+version="2.3.2_opensource"
 # For binary auto-update only, beta features only bump revision number
 revision=2
 def checkDirs():
@@ -1054,25 +1054,28 @@ def checkPA1AIStatement():
             for lines in openfile:
                 temp.append(str(lines).strip('\n'))
         openfile.close()
-        line1=False
-        line2=False
-        line3=False
-        correct_string="I, "+ubitname+", have read and understood the course academic integrity policy."
-        if temp[0]==common[0]:
-            line1=True
-        if temp[2]==common[1]:
-            line3=True
-        if temp[1]==correct_string:
-            line2=True
-        if line1 and line2 and line3:
-            print(colours.fg.green+"INFO: Server mode AI Statement check out",colours.reset)
-            serverMode=True
+        if len(temp)==0:
+            print("File:","../cse489589_assignment1/"+ubitname+"/logs/assignment_log__"+str(serverport),"is empty.")
         else:
-            print("INFO: Correct string should look like this")
-            print(correct_string)
-            print("INFO: Your string looks like this")
-            print(temp[1])        
-        #print(temp)
+            line1=False
+            line2=False
+            line3=False
+            correct_string="I, "+ubitname+", have read and understood the course academic integrity policy."
+            if temp[0]==common[0]:
+                line1=True
+            if temp[2]==common[1]:
+                line3=True
+            if temp[1]==correct_string:
+                line2=True
+            if line1 and line2 and line3:
+                print(colours.fg.green+"INFO: Server mode AI Statement check out",colours.reset)
+                serverMode=True
+            else:
+                print("INFO: Correct string should look like this")
+                print(correct_string)
+                print("INFO: Your string looks like this")
+                print(temp[1])        
+            #print(temp)
     else:
         print("File: "+"../cse489589_assignment1/"+ubitname+"/logs/assignment_log__"+str(serverport)+" does NOT exist!")
     #Client
@@ -1083,25 +1086,36 @@ def checkPA1AIStatement():
             for lines in openfile:
                 temp.append(str(lines).strip('\n'))
         openfile.close()
-        line1=False
-        line2=False
-        line3=False
-        correct_string="I, "+ubitname+", have read and understood the course academic integrity policy."
-        if temp[0]==common[0]:
-            line1=True
-        if temp[2]==common[1]:
-            line3=True
-        if temp[1]==correct_string:
-            line2=True
-        if line1 and line2 and line3:
-            print(colours.fg.green+"INFO: Client mode AI Statement check out",colours.reset)
-            clientMode=True
+        if len(temp)==0:
+            print("File:","../cse489589_assignment1/"+ubitname+"/logs/assignment_log__"+str(clientport),"is empty.")
         else:
-            print("Correct string should look like this")
-            print(correct_string)
-            print("Your string looks like this")
-            print(temp[1])
-        #print(temp)
+            line1=False
+            line2=False
+            line3=False
+            correct_string="I, "+ubitname+", have read and understood the course academic integrity policy."
+            if temp[0]==common[0]:
+                line1=True
+            if temp[2]==common[1]:
+                line3=True
+            if temp[1]==correct_string:
+                line2=True
+            if line1 and line2 and line3:
+                print(colours.fg.green+"INFO: Client mode AI Statement check out",colours.reset)
+                clientMode=True
+            else:
+                print("Correct statement should look like this")
+                print("=======================================")
+                print(common[0])
+                print(correct_string)
+                print(common[1])
+                print("=======================================")
+                print("Your string looks like this")
+                print("=======================================")
+                print(common[0])
+                print(temp[1])
+                print(common[1])
+                print("=======================================")                                
+            #print(temp)
     else:
         print("File: "+"../cse489589_assignment1/"+ubitname+"/logs/assignment_log__"+str(clientport)+" does NOT exist!")
     if serverMode and clientMode:
