@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 dt=$(date '+%d %h %Y %H:%M:%S');
-version="1.1"
+version="1.2"
 echo "INFO: Hello there, $USER@$HOSTNAME!"
 echo "INFO: Script started at $dt"
 echo -e "INFO: Getting info about your OS\c"
@@ -51,6 +51,7 @@ wget -O $0 $2
 chmod u+x $0
 ./$0
 exit 0
+fi
 }
 #Check if version file exists and reachable
 wget -q --spider https://github.com/johnkramorbhz/Scripts/raw/master/versions/upgrader_version
