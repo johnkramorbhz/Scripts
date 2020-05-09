@@ -10,7 +10,17 @@ PROVIDED AS IS WITHOUT WARRANTY OR SERVICE. You may fork this project and contin
 
 Even though the static binary is built from Ubuntu 20.04, running in Ubuntu 20.04 is not formally tested.
 
-*If you have Ubuntu version higher than 18.04, it is not guaranteed that the python script version will work correctly, since python is an interpreted programming language. In this case, you should use the binary instead, and you might need to link them to the script by yourself.*
+To reduce the problem of dynamically linked binary(if you have a newer build system than the target system, it will not run), I require `staticx` in addition to the `pyinstaller`. This is a 64-bit binary, which only works on 64-bit Linux OSes. By running `file testTemplate_bin`, here is the output:
+
+```bash
+testTemplate_bin: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, not stripped
+```
+
+SHA256 checksum by running `sha256sum testTemplate_bin`:
+
+`6d402509fb18eeff9a22b54b6c22220599c32f464451f57ca3f37dc351159742  testTemplate_bin`
+
+*If you have Ubuntu version higher than 18.04, it is not guaranteed that the python script version will work correctly, since python is an interpreted programming language. Even though I patched the python 3.8 deprecated function, I have not test anything else. In this case, you might need to use the binary instead if the outcome is incorrect, and you might need to link them to the script by yourself.*
 
 You can use an older shell script with the new python script or binary but not the other way around. If you have the pre-opensource version, you will have to manually replace all scripts as there are many changes implemented.
 
