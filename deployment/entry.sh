@@ -128,15 +128,23 @@ else
 echo "ERROR: Failed to download"
 exit 1
 fi
-elif [ '$OSID" = "ID="centos"' ] || [ '$OSID" = "ID="rhel"' ]; then
-echo "INFO: Starting installer for Red Hat based Linux systems"
-wget -O rhel_setup.sh https://hbai.me/deployment-rhel
-if [ -e "rhel_setup.sh" ]; then
-chmod u+x rhel_setup.sh
-./rhel_setup.sh
+# Only CentOS is officially supported
+elif [ '$OSID" = "ID="centos"' ]; then
+echo "INFO: Starting installer for CentOS"
+major=$(cat /etc/centos-release | tr -dc '0-9.'|cut -d \. -f1)
+if [ $major = "8" ]; then
+wget -O centos_setup.sh https://github.com/johnkramorbhz/Scripts/raw/master/deployment/linux_setup/centos_8.sh
+else
+echo "ERROR: Your CentOS version is not supported."
+echo "Your major version is $major, and I support 8 at this time."
+exit 1
+fi
+if [ -e "centos_setup.sh" ]; then
+chmod u+x centos_setup.sh
+./centos_setup.sh
 echo "INFO: Cleaning up..."
 rm -rf entry.sh
-rm -rf rhel_setup.sh
+rm -rf centos_setup.sh
 exit 0
 else
 echo "INFO: Failed to download from GitHub!"
