@@ -31,6 +31,13 @@ if [[ $EUID -ne 0 ]]; then
 else
 echo -e "\e[32mYes \e[0m"
 fi
+function install_swift(){
+wget https://swift.org/builds/swift-5.2.4-release/ubuntu2004/swift-5.2.4-RELEASE/swift-5.2.4-RELEASE-ubuntu20.04.tar.gz
+tar xzf swift-5.2.4-RELEASE-ubuntu20.04.tar.gz
+mv swift-5.2.4-RELEASE-ubuntu20.04 /usr/share/swift
+echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> $HOME/.bashrc
+source  $HOME/.bashrc   
+}
 echo 'INFO: Installing all needed compilers packages'
 if [ "$1" = "--no-GUI" ]; then
 echo "INFO: Running in no GUI mode..."
@@ -60,6 +67,9 @@ python-imaging-tk docker.io unattended-upgrades binutils bochs \
 r-base gdb
 snap install --classic kotlin
 pip3 install --upgrade tensorflow requests
+# Go to install_swift()
+install_swift
+# End of install_swift()
 exit 0
 fi
 # Everything else
@@ -92,6 +102,9 @@ libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-se
 python-imaging-tk docker.io unattended-upgrades binutils qemu-kvm qemu virt-manager bochs python3-pip \
 r-base libncurses5-dev libncursesw5-dev libncurses5-dev:i386 libncursesw5-dev:i386 libx11-6:i386 libxpm4:i386 gdb
 pip3 install --upgrade tensorflow requests
+# Go to install_swift()
+install_swift
+# End of install_swift()
 wget -4 https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 gdebi --non-interactive google-chrome-stable_current_amd64.deb
 snap install --classic kotlin
