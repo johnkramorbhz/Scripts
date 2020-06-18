@@ -7,6 +7,18 @@ To install NVIDIA drivers only, run `./ubuntu_setup.sh --nvidia--driver--only` a
 
 Upgrade nodejs to the latest LTS and force update `pip3` and `apt` packages: `wget -O upgrade_all.sh https://github.com/johnkramorbhz/Scripts/raw/master/deployment/linux_setup/upgrade_all.sh && chmod u+x upgrade_all.sh && sudo ./upgrade_all.sh`
 
+## httpd setup script usage for CentOS
+
+`python3 genreate_httpd_config.py --single domains.com centos`
+
+Mass mode  `python3 genreate_httpd_config.py --bulk domains.txt centos`
+
+## apache2 setup script usage for Ubuntu
+
+`python3 genreate_httpd_config.py --single domains.com Ubuntu`
+
+Mass mode  `python3 genreate_httpd_config.py --bulk domains.txt Ubuntu`
+
 ## Important notice
 If you want pintos binaries, you have to use 18.04 LTS instead of anything newer than 18.04 LTS that are supported right now, because Ubuntu dropped `i386` packages in 2019.
 

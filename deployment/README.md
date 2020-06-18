@@ -9,11 +9,9 @@ It only supports Ubuntu LTS releases for auto setup. Currently, it supports `18.
 
 ## Supported distros
 
-Ubuntu 18.04 & 20.04
+Ubuntu 18.04 & 20.04 for client deployment. CentOS 8 for server deployment.
 
-Ubuntu 20.04 is in beta support as of now.
-
-CentOS/RHEL 8 support will be added in the future.
+CentOS 8 is in beta support as of now. CentOS 8 is a SERVER deployment script.
 
 ## How to run this script
 Intel and AMD Display Adapter `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/master/deployment/entry.sh && chmod u+x entry.sh && sudo ./entry.sh`
