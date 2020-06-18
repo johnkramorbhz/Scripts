@@ -45,6 +45,11 @@ setsebool -P httpd_execmem 1
 wget -O generate_httpd_config.py https://raw.githubusercontent.com/johnkramorbhz/Scripts/master/deployment/linux_setup/generate_httpd_config.py
 if [ -e "domains.txt" ]; then
 python3 generate_httpd_config.py --bulk domains.txt centos
+apachectl configtest
+if [ $? -ne 0 ]; then
+echo "ERROR: httpd config test failed"
+read
+fi
 fi
 else
 # If major version is something else, return this error msg
