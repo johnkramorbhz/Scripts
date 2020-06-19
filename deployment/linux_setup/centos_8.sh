@@ -48,8 +48,16 @@ python3 generate_httpd_config.py --bulk domains.txt centos
 apachectl configtest
 if [ $? -ne 0 ]; then
 echo "ERROR: httpd config test failed"
-read
+exit 1
 fi
+firewall-cmd --permanent --add-service=http
+firewall-cmd --reload
+systemctl start httpd
+systemctl enable httpd
+systemctl start mariadb
+systemctl enable mariadb
+mysql_secure_installation
+systemctl restart mariadb
 fi
 else
 # If major version is something else, return this error msg
