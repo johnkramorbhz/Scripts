@@ -36,7 +36,7 @@ fi
 echo "export PINTOSDIR=$HOME/pintos" >> $HOME/.bashrc
 echo "export BXSHARE=/usr/local/share/bochs" >> $HOME/.bashrc
 source  $HOME/.bashrc
-sudo apt install libncurses5-dev:i386 libncursesw5-dev:i386 libx11-6:i386 libxpm4:i386 perl build-essential gdb
+sudo apt install libncurses5-dev:i386 libncursesw5-dev:i386 libx11-6:i386 libxpm4:i386 perl build-essential gcc make libcunit1-dev libcunit1-doc libcunit1 wget python qemu xorg-dev libncurses5-dev gdb git
 wget https://github.com/johnkramorbhz/Scripts/raw/master/deployment/linux_setup/pintosbin.tar
 wget https://github.com/johnkramorbhz/Scripts/raw/master/deployment/linux_setup/ubpintos.tar
 tar -xvf ubpintos.tar -C $HOME
