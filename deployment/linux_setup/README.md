@@ -19,6 +19,16 @@ Mass mode  `python3 genreate_httpd_config.py --bulk domains.txt centos`
 
 Mass mode  `python3 genreate_httpd_config.py --bulk domains.txt Ubuntu`
 
+## Mass mode instruction
+
+It must look like the following. One domain per line
+
+```
+a.com
+b.com
+c.com
+```
+
 ## Important notice
 If you want pintos binaries, you have to use 18.04 LTS instead of anything newer than 18.04 LTS that are supported right now, because Ubuntu dropped `i386` packages in 2019.
 
