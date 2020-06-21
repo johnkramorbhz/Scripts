@@ -1,4 +1,26 @@
 import os,sys
+# If needed, add your email address in webmaster variable so ServerAdmin is not blank. 
+webmaster=""
+
+# Copyright (c) 2020 johnkramorbhz
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 raw_domains=[]
 basic=["<VirtualHost *:80>","</VirtualHost>"]
 centos_config_absolute_path_prefix="/etc/httpd/conf.d/"
@@ -30,6 +52,8 @@ def generate_single_conf(domain):
         openfile.write(basic[0]+"\n")
         openfile.write("ServerName "+domain+"\n")
         openfile.write("DocumentRoot "+html_full_path+"\n")
+        if webmaster!="":
+            openfile.write("ServerAdmin "+webmaster+"\n")
         #</VirtualHost>
         openfile.write(basic[1]+"\n")
 # To use it, you need to provide a text file that contains all domains you want

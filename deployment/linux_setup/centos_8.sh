@@ -42,8 +42,8 @@ dnf install -y php php-opcache php-gd php-curl php-mysqlnd mariadb-server httpd 
 # Allow PHP code to be executed on SELinux, even though it does not solve the problem. 
 # It looks like disabling SELinux is necessary.
 setsebool -P httpd_execmem 1 
-wget -O generate_httpd_config.py https://raw.githubusercontent.com/johnkramorbhz/Scripts/master/deployment/linux_setup/generate_httpd_config.py
 if [ -e "domains.txt" ]; then
+wget -O generate_httpd_config.py https://raw.githubusercontent.com/johnkramorbhz/Scripts/master/deployment/linux_setup/generate_httpd_config.py
 python3 generate_httpd_config.py --bulk domains.txt centos
 apachectl configtest
 if [ $? -ne 0 ]; then
