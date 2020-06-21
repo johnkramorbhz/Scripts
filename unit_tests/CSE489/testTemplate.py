@@ -47,7 +47,7 @@ resultsfortherun=[]
 lowerPythonVersion=False
 result=[]
 global ubitname
-version="2.3.2_opensource"
+version="2.3.3_opensource"
 # For binary auto-update only, beta features only bump revision number
 revision=2
 def checkDirs():
@@ -77,25 +77,25 @@ if len(sys.argv)>1 and sys.argv[1]=="install":
     wget_useragent='"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.92 Safari/537.36"'
     wget_friendly="wget -q -U "+wget_useragent+" "
     # Filenames
-    pa1CSV_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA1.csv;"
-    pa2bas_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_basic.csv;"
-    pa2adv_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_advanced.csv;"
-    pa2san_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_sanity.csv;"
-    exp1_10URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_experiment1_10_ds.csv;"
-    exp1_50URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_experiment1_50_ds.csv;"
-    exp2_02URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_experiment2_0.2_ds.csv;"
-    exp2_05URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_experiment2_0.5_ds.csv;"
-    exp2_08URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_experiment2_0.8_ds.csv;"
-    script_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate.py;"
-    binary_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate_bin;"
+    pa1CSV_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA1.csv;"
+    pa2bas_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA2_basic.csv;"
+    pa2adv_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA2_advanced.csv;"
+    pa2san_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA2_sanity.csv;"
+    exp1_10URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA2_experiment1_10_ds.csv;"
+    exp1_50URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA2_experiment1_50_ds.csv;"
+    exp2_02URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA2_experiment2_0.2_ds.csv;"
+    exp2_05URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA2_experiment2_0.5_ds.csv;"
+    exp2_08URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA2_experiment2_0.8_ds.csv;"
+    script_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/testTemplate.py;"
+    binary_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/testTemplate_bin;"
     a1_init_sc="https://ubwins.cse.buffalo.edu/cse-489_589/assignment1_init_script.sh; chmod +x assignment1_init_script.sh;"
     a2_init_sc="https://ubwins.cse.buffalo.edu/cse-489_589/pa2/assignment2_init_script.sh; chmod +x assignment2_init_script.sh;"
-    pa1_test_s="-O test.sh https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA1_test.sh;"
-    pa2_test_s="-O test.sh https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/PA2_test.sh;"
+    pa1_test_s="-O test.sh https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA1_test.sh;"
+    pa2_test_s="-O test.sh https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA2_test.sh;"
     if not sys.platform.startswith('linux'):
         print("ERROR: Make sure you are running it in Linux")
         sys.exit(1)
-    if os.system("wget -q --spider https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate.py")!=0:
+    if os.system("wget -q --spider https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/testTemplate.py")!=0:
         print("ERROR: You do NOT have wget installed!")
         sys.exit(1)
     if os.path.exists("framework"):
@@ -123,10 +123,10 @@ if len(sys.argv)>1 and sys.argv[1]=="update":
     if not sys.platform.startswith('linux'):
         print("ERROR: Make sure you are running it in Linux")
         sys.exit(1)
-    if os.system("wget -q --spider https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate.py")!=0:
+    if os.system("wget -q --spider https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/testTemplate.py")!=0:
         print("ERROR: You do NOT have wget installed or You do NOT have Internet access!")
         sys.exit(1)
-    os.system("rm -rf testTemplate.py testTemplate_bin;wget -O testTemplate.py https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate.py; wget -O testTemplate_bin https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate_bin; chmod u+x testTemplate_bin")
+    os.system("rm -rf testTemplate.py testTemplate_bin;wget -O testTemplate.py https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/testTemplate.py; wget -O testTemplate_bin https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/testTemplate_bin; chmod u+x testTemplate_bin")
     sys.exit()        
 try:
     ubitname=os.environ["ubitname"]
@@ -137,7 +137,7 @@ try:
     personNumber=os.environ["personNumber"]
 except:
     print("ERROR: You need to launch this program from shell scripts provided with it!")
-    print("Usage can be found in https://github.com/johnkramorbhz/Scripts/blob/master/unit_tests/CSE489/usage.md")
+    print("Usage can be found in https://github.com/johnkramorbhz/Scripts/blob/main/unit_tests/CSE489/usage.md")
     sys.exit(1)
 stdoutsOfProgram=[]
 experimentsData=[]
@@ -1130,7 +1130,7 @@ def checkPA1AIStatement():
 # Usage moved up
 # if len(sys.argv)<2:
 #     prompt()
-#     print("Usage can be found in https://github.com/johnkramorbhz/Scripts/blob/master/unit_tests/CSE489/usage.md")
+#     print("Usage can be found in https://github.com/johnkramorbhz/Scripts/blob/main/unit_tests/CSE489/usage.md")
 #     sys.exit(1)
 if sys.argv[1]=="test-indv-PA1":
     if sys.argv[-1]=="test":
