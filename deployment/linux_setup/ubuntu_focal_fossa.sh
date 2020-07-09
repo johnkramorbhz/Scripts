@@ -78,7 +78,6 @@ apt upgrade -y
 apt dist-upgrade -y
 apt-get update -y
 apt-get upgrade -y
-#add-apt-repository -y ppa:videolan/master-daily
 #add-apt-repository -y ppa:wireshark-dev/stable
 #add-apt-repository -y ppa:kelleyk/emacs
 add-apt-repository -y universe

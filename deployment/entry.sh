@@ -41,11 +41,11 @@ read
 }
 if [ "$1" = "--update" ]; then
 echo "INFO: User choose to update this script to the most current version on the GitHub."
-wget -q --spider https://github.com/johnkramorbhz/Scripts/raw/master/deployment/entry.sh
+wget -q --spider https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh
 if [ "$?" -eq 0]; then
 rm -rf entry.sh
 echo -e "INFO: Upgrading... \c"
-wget -q https://github.com/johnkramorbhz/Scripts/raw/master/deployment/entry.sh
+wget -q https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh
 echo "done"
 ./entry.sh
 exit 0
@@ -73,9 +73,9 @@ exit 1
 fi
 echo "INFO: Replacing entry.sh with what's available on the GitHub"
 echo -e "INFO: Checking Internet connectivity \c"
-wget -q --spider https://github.com/johnkramorbhz/Scripts/raw/master/deployment/entry.sh
+wget -q --spider https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh
 exit_code_source=$?
-wget -q --spider https://github.com/johnkramorbhz/Scripts/raw/master/deployment/linux_setup/ubuntu_setup.sh
+wget -q --spider https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/ubuntu_setup.sh
 exit_code_source_link=$?
 if [ "$exit_code_source" -eq 0 ] || [ "$exit_code_source_link" -eq 0 ] ; then
 echo -e "\e[32mPass\e[0m"
@@ -90,10 +90,10 @@ echo "INFO: Checking your release..."
 release_name=$(lsb_release -c -s)
 if [ $release_name = "bionic" ]; then
 # Ubuntu 18.04 LTS
-wget https://github.com/johnkramorbhz/Scripts/raw/master/deployment/linux_setup/ubuntu_setup.sh
+wget https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/ubuntu_setup.sh
 elif [ $release_name = "focal" ]; then
 # Ubuntu 20.04 LTS
-wget -O ubuntu_setup.sh https://github.com/johnkramorbhz/Scripts/raw/master/deployment/linux_setup/ubuntu_focal_fossa.sh
+wget -O ubuntu_setup.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/ubuntu_focal_fossa.sh
 else
 # Not supported release
 echo "ERROR: Your Ubuntu release is not supported."
@@ -133,7 +133,7 @@ elif [ '$OSID" = "ID="centos"' ]; then
 echo "INFO: Starting installer for CentOS"
 major=$(cat /etc/centos-release | tr -dc '0-9.'|cut -d \. -f1)
 if [ $major = "8" ]; then
-wget -O centos_setup.sh https://github.com/johnkramorbhz/Scripts/raw/master/deployment/linux_setup/centos_8.sh
+wget -O centos_setup.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/centos_8.sh
 else
 echo "ERROR: Your CentOS version is not supported."
 echo "Your major version is $major, and I support 8 at this time."

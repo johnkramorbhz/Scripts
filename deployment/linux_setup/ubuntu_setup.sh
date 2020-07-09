@@ -125,7 +125,6 @@ snap install libreoffice
 snap install code --classic
 #npm install -g npm mocha chai mocha-simple-html-reporter
 snap install vlc
-# wget https://github.com/kumardeepakr3/PINTOS-Ubuntu/raw/master/pintos_ubuntu.sh
 # chmod 777 pintos_ubuntu.sh
 if [ "$1" = "--nvidia" ]; then
 add-apt-repository -y ppa:graphics-drivers/ppa

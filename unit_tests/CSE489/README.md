@@ -4,7 +4,7 @@
 
 PROVIDED AS IS WITHOUT WARRANTY OR SERVICE. You may fork this project and continue on your own. However, I will not push any more changes unless it is a bugfix. Only work with these projects in these links. [Link1](https://docs.google.com/document/u/1/d/135usaNDMnJ5pEDG-UbspZameDPmOH0DmXLrMVrLVJ88/pub) [Link2](https://docs.google.com/document/u/1/d/19I8-TrLNcfaCGX1L-KSx5xFYEoiFAN3F9o_jQlOgsFM/pub)
 
-### [Click here for usage](https://github.com/johnkramorbhz/Scripts/blob/master/unit_tests/CSE489/usage.md)
+### [Click here for usage](https://github.com/johnkramorbhz/Scripts/blob/main/unit_tests/CSE489/usage.md)
 
 ## Please Note
 
@@ -46,11 +46,11 @@ gradMode="" # Put anything inside "" to set it to be true
 
 If you do not want to use `python3` (A backup solution)
 
-`wget https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate_bin && chmod u+x testTemplate_bin && ./testTemplate_bin install`
+`wget https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/testTemplate_bin && chmod u+x testTemplate_bin && ./testTemplate_bin install`
 
 If you want to use `python3` **Preferred**
 
-`wget https://github.com/johnkramorbhz/Scripts/raw/master/unit_tests/CSE489/testTemplate.py && python3 testTemplate.py install`
+`wget https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/testTemplate.py && python3 testTemplate.py install`
 
 After installation, the directory structure looks like this
 
@@ -81,7 +81,7 @@ Under `framework/report`, there are reports having name of `PAX_Date_Time`, wher
 
 `testTemplate.py` is the backend of the `./test.sh` in each Programming Assignment folder
 
-It is also available in the binary form, which is `testTemplate_bin`. You need `pyInstaller` & `staticx` to create a static binary that works on any Linux machines/servers. [Compile Guide](https://github.com/johnkramorbhz/Scripts/blob/master/unit_tests/CSE489/usage.md#re-compile-binary)
+It is also available in the binary form, which is `testTemplate_bin`. You need `pyInstaller` & `staticx` to create a static binary that works on any Linux machines/servers. [Compile Guide](https://github.com/johnkramorbhz/Scripts/blob/main/unit_tests/CSE489/usage.md#re-compile-binary)
 
 ## Interpret `.csv` files that are used in the readCSV() function
 
