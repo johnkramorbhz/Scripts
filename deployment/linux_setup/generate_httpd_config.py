@@ -1,4 +1,4 @@
-import os,sys
+import os,sys,string
 # If needed, add your email address in webmaster variable so ServerAdmin is not blank. 
 webmaster=""
 
@@ -61,7 +61,8 @@ def generate_single_conf(domain):
 if sys.argv[1]=="--bulk" and os.path.exists(sys.argv[2]):
     with open(sys.argv[2],'r') as openfile:
         for lines in openfile:
-            raw_domains.append("".join(str(lines).split().strip('\n')))
+            # Get rid of newline character and also whitespace
+            raw_domains.append(lines.translate({ord(c): None for c in string.whitespace}))
     for domains_info in raw_domains:
         generate_single_conf(domains_info)
 # Bulk mode and file does not exist

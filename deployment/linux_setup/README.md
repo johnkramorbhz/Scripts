@@ -21,7 +21,7 @@ Mass mode  `python3 genreate_httpd_config.py --bulk domains.txt Ubuntu`
 
 ## Mass mode instruction
 
-It must look like the following. One domain per line
+It must look like the following. One domain per line. It will try to delete whitespaces, but you need to make sure there are no other character is there.
 
 ```
 a.com
