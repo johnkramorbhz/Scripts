@@ -1,12 +1,16 @@
 # sudo is not needed
 sudo: false
+# Set the distro to Ubuntu 20.04 LTS
+dist: focal
 # Set the build language to Python
 language: python
 # Set the python version to 3.8
 python: 3.8
 # Run the unit test
+# Test independent stuff first
 script:
-  - python3 tests.py
+  - python3 ./unit_tests/CSE489/testTemplate.py version
+  - python3 ./unit_tests/CSE489/testTemplate.py revision
 
 # Push the results back to codecov
 after_success:
