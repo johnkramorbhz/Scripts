@@ -32,7 +32,7 @@ echo "Make sure UBITname, semester are configured!"
 echo "Fail for python version"
 exit 1
 fi
-
+chmod 777 $pathofbinary
 $pathofbinary prompt
 $pathofbinary check-required-software
 if [ $? -ne 0 ]; then
@@ -40,6 +40,8 @@ echo "Make sure UBITname, semester are configured!"
 echo "Fail for binary version"
 exit 1
 fi
+python3 $pathofpythonscript autocompile
+
 # Launcher
 unset ubitname
 unset fullname
