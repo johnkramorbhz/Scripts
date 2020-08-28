@@ -9,3 +9,4 @@ python: 3.8
 script:
   - python3 ./unit_tests/CSE489/testTemplate.py version
   - python3 ./unit_tests/CSE489/testTemplate.py revision
+  - ./scripts/fake_pa1.sh
