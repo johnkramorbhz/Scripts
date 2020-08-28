@@ -4,14 +4,10 @@ sudo: false
 language: python
 # Set the python version to 3.8
 python: 3.8
-# Install the codecov pip dependency
-install:
-  - pip install codecov
-
 # Run the unit test
 script:
-  - coverage run tests.py
+  - python3 tests.py
 
 # Push the results back to codecov
 after_success:
-  - codecov
+  - echo "Yay, it's successful"
