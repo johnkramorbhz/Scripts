@@ -10,6 +10,5 @@ before_install:
 # Run the unit test
 # Test independent stuff first
 script:
-  - python3 ./unit_tests/CSE489/testTemplate.py version
-  - python3 ./unit_tests/CSE489/testTemplate.py revision
+  - chmod 777 ./scripts/independent_tests.sh && ./scripts/independent_tests.sh
   - chmod 777 ./scripts/fake_pa1.sh && ./scripts/fake_pa1.sh
