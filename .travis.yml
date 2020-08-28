@@ -1,14 +1,11 @@
 # Set the distro to Ubuntu 20.04 LTS
 dist: focal
-# Set the build language to Python
-language: python
-# Set the python version to 3.8
-python: 3.8
+
 before_install:
   - chmod 777 ./scripts/setup.sh && sudo ./scripts/setup.sh
 
-# Run the unit test
+# Run unit tests scripts
 # Test independent stuff first
 script:
   - chmod 777 ./scripts/independent_tests.sh && ./scripts/independent_tests.sh
-  - chmod 777 ./scripts/fake_pa1.sh && ./scripts/fake_pa1.sh
+  - chmod 777 ./scripts/4589_pa1_test.sh && ./scripts/4589_pa1_test.sh
