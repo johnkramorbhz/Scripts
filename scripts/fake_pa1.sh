@@ -40,8 +40,13 @@ echo "Make sure UBITname, semester are configured!"
 echo "Fail for binary version"
 exit 1
 fi
+# Compile python binary
 python3 $pathofpythonscript autocompile
-
+if [ $? -ne 0 ]; then
+echo "Make sure pre-requisites are installed!"
+echo "Fail for autocompile"
+exit 1
+fi
 # Launcher
 unset ubitname
 unset fullname

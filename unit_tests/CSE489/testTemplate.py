@@ -47,9 +47,14 @@ resultsfortherun=[]
 lowerPythonVersion=False
 result=[]
 global ubitname
-version="2.3.3_opensource"
+
+supported_PAs=2
+API_level=3
+bug_fixes=4
+suffix="final_opensource"
+version=str(supported_PAs)+"."+str(API_level)+"."+str(bug_fixes)+"_"+suffix
 # For binary auto-update only, beta features only bump revision number
-revision=2
+revision=supported_PAs+API_level+bug_fixes
 def checkDirs():
     if not os.path.exists("../framework/report"):
         os.makedirs("../framework/report")
@@ -1547,7 +1552,9 @@ elif sys.argv[1]=="autocompile":
     print("Recompiling this script as a blob")
     try:
         #import pyinstaller
-        os.system("pyinstaller -F ../framework/testTemplate.py && staticx dist/testTemplate ../framework/testTemplate_bin && rm -rf build dist testTemplate testTemplate.spec ../framework/__pycache__")
+        if os.system("pyinstaller -F ../framework/testTemplate.py && staticx dist/testTemplate ../framework/testTemplate_bin && rm -rf build dist testTemplate testTemplate.spec ../framework/__pycache__")!=0:
+            print("pyinstaller is NOT installed!")
+            sys.exit(1)
     except:
         print("pyinstaller is NOT installed!")
         sys.exit(1)

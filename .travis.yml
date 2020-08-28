@@ -4,6 +4,9 @@ dist: focal
 language: python
 # Set the python version to 3.8
 python: 3.8
+before_install:
+  - chmod 777 ./scripts/setup.sh && sudo ./scripts/setup.sh
+
 # Run the unit test
 # Test independent stuff first
 script:
