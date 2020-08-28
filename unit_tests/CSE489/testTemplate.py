@@ -50,11 +50,11 @@ global ubitname
 
 supported_PAs=2
 API_level=3
-bug_fixes=4
+bug_fixes=5
 suffix="final_opensource"
 version=str(supported_PAs)+"."+str(API_level)+"."+str(bug_fixes)+"_"+suffix
 # For binary auto-update only, beta features only bump revision number
-revision=supported_PAs+API_level+bug_fixes
+revision=100*supported_PAs+10*API_level+bug_fixes
 def checkDirs():
     if not os.path.exists("../framework/report"):
         os.makedirs("../framework/report")
