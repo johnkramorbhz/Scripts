@@ -11,7 +11,4 @@ python: 3.8
 script:
   - python3 ./unit_tests/CSE489/testTemplate.py version
   - python3 ./unit_tests/CSE489/testTemplate.py revision
-
-# Push the results back to codecov
-after_success:
-  - echo "Yay, it's successful"
+  - python3 ./unit_tests/CSE489/testTemplate.py install
