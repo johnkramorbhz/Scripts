@@ -47,14 +47,15 @@ resultsfortherun=[]
 lowerPythonVersion=False
 result=[]
 global ubitname
-
+# This var will decide if user is on the main channel or preview
+branch="main"
 supported_PAs=2
 API_level=3
-bug_fixes=5
+bug_fixes=6
 suffix="final_opensource"
 version=str(supported_PAs)+"."+str(API_level)+"."+str(bug_fixes)+"_"+suffix
 # For binary auto-update only, beta features only bump revision number
-revision=100*supported_PAs+10*API_level+bug_fixes
+revision=10000*supported_PAs+10*API_level+bug_fixes
 def checkDirs():
     if not os.path.exists("../framework/report"):
         os.makedirs("../framework/report")
@@ -81,20 +82,22 @@ if len(sys.argv)>1 and sys.argv[1]=="revision":
 if len(sys.argv)>1 and sys.argv[1]=="install":
     wget_useragent='"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.92 Safari/537.36"'
     wget_friendly="wget -q -U "+wget_useragent+" "
+    repo_URL_prefix="https://github.com/johnkramorbhz/Scripts"
+    repo_URL=repo_URL_prefix+"/raw/"+branch+"/unit_tests/CSE489/"
     # Filenames
-    pa1CSV_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA1.csv;"
-    pa2bas_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA2_basic.csv;"
-    pa2adv_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA2_advanced.csv;"
-    pa2san_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA2_sanity.csv;"
-    exp1_10URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA2_experiment1_10_ds.csv;"
-    exp1_50URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA2_experiment1_50_ds.csv;"
-    exp2_02URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA2_experiment2_0.2_ds.csv;"
-    exp2_05URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA2_experiment2_0.5_ds.csv;"
-    exp2_08URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA2_experiment2_0.8_ds.csv;"
-    script_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/testTemplate.py;"
-    binary_URL=wget_friendly+"https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/testTemplate_bin;"
-    a1_init_sc="https://ubwins.cse.buffalo.edu/cse-489_589/assignment1_init_script.sh; chmod +x assignment1_init_script.sh;"
-    a2_init_sc="https://ubwins.cse.buffalo.edu/cse-489_589/pa2/assignment2_init_script.sh; chmod +x assignment2_init_script.sh;"
+    pa1CSV_URL=wget_friendly+repo_URL+"PA1.csv;"
+    pa2bas_URL=wget_friendly+repo_URL+"PA2_basic.csv;"
+    pa2adv_URL=wget_friendly+repo_URL+"PA2_advanced.csv;"
+    pa2san_URL=wget_friendly+repo_URL+"PA2_sanity.csv;"
+    exp1_10URL=wget_friendly+repo_URL+"PA2_experiment1_10_ds.csv;"
+    exp1_50URL=wget_friendly+repo_URL+"PA2_experiment1_50_ds.csv;"
+    exp2_02URL=wget_friendly+repo_URL+"PA2_experiment2_0.2_ds.csv;"
+    exp2_05URL=wget_friendly+repo_URL+"PA2_experiment2_0.5_ds.csv;"
+    exp2_08URL=wget_friendly+repo_URL+"PA2_experiment2_0.8_ds.csv;"
+    script_URL=wget_friendly+repo_URL+"testTemplate.py;"
+    binary_URL=wget_friendly+repo_URL+"testTemplate_bin;"
+    a1_init_sc="https://ubwins.cse.buffalo.edu/cse-489_589/assignment1_init_script.sh && chmod +x assignment1_init_script.sh;"
+    a2_init_sc="https://ubwins.cse.buffalo.edu/cse-489_589/pa2/assignment2_init_script.sh && chmod +x assignment2_init_script.sh;"
     pa1_test_s="-O test.sh https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA1_test.sh;"
     pa2_test_s="-O test.sh https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA2_test.sh;"
     if not sys.platform.startswith('linux'):
@@ -713,19 +716,19 @@ def report(PAX):
             if len(passeditems)!=0:
                 print(colours.fg.green+"Passed tests:",str(len(passeditems))+", total score:",passgrade,colours.reset)
                 for items in passeditems:
-                    print(colours.fg.green+str(items[1]),colours.reset,"Execution time(in seconds):",items[5])
+                    print(colours.fg.green+str(items[1]),colours.reset,"Elapsed(in seconds):",items[5])
                 print("")
     
             if len(partialitems)!=0:
                 print(colours.fg.yellow+"Partially passed tests:",str(len(partialitems))+", total score:",partialgrade,colours.reset)
                 for items in partialitems:
-                    print(colours.fg.yellow+str(items[3]),"out of",str(items[2]),colours.reset,str(items[1]),"Execution time(in seconds):",items[5])
+                    print(colours.fg.yellow+str(items[3]),"out of",str(items[2]),colours.reset,str(items[1]),"Elapsed(in seconds):",items[5])
                 print("")
 
             if len(faileditems)!=0:
                 print(colours.fg.red+"Failed tests:",len(faileditems),colours.reset)
                 for items in faileditems:
-                    print(colours.fg.red+str(items[1])+colours.reset+", scores:",str(items[2]),"Execution time(in seconds):",items[5])
+                    print(colours.fg.red+str(items[1])+colours.reset+", scores:",str(items[2]),"Elapsed(in seconds):",items[5])
                     #print("stdout of this item")
                     #print(items[4])
             if len(timedoutitems)!=0:
