@@ -39,4 +39,4 @@ So the `cse421.sh` will only work with Ubuntu 18.04 LTS(Bionic Beaver). If you a
 
 `ubuntu_focal_fossa.sh` is the Ubuntu 20.04 install script, and starting onwards I will name them by their code name instead of enlarging `ubuntu_setup.sh`
 
-`cse421.sh` is a mini script that only setup the `pintos` environment used by many OS classes around the universities. 
+`cse4521.sh` is a mini script that only setup the `pintos` environment used by many OS classes around the universities. 

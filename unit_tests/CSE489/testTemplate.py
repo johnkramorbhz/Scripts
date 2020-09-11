@@ -50,12 +50,12 @@ global ubitname
 # This var will decide if user is on the main channel or preview
 branch="main"
 supported_PAs=2
-API_level=3
+SCRIPT_API_level=3
 bug_fixes=6
 suffix="final_opensource"
-version=str(supported_PAs)+"."+str(API_level)+"."+str(bug_fixes)+"_"+suffix
+version=str(supported_PAs)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
 # For binary auto-update only, beta features only bump revision number
-revision=10000*supported_PAs+10*API_level+bug_fixes
+revision=10000*supported_PAs+10*SCRIPT_API_level+bug_fixes
 def checkDirs():
     if not os.path.exists("../framework/report"):
         os.makedirs("../framework/report")
