@@ -66,7 +66,7 @@ libxml-parser-perl gcc-multilib gconf-editor libxml2-dev g++-multilib gitk libnc
 libncurses5-dev libvorbis-dev git autopoint autogen sed build-essential intltool libglib2.0-dev \
 xutils-dev lib32z1-dev lib32stdc++6 xsltproc gtk-doc-tools clang gdb valgrind default-jdk ruby-full libglu1-mesa-dev \
 texlive-full texmaker network-manager-openconnect-gnome vpnc ros-noetic-desktop-full \
-network-manager-vpnc network-manager-vpnc-gnome nodejs python-rosdep python-rosinstall python-rosinstall-generator python-wstool \
+network-manager-vpnc network-manager-vpnc-gnome nodejs python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool \
 gdebi-core libxmu-dev libxi-dev libglu1-mesa python3-pip \
 libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev \
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
@@ -87,7 +87,7 @@ subversion tar texinfo zlib1g zlib1g-dev git-core gettext libexpat1-dev libssl-d
 libxml-parser-perl gcc-multilib gconf-editor libxml2-dev g++-multilib gitk libncurses5 mtd-utils \
 libncurses5-dev libvorbis-dev git autopoint autogen sed build-essential intltool libelf1:i386 libglib2.0-dev \
 xutils-dev lib32z1-dev lib32stdc++6 xsltproc gtk-doc-tools clang gdb valgrind default-jdk ruby-full libglu1-mesa-dev \
-texlive-full texmaker network-manager-openconnect-gnome vpnc open-cobol lua5.3 python-rosdep python-rosinstall python-rosinstall-generator python-wstool \
+texlive-full texmaker network-manager-openconnect-gnome vpnc open-cobol lua5.3 python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool \
 network-manager-vpnc network-manager-vpnc-gnome nodejs gnome-tweak-tool gnome-shell-extension-system-monitor ros-noetic-desktop-full \
 filezilla transmission gnome-shell-extensions gdebi-core grub-customizer libxmu-dev libxi-dev libglu1-mesa \
 libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev \
