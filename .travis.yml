@@ -9,3 +9,5 @@ before_install:
 script:
   - chmod 777 ./scripts/independent_tests.sh && ./scripts/independent_tests.sh
   - chmod 777 ./scripts/4589_pa1_test.sh && ./scripts/4589_pa1_test.sh
+  - chmod 777 ./deployment/linux_setup/cse4568.sh && sudo ./deployment/linux_setup/cse4568.sh
+  - chmod 777 ./deployment/linux_setup/entry.sh && sudo ./deployment/linux_setup/entry.sh --no-GUI
