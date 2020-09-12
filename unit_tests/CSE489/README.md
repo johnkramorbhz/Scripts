@@ -18,7 +18,7 @@ testTemplate_bin: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), staticall
 
 SHA256 checksum by running `sha256sum testTemplate_bin`:
 
-`6d402509fb18eeff9a22b54b6c22220599c32f464451f57ca3f37dc351159742  testTemplate_bin`
+`511d1e8518222f72bc2053e46cb804c24c6f13503518348028bdf5cce8930414  testTemplate_bin`
 
 *If you have Ubuntu version higher than 18.04, it is not guaranteed that the python script version will work correctly, since python is an interpreted programming language. Even though I patched the python 3.8 deprecated function, I have not test anything else. In this case, you might need to use the binary instead if the outcome is incorrect, and you might need to link them to the script by yourself.*
 
