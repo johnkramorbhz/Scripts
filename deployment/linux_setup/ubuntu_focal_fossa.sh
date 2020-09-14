@@ -83,6 +83,7 @@ python-imaging-tk docker.io unattended-upgrades binutils bochs \
 r-base gdb
 # Post installation of ROS
 post_install_ROS
+cat ~/.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null || post_install_ROS
 # End of post installation of ROS
 
 # Go to install_swift()
@@ -92,7 +93,7 @@ pip3 install --upgrade tensorflow requests
 exit 0
 fi
 if [ "$1" = "--init-ROS" ]; then
-post_install_ROS
+cat ~/.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null || post_install_ROS
 fi
 # Everything else
 common_pre_reqs
@@ -113,6 +114,7 @@ r-base libncurses5-dev libncursesw5-dev libncurses5-dev:i386 libncursesw5-dev:i3
 pip3 install --upgrade tensorflow requests
 # Post installation of ROS
 post_install_ROS
+cat ~/.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null || post_install_ROS
 # End of post installation of ROS
 # Go to install_swift()
 install_swift

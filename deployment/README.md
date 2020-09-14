@@ -13,6 +13,17 @@ Ubuntu 18.04 & 20.04 for client deployment. CentOS 8 for server deployment.
 
 CentOS 8 is in beta support as of now. CentOS 8 is a SERVER deployment script.
 
+## Ubuntu 20.04 LTS & ROS
+
+This problem only seem to occur in 20.04 LTS. The 18.04 LTS is NOT affected.
+
+If you cannot see the ROS environment variables, run the following again to fix the problem.
+
+```bash
+echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+```
+
 ## How to run this script
 Intel and AMD Display Adapter `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh && sudo chmod 777 entry.sh && sudo ./entry.sh`
 
