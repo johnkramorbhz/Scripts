@@ -48,12 +48,21 @@ function install_swift(){
 wget https://swift.org/builds/swift-5.2.4-release/ubuntu1804/swift-5.2.4-RELEASE/swift-5.2.4-RELEASE-ubuntu18.04.tar.gz
 tar xzf swift-5.2.4-RELEASE-ubuntu18.04.tar.gz
 mv swift-5.2.4-RELEASE-ubuntu18.04 /usr/share/swift
-echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> $HOME/.bashrc
-source  $HOME/.bashrc   
+echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> "$HOME"/.bashrc
+source  "$HOME"/.bashrc   
+}
+function install_ROS_pre_reqs(){
+sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+}
+function post_install_ROS(){
+echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+source "$HOME"/.bashrc
 }
 if [ "$1" = "--no-GUI" ]; then
 echo "INFO: Running in no GUI mode..."
 sleep 3
+install_ROS_pre_reqs
 apt update -y
 apt upgrade -y
 apt dist-upgrade -y
@@ -61,7 +70,7 @@ apt-get update -y
 apt-get upgrade -y
 add-apt-repository -y ppa:wireshark-dev/stable
 add-apt-repository -y ppa:kelleyk/emacs
-apt install -y curl
+apt install -y curl python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool
 curl -sL https://deb.nodesource.com/setup_14.x | bash -
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 apt install -y utop ocaml iverilog wget libtool-bin cmake libproxy-dev uuid-dev liblzo2-dev autoconf automake bash bison \
@@ -82,9 +91,11 @@ install_swift
 # End of install_swift()
 snap install --classic kotlin
 pip3 install --upgrade tensorflow requests
+#post_install_ROS
 exit 0
 fi
 # Everything else
+install_ROS_pre_reqs
 apt update -y
 apt upgrade -y
 apt dist-upgrade -y
@@ -102,9 +113,9 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB
 add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'
 apt install -y utop ocaml iverilog wget libtool-bin cmake libproxy-dev uuid-dev liblzo2-dev autoconf automake bash bison \
 bzip2 diffutils file flex m4 g++ gawk groff-base libncurses-dev libtool libslang2 make patch perl pkg-config shtool \
-subversion tar texinfo zlib1g zlib1g-dev git-core gettext libexpat1-dev libssl-dev cvs gperf unzip \
-python libxml-parser-perl gcc-multilib gconf-editor libxml2-dev g++-multilib gitk libncurses5 mtd-utils \
-libncurses5-dev libvorbis-dev git autopoint autogen sed build-essential intltool libelf1:i386 libglib2.0-dev \
+subversion tar texinfo zlib1g zlib1g-dev git-core gettext libexpat1-dev libssl-dev cvs gperf unzip python3-rosdep python3-wstool \
+python libxml-parser-perl gcc-multilib gconf-editor libxml2-dev g++-multilib gitk libncurses5 mtd-utils python3-rosinstall \
+libncurses5-dev libvorbis-dev git autopoint autogen sed build-essential intltool libelf1:i386 libglib2.0-dev python3-rosinstall-generator \
 xutils-dev lib32z1-dev lib32stdc++6 xsltproc gtk-doc-tools clang gdb valgrind default-jdk ruby-full libglu1-mesa-dev \
 texlive-full texmaker network-manager-openconnect-gnome vpnc ubuntu-communitheme-session open-cobol lua5.3 \
 network-manager-vpnc network-manager-vpnc-gnome emacs26 nodejs gnome-tweak-tool gnome-shell-extension-system-monitor \
@@ -125,7 +136,7 @@ snap install libreoffice
 snap install code --classic
 #npm install -g npm mocha chai mocha-simple-html-reporter
 snap install vlc
-# chmod 777 pintos_ubuntu.sh
+#post_install_ROS
 if [ "$1" = "--nvidia" ]; then
 add-apt-repository -y ppa:graphics-drivers/ppa
 apt update
