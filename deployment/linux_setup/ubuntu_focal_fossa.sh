@@ -32,15 +32,17 @@ else
 echo -e "\e[32mYes \e[0m"
 fi
 function install_swift(){
-wget https://swift.org/builds/swift-5.2.4-release/ubuntu2004/swift-5.2.4-RELEASE/swift-5.2.4-RELEASE-ubuntu20.04.tar.gz
-tar xzf swift-5.2.4-RELEASE-ubuntu20.04.tar.gz
-mv swift-5.2.4-RELEASE-ubuntu20.04 /usr/share/swift
-echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> $HOME/.bashrc
-source  $HOME/.bashrc   
+wget https://swift.org/builds/swift-5.2.5-release/ubuntu2004/swift-5.2.5-RELEASE/swift-5.2.5-RELEASE-ubuntu20.04.tar.gz
+tar xzf swift-5.2.5-RELEASE-ubuntu20.04.tar.gz
+mv swift-5.2.5-RELEASE-ubuntu20.04 /usr/share/swift
+echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> "$HOME"/.bashrc
+source  "$HOME"/.bashrc   
 }
 function common_pre_reqs(){
+#ROS packages
 sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+# END of ROS packages
 apt update -y
 apt upgrade -y
 apt dist-upgrade -y
@@ -51,8 +53,12 @@ add-apt-repository -y universe
 add-apt-repository -y restricted
 add-apt-repository -y multiverse
 curl -sL https://deb.nodesource.com/setup_14.x | bash -
-apt install -y curl
+apt install -y curl python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool
 snap install --classic kotlin
+}
+function post_install_ROS(){
+echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+source "$HOME"/.bashrc
 }
 echo 'INFO: Installing all needed compilers packages'
 if [ "$1" = "--no-GUI" ]; then
@@ -66,7 +72,7 @@ libxml-parser-perl gcc-multilib gconf-editor libxml2-dev g++-multilib gitk libnc
 libncurses5-dev libvorbis-dev git autopoint autogen sed build-essential intltool libglib2.0-dev \
 xutils-dev lib32z1-dev lib32stdc++6 xsltproc gtk-doc-tools clang gdb valgrind default-jdk ruby-full libglu1-mesa-dev \
 texlive-full texmaker network-manager-openconnect-gnome vpnc ros-noetic-desktop-full \
-network-manager-vpnc network-manager-vpnc-gnome nodejs python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool \
+network-manager-vpnc network-manager-vpnc-gnome nodejs \
 gdebi-core libxmu-dev libxi-dev libglu1-mesa python3-pip \
 libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev \
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
@@ -76,6 +82,10 @@ pip3 install --upgrade tensorflow requests
 # Go to install_swift()
 install_swift
 # End of install_swift()
+
+# Post installation of ROS
+post_install_ROS
+# End of post installation of ROS
 exit 0
 fi
 # Everything else
@@ -98,6 +108,10 @@ pip3 install --upgrade tensorflow requests
 # Go to install_swift()
 install_swift
 # End of install_swift()
+
+# Post installation of ROS
+post_install_ROS
+# End of post installation of ROS
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 gdebi --non-interactive google-chrome-stable_current_amd64.deb
 snap install slack --classic
