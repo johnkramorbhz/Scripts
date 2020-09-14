@@ -42,7 +42,7 @@ read
 if [ "$1" = "--update" ]; then
 echo "INFO: User choose to update this script to the most current version on the GitHub."
 wget -q --spider https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh
-if [ "$?" -eq 0]; then
+if [ "$?" -eq 0 ]; then
 rm -rf entry.sh
 echo -e "INFO: Upgrading... \c"
 wget -q https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh
@@ -84,14 +84,14 @@ echo -e "\e[32mFail\e[0m"
 echo "ERROR: Please check your internet connection. Please re-run this script when you resolved the problem"
 exit 1
 fi
-if [ "$OSID" = "ID=ubuntu" ] || [ "$OSID" = "ID=debian" ] || [ "$OSLIKE" = "ID_LIKE=debian" ]; then
+if [ "$OSID" = "ID=ubuntu" ]; then
 echo "INFO: Starting installer for Ubuntu systems"
 echo "INFO: Checking your release..."
 release_name=$(lsb_release -c -s)
-if [ $release_name = "bionic" ]; then
+if [ "$release_name" = "bionic" ]; then
 # Ubuntu 18.04 LTS
 wget https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/ubuntu_setup.sh
-elif [ $release_name = "focal" ]; then
+elif [ "$release_name" = "focal" ]; then
 # Ubuntu 20.04 LTS
 wget -O ubuntu_setup.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/ubuntu_focal_fossa.sh
 else
@@ -122,7 +122,7 @@ chmod u+x ubuntu_setup.sh
 echo "INFO: Cleaning up..."
 rm -rf entry.sh
 rm -rf ubuntu_setup.sh
-rm -rf $0
+rm -rf "$0"
 exit 0
 else
 echo "ERROR: Failed to download"
@@ -132,7 +132,7 @@ fi
 elif [ '$OSID" = "ID="centos"' ]; then
 echo "INFO: Starting installer for CentOS"
 major=$(cat /etc/centos-release | tr -dc '0-9.'|cut -d \. -f1)
-if [ $major = "8" ]; then
+if [ "$major" = "8" ]; then
 wget -O centos_setup.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/centos_8.sh
 else
 echo "ERROR: Your CentOS version is not supported."

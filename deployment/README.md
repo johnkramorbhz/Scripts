@@ -14,11 +14,11 @@ Ubuntu 18.04 & 20.04 for client deployment. CentOS 8 for server deployment.
 CentOS 8 is in beta support as of now. CentOS 8 is a SERVER deployment script.
 
 ## How to run this script
-Intel and AMD Display Adapter `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh && chmod u+x entry.sh && sudo ./entry.sh`
+Intel and AMD Display Adapter `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh && sudo chmod 777 entry.sh && sudo ./entry.sh`
 
-NVIDIA Display Adapter `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh && chmod u+x entry.sh && sudo ./entry.sh --nvidia`
+NVIDIA Display Adapter `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh && sudo chmod 777 entry.sh && sudo ./entry.sh --nvidia`
 
-WSL & WSL2 `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh && chmod u+x entry.sh && sudo ./entry.sh --no-GUI`
+WSL & WSL2 `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh && sudo chmod 777 entry.sh && sudo ./entry.sh --no-GUI`
 
 ## If you have older setup scripts that installs older `nodejs`, use the following command to upgrade to the latest LTS.
 
