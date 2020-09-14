@@ -35,8 +35,8 @@ function install_swift(){
 wget https://swift.org/builds/swift-5.2.5-release/ubuntu2004/swift-5.2.5-RELEASE/swift-5.2.5-RELEASE-ubuntu20.04.tar.gz
 tar xzf swift-5.2.5-RELEASE-ubuntu20.04.tar.gz
 mv swift-5.2.5-RELEASE-ubuntu20.04 /usr/share/swift
-echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> "$HOME"/.bashrc
-source  "$HOME"/.bashrc   
+echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> ~/.bashrc
+source  ~/.bashrc   
 }
 function common_pre_reqs(){
 #ROS packages
@@ -80,7 +80,6 @@ libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
 python-imaging-tk docker.io unattended-upgrades binutils bochs \
 r-base gdb
-pip3 install --upgrade tensorflow requests
 # Go to install_swift()
 install_swift
 # End of install_swift()
@@ -88,6 +87,7 @@ install_swift
 # Post installation of ROS
 post_install_ROS
 # End of post installation of ROS
+pip3 install --upgrade tensorflow requests
 exit 0
 fi
 # Everything else
@@ -107,13 +107,12 @@ libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-se
 python-imaging-tk docker.io unattended-upgrades binutils qemu-kvm qemu virt-manager bochs python3-pip \
 r-base libncurses5-dev libncursesw5-dev libncurses5-dev:i386 libncursesw5-dev:i386 libx11-6:i386 libxpm4:i386 gdb
 pip3 install --upgrade tensorflow requests
-# Go to install_swift()
-install_swift
-# End of install_swift()
-
 # Post installation of ROS
 post_install_ROS
 # End of post installation of ROS
+# Go to install_swift()
+install_swift
+# End of install_swift()
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 gdebi --non-interactive google-chrome-stable_current_amd64.deb
 snap install slack --classic

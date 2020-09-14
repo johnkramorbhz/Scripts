@@ -22,7 +22,7 @@
 # SOFTWARE.
 
 start=$SECONDS
-echo "Last Updated at 2020-09-14 00:37 EDT/EST"
+echo "Last Updated at 2020-09-14 01:35 EDT/EST"
 sleep 3
 echo -e "INFO: Are you running this script as root or sudo? \c"
 if [[ $EUID -ne 0 ]]; then
@@ -50,8 +50,8 @@ function install_swift(){
 wget https://swift.org/builds/swift-5.2.5-release/ubuntu1804/swift-5.2.5-RELEASE/swift-5.2.5-RELEASE-ubuntu18.04.tar.gz
 tar xzf swift-5.2.5-RELEASE-ubuntu18.04.tar.gz
 mv swift-5.2.5-RELEASE-ubuntu18.04 /usr/share/swift
-echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> "$HOME"/.bashrc
-source  "$HOME"/.bashrc   
+echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> ~/.bashrc
+source  ~/.bashrc   
 }
 function install_ROS_pre_reqs(){
 sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -91,9 +91,9 @@ r-base gdb libpython2.7 libpython2.7-dev ros-melodic-desktop-full
 # Go to install_swift()
 install_swift
 # End of install_swift()
+post_install_ROS
 snap install --classic kotlin
 pip3 install --upgrade tensorflow requests
-post_install_ROS
 exit 0
 fi
 # Everything else
@@ -129,6 +129,7 @@ r-base libncurses5-dev libncursesw5-dev libncurses5-dev:i386 libncursesw5-dev:i3
 # Go to install_swift()
 install_swift
 # End of install_swift()
+post_install_ROS
 snap install --classic kotlin
 pip3 install --upgrade tensorflow requests
 wget -4 https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -138,7 +139,6 @@ snap install libreoffice
 snap install code --classic
 #npm install -g npm mocha chai mocha-simple-html-reporter
 snap install vlc
-post_install_ROS
 if [ "$1" = "--nvidia" ]; then
 add-apt-repository -y ppa:graphics-drivers/ppa
 apt update
