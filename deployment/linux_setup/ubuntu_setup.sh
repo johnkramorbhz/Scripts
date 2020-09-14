@@ -87,13 +87,13 @@ gdebi-core libxmu-dev libxi-dev libglu1-mesa \
 libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev \
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
 python-imaging-tk docker.io unattended-upgrades binutils qemu-kvm qemu virt-manager virt-viewer libvirt-bin bochs \
-r-base gdb libpython2.7 libpython2.7-dev
+r-base gdb libpython2.7 libpython2.7-dev ros-melodic-desktop-full
 # Go to install_swift()
 install_swift
 # End of install_swift()
 snap install --classic kotlin
 pip3 install --upgrade tensorflow requests
-#post_install_ROS
+post_install_ROS
 exit 0
 fi
 # Everything else
@@ -121,7 +121,7 @@ libncurses5-dev libvorbis-dev git autopoint autogen sed build-essential intltool
 xutils-dev lib32z1-dev lib32stdc++6 xsltproc gtk-doc-tools clang gdb valgrind default-jdk ruby-full libglu1-mesa-dev \
 texlive-full texmaker network-manager-openconnect-gnome vpnc ubuntu-communitheme-session open-cobol lua5.3 \
 network-manager-vpnc network-manager-vpnc-gnome emacs26 nodejs gnome-tweak-tool gnome-shell-extension-system-monitor \
-filezilla transmission gnome-shell-extensions gdebi-core grub-customizer libxmu-dev libxi-dev libglu1-mesa \
+filezilla transmission gnome-shell-extensions gdebi-core grub-customizer libxmu-dev libxi-dev libglu1-mesa ros-melodic-desktop-full \
 libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev \
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
 python-imaging-tk docker.io unattended-upgrades binutils qemu-kvm qemu virt-manager virt-viewer libvirt-bin bochs \
@@ -138,7 +138,7 @@ snap install libreoffice
 snap install code --classic
 #npm install -g npm mocha chai mocha-simple-html-reporter
 snap install vlc
-#post_install_ROS
+post_install_ROS
 if [ "$1" = "--nvidia" ]; then
 add-apt-repository -y ppa:graphics-drivers/ppa
 apt update
