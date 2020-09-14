@@ -20,7 +20,8 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
+echo "Last Updated at 2020-09-14 03:43 EDT/EST"
+sleep 3
 start=$SECONDS
 echo -e "INFO: Are you running this script as root or sudo? \c"
 if [[ $EUID -ne 0 ]]; then
@@ -80,13 +81,13 @@ libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
 python-imaging-tk docker.io unattended-upgrades binutils bochs \
 r-base gdb
-# Go to install_swift()
-install_swift
-# End of install_swift()
-
 # Post installation of ROS
 post_install_ROS
 # End of post installation of ROS
+
+# Go to install_swift()
+install_swift
+# End of install_swift()
 pip3 install --upgrade tensorflow requests
 exit 0
 fi
