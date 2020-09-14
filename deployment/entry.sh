@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-echo "Last Updated at 2020-09-14 00:37 EDT/EST"
+echo "Last Updated at 2020-09-14 02:02 EDT/EST"
 sleep 3
 dt=$(date '+%d %h %Y %H:%M:%S');
 echo "INFO: Hello there, $USER@$HOSTNAME!"
@@ -117,7 +117,7 @@ fi
 if [ "$1" = "--no-GUI" ]; then
 chmod u+x ubuntu_setup.sh
 ./ubuntu_setup.sh --no-GUI
-echo "INFO: Cleaning up..."
+echo "INFO: Cleaning up installation scripts..."
 rm -rf entry.sh
 rm -rf ubuntu_setup.sh
 exit 0

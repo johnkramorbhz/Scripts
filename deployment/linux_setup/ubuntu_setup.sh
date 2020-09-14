@@ -22,7 +22,7 @@
 # SOFTWARE.
 
 start=$SECONDS
-echo "Last Updated at 2020-09-14 01:35 EDT/EST"
+echo "Last Updated at 2020-09-14 02:02 EDT/EST"
 sleep 3
 echo -e "INFO: Are you running this script as root or sudo? \c"
 if [[ $EUID -ne 0 ]]; then
@@ -93,7 +93,7 @@ install_swift
 # End of install_swift()
 post_install_ROS
 snap install --classic kotlin
-pip3 install --upgrade tensorflow requests
+#pip3 install --upgrade tensorflow requests
 exit 0
 fi
 # Everything else
@@ -131,7 +131,7 @@ install_swift
 # End of install_swift()
 post_install_ROS
 snap install --classic kotlin
-pip3 install --upgrade tensorflow requests
+#pip3 install --upgrade tensorflow requests
 wget -4 https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 gdebi --non-interactive google-chrome-stable_current_amd64.deb
 snap install slack --classic
