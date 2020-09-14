@@ -57,8 +57,10 @@ apt install -y curl python3-rosdep python3-rosinstall python3-rosinstall-generat
 snap install --classic kotlin
 }
 function post_install_ROS(){
+echo "INFO: Doing post-installation of ROS"
+sleep 3
 echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-source "$HOME"/.bashrc
+source ~/.bashrc
 }
 echo 'INFO: Installing all needed compilers packages'
 if [ "$1" = "--no-GUI" ]; then

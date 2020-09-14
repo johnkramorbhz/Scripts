@@ -59,7 +59,7 @@ apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BAD
 }
 function post_install_ROS(){
 echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
-source "$HOME"/.bashrc
+source ~/.bashrc
 }
 if [ "$1" = "--no-GUI" ]; then
 echo "INFO: Running in no GUI mode..."
