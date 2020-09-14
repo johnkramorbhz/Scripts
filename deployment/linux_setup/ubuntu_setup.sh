@@ -22,6 +22,8 @@
 # SOFTWARE.
 
 start=$SECONDS
+echo "Last Updated at 2020-09-14 00:37 EDT/EST"
+sleep 3
 echo -e "INFO: Are you running this script as root or sudo? \c"
 if [[ $EUID -ne 0 ]]; then
    echo -e "\e[31mNo \e[0m"
@@ -85,7 +87,7 @@ gdebi-core libxmu-dev libxi-dev libglu1-mesa \
 libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev \
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
 python-imaging-tk docker.io unattended-upgrades binutils qemu-kvm qemu virt-manager virt-viewer libvirt-bin bochs \
-r-base gdb libcurl3 libpython2.7 libpython2.7-dev
+r-base gdb libpython2.7 libpython2.7-dev
 # Go to install_swift()
 install_swift
 # End of install_swift()
