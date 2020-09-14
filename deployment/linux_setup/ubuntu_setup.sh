@@ -61,6 +61,9 @@ function post_install_ROS(){
 echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 }
+if [ "$1" = "--init-ROS" ]; then
+post_install_ROS
+fi
 if [ "$1" = "--no-GUI" ]; then
 echo "INFO: Running in no GUI mode..."
 sleep 3

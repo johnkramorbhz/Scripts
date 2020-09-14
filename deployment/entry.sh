@@ -109,7 +109,15 @@ if [ -e "ubuntu_setup.sh" ]; then
 if [ "$1" = "--nvidia" ]; then
 chmod u+x ubuntu_setup.sh
 ./ubuntu_setup.sh --nvidia
-echo "INFO: Cleaning up..."
+if [ "$release_name" = "focal" ]; then
+echo "INFO: Checking ROS installation"
+cat ~/.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null
+if [ "$?" != "0" ]; then
+echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+fi
+fi
+echo "INFO: Cleaning up installation scripts..."
 rm -rf entry.sh
 rm -rf ubuntu_setup.sh
 exit 0
@@ -117,6 +125,14 @@ fi
 if [ "$1" = "--no-GUI" ]; then
 chmod u+x ubuntu_setup.sh
 ./ubuntu_setup.sh --no-GUI
+if [ "$release_name" = "focal" ]; then
+echo "INFO: Checking ROS installation"
+cat ~/.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null
+if [ "$?" != "0" ]; then
+echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+fi
+fi
 echo "INFO: Cleaning up installation scripts..."
 rm -rf entry.sh
 rm -rf ubuntu_setup.sh
@@ -124,7 +140,15 @@ exit 0
 fi
 chmod u+x ubuntu_setup.sh
 ./ubuntu_setup.sh
-echo "INFO: Cleaning up..."
+if [ "$release_name" = "focal" ]; then
+echo "INFO: Checking ROS installation"
+cat ~/.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null
+if [ "$?" != "0" ]; then
+echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+fi
+fi
+echo "INFO: Cleaning up installation scripts..."
 rm -rf entry.sh
 rm -rf ubuntu_setup.sh
 rm -rf "$0"

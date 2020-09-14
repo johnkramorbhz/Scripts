@@ -38,6 +38,12 @@ mv swift-5.2.5-RELEASE-ubuntu20.04 /usr/share/swift
 echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> ~/.bashrc
 source  ~/.bashrc   
 }
+function post_install_ROS(){
+echo "INFO: Doing post-installation of ROS"
+sleep 3
+echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+}
 function common_pre_reqs(){
 #ROS packages
 sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -55,12 +61,6 @@ add-apt-repository -y multiverse
 curl -sL https://deb.nodesource.com/setup_14.x | bash -
 apt install -y curl python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool
 snap install --classic kotlin
-}
-function post_install_ROS(){
-echo "INFO: Doing post-installation of ROS"
-sleep 3
-echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-source ~/.bashrc
 }
 echo 'INFO: Installing all needed compilers packages'
 if [ "$1" = "--no-GUI" ]; then
@@ -89,6 +89,9 @@ post_install_ROS
 # End of post installation of ROS
 pip3 install --upgrade tensorflow requests
 exit 0
+fi
+if [ "$1" = "--init-ROS" ]; then
+post_install_ROS
 fi
 # Everything else
 common_pre_reqs
