@@ -90,7 +90,10 @@ echo "INFO: Checking your release..."
 release_name=$(lsb_release -c -s)
 if [ "$release_name" = "bionic" ]; then
 # Ubuntu 18.04 LTS
-wget https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/ubuntu_setup.sh
+if [ -e ubuntu_setup.sh ]; then
+rm -rf ubuntu_setup.sh*
+fi
+wget -O ubuntu_setup.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/ubuntu_setup.sh
 elif [ "$release_name" = "focal" ]; then
 # Ubuntu 20.04 LTS
 wget -O ubuntu_setup.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/ubuntu_focal_fossa.sh
