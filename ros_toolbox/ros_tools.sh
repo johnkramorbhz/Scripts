@@ -2,7 +2,7 @@
 version="0.0.3"
 version_suffix="beta"
 update_path="main"
-catkin_path=$(ros_tools --get-catkin-path-clean)
+catkin_path="$HOME/catkin_ws"
 function compile_and_update(){
 cd $catkin_path && catkin_make && source $catkin_path/devel/setup.bash
 if [ "$?" = "0" ]; then
