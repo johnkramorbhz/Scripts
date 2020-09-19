@@ -34,7 +34,7 @@ def upgrade_this_script():
         print("ERROR: You must run this script as root or sudo in order to upgrade")
         sys.exit(1)
     else:
-        print("Exit code:",os.system("wget -O /bin/ros_tools https://raw.githubusercontent.com/johnkramorbhz/Scripts/main/ros_toolbox/ros_tools.py && chmod 777 /bin/ros_tools"))       
+        print("Exit code:",os.system("wget -q -O /bin/ros_tools https://raw.githubusercontent.com/johnkramorbhz/Scripts/main/ros_toolbox/ros_tools.py && chmod 777 /bin/ros_tools"))       
 def print_help():
     print("ROS Toolbox Help")
     print("Usage can be found on https://github.com/johnkramorbhz/Scripts/tree/main/ros_toolbox")
