@@ -68,7 +68,7 @@ elif sys.argv[1]=="--test-w":
     test_json_w()
 elif sys.argv[1]=="--get-catkin-path-clean":
     load_user_value(True)
-    print(get_catkin_path())
+    print(get_catkin_path(),end='')
 else:
     print_help()
     sys.exit(1)
