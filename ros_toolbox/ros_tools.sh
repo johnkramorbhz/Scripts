@@ -1,8 +1,8 @@
 #!/bin/bash
-version="0.0.2"
+version="0.0.3"
 version_suffix="beta"
 update_path="main"
-catkin_path=$(cat $HOME/catkin_dir.cfg)
+catkin_path=$(ros_tools --get-catkin-path)
 function compile_and_update(){
 cd $catkin_path && catkin_make && source $catkin_path/devel/setup.bash
 if [ "$?" = "0" ]; then
@@ -24,8 +24,8 @@ if [[ $EUID -ne 0 ]]; then
 else
 echo -e "\e[32mYes \e[0m"
 fi
-cp $0 /bin/ros_tools
-chmod 777 /bin/ros_tools
+cp $0 /bin/ros_bashtools
+chmod 777 /bin/ros_bashtools
 elif [ "$1" = "--compile" ] || [ "$1" = "-c" ]; then
 compile_and_update
 elif [ "$1" = "--version" ] || [ "$1" = "-v" ]; then
@@ -40,8 +40,8 @@ if [[ $EUID -ne 0 ]]; then
 else
 echo -e "\e[32mYes \e[0m"
 fi
-wget -O /bin/ros_tools https://raw.githubusercontent.com/johnkramorbhz/Scripts/main/ros_toolbox/ros_tools.sh
-chmod 777 /bin/ros_tools
+wget -O /bin/ros_bashtools https://raw.githubusercontent.com/johnkramorbhz/Scripts/main/ros_toolbox/ros_tools.sh
+chmod 777 /bin/ros_bashtools
 elif [ "$1" = "--launch-lab1-test" ] || [ "$1" = "-l1t" ]; then
 compile_and_update
 roslaunch lab1 lab1.launch

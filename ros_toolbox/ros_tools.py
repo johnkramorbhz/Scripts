@@ -4,7 +4,7 @@ from os.path import expanduser
 branch="main"
 major=0
 SCRIPT_API_level=0
-bug_fixes=2
+bug_fixes=3
 suffix="beta"
 version=str(major)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
 default_value_of_rostools = {"format_level": 1,
@@ -16,11 +16,7 @@ home = expanduser("~")
 data = default_value_of_rostools
 #print(default_value_of_rostools)
 def compile_and_update():
-    if os.system("cd "+get_catkin_path()+" && catkin_make && source "+get_catkin_path()+"/devel/setup.bash") !=0:
-        print("ERROR: Failed to compile or update!")
-        sys.exit(1)
-    else:
-        print("INFO: Compile and update successfully")
+    os.system("ros_bashtools -c")
 def install_this_script():
     if os.geteuid()!=0:
         print("ERROR: You must run this script as root or sudo in order to install")
@@ -41,11 +37,13 @@ def print_help():
 def test_json_w():
     with open(home+'/ros_tools.config.json', 'w+') as json_file:
         json.dump(default_value_of_rostools, json_file,indent=4,sort_keys=True)
-def load_user_value():
+def load_user_value(suppress):
+    # suppress = True, then NO print statements
     global data
     if not os.path.exists(home+'/ros_tools.config.json'):
-        print("WARNING: You do not have \"ros_tools.config.json\" in your HOME directory")
-        print("Using default values")
+        if not suppress:
+            print("WARNING: You do not have \"ros_tools.config.json\" in your HOME directory")
+            print("Using default values")
         return
     with open(home+'/ros_tools.config.json', 'r') as json_file:
         data=json.load(json_file)
@@ -68,8 +66,8 @@ elif sys.argv[1]=="--version" or sys.argv[1]=="-v":
     print(version)
 elif sys.argv[1]=="--test-w":
     test_json_w()
-elif sys.argv[1]=="--test-r":
-    load_user_value()
+elif sys.argv[1]=="--get-catkin-path-clean":
+    load_user_value(True)
     print(get_catkin_path())
 else:
     print_help()
