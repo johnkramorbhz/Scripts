@@ -2,11 +2,11 @@
 
 ## Usage
 
-`ros_tools --compile`
+`ros_tools --compile` It compiles packages in `~/catkin_ws/`
 
-`ros_tools --version`
+`ros_tools --version` Prints version string
 
-`ros_tools --update`
+`ros_tools --upgrade` Upgrade this script
 
 ## Installation
 
