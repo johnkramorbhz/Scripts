@@ -1,5 +1,5 @@
 #!/bin/bash
-version="0.0.13"
+version="0.0.14"
 version_suffix="beta"
 update_path="main"
 # Default path
@@ -72,6 +72,12 @@ fi
 mkdir -p $(pwd)/catkin_ws/src
 chmod 777 -R $(pwd)/catkin_ws/
 cd $(pwd)/catkin_ws/
+release_name=$(lsb_release -c -s)
+if [ "$release_name" = "bionic" ]; then
+source /opt/ros/melodic/setup.bash
+elif [ "$release_name" = "focal" ]; then
+source /opt/ros/noetic/setup.bash
+fi
 catkin_make
 elif [ "$1" = "--print-directory" ] || [ "$1" = "-pwd" ]; then
 pwd
