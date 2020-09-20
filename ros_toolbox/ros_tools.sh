@@ -1,5 +1,5 @@
 #!/bin/bash
-version="0.0.5"
+version="0.0.6"
 version_suffix="beta"
 update_path="main"
 catkin_path="$HOME/catkin_ws"
@@ -13,7 +13,7 @@ exit 1
 fi
 }
 function compile_and_update_custom_dir(){
-cd $1 && catkin_make && source $1/devel/setup.bash
+cd -L $1 && catkin_make && source $1/devel/setup.bash
 if [ "$?" = "0" ]; then
 echo "INFO: Compiled and updated package(s) successfully"
 else
