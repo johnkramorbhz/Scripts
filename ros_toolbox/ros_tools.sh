@@ -2,6 +2,7 @@
 version="0.0.6"
 version_suffix="beta"
 update_path="main"
+# Default path
 catkin_path="$HOME/catkin_ws"
 function compile_and_update(){
 cd $catkin_path && catkin_make && source $catkin_path/devel/setup.bash
