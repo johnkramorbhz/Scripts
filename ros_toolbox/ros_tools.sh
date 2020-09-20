@@ -1,5 +1,5 @@
 #!/bin/bash
-version="0.0.8"
+version="0.0.9"
 version_suffix="beta"
 update_path="main"
 # Default path
@@ -59,9 +59,9 @@ compile_and_update_custom_dir $2
 elif [ "$1" = "--launch-lab1" ] || [ "$1" = "-l1" ]; then
 compile_and_update_custom_dir $2
 roslaunch lab1 lab1.launch
-elif [ "$1" = "--make-workspace-tutorial" ] || [ "$1" = "-makews-t" ]; then
-mkdir -p ~/catkin_ws/src
-cd ~/catkin_ws/
+elif [ "$1" = "--make-workspace" ] || [ "$1" = "-makews" ]; then
+mkdir -p $(pwd)/catkin_ws/src
+cd $(pwd)/catkin_ws/
 catkin_make
 elif [ "$1" = "--print-directory" ] || [ "$1" = "-pwd" ]; then
 pwd
