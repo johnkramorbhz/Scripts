@@ -54,7 +54,7 @@ elif [ "$1" = "--launch-lab1-test" ] || [ "$1" = "-l1t" ]; then
 compile_and_update
 roslaunch lab1 lab1.launch
 elif [ "$1" = "--compile-custom-dir" ] || [ "$1" = "-ccd" ]; then
-compile_and_update_custom_dir $1
+compile_and_update_custom_dir $2
 else
 # Literlly else
 echo "ERROR: You need to provide an argument!"
