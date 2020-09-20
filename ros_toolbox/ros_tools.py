@@ -74,6 +74,8 @@ elif sys.argv[1]=="--generate-config" or sys.argv[1]=="-gc":
 elif sys.argv[1]=="--get-catkin-path-clean":
     load_user_value(True)
     print(get_catkin_path()+"")
+# elif sys.argv[1]=="--make-workspace" or sys.argv[1]=="--makews":
+#     os.system("ros_bashtools ")
 else:
     print_help()
     sys.exit(1)
