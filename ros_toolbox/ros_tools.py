@@ -4,7 +4,7 @@ from os.path import expanduser
 branch="main"
 major=0
 SCRIPT_API_level=1
-bug_fixes=6
+bug_fixes=7
 suffix="beta"
 version=str(major)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
 default_value_of_rostools = {"format_level": 1,
@@ -65,6 +65,9 @@ elif sys.argv[1]=="--lab1-legacy" or sys.argv[1]=="-l1tl":
 elif sys.argv[1]=="--lab1" or sys.argv[1]=="-l1":
     load_user_value(False)
     print("Exit code:",os.system("ros_bashtools --launch-lab1 "+get_catkin_path()))
+elif sys.argv[1]=="--evader":
+    load_user_value(False)
+    print("Exit code:",os.system("ros_bashtools --launch-evader "+get_catkin_path()))
 elif sys.argv[1]=="--upgrade" or sys.argv[1]=="-u":
     upgrade_this_script()
 elif sys.argv[1]=="--version" or sys.argv[1]=="-v":
