@@ -1,5 +1,5 @@
 #!/bin/bash
-version="0.0.12"
+version="0.0.13"
 version_suffix="beta"
 update_path="main"
 # Default path
@@ -60,6 +60,15 @@ elif [ "$1" = "--launch-lab1" ] || [ "$1" = "-l1" ]; then
 compile_and_update_custom_dir $2
 roslaunch lab1 lab1.launch
 elif [ "$1" = "--make-workspace" ] || [ "$1" = "-makews" ]; then
+echo -e "INFO: Are you making this workspace as root or sudo? \c"
+if [[ $EUID -ne 0 ]]; then
+   echo -e "\e[31mNo \e[0m"
+   echo "ERROR: This script must be run as root in init mode"
+   echo "INFO: Restart it as 'sudo $0 --make-workspace' instead" 
+   exit 1
+else
+echo -e "\e[32mYes \e[0m"
+fi
 mkdir -p $(pwd)/catkin_ws/src
 chmod 777 -R $(pwd)/catkin_ws/
 cd $(pwd)/catkin_ws/
