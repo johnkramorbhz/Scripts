@@ -1,5 +1,5 @@
 #!/bin/bash
-version="0.1.1"
+version="0.1.2"
 version_suffix="beta"
 update_path="main"
 # Default path
@@ -82,7 +82,7 @@ source /opt/ros/noetic/setup.bash
 fi
 catkin_make
 cd ..
-chmod 777 -R $(pwd)/catkin_ws/
+chmod 777 -R $(pwd)/catkin_ws/*
 elif [ "$1" = "--print-directory" ] || [ "$1" = "-pwd" ]; then
 pwd
 else
