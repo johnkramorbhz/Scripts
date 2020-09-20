@@ -1,5 +1,5 @@
 #!/bin/bash
-version="0.0.3"
+version="0.0.4"
 version_suffix="beta"
 update_path="main"
 catkin_path="$HOME/catkin_ws"
@@ -12,7 +12,15 @@ echo "ERROR: Failed to compile or update!"
 exit 1
 fi
 }
-
+function compile_and_update_custom_dir(){
+cd $1 && catkin_make && source $1/devel/setup.bash
+if [ "$?" = "0" ]; then
+echo "INFO: Compiled and updated package(s) successfully"
+else
+echo "ERROR: Failed to compile or update!"
+exit 1
+fi
+}
 if [ "$1" = "--install" ]; then
 # Since it's not so feasible to keep the shell script in lots of directories, I provide --install option
 echo -e "INFO: Are you running installation mode as root or sudo? \c"
@@ -45,6 +53,8 @@ chmod 777 /bin/ros_bashtools
 elif [ "$1" = "--launch-lab1-test" ] || [ "$1" = "-l1t" ]; then
 compile_and_update
 roslaunch lab1 lab1.launch
+elif [ "$1" = "--compile-custom-dir" ] || [ "$1" = "-ccd" ]; then
+compile_and_update_custom_dir $1
 else
 # Literlly else
 echo "ERROR: You need to provide an argument!"
