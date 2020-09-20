@@ -4,7 +4,7 @@ from os.path import expanduser
 branch="main"
 major=0
 SCRIPT_API_level=1
-bug_fixes=4
+bug_fixes=5
 suffix="beta"
 version=str(major)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
 default_value_of_rostools = {"format_level": 1,
@@ -30,7 +30,7 @@ def upgrade_this_script():
         print("ERROR: You must run this script as root or sudo in order to upgrade")
         sys.exit(1)
     else:
-        print("Exit code:",os.system("wget -q -O /bin/ros_tools https://raw.githubusercontent.com/johnkramorbhz/Scripts/main/ros_toolbox/ros_tools.py && chmod 777 /bin/ros_tools && echo \"Update ROS Tools successfully\" && wget -O /bin/ros_bashtools -q https://raw.githubusercontent.com/johnkramorbhz/Scripts/main/ros_toolbox/ros_tools.sh && chmod 777 /bin/ros_bashtools && echo \"Update Complete!\" "))       
+        print("Exit code:",os.system("wget -q --no-cache -O /bin/ros_tools https://raw.githubusercontent.com/johnkramorbhz/Scripts/main/ros_toolbox/ros_tools.py && chmod 777 /bin/ros_tools && echo \"Update ROS Tools successfully\" && wget -O /bin/ros_bashtools --no-cache -q https://raw.githubusercontent.com/johnkramorbhz/Scripts/main/ros_toolbox/ros_tools.sh && chmod 777 /bin/ros_bashtools && echo \"Update Complete!\" "))       
 def print_help():
     print("ROS Toolbox Help")
     print("Usage can be found on https://github.com/johnkramorbhz/Scripts/tree/main/ros_toolbox")

@@ -1,5 +1,5 @@
 #!/bin/bash
-version="0.0.11"
+version="0.0.12"
 version_suffix="beta"
 update_path="main"
 # Default path
@@ -49,7 +49,7 @@ if [[ $EUID -ne 0 ]]; then
 else
 echo -e "\e[32mYes \e[0m"
 fi
-wget -O /bin/ros_bashtools -q https://raw.githubusercontent.com/johnkramorbhz/Scripts/main/ros_toolbox/ros_tools.sh
+wget --no-cache -O /bin/ros_bashtools -q https://raw.githubusercontent.com/johnkramorbhz/Scripts/main/ros_toolbox/ros_tools.sh
 chmod 777 /bin/ros_bashtools
 elif [ "$1" = "--launch-lab1-test" ] || [ "$1" = "-l1t" ]; then
 compile_and_update

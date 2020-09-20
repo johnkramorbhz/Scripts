@@ -15,7 +15,7 @@ TODO
 ## Installation
 
 ```bash
-sudo wget -O /bin/ros_tools https://raw.githubusercontent.com/johnkramorbhz/Scripts/main/ros_toolbox/ros_tools.py && sudo chmod 777 /bin/ros_tools && sudo wget -O /bin/ros_bashtools https://raw.githubusercontent.com/johnkramorbhz/Scripts/main/ros_toolbox/ros_tools.sh && sudo chmod 777 /bin/ros_bashtools
+sudo wget --no-cache -O /bin/ros_tools https://raw.githubusercontent.com/johnkramorbhz/Scripts/main/ros_toolbox/ros_tools.py && sudo chmod 777 /bin/ros_tools && sudo wget --no-cache -O /bin/ros_bashtools https://raw.githubusercontent.com/johnkramorbhz/Scripts/main/ros_toolbox/ros_tools.sh && sudo chmod 777 /bin/ros_bashtools
 ```
 
 ## Purpose
