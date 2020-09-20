@@ -1,5 +1,5 @@
 #!/bin/bash
-version="0.0.10"
+version="0.0.11"
 version_suffix="beta"
 update_path="main"
 # Default path
@@ -61,8 +61,8 @@ compile_and_update_custom_dir $2
 roslaunch lab1 lab1.launch
 elif [ "$1" = "--make-workspace" ] || [ "$1" = "-makews" ]; then
 mkdir -p $(pwd)/catkin_ws/src
+chmod 777 -R $(pwd)/catkin_ws/
 cd $(pwd)/catkin_ws/
-chmod 777 -R ../catkin_ws/*
 catkin_make
 elif [ "$1" = "--print-directory" ] || [ "$1" = "-pwd" ]; then
 pwd
