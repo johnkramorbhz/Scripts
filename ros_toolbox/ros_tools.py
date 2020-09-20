@@ -4,7 +4,7 @@ from os.path import expanduser
 branch="main"
 major=0
 SCRIPT_API_level=1
-bug_fixes=0
+bug_fixes=1
 suffix="beta"
 version=str(major)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
 default_value_of_rostools = {"format_level": 1,
@@ -59,7 +59,7 @@ elif sys.argv[1]=="--compile" or sys.argv[1]=="-c":
     compile_and_update()
 elif sys.argv[1]=="--compile-custom-directory" or sys.argv[1]=="-ccd":
     load_user_value(False)
-    print("Exit code:",os.system("ros_bashtools -ccd"+get_catkin_path()))
+    print("Exit code:",os.system("ros_bashtools -ccd "+get_catkin_path()))
 elif sys.argv[1]=="--lab1" or sys.argv[1]=="-l1t":
     run_lab1()
 elif sys.argv[1]=="--upgrade" or sys.argv[1]=="-u":
