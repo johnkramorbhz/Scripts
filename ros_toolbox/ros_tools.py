@@ -4,7 +4,7 @@ from os.path import expanduser
 branch="main"
 major=0
 SCRIPT_API_level=0
-bug_fixes=3
+bug_fixes=4
 suffix="beta"
 version=str(major)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
 default_value_of_rostools = {"format_level": 1,
@@ -24,7 +24,7 @@ def install_this_script():
     else:
         print("Exit code:",os.system("cp " + sys.argv[0] + " /bin/ros_tools && chmod 777 /bin/ros_tools"))
 def run_lab1():
-    print("Exit code:",os.system("roslaunch lab1 lab1.launch"))
+    print("Exit code:",os.system("ros_bashtools --launch-lab1-test"))
 def upgrade_this_script():
     if os.geteuid()!=0:
         print("ERROR: You must run this script as root or sudo in order to upgrade")
