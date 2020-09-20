@@ -12,6 +12,10 @@ TODO
 
 `ros_tools --lab1` Test lab1 default setting
 
+`sudo ros_tools --makews` Make a workspace
+
+`ros_tools -gc` Generate a JSON config in your HOME folder e.g. `{'format_level': 1, 'debug': False, 'catkin_path': '$HOME/catkin_ws'}`
+
 ## Installation
 
 ```bash
@@ -20,6 +24,4 @@ sudo wget --no-cache -O /bin/ros_tools https://raw.githubusercontent.com/johnkra
 
 ## Purpose
 
-Why making this? It requires so many unnecessary steps that I believe it can be automated. ROS does NOT actively look for a package after `catkin_make`.
-
-I just don't like the default config that I have to put it in `~/catkin_ws/`
+TODO
