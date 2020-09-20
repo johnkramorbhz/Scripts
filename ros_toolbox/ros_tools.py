@@ -4,7 +4,7 @@ from os.path import expanduser
 branch="main"
 major=0
 SCRIPT_API_level=0
-bug_fixes=4
+bug_fixes=5
 suffix="beta"
 version=str(major)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
 default_value_of_rostools = {"format_level": 1,
@@ -58,7 +58,6 @@ if sys.argv[1]=="--install":
 elif sys.argv[1]=="--compile" or sys.argv[1]=="-c":
     compile_and_update()
 elif sys.argv[1]=="--lab1" or sys.argv[1]=="-l1t":
-    compile_and_update()
     run_lab1()
 elif sys.argv[1]=="--upgrade" or sys.argv[1]=="-u":
     upgrade_this_script()
