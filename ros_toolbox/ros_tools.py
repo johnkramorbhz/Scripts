@@ -4,7 +4,7 @@ from os.path import expanduser
 branch="main"
 major=0
 SCRIPT_API_level=1
-bug_fixes=1
+bug_fixes=2
 suffix="beta"
 version=str(major)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
 default_value_of_rostools = {"format_level": 1,
@@ -68,9 +68,9 @@ elif sys.argv[1]=="--version" or sys.argv[1]=="-v":
     print(version)
 elif sys.argv[1]=="--test-w":
     test_json_w()
-# elif sys.argv[1]=="--get-catkin-path-clean":
-#     load_user_value(True)
-#     print(get_catkin_path(),end='')
+elif sys.argv[1]=="--get-catkin-path-clean":
+    load_user_value(True)
+    print(get_catkin_path()+"")
 else:
     print_help()
     sys.exit(1)
