@@ -2,11 +2,15 @@
 
 ## Usage
 
-`ros_tools --compile` It compiles packages in `~/catkin_ws/`
+TODO
+
+`ros_tools --compile` It compiles packages in `~/catkin_ws/` if there is no `$HOME/ros_tools.config.json` detected. Otherwise it will be whatever directory you want to go to.
 
 `ros_tools --version` Prints version string
 
 `ros_tools --upgrade` Upgrade this script
+
+`ros_tools --lab1` Test lab1 default setting
 
 ## Installation
 

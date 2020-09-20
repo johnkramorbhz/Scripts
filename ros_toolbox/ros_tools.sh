@@ -1,5 +1,5 @@
 #!/bin/bash
-version="0.0.6"
+version="0.0.7"
 version_suffix="beta"
 update_path="main"
 # Default path
@@ -56,6 +56,9 @@ compile_and_update
 roslaunch lab1 lab1.launch
 elif [ "$1" = "--compile-custom-dir" ] || [ "$1" = "-ccd" ]; then
 compile_and_update_custom_dir $2
+elif [ "$1" = "--launch-lab1" ] || [ "$1" = "-l1" ]; then
+compile_and_update_custom_dir $2
+roslaunch lab1 lab1.launch
 else
 # Literlly else
 echo "ERROR: You need to provide an argument!"

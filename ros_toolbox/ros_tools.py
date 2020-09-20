@@ -4,7 +4,7 @@ from os.path import expanduser
 branch="main"
 major=0
 SCRIPT_API_level=1
-bug_fixes=3
+bug_fixes=4
 suffix="beta"
 version=str(major)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
 default_value_of_rostools = {"format_level": 1,
@@ -55,13 +55,16 @@ if len(sys.argv)==1:
     sys.exit(1)
 if sys.argv[1]=="--install":
     install_this_script()
-elif sys.argv[1]=="--compile" or sys.argv[1]=="-c":
+elif sys.argv[1]=="--compile-in-legacy-way" or sys.argv[1]=="-cl":
     compile_and_update()
-elif sys.argv[1]=="--compile-custom-directory" or sys.argv[1]=="-ccd":
+elif sys.argv[1]=="--compile" or sys.argv[1]=="-ccd" or sys.argv[1]=="-c":
     load_user_value(False)
     print("Exit code:",os.system("ros_bashtools -ccd "+get_catkin_path()))
-elif sys.argv[1]=="--lab1" or sys.argv[1]=="-l1t":
+elif sys.argv[1]=="--lab1-legacy" or sys.argv[1]=="-l1tl":
     run_lab1()
+elif sys.argv[1]=="--lab1" or sys.argv[1]=="-l1":
+    load_user_value(False)
+    print("Exit code:",os.system("ros_bashtools --launch-lab1 "+get_catkin_path()))
 elif sys.argv[1]=="--upgrade" or sys.argv[1]=="-u":
     upgrade_this_script()
 elif sys.argv[1]=="--version" or sys.argv[1]=="-v":
