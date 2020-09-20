@@ -17,3 +17,5 @@ sudo wget -O /bin/ros_tools https://raw.githubusercontent.com/johnkramorbhz/Scri
 ## Purpose
 
 Why making this? It requires so many unnecessary steps that I believe it can be automated. ROS does NOT actively look for a package after `catkin_make`.
+
+I just don't like the default config that I have to put it in `~/catkin_ws/`

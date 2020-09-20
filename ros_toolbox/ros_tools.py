@@ -4,7 +4,7 @@ from os.path import expanduser
 branch="main"
 major=0
 SCRIPT_API_level=1
-bug_fixes=2
+bug_fixes=3
 suffix="beta"
 version=str(major)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
 default_value_of_rostools = {"format_level": 1,
@@ -34,7 +34,7 @@ def upgrade_this_script():
 def print_help():
     print("ROS Toolbox Help")
     print("Usage can be found on https://github.com/johnkramorbhz/Scripts/tree/main/ros_toolbox")
-def test_json_w():
+def generate_default_config():
     with open(home+'/ros_tools.config.json', 'w+') as json_file:
         json.dump(default_value_of_rostools, json_file,indent=4,sort_keys=True)
 def load_user_value(suppress):
@@ -66,8 +66,8 @@ elif sys.argv[1]=="--upgrade" or sys.argv[1]=="-u":
     upgrade_this_script()
 elif sys.argv[1]=="--version" or sys.argv[1]=="-v":
     print(version)
-elif sys.argv[1]=="--test-w":
-    test_json_w()
+elif sys.argv[1]=="--generate-config" or sys.argv[1]=="-gc":
+    generate_default_config()
 elif sys.argv[1]=="--get-catkin-path-clean":
     load_user_value(True)
     print(get_catkin_path()+"")
