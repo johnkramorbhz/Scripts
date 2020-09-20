@@ -1,5 +1,5 @@
 #!/bin/bash
-version="0.0.4"
+version="0.0.5"
 version_suffix="beta"
 update_path="main"
 catkin_path="$HOME/catkin_ws"
