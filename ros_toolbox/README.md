@@ -22,6 +22,10 @@ TODO
 sudo wget --no-cache -O /bin/ros_tools https://raw.githubusercontent.com/johnkramorbhz/Scripts/main/ros_toolbox/ros_tools.py && sudo chmod 777 /bin/ros_tools && sudo wget --no-cache -O /bin/ros_bashtools https://raw.githubusercontent.com/johnkramorbhz/Scripts/main/ros_toolbox/ros_tools.sh && sudo chmod 777 /bin/ros_bashtools
 ```
 
+## Why bashtools in addition to ros tools
+
+ROS only support bash instead of sh that python uses, so it's required to use bashtools as an interface.
+
 ## Purpose
 
 TODO
