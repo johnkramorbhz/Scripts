@@ -1,5 +1,5 @@
 #!/bin/bash
-version="0.1.4"
+version="0.1.5"
 version_suffix="beta"
 update_path="main"
 # Default path
@@ -76,7 +76,7 @@ roslaunch lab1 evader.launch
 elif [ "$1" = "--launch-pe" ]; then
 include_environment_vars
 compile_and_update_custom_dir $2
-roslaunch lab1 evader.launch
+roslaunch lab1 pursuer-evader.launch
 elif [ "$1" = "--make-workspace" ] || [ "$1" = "-makews" ]; then
 echo -e "INFO: Are you making this workspace as root or sudo? \c"
 if [[ $EUID -ne 0 ]]; then
