@@ -1,5 +1,5 @@
 #!/bin/bash
-version="0.1.3"
+version="0.1.4"
 version_suffix="beta"
 update_path="main"
 # Default path
@@ -20,6 +20,16 @@ echo "INFO: Compiled and updated package(s) successfully"
 else
 echo "ERROR: Failed to compile or update!"
 exit 1
+fi
+}
+function include_environment_vars(){
+release_name=$(lsb_release -c -s)
+if [ "$release_name" = "bionic" ]; then
+# Ubuntu 18.04 LTS
+source /opt/ros/melodic/setup.bash
+elif [ "$release_name" = "focal" ]; then
+# Ubuntu 20.04 LTS
+source /opt/ros/noetic/setup.bash
 fi
 }
 if [ "$1" = "--install" ]; then
@@ -60,6 +70,11 @@ elif [ "$1" = "--launch-lab1" ] || [ "$1" = "-l1" ]; then
 compile_and_update_custom_dir $2
 roslaunch lab1 lab1.launch
 elif [ "$1" = "--launch-evader" ]; then
+include_environment_vars
+compile_and_update_custom_dir $2
+roslaunch lab1 evader.launch
+elif [ "$1" = "--launch-pe" ]; then
+include_environment_vars
 compile_and_update_custom_dir $2
 roslaunch lab1 evader.launch
 elif [ "$1" = "--make-workspace" ] || [ "$1" = "-makews" ]; then
@@ -75,14 +90,7 @@ fi
 mkdir -p $(pwd)/catkin_ws/src
 chmod 777 -R $(pwd)/catkin_ws/
 cd $(pwd)/catkin_ws/
-release_name=$(lsb_release -c -s)
-if [ "$release_name" = "bionic" ]; then
-# Ubuntu 18.04 LTS
-source /opt/ros/melodic/setup.bash
-elif [ "$release_name" = "focal" ]; then
-# Ubuntu 20.04 LTS
-source /opt/ros/noetic/setup.bash
-fi
+include_environment_vars
 catkin_make
 cd ..
 chmod 777 -R $(pwd)/catkin_ws/*
