@@ -1,5 +1,5 @@
 #!/bin/bash
-version="0.1.5"
+version="0.1.6"
 version_suffix="beta"
 update_path="main"
 # Default path
@@ -63,18 +63,22 @@ wget --no-cache -O /bin/ros_bashtools -q https://raw.githubusercontent.com/johnk
 chmod 777 /bin/ros_bashtools
 elif [ "$1" = "--launch-lab1-test" ] || [ "$1" = "-l1t" ]; then
 compile_and_update
+rm -rf $HOME/.ros/log
 roslaunch lab1 lab1.launch
 elif [ "$1" = "--compile-custom-dir" ] || [ "$1" = "-ccd" ]; then
 compile_and_update_custom_dir $2
 elif [ "$1" = "--launch-lab1" ] || [ "$1" = "-l1" ]; then
+rm -rf $HOME/.ros/log
 compile_and_update_custom_dir $2
 roslaunch lab1 lab1.launch
 elif [ "$1" = "--launch-evader" ]; then
 include_environment_vars
+rm -rf $HOME/.ros/log
 compile_and_update_custom_dir $2
 roslaunch lab1 evader.launch
 elif [ "$1" = "--launch-pe" ]; then
 include_environment_vars
+rm -rf $HOME/.ros/log
 compile_and_update_custom_dir $2
 roslaunch lab1 pursuer-evader.launch
 elif [ "$1" = "--make-workspace" ] || [ "$1" = "-makews" ]; then
@@ -96,6 +100,8 @@ cd ..
 chmod 777 -R $(pwd)/catkin_ws/*
 elif [ "$1" = "--print-directory" ] || [ "$1" = "-pwd" ]; then
 pwd
+elif [ "$1" = "--clean-log" ] || [ "$1" = "-clog" ]; then
+rm -rf $HOME/.ros/log
 else
 # Literlly else
 echo "ERROR: You need to provide an argument!"

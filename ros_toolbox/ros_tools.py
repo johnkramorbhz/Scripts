@@ -4,7 +4,7 @@ from os.path import expanduser
 branch="main"
 major=0
 SCRIPT_API_level=1
-bug_fixes=8
+bug_fixes=9
 suffix="beta"
 version=str(major)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
 default_value_of_rostools = {"format_level": 1,
@@ -80,6 +80,8 @@ elif sys.argv[1]=="--generate-config" or sys.argv[1]=="-gc":
 elif sys.argv[1]=="--get-catkin-path-clean":
     load_user_value(True)
     print(get_catkin_path()+"")
+elif sys.argv[1]=="--clean":
+    os.system("ros_bashtools --clean-log")
 elif sys.argv[1]=="--make-workspace" or sys.argv[1]=="--makews":
     if os.geteuid()!=0:
         print("ERROR: You need root or sudo privilege to make workspace")
