@@ -29,7 +29,7 @@ Intel and AMD Display Adapter `wget -O entry.sh https://github.com/johnkramorbhz
 
 NVIDIA Display Adapter `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh && sudo bash entry.sh --nvidia`
 
-WSL & WSL2 `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh && sudo sudo bash entry.sh --no-GUI`
+WSL & WSL2 `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh && sudo bash entry.sh --no-GUI`
 
 ## If you have older setup scripts that installs older `nodejs`, use the following command to upgrade to the latest LTS.
 
