@@ -4,8 +4,8 @@ from os.path import expanduser
 branch="main"
 major=1
 SCRIPT_API_level=0
-bug_fixes=0
-suffix=""
+bug_fixes=1
+suffix="development"
 if suffix != "":
     version=str(major)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
 else:
@@ -17,7 +17,13 @@ default_value_of_rostools = {"format_level": 1,
 }
 home = expanduser("~")
 data = default_value_of_rostools
+timestamp="2020-09-26 06:21"
 #print(default_value_of_rostools)
+def print_start():
+    print("ROS Tools")
+    print("This is a free software that have absolutely NO WARRANTY.\nYou are free to redistribute this software as long as you don\'t disable this startup message.")
+    print("Licence: MIT")
+    print("Last edited on:",timestamp)
 def compile_and_update():
     os.system("ros_bashtools -c")
 def install_this_script():
@@ -53,6 +59,7 @@ def load_user_value(suppress):
     #print(data)
 def get_catkin_path():
     return data['catkin_path']
+print_start()
 if len(sys.argv)==1:
     print_help()
     sys.exit(1)
