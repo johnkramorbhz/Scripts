@@ -73,7 +73,11 @@ snap install --classic kotlin
 }
 echo 'INFO: Installing all needed compilers packages'
 if [ "$1" = "--no-GUI" ]; then
-cat /proc/version | grep microsoft >> /dev/null || echo "ERROR: It is not WSL" && exit 1
+cat /proc/version | grep microsoft >> /dev/null
+if [ "$?" -ne 0 ]; then
+echo "ERROR: It is not WSL"
+exit 1
+fi
 echo "INFO: Running in no GUI mode..."
 sleep 3
 common_pre_reqs
@@ -100,7 +104,11 @@ install_swift
 # End of install_swift()
 pip3 install --upgrade tensorflow requests
 # Skip CUDA installation if not in WSL2
-cat /proc/version | grep "4.19" >> /dev/null || echo "INFO: Not in WSL2" && exit 0
+cat /proc/version | grep "4.19" >> /dev/null
+if [ "$?" -ne 0 ]; then
+echo "INFO: Not in WSL2" 
+exit 0
+fi
 sh -c 'echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda.list'
 apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub
 apt update
