@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-echo "Last Updated at 2020-09-14 03:43 EDT/EST"
+echo "Last Updated at 2020-09-26 08:43 EDT/EST"
 sleep 3
 start=$SECONDS
 echo -e "INFO: Are you running this script as root or sudo? \c"
@@ -32,10 +32,18 @@ if [[ $EUID -ne 0 ]]; then
 else
 echo -e "\e[32mYes \e[0m"
 fi
+echo -e "INFO: Are you running this script on x86_64 architecture? \c"
+if [[ $(uname -m) != "x86_64" ]]; then
+   echo -e "\e[31mNo \e[0m"
+   echo "ERROR: You cannot use this script on a non x86_64 machines like ARM, x86, or etc."
+   exit 2
+else
+echo -e "\e[32mYes \e[0m"
+fi
 function install_swift(){
-wget https://swift.org/builds/swift-5.2.5-release/ubuntu2004/swift-5.2.5-RELEASE/swift-5.2.5-RELEASE-ubuntu20.04.tar.gz
-tar xzf swift-5.2.5-RELEASE-ubuntu20.04.tar.gz
-mv swift-5.2.5-RELEASE-ubuntu20.04 /usr/share/swift
+wget -O swift.tar.gz https://swift.org/builds/swift-5.3-release/ubuntu2004/swift-5.3-RELEASE/swift-5.3-RELEASE-ubuntu20.04.tar.gz
+tar xzf swift.tar.gz
+mv swift /usr/share/swift
 echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> /etc/bash.bashrc
 source /etc/bash.bashrc
 }
@@ -65,6 +73,7 @@ snap install --classic kotlin
 }
 echo 'INFO: Installing all needed compilers packages'
 if [ "$1" = "--no-GUI" ]; then
+# cat /proc/version | grep microsoft >> /dev/null && cat /proc/version | grep "4.19" >> /dev/null
 echo "INFO: Running in no GUI mode..."
 sleep 3
 common_pre_reqs
@@ -90,6 +99,8 @@ cat /etc/bash.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null || 
 install_swift
 # End of install_swift()
 pip3 install --upgrade tensorflow requests
+wget https://developer.download.nvidia.com/compute/cuda/11.1.0/local_installers/cuda_11.1.0_455.23.05_linux.run
+sh cuda_11.1.0_455.23.05_linux.run
 exit 0
 fi
 if [ "$1" = "--init-ROS" ]; then
@@ -126,11 +137,10 @@ snap install libreoffice
 snap install code --classic
 snap install vlc
 if [ "$1" = "--nvidia" ]; then
-# echo "Not supported at this time. Skip!"
-add-apt-repository -y ppa:graphics-drivers/ppa
-apt update
-apt install -y build-essential libglvnd-dev pkg-config
-ubuntu-drivers autoinstall
+wget -O nvidia_driver.run https://us.download.nvidia.com/XFree86/Linux-x86_64/455.23.04/NVIDIA-Linux-x86_64-455.23.04.run
+sh nvidia_driver.run
+wget -O cuda.run https://developer.download.nvidia.com/compute/cuda/11.1.0/local_installers/cuda_11.1.0_455.23.05_linux.run
+sh cuda.run
 fi
 echo "INFO: Installing wireshark..."
 apt install -y wireshark

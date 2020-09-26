@@ -22,7 +22,7 @@
 # SOFTWARE.
 
 start=$SECONDS
-echo "Last Updated at 2020-09-14 03:43 EDT/EST"
+echo "Last Updated at 2020-09-26 08:43 EDT/EST"
 sleep 3
 echo -e "INFO: Are you running this script as root or sudo? \c"
 if [[ $EUID -ne 0 ]]; then
@@ -30,6 +30,14 @@ if [[ $EUID -ne 0 ]]; then
    echo "ERROR: This script must be run as root since it installs some packages necessary for deployment"
    echo "INFO: Restart it as 'sudo $0 $1 $2' instead" 
    exit 1
+else
+echo -e "\e[32mYes \e[0m"
+fi
+echo -e "INFO: Are you running this script on x86_64 architecture? \c"
+if [[ $(uname -m) != "x86_64" ]]; then
+   echo -e "\e[31mNo \e[0m"
+   echo "ERROR: You cannot use this script on a non x86_64 machines like ARM, x86, or etc."
+   exit 2
 else
 echo -e "\e[32mYes \e[0m"
 fi
@@ -47,9 +55,9 @@ exit 0
 fi
 echo 'INFO: Installing all needed compilers packages'
 function install_swift(){
-wget https://swift.org/builds/swift-5.2.5-release/ubuntu1804/swift-5.2.5-RELEASE/swift-5.2.5-RELEASE-ubuntu18.04.tar.gz
-tar xzf swift-5.2.5-RELEASE-ubuntu18.04.tar.gz
-mv swift-5.2.5-RELEASE-ubuntu18.04 /usr/share/swift
+wget https://swift.org/builds/swift-5.3-release/ubuntu1804/swift-5.3-RELEASE/swift-5.3-RELEASE-ubuntu18.04.tar.gz
+tar xzf swift-5.3-RELEASE-ubuntu18.04.tar.gz
+mv swift-5.3-RELEASE-ubuntu18.04 /usr/share/swift
 echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> ~/.bashrc
 source  ~/.bashrc   
 }
@@ -143,22 +151,10 @@ snap install code --classic
 #npm install -g npm mocha chai mocha-simple-html-reporter
 snap install vlc
 if [ "$1" = "--nvidia" ]; then
-add-apt-repository -y ppa:graphics-drivers/ppa
-apt update
-dpkg --add-architecture i386
-apt update -y
-apt install -y build-essential libc6:i386
-ubuntu-drivers autoinstall
-echo "INFO: Installing prerequisite packages for Tensorflow GPU"
-apt install -y gcc-6 g++-6
-wget -4 http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda_10.2.89_440.33.01_linux.run
-chmod u+x cuda_10.2.89_440.33.01_linux.run
-echo "INFO: Starting the CUDA installer..."
-./cuda_10.2.89_440.33.01_linux.run --override
-# echo "INFO: Downloading and instaling patch 4..."
-# wget -4 https://developer.nvidia.com/compute/cuda/9.0/Prod/patches/4/cuda_9.0.176.4_linux-run
-# chmod u+x cuda_9.0.176.4_linux-run
-# sh cuda_9.0.176.4_linux-run
+wget -O nvidia_driver.run https://us.download.nvidia.com/XFree86/Linux-x86_64/455.23.04/NVIDIA-Linux-x86_64-455.23.04.run
+sh nvidia_driver.run
+wget -O cuda.run https://developer.download.nvidia.com/compute/cuda/11.1.0/local_installers/cuda_11.1.0_455.23.05_linux.run
+sh cuda.run
 fi
 echo "INFO: Installing wireshark..."
 apt install -y wireshark
