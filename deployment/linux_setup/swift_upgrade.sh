@@ -16,6 +16,6 @@ if [[ $(uname -m) != "x86_64" ]]; then
 else
 echo -e "\e[32mYes \e[0m"
 fi
-wget -O swift.tar.gz https://swift.org/builds/swift-5.3-release/ubuntu2004/swift-5.3-RELEASE/swift-5.3-RELEASE-ubuntu20.04.tar.gz
-tar xzf swift.tar.gz
-mv swift /usr/share/swift
+wget https://swift.org/builds/swift-5.3-release/ubuntu2004/swift-5.3-RELEASE/swift-5.3-RELEASE-ubuntu20.04.tar.gz
+tar xzf swift-5.3-RELEASE-ubuntu20.04.tar.gz
+mv swift-5.3-RELEASE-ubuntu20.04 /usr/share/swift
