@@ -30,8 +30,7 @@ exit 1
 else
 echo -e "\e[32mYes \e[0m"
 fi
-major=$(cat /etc/centos-release | tr -dc '0-9.'|cut -d \. -f1)
-if [ $major = "8" ]; then
+if [ $(cat /etc/centos-release | tr -dc '0-9.'|cut -d \. -f1) = "8" ]; then
 dnf update -y
 # Enable EPEL repo
 dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm

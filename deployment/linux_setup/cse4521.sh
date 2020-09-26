@@ -21,8 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 echo "INFO: Checking your release..."
-release_name=$(lsb_release -c -s)
-if [ $release_name = "bionic" ]; then
+if [ $(lsb_release -c -s) = "bionic" ]; then
 echo "Please only run this ONCE! ONLY USE IT ON UBUNTU BIONIC BEAVER(18.04), since Ubuntu REMOVES i386 support on the later release!"
 else
 echo "WARNING: You are using a distro that is not supported by this script. I urge you stop this installation unless you know what you are doing."

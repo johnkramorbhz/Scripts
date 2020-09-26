@@ -1,7 +1,5 @@
 #!/bin/bash
 # This will setup ROS on your system.
-release_name=$(lsb_release -c -s)
-OSID=$(cat /etc/os-release | grep -w "ID")
 function install_pre_req(){
 sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
@@ -13,7 +11,7 @@ function post_install_ROS(){
 echo "source /opt/ros/$1/setup.bash" >> /etc/bash.bashrc
 source /etc/bash.bashrc
 }
-if [ "$OSID" = "ID=ubuntu" ]; then
+if [ "$(cat /etc/os-release | grep -w "ID")" = "ID=ubuntu" ]; then
 echo -e "INFO: Are you running this script as root or sudo? \c"
 if [[ $EUID -ne 0 ]]; then
    echo -e "\e[31mNo \e[0m"
@@ -23,12 +21,12 @@ if [[ $EUID -ne 0 ]]; then
 else
 echo -e "\e[32mYes \e[0m"
 fi
-if [ "$release_name" = "focal" ]; then
+if [ "$(lsb_release -c -s)" = "focal" ]; then
 echo "INFO: This will install ROS Noetic"
 install_pre_req
 apt install -y ros-noetic-desktop-full
 post_install_ROS noetic
-elif [ "$release_name" = "bionic" ]; then
+elif [ "$(lsb_release -c -s)" = "bionic" ]; then
 install_pre_req
 apt install -y ros-melodic-desktop-full
 post_install_ROS melodic

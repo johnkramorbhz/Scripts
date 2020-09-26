@@ -23,11 +23,10 @@ exit 1
 fi
 }
 function include_environment_vars(){
-release_name=$(lsb_release -c -s)
-if [ "$release_name" = "bionic" ]; then
+if [ "$(lsb_release -c -s)" = "bionic" ]; then
 # Ubuntu 18.04 LTS
 source /opt/ros/melodic/setup.bash
-elif [ "$release_name" = "focal" ]; then
+elif [ "$(lsb_release -c -s)" = "focal" ]; then
 # Ubuntu 20.04 LTS
 source /opt/ros/noetic/setup.bash
 fi

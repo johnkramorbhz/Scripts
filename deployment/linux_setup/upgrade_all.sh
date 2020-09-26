@@ -20,16 +20,10 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-dt=$(date '+%d %h %Y %H:%M:%S');
 version="1.5"
 echo "INFO: Hello there, $USER@$HOSTNAME!"
-echo "INFO: Script started at $dt"
-echo -e "INFO: Getting info about your OS\c"
-unameOut="$(uname -s)"
-OSID=$(cat /etc/os-release | grep -w "ID")
-OSLIKE=$(cat /etc/os-release | grep -w "ID_LIKE")
-echo -e "\e[32m done \e[0m"
-echo "INFO: Your OS type string: $unameOut, OSID: $OSID, OSLIKE: $OSLIKE"
+echo -e "INFO: Script started at $(date '+%d %h %Y %H:%M:%S')"
+echo -e "INFO: Your OS type string: $(uname -s), OSID: $(cat /etc/os-release | grep -w "ID"), OSLIKE: $(cat /etc/os-release | grep -w "ID_LIKE")"
 echo -e "INFO: Are you running this script as root or sudo? \c"
 if [[ $EUID -ne 0 ]]; then
    echo -e "\e[31mNo \e[0m"
@@ -42,8 +36,7 @@ fi
 function check_and_download(){
 #$1 is upgrader URL #$2 is script URL
 URL=$1
-version_remote=$(wget -O - -o /dev/null $URL)
-if [ "$version_remote" != "$version" ]; then
+if [ "$(wget -O - -o /dev/null $URL)" != "$version" ]; then
 #Download newer version script from Gitee and execute the new script
 echo "INFO: There is a newer version available on the remote. Downloading it for you before proceeding..."
 rm -rf $0

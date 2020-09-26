@@ -20,17 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-echo "Last Updated at 2020-09-14 03:43 EDT/EST"
+echo "Last Updated at 2020-09-26 09:16 EDT/EST"
 sleep 3
-dt=$(date '+%d %h %Y %H:%M:%S');
 echo "INFO: Hello there, $USER@$HOSTNAME!"
-echo "INFO: Script started at $dt"
+echo -e "INFO: Script started at $(date '+%d %h %Y %H:%M:%S')"
 echo -e "INFO: Getting info about your OS\c"
-unameOut="$(uname -s)"
 OSID=$(cat /etc/os-release | grep -w "ID")
-OSLIKE=$(cat /etc/os-release | grep -w "ID_LIKE")
 echo -e "\e[32m done \e[0m"
-echo "INFO: Your OS type string: $unameOut, OSID: $OSID, OSLIKE: $OSLIKE"
+echo -e "INFO: Your OS type string: $(uname -s), OSID: $(cat /etc/os-release | grep -w "ID"), OSLIKE: $(cat /etc/os-release | grep -w "ID_LIKE")"
 function warning_eol(){
 echo "WARNING: This distro is having less than a year of support."
 echo "Process will continue in 15 seconds"
@@ -86,17 +83,16 @@ echo -e "\e[32mFail\e[0m"
 echo "ERROR: Please check your internet connection. Please re-run this script when you resolved the problem"
 exit 1
 fi
-if [ "$OSID" = "ID=ubuntu" ]; then
+if [ "$(cat /etc/os-release | grep -w "ID")" = "ID=ubuntu" ]; then
 echo "INFO: Starting installer for Ubuntu systems"
 echo "INFO: Checking your release..."
-release_name=$(lsb_release -c -s)
-if [ "$release_name" = "bionic" ]; then
+if [ "$(lsb_release -c -s)" = "bionic" ]; then
 # Ubuntu 18.04 LTS
 if [ -e ubuntu_setup.sh ]; then
 rm -rf ubuntu_setup.sh*
 fi
 wget -O ubuntu_setup.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/ubuntu_setup.sh
-elif [ "$release_name" = "focal" ]; then
+elif [ "$(lsb_release -c -s)" = "focal" ]; then
 # Ubuntu 20.04 LTS
 wget -O ubuntu_setup.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/ubuntu_focal_fossa.sh
 else
@@ -109,7 +105,7 @@ if [ -e "ubuntu_setup.sh" ]; then
 if [ "$1" = "--nvidia" ]; then
 chmod u+x ubuntu_setup.sh
 ./ubuntu_setup.sh --nvidia
-if [ "$release_name" = "focal" ]; then
+if [ "$(lsb_release -c -s)" = "focal" ]; then
 echo "INFO: Checking ROS installation"
 cat ~/.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null
 if [ "$?" != "0" ]; then
@@ -125,7 +121,7 @@ fi
 if [ "$1" = "--no-GUI" ]; then
 chmod u+x ubuntu_setup.sh
 ./ubuntu_setup.sh --no-GUI
-if [ "$release_name" = "focal" ]; then
+if [ "$(lsb_release -c -s)" = "focal" ]; then
 echo "INFO: Checking ROS installation"
 cat ~/.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null
 if [ "$?" != "0" ]; then
@@ -140,7 +136,7 @@ exit 0
 fi
 chmod u+x ubuntu_setup.sh
 ./ubuntu_setup.sh
-if [ "$release_name" = "focal" ]; then
+if [ "$(lsb_release -c -s)" = "focal" ]; then
 echo "INFO: Checking ROS installation"
 cat ~/.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null
 if [ "$?" != "0" ]; then
@@ -160,12 +156,11 @@ fi
 # Only CentOS is officially supported
 elif [ '$OSID" = "ID="centos"' ]; then
 echo "INFO: Starting installer for CentOS"
-major=$(cat /etc/centos-release | tr -dc '0-9.'|cut -d \. -f1)
-if [ "$major" = "8" ]; then
+if [ "$(cat /etc/centos-release | tr -dc '0-9.'|cut -d \. -f1)" = "8" ]; then
 wget -O centos_setup.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/centos_8.sh
 else
 echo "ERROR: Your CentOS version is not supported."
-echo "Your major version is $major, and I support 8 at this time."
+echo -e "Your major version is $(cat /etc/centos-release | tr -dc '0-9.'|cut -d \. -f1), and I support 8 at this time."
 exit 1
 fi
 if [ -e "centos_setup.sh" ]; then

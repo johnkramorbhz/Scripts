@@ -8,8 +8,7 @@ exit 1
 else
 echo -e "\e[32mYes \e[0m"
 fi
-release_name=$(lsb_release -c -s)
-if [ "$release_name" = "focal" ]; then
+if [ "$(lsb_release -c -s)" = "focal" ]; then
 sh -c 'cat > /etc/apt/sources.list.d/focal-dell.list << EOF
 deb http://dell.archive.canonical.com/updates/ focal-dell public
 # deb-src http://dell.archive.canonical.com/updates/ focal-dell public
