@@ -3,7 +3,7 @@
 
 `management` is where I save the common diagnostic script for my Ubuntu setup.
 
-It only supports Ubuntu LTS releases for auto setup. Currently, it supports `18.04` and `20.04` is in beta support.
+It only supports Ubuntu LTS releases for auto setup. Currently, it supports `18.04` and `20.04`.
 
 **If shell is not working, please make sure your endline character is set to `LF`**
 
@@ -15,7 +15,7 @@ CentOS 8 is in beta support as of now. CentOS 8 is a SERVER deployment script.
 
 ## Ubuntu 20.04 LTS & ROS
 
-This problem only seem to occur in 20.04 LTS. The 18.04 LTS is NOT affected.
+This problem only seem to occur in 20.04 LTS, since the bash shell handles users differently. The 18.04 LTS is NOT affected.
 
 If you cannot see the ROS environment variables, run the following again to fix the problem.
 
