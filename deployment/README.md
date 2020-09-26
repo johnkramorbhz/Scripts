@@ -25,15 +25,15 @@ source ~/.bashrc
 ```
 
 ## How to run this script
-Intel and AMD Display Adapter `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh && sudo chmod 777 entry.sh && sudo ./entry.sh`
+Intel and AMD Display Adapter `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh && sudo bash entry.sh`
 
-NVIDIA Display Adapter `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh && sudo chmod 777 entry.sh && sudo ./entry.sh --nvidia`
+NVIDIA Display Adapter `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh && sudo bash entry.sh --nvidia`
 
-WSL & WSL2 `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh && sudo chmod 777 entry.sh && sudo ./entry.sh --no-GUI`
+WSL & WSL2 `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh && sudo sudo bash entry.sh --no-GUI`
 
 ## If you have older setup scripts that installs older `nodejs`, use the following command to upgrade to the latest LTS.
 
-`wget -O upgrade_nodejs.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/upgrade_all.sh && chmod u+x upgrade_all.sh && sudo ./upgrade_all.sh`
+`wget -O upgrade_nodejs.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/upgrade_all.sh && sudo bash upgrade_all.sh`
 
 ## Note
 
