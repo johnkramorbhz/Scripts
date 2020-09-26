@@ -17,5 +17,4 @@ else
 echo -e "\e[32mYes \e[0m"
 fi
 wget https://swift.org/builds/swift-5.3-release/ubuntu2004/swift-5.3-RELEASE/swift-5.3-RELEASE-ubuntu20.04.tar.gz
-tar xzf swift-5.3-RELEASE-ubuntu20.04.tar.gz
-mv swift-5.3-RELEASE-ubuntu20.04/usr /usr/share/swift
+tar xzf swift-5.3-RELEASE-ubuntu20.04.tar.gz && rm -rf /usr/share/swift && mv -f swift-5.3-RELEASE-ubuntu20.04 /usr/share/swift && echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> /etc/bash.bashrc && source /etc/bash.bashrc
