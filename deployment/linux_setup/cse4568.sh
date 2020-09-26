@@ -10,8 +10,8 @@ apt upgrade -y
 apt install -y python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
 }
 function post_install_ROS(){
-echo "source /opt/ros/$1/setup.bash" >> ~/.bashrc
-source "$HOME"/.bashrc
+echo "source /opt/ros/$1/setup.bash" >> /etc/bash.bashrc
+source /etc/bash.bashrc
 }
 if [ "$OSID" = "ID=ubuntu" ]; then
 echo -e "INFO: Are you running this script as root or sudo? \c"

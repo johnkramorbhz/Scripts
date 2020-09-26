@@ -36,14 +36,14 @@ function install_swift(){
 wget https://swift.org/builds/swift-5.2.5-release/ubuntu2004/swift-5.2.5-RELEASE/swift-5.2.5-RELEASE-ubuntu20.04.tar.gz
 tar xzf swift-5.2.5-RELEASE-ubuntu20.04.tar.gz
 mv swift-5.2.5-RELEASE-ubuntu20.04 /usr/share/swift
-echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> ~/.bashrc
-source  ~/.bashrc   
+echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> /etc/bash.bashrc
+source /etc/bash.bashrc
 }
 function post_install_ROS(){
 echo "INFO: Doing post-installation of ROS"
 sleep 3
-echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-source ~/.bashrc
+echo "source /opt/ros/noetic/setup.bash" >> /etc/bash.bashrc
+source /etc/bash.bashrc
 }
 function common_pre_reqs(){
 #ROS packages
@@ -83,7 +83,7 @@ python-imaging-tk docker.io unattended-upgrades binutils bochs \
 r-base gdb
 # Post installation of ROS
 post_install_ROS
-cat ~/.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null || post_install_ROS
+cat /etc/bash.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null || post_install_ROS
 # End of post installation of ROS
 
 # Go to install_swift()
@@ -93,7 +93,7 @@ pip3 install --upgrade tensorflow requests
 exit 0
 fi
 if [ "$1" = "--init-ROS" ]; then
-cat ~/.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null || post_install_ROS
+cat /etc/bash.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null || post_install_ROS
 fi
 # Everything else
 common_pre_reqs
@@ -114,7 +114,7 @@ r-base libncurses5-dev libncursesw5-dev libncurses5-dev:i386 libncursesw5-dev:i3
 pip3 install --upgrade tensorflow requests
 # Post installation of ROS
 post_install_ROS
-cat ~/.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null || post_install_ROS
+cat /etc/bash.bashrc| grep "source /opt/ros/noetic/setup.bash" >> /dev/null || post_install_ROS
 # End of post installation of ROS
 # Go to install_swift()
 install_swift
