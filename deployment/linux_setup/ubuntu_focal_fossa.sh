@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-echo "Last Updated at 2020-09-26 08:43 EDT/EST"
+echo "Last Updated at 2020-09-26 08:51 EDT/EST"
 sleep 3
 start=$SECONDS
 echo -e "INFO: Are you running this script as root or sudo? \c"
@@ -41,9 +41,9 @@ else
 echo -e "\e[32mYes \e[0m"
 fi
 function install_swift(){
-wget -O swift.tar.gz https://swift.org/builds/swift-5.3-release/ubuntu2004/swift-5.3-RELEASE/swift-5.3-RELEASE-ubuntu20.04.tar.gz
-tar xzf swift.tar.gz
-mv swift /usr/share/swift
+wget https://swift.org/builds/swift-5.3-release/ubuntu2004/swift-5.3-RELEASE/swift-5.3-RELEASE-ubuntu20.04.tar.gz
+tar xzf swift-5.3-RELEASE-ubuntu20.04.tar.gz
+mv swift-5.3-RELEASE-ubuntu20.04 /usr/share/swift
 echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> /etc/bash.bashrc
 source /etc/bash.bashrc
 }
