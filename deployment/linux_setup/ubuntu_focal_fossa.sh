@@ -73,7 +73,7 @@ snap install --classic kotlin
 }
 echo 'INFO: Installing all needed compilers packages'
 if [ "$1" = "--no-GUI" ]; then
-# cat /proc/version | grep microsoft >> /dev/null && cat /proc/version | grep "4.19" >> /dev/null
+cat /proc/version | grep microsoft >> /dev/null || echo "ERROR: It is not WSL" ; exit 1
 echo "INFO: Running in no GUI mode..."
 sleep 3
 common_pre_reqs
@@ -99,8 +99,12 @@ cat /etc/bash.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null || 
 install_swift
 # End of install_swift()
 pip3 install --upgrade tensorflow requests
-wget https://developer.download.nvidia.com/compute/cuda/11.1.0/local_installers/cuda_11.1.0_455.23.05_linux.run
-sh cuda_11.1.0_455.23.05_linux.run
+# Skip CUDA installation if not in WSL2
+cat /proc/version | grep "4.19" >> /dev/null || echo "INFO: Not in WSL2"; exit 0
+sh -c 'echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda.list'
+apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub
+apt update
+apt install -y cuda-toolkit-11-0
 exit 0
 fi
 if [ "$1" = "--init-ROS" ]; then
