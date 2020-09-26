@@ -16,5 +16,14 @@ if [[ $(uname -m) != "x86_64" ]]; then
 else
 echo -e "\e[32mYes \e[0m"
 fi
+function insert_env(){
+cat /etc/bash.bashrc | grep "export PATH=/usr/share/swift/usr/bin:$PATH" >> /dev/null || echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> /etc/bash.bashrc && source /etc/bash.bashrc
+}
+release_name=$(lsb_release -c -s)
+if [ "$release_name" = "focal" ]; then
 wget https://swift.org/builds/swift-5.3-release/ubuntu2004/swift-5.3-RELEASE/swift-5.3-RELEASE-ubuntu20.04.tar.gz
-tar xzf swift-5.3-RELEASE-ubuntu20.04.tar.gz && rm -rf /usr/share/swift && mv -f swift-5.3-RELEASE-ubuntu20.04 /usr/share/swift && echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> /etc/bash.bashrc && source /etc/bash.bashrc && echo "Upgrade complete"
+tar xzf swift-5.3-RELEASE-ubuntu20.04.tar.gz && rm -rf /usr/share/swift && mv -f swift-5.3-RELEASE-ubuntu20.04 /usr/share/swift && insert_env && source /etc/bash.bashrc && echo "Upgrade complete"
+elif [ "$release_name" = "bionic" ]; then
+wget https://swift.org/builds/swift-5.3-release/ubuntu1804/swift-5.3-RELEASE/swift-5.3-RELEASE-ubuntu18.04.tar.gz
+tar xzf swift-5.3-RELEASE-ubuntu20.04.tar.gz && rm -rf /usr/share/swift && mv -f swift-5.3-RELEASE-ubuntu18.04 /usr/share/swift && insert_env && source /etc/bash.bashrc && echo "Upgrade complete"
+fi
