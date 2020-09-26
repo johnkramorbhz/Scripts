@@ -1,5 +1,5 @@
 #!/bin/bash
-version="0.1.6"
+version="1.0.0"
 version_suffix="beta"
 update_path="main"
 # Default path
@@ -64,23 +64,23 @@ chmod 777 /bin/ros_bashtools
 elif [ "$1" = "--launch-lab1-test" ] || [ "$1" = "-l1t" ]; then
 compile_and_update
 rm -rf $HOME/.ros/log
-roslaunch lab1 lab1.launch
+time roslaunch lab1 lab1.launch
 elif [ "$1" = "--compile-custom-dir" ] || [ "$1" = "-ccd" ]; then
 compile_and_update_custom_dir $2
 elif [ "$1" = "--launch-lab1" ] || [ "$1" = "-l1" ]; then
 rm -rf $HOME/.ros/log
 compile_and_update_custom_dir $2
-roslaunch lab1 lab1.launch
+time roslaunch lab1 lab1.launch
 elif [ "$1" = "--launch-evader" ]; then
 include_environment_vars
 rm -rf $HOME/.ros/log
 compile_and_update_custom_dir $2
-roslaunch lab1 evader.launch
+time roslaunch lab1 evader.launch
 elif [ "$1" = "--launch-pe" ]; then
 include_environment_vars
 rm -rf $HOME/.ros/log
 compile_and_update_custom_dir $2
-roslaunch lab1 pursuer-evader.launch
+time roslaunch lab1 pursuer-evader.launch
 elif [ "$1" = "--make-workspace" ] || [ "$1" = "-makews" ]; then
 echo -e "INFO: Are you making this workspace as root or sudo? \c"
 if [[ $EUID -ne 0 ]]; then
