@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-echo "Last Updated at 2020-09-26 09:16 EDT/EST"
+echo "Last Updated at 2020-09-28 17:00 EDT/EST"
 sleep 3
 echo "INFO: Hello there, $USER@$HOSTNAME!"
 echo -e "INFO: Script started at $(date '+%d %h %Y %H:%M:%S')"
@@ -74,7 +74,7 @@ echo "INFO: Replacing entry.sh with what's available on the GitHub"
 echo -e "INFO: Checking Internet connectivity \c"
 wget -q --spider https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh
 exit_code_source=$?
-wget -q --spider https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/ubuntu_setup.sh
+wget -q --spider https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/ubuntu_bionic.sh
 exit_code_source_link=$?
 if [ "$exit_code_source" -eq 0 ] || [ "$exit_code_source_link" -eq 0 ] ; then
 echo -e "\e[32mPass\e[0m"
@@ -91,10 +91,10 @@ if [ "$(lsb_release -c -s)" = "bionic" ]; then
 if [ -e ubuntu_setup.sh ]; then
 rm -rf ubuntu_setup.sh*
 fi
-wget -O ubuntu_setup.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/ubuntu_setup.sh
+wget -O ubuntu_setup.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/ubuntu_bionic.sh
 elif [ "$(lsb_release -c -s)" = "focal" ]; then
 # Ubuntu 20.04 LTS
-wget -O ubuntu_setup.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/ubuntu_focal_fossa.sh
+wget -O ubuntu_setup.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/ubuntu_focal.sh
 else
 # Not supported release
 echo "ERROR: Your Ubuntu release is not supported."
@@ -103,8 +103,7 @@ exit 1
 fi
 if [ -e "ubuntu_setup.sh" ]; then
 if [ "$1" = "--nvidia" ]; then
-chmod u+x ubuntu_setup.sh
-./ubuntu_setup.sh --nvidia
+bash ./ubuntu_setup.sh --nvidia
 if [ "$(lsb_release -c -s)" = "focal" ]; then
 echo "INFO: Checking ROS installation"
 cat ~/.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null
@@ -119,8 +118,7 @@ rm -rf ubuntu_setup.sh
 exit 0
 fi
 if [ "$1" = "--no-GUI" ]; then
-chmod u+x ubuntu_setup.sh
-./ubuntu_setup.sh --no-GUI
+bash ./ubuntu_setup.sh --no-GUI
 if [ "$(lsb_release -c -s)" = "focal" ]; then
 echo "INFO: Checking ROS installation"
 cat ~/.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null
@@ -164,8 +162,7 @@ echo -e "Your major version is $(cat /etc/centos-release | tr -dc '0-9.'|cut -d 
 exit 1
 fi
 if [ -e "centos_setup.sh" ]; then
-chmod u+x centos_setup.sh
-./centos_setup.sh
+bash ./centos_setup.sh
 echo "INFO: Cleaning up..."
 rm -rf entry.sh
 rm -rf centos_setup.sh

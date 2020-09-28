@@ -149,8 +149,8 @@ snap install libreoffice
 snap install code --classic
 snap install vlc
 if [ "$1" = "--nvidia" ]; then
-wget -O nvidia_driver.run https://us.download.nvidia.com/XFree86/Linux-x86_64/455.23.04/NVIDIA-Linux-x86_64-455.23.04.run
-sh nvidia_driver.run
+# wget -O nvidia_driver.run https://us.download.nvidia.com/XFree86/Linux-x86_64/455.23.04/NVIDIA-Linux-x86_64-455.23.04.run
+# sh nvidia_driver.run
 wget -O cuda.run https://developer.download.nvidia.com/compute/cuda/11.1.0/local_installers/cuda_11.1.0_455.23.05_linux.run
 sh cuda.run
 fi
