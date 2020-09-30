@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-echo "Last Updated at 2020-09-28 17:00 EDT/EST"
+echo "Last Updated at 2020-09-30 14:46 EDT/EST"
 sleep 3
 echo "INFO: Hello there, $USER@$HOSTNAME!"
 echo -e "INFO: Script started at $(date '+%d %h %Y %H:%M:%S')"
@@ -86,15 +86,12 @@ fi
 if [ "$(cat /etc/os-release | grep -w "ID")" = "ID=ubuntu" ]; then
 echo "INFO: Starting installer for Ubuntu systems"
 echo "INFO: Checking your release..."
-if [ "$(lsb_release -c -s)" = "bionic" ]; then
-# Ubuntu 18.04 LTS
 if [ -e ubuntu_setup.sh ]; then
 rm -rf ubuntu_setup.sh*
 fi
-wget -O ubuntu_setup.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/ubuntu_bionic.sh
-elif [ "$(lsb_release -c -s)" = "focal" ]; then
-# Ubuntu 20.04 LTS
-wget -O ubuntu_setup.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/ubuntu_focal.sh
+wget -O ubuntu_setup.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/ubuntu_$(lsb_release -c -s).sh
+if [ "$?" -eq 0 ]; then
+continue
 else
 # Not supported release
 echo "ERROR: Your Ubuntu release is not supported."
@@ -134,14 +131,14 @@ exit 0
 fi
 chmod u+x ubuntu_setup.sh
 ./ubuntu_setup.sh
-if [ "$(lsb_release -c -s)" = "focal" ]; then
-echo "INFO: Checking ROS installation"
-cat ~/.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null
-if [ "$?" != "0" ]; then
-echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-source ~/.bashrc
-fi
-fi
+# if [ "$(lsb_release -c -s)" = "focal" ]; then
+# echo "INFO: Checking ROS installation"
+# cat ~/.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null
+# if [ "$?" != "0" ]; then
+# echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+# source ~/.bashrc
+# fi
+# fi
 echo "INFO: Cleaning up installation scripts..."
 rm -rf entry.sh
 rm -rf ubuntu_setup.sh
@@ -153,9 +150,10 @@ exit 1
 fi
 # Only CentOS is officially supported
 elif [ '$OSID" = "ID="centos"' ]; then
-echo "INFO: Starting installer for CentOS"
-if [ "$(cat /etc/centos-release | tr -dc '0-9.'|cut -d \. -f1)" = "8" ]; then
-wget -O centos_setup.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/centos_8.sh
+echo -e "INFO: Starting installer for CentOS $(cat /etc/centos-release | tr -dc '0-9.'|cut -d \. -f1)"
+wget -O centos_setup.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/centos_$(cat /etc/centos-release | tr -dc '0-9.'|cut -d \. -f1).sh
+if [ "$?" -eq 0 ]; then
+continue
 else
 echo "ERROR: Your CentOS version is not supported."
 echo -e "Your major version is $(cat /etc/centos-release | tr -dc '0-9.'|cut -d \. -f1), and I support 8 at this time."

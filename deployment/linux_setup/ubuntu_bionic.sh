@@ -22,7 +22,7 @@
 # SOFTWARE.
 
 start=$SECONDS
-echo "Last Updated at 2020-09-26 08:43 EDT/EST"
+echo "Last Updated at 2020-09-30 14:49 EDT/EST"
 sleep 3
 echo -e "INFO: Are you running this script as root or sudo? \c"
 if [[ $EUID -ne 0 ]]; then
@@ -151,8 +151,8 @@ snap install code --classic
 #npm install -g npm mocha chai mocha-simple-html-reporter
 snap install vlc
 if [ "$1" = "--nvidia" ]; then
-wget -O nvidia_driver.run https://us.download.nvidia.com/XFree86/Linux-x86_64/455.23.04/NVIDIA-Linux-x86_64-455.23.04.run
-sh nvidia_driver.run
+# wget -O nvidia_driver.run https://us.download.nvidia.com/XFree86/Linux-x86_64/455.23.04/NVIDIA-Linux-x86_64-455.23.04.run
+# sh nvidia_driver.run
 wget -O cuda.run https://developer.download.nvidia.com/compute/cuda/11.1.0/local_installers/cuda_11.1.0_455.23.05_linux.run
 sh cuda.run
 fi
