@@ -46,6 +46,7 @@ tar xzf swift-5.3-RELEASE-ubuntu20.04.tar.gz
 mv swift-5.3-RELEASE-ubuntu20.04 /usr/share/swift
 echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> /etc/bash.bashrc
 source /etc/bash.bashrc
+rm -rf swift-5.3-RELEASE-ubuntu20.04.tar.gz
 }
 function post_install_ROS(){
 echo "INFO: Doing post-installation of ROS"

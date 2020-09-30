@@ -60,6 +60,7 @@ tar xzf swift-5.3-RELEASE-ubuntu18.04.tar.gz
 mv swift-5.3-RELEASE-ubuntu18.04 /usr/share/swift
 echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> /etc/bash.bashrc
 source  /etc/bash.bashrc
+rm -rf swift-5.3-RELEASE-ubuntu20.04.tar.gz
 }
 function install_ROS_pre_reqs(){
 sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
