@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-echo "Last Updated at 2020-09-26 08:51 EDT/EST"
+echo "Last Updated at 2020-09-30 16:26 EDT/EST"
 sleep 3
 start=$SECONDS
 echo -e "INFO: Are you running this script as root or sudo? \c"
@@ -153,6 +153,8 @@ if [ "$1" = "--nvidia" ]; then
 # sh nvidia_driver.run
 wget -O cuda.run https://developer.download.nvidia.com/compute/cuda/11.1.0/local_installers/cuda_11.1.0_455.23.05_linux.run
 sh cuda.run
+echo 'export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}' >> /etc/bash.bashrc
+source /etc/bash.bashrc
 fi
 echo "INFO: Installing wireshark..."
 apt install -y wireshark

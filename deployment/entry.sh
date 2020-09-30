@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-echo "Last Updated at 2020-09-30 14:46 EDT/EST"
+echo "Last Updated at 2020-09-30 16:31 EDT/EST"
 sleep 3
 echo "INFO: Hello there, $USER@$HOSTNAME!"
 echo -e "INFO: Script started at $(date '+%d %h %Y %H:%M:%S')"
@@ -90,9 +90,7 @@ if [ -e ubuntu_setup.sh ]; then
 rm -rf ubuntu_setup.sh*
 fi
 wget -O ubuntu_setup.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/ubuntu_$(lsb_release -c -s).sh
-if [ "$?" -eq 0 ]; then
-continue
-else
+if [ "$?" -ne 0 ]; then
 # Not supported release
 echo "ERROR: Your Ubuntu release is not supported."
 lsb_release -a
@@ -152,9 +150,7 @@ fi
 elif [ '$OSID" = "ID="centos"' ]; then
 echo -e "INFO: Starting installer for CentOS $(cat /etc/centos-release | tr -dc '0-9.'|cut -d \. -f1)"
 wget -O centos_setup.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/centos_$(cat /etc/centos-release | tr -dc '0-9.'|cut -d \. -f1).sh
-if [ "$?" -eq 0 ]; then
-continue
-else
+if [ "$?" -ne 0 ]; then
 echo "ERROR: Your CentOS version is not supported."
 echo -e "Your major version is $(cat /etc/centos-release | tr -dc '0-9.'|cut -d \. -f1), and I support 8 at this time."
 exit 1
