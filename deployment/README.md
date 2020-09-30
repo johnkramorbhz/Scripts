@@ -13,13 +13,16 @@ Ubuntu 18.04 & 20.04 for client deployment. CentOS 8 for server deployment.
 
 CentOS 8 is in beta support as of now. CentOS 8 is a SERVER deployment script.
 
-## Ubuntu 20.04 LTS & ROS
+## Ubuntu 20.04 LTS & ROS or NVIDIA CUDA
 
 This problem only seem to occur in 20.04 LTS, since the bash shell handles users differently. The 18.04 LTS is NOT affected.
 
-If you cannot see the ROS environment variables, run the following again to fix the problem.
+If you cannot see their environment variables, run the following again as yourself(not root) to fix the problem.
 
 ```bash
+# Only copy this one if you have NVIDIA graphics card installed whether it is in WSL or non-VM.
+echo 'export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}' >> ~/.bashrc
+
 echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
