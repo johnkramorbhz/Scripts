@@ -3,7 +3,7 @@ pathofpythonscript="../framework/testTemplate.py"
 pathofbinary="../framework/testTemplate_bin"
 filename="${ubitname}_pa1.tar"
 csvlocation="../framework/PA1.csv"
-version_number="1.4.5_PA1_opensource"
+version_number="1.4.6_PA1_opensource"
 export version_number
 if hash python3 2>/dev/null; then
 use_binary=$(python3 $pathofpythonscript determine-whether-binary-is-needed)
@@ -179,27 +179,4 @@ fi
 else
 pinfo "Usage can be found in the README file in GitHub"
 fi
-unset version_number
-$pathofbinary clean-all-binaries
-fi
-if [ "$use_binary" != "false" ]; then
-python3 $pathofpythonscript compile-PA1 $ubitname
-else
-$pathofbinary compile-PA1 $ubitname
-fi
-if [ "$use_binary" != "false" ]; then
-python3 $pathofpythonscript test-AIS-PA1
-else
-$pathofbinary test-AIS-PA1
-fi
-else
-pinfo "Usage can be found in the README file in GitHub"
-fi
-unset ubitname
-unset fullname
-unset semester
-unset debug
-unset timeout
-unset quiet
-unset personNumber
 unset version_number
