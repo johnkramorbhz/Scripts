@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-echo "Last Updated at 2020-09-30 16:31 EDT/EST"
+echo "Last Updated at 2020-09-30 22:48 EDT/EST"
 sleep 3
 echo "INFO: Hello there, $USER@$HOSTNAME!"
 echo -e "INFO: Script started at $(date '+%d %h %Y %H:%M:%S')"
@@ -36,7 +36,7 @@ sleep 15
 function end_of_life(){
 echo "WARNING: This distro is marked as EOL. You should only continue installation if you know what you are doing."
 echo "Press [ENTER] to continue."
-read
+read -r
 }
 if [ "$1" = "--update" ]; then
 echo "INFO: User choose to update this script to the most current version on the GitHub."
@@ -99,14 +99,14 @@ fi
 if [ -e "ubuntu_setup.sh" ]; then
 if [ "$1" = "--nvidia" ]; then
 bash ./ubuntu_setup.sh --nvidia
-if [ "$(lsb_release -c -s)" = "focal" ]; then
-echo "INFO: Checking ROS installation"
-cat ~/.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null
-if [ "$?" != "0" ]; then
-echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-source ~/.bashrc
-fi
-fi
+# if [ "$(lsb_release -c -s)" = "focal" ]; then
+# echo "INFO: Checking ROS installation"
+# cat ~/.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null
+# if [ "$?" != "0" ]; then
+# echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+# source ~/.bashrc
+# fi
+# fi
 echo "INFO: Cleaning up installation scripts..."
 rm -rf entry.sh
 rm -rf ubuntu_setup.sh
@@ -114,14 +114,14 @@ exit 0
 fi
 if [ "$1" = "--no-GUI" ]; then
 bash ./ubuntu_setup.sh --no-GUI
-if [ "$(lsb_release -c -s)" = "focal" ]; then
-echo "INFO: Checking ROS installation"
-cat ~/.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null
-if [ "$?" != "0" ]; then
-echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-source ~/.bashrc
-fi
-fi
+# if [ "$(lsb_release -c -s)" = "focal" ]; then
+# echo "INFO: Checking ROS installation"
+# cat ~/.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null
+# if [ "$?" != "0" ]; then
+# echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+# source ~/.bashrc
+# fi
+# fi
 echo "INFO: Cleaning up installation scripts..."
 rm -rf entry.sh
 rm -rf ubuntu_setup.sh
