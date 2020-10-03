@@ -4,16 +4,7 @@ version_number="2.0.7_PA2_opensource"
 pathofpythonscript="../framework/testTemplate.py"
 pathofbinary="../framework/testTemplate_bin"
 checksumFile=""
-export ubitname
-export fullname
-export semester
-export debug
-export suppressHeader
-export timeout
-export personNumber
-export quiet
 export version_number
-export gradMode
 if hash python3 2>/dev/null; then
 use_binary=$(python3 $pathofpythonscript determine-whether-binary-is-needed)
 else
