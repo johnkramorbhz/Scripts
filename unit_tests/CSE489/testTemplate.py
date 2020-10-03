@@ -48,11 +48,11 @@ lowerPythonVersion=False
 result=[]
 global ubitname
 # This var will decide if user is on the main channel or preview
-branch="beta"
+branch="main"
 supported_PAs=2
 SCRIPT_API_level=4
 bug_fixes=0
-suffix="beta-opensource"
+suffix="final_opensource"
 version=str(supported_PAs)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
 # For binary auto-update only, beta features only bump revision number
 revision=10000*supported_PAs+10*SCRIPT_API_level+bug_fixes
@@ -499,7 +499,7 @@ def buildPA2():
         print("ERROR: Failed to compile!")
         sys.exit(1)
     print("done")
-def buildPA1(ubitname):
+def buildPA1():
     ifRunningInLinux()
     print("INFO: Compiling... ",end='')
     # This folder check is necessary because make will fail to run
@@ -1028,7 +1028,7 @@ def verify(filenameOfSourceFile,filenameOfChecksumFile):
             openfile.close()
             openCheckSum.close()
             sys.exit(1)
-def run_experiments(messages,loss,corruption,time,window,binary,outputfile,supressHeader,ubitname):
+def run_experiments(messages,loss,corruption,time,window,binary,outputfile,supressHeader):
     checkDirs()
     if supressHeader==True:
         if os.system("../cse489589_assignment2/grader/run_experiments -m "+str(messages)+" -l "+str(loss)+" -c "+str(corruption)+" -t "+str(time)+" -w "+str(window)+" -p ../cse489589_assignment2/"+str(ubitname)+"/"+str(binary)+" -o ../framework/report/PA2_experiments/"+str(outputfile)+" -n") !=0:
@@ -1309,7 +1309,7 @@ elif sys.argv[1]=="test-indv-PA2":
     if item_exist(sys.argv[4]):
         #isHostReachable()
         #run_individual_testPA2(filename_csv,ubitname,testcase,testType,PAX)
-        run_individual_testPA2(sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],"PA2")
+        run_individual_testPA2(sys.argv[2],ubitname,sys.argv[4],sys.argv[5],"PA2")
         t1_end = time.perf_counter()
         print("It takes",str(t1_end-t1_start-float(subtractSeconds))+"(s) to finish this script, where program total runtime is",str(getSumOfRunTime())+"(s)")
     else:
@@ -1384,22 +1384,22 @@ elif sys.argv[1]=="run-experiments-batch":
             if sys.argv[4]=="1":
                 print("./run_experiments -m",1000,"-l",line[0],"-c",0.2,"-t",50,"-w",line[1],"-p",line[2])
                 print("*********************************")
-                run_experiments(1000,line[0],0.2,50,line[1],line[2],str(line[2])+"_"+str(line[1])+"_experiment1.csv",suppressHeader,sys.argv[3])
+                run_experiments(1000,line[0],0.2,50,line[1],line[2],str(line[2])+"_"+str(line[1])+"_experiment1.csv",suppressHeader)
             elif sys.argv[4]=="2":
                 print("./run_experiments -m",1000,"-l",line[0],"-c",0.2,"-t",50,"-w",line[1],"-p",line[2])
                 print("*********************************")
                 #run_experiments(messages,loss,corruption,time,window,binary,outputfile,supressHeader,ubitname):
-                run_experiments(1000,line[0],0.2,50,line[1],line[2],str(line[2])+"_"+str(line[0])+"_experiment2.csv",suppressHeader,sys.argv[3])
-elif sys.argv[1]=="test-experiment-one":
-    if sys.argv[-1]=="test":
-        print(sys.argv)
-        sys.exit()
-    buildPA2(sys.argv[2])
-    print("ABT binary SHA256:"+getFileChecksum("../cse489589_assignment2/"+sys.argv[2]+"/abt")[0])
-    print("GBN binary SHA256:"+getFileChecksum("../cse489589_assignment2/"+sys.argv[2]+"/gbn")[0])
-    print("SR  binary SHA256:"+getFileChecksum("../cse489589_assignment2/"+sys.argv[2]+"/sr")[0])
-    print()
-    run_experiments(1000,0.1,0.2,50,10,"sr","result_sr.csv",suppressHeader,sys.argv[2])   
+                run_experiments(1000,line[0],0.2,50,line[1],line[2],str(line[2])+"_"+str(line[0])+"_experiment2.csv",suppressHeader)
+# elif sys.argv[1]=="test-experiment-one":
+#     if sys.argv[-1]=="test":
+#         print(sys.argv)
+#         sys.exit()
+#     buildPA2(sys.argv[2])
+#     print("ABT binary SHA256:"+getFileChecksum("../cse489589_assignment2/"+sys.argv[2]+"/abt")[0])
+#     print("GBN binary SHA256:"+getFileChecksum("../cse489589_assignment2/"+sys.argv[2]+"/gbn")[0])
+#     print("SR  binary SHA256:"+getFileChecksum("../cse489589_assignment2/"+sys.argv[2]+"/sr")[0])
+#     print()
+#     run_experiments(1000,0.1,0.2,50,10,"sr","result_sr.csv",suppressHeader,sys.argv[2])   
 elif sys.argv[1]=="trim-all-reports":
     if sys.argv[-1]=="test":
         print(sys.argv)
@@ -1504,14 +1504,14 @@ elif sys.argv[1]=="clean-all-binaries":
     if os.path.exists("../cse489589_assignment1/"+ubitname+"/Makefile"):
         os.system("cd ../cse489589_assignment1/"+ubitname+"; make clean >> /dev/null")
 elif sys.argv[1]=="compile-PA1":
-    if sys.argv[-1]=="test":
-        print(sys.argv)
-        sys.exit()
-    if len(sys.argv)!=3 or len(sys.argv[2])==0 or len(sys.argv[2])>8:
-        print(colours.fg.red+"ERROR: Arguments incorrect for compile-PA1!",colours.reset)
-        print("Make sure UBITname is configured properly!")
-        sys.exit(1)
-    buildPA1(sys.argv[2])
+    # if sys.argv[-1]=="test":
+    #     print(sys.argv)
+    #     sys.exit()
+    # if len(sys.argv)!=3 or len(sys.argv[2])==0 or len(sys.argv[2])>8:
+    #     print(colours.fg.red+"ERROR: Arguments incorrect for compile-PA1!",colours.reset)
+    #     print("Make sure UBITname is configured properly!")
+    #     sys.exit(1)
+    buildPA1()
 # elif sys.argv[1]=="version":
 #     print(version)
 elif sys.argv[1]=="pre-auth":
