@@ -1,25 +1,9 @@
 #!/bin/bash
-# Change it to YOUR UBITName and your full legal name.
-ubitname=""
-fullname=""
-semester=""
-personNumber=""
-debug="" # Put anything inside "" to set it to be true
-timeout=190
-quiet="" # Put anything inside "" to set it to be true
-# End of personalisation section
 pathofpythonscript="../framework/testTemplate.py"
 pathofbinary="../framework/testTemplate_bin"
 filename="${ubitname}_pa1.tar"
 csvlocation="../framework/PA1.csv"
-version_number="1.4.4_PA1_opensource"
-export ubitname
-export fullname
-export semester
-export debug
-export timeout
-export quiet
-export personNumber
+version_number="1.4.5_PA1_opensource"
 export version_number
 if hash python3 2>/dev/null; then
 use_binary=$(python3 $pathofpythonscript determine-whether-binary-is-needed)
@@ -75,35 +59,35 @@ md5sum $1
 }
 # Launcher
 if [ "$1" = "--submit" ]; then
-pinfo "Building tarball for $ubitname"
+pinfo "Building tarball for placeholder_ubitname"
 if [ "$use_binary" != "false" ]; then
-python3 $pathofpythonscript build-PA1 $ubitname
+python3 $pathofpythonscript build-PA1 placeholder_ubitname
 else
-$pathofbinary build-PA1 $ubitname
+$pathofbinary build-PA1 placeholder_ubitname
 fi
 elif [ "$1" = "--build" ]; then
 if [ "$use_binary" != "false" ]; then
-python3 $pathofpythonscript build-PA1 $ubitname
+python3 $pathofpythonscript build-PA1 placeholder_ubitname
 else
-$pathofbinary build-PA1 $ubitname
+$pathofbinary build-PA1 placeholder_ubitname
 fi
 elif [ "$1" = "--compile" ]; then
 if [ "$use_binary" != "false" ]; then
-python3 $pathofpythonscript compile-PA1 $ubitname
+python3 $pathofpythonscript compile-PA1 placeholder_ubitname
 else
-$pathofbinary compile-PA1 $ubitname
+$pathofbinary compile-PA1 placeholder_ubitname
 fi
 elif [ "$1" = "--clean" ]; then
 cleanup
 elif [ "$1" = "--test-indv" ]; then
 config_check
 if [ "$use_binary" != "false" ]; then
-python3 $pathofpythonscript test-indv-PA1 $csvlocation $ubitname $2
+python3 $pathofpythonscript test-indv-PA1 $csvlocation placeholder_ubitname $2
 cleanup
 echo "INFO: Test finished on:"
 date
 else
-$pathofbinary test-indv-PA1 $csvlocation $ubitname $2
+$pathofbinary test-indv-PA1 $csvlocation placeholder_ubitname $2
 cleanup
 echo "INFO: Test finished on:"
 date
@@ -111,12 +95,12 @@ fi
 elif [ "$1" = "--test-score" ]; then
 config_check
 if [ "$use_binary" != "false" ]; then
-python3 $pathofpythonscript test-all-PA1 $csvlocation $ubitname PA1
+python3 $pathofpythonscript test-all-PA1 $csvlocation placeholder_ubitname PA1
 cleanup
 echo "INFO: Test finished on:"
 date
 else
-$pathofbinary test-all-PA1 $csvlocation $ubitname PA1
+$pathofbinary test-all-PA1 $csvlocation placeholder_ubitname PA1
 cleanup
 echo "INFO: Test finished on:"
 date
@@ -124,12 +108,12 @@ fi
 elif [ "$1" = "--test-all" ]; then
 config_check
 if [ "$use_binary" != "false" ]; then
-python3 $pathofpythonscript test-all-PA1 $csvlocation $ubitname PA1
+python3 $pathofpythonscript test-all-PA1 $csvlocation placeholder_ubitname PA1
 cleanup
 echo "INFO: Test finished on:"
 date
 else
-$pathofbinary test-all-PA1 $csvlocation $ubitname PA1
+$pathofbinary test-all-PA1 $csvlocation placeholder_ubitname PA1
 cleanup
 echo "INFO: Test finished on:"
 date
@@ -137,12 +121,12 @@ fi
 elif [ "$1" = "--repeat" ]; then
 config_check
 if [ "$use_binary" != "false" ]; then
-python3 $pathofpythonscript repeat-PA1 $csvlocation $ubitname $2 $3 PA1
+python3 $pathofpythonscript repeat-PA1 $csvlocation placeholder_ubitname $2 $3 PA1
 cleanup
 echo "INFO: Test finished on:"
 date
 else
-$pathofbinary repeat-PA1 $csvlocation $ubitname $2 $3 PA1
+$pathofbinary repeat-PA1 $csvlocation placeholder_ubitname $2 $3 PA1
 cleanup
 echo "INFO: Test finished on:"
 date
@@ -150,12 +134,12 @@ fi
 elif [ "$1" = "--repeat-all" ]; then
 config_check
 if [ "$use_binary" != "false" ]; then
-python3 $pathofpythonscript repeat-test-all-PA1 $csvlocation $ubitname PA1 $2
+python3 $pathofpythonscript repeat-test-all-PA1 $csvlocation placeholder_ubitname PA1 $2
 cleanup
 echo "INFO: Test finished on:"
 date
 else
-$pathofbinary repeat-test-all-PA1 $csvlocation $ubitname PA1 $2
+$pathofbinary repeat-test-all-PA1 $csvlocation placeholder_ubitname PA1 $2
 cleanup
 echo "INFO: Test finished on:"
 date
@@ -180,6 +164,22 @@ elif [ "$1" = "--AIS" ]; then
 if [ "$use_binary" != "false" ]; then
 python3 $pathofpythonscript clean-all-binaries
 else
+$pathofbinary clean-all-binaries
+fi
+if [ "$use_binary" != "false" ]; then
+python3 $pathofpythonscript compile-PA1 placeholder_ubitname
+else
+$pathofbinary compile-PA1 placeholder_ubitname
+fi
+if [ "$use_binary" != "false" ]; then
+python3 $pathofpythonscript test-AIS-PA1
+else
+$pathofbinary test-AIS-PA1
+fi
+else
+pinfo "Usage can be found in the README file in GitHub"
+fi
+unset version_number
 $pathofbinary clean-all-binaries
 fi
 if [ "$use_binary" != "false" ]; then

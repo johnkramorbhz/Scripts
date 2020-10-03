@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import sys,os,math,subprocess,copy,time,random,datetime,signal,hashlib,glob,getpass,platform,socket
+import sys,os,math,subprocess,copy,time,random,datetime,signal,hashlib,glob,getpass,platform,socket,json
 #Don't modify this section!
 sfRequired=['python3','gcc','g++','make','curl','wget']
 grade=0.0
@@ -48,14 +48,41 @@ lowerPythonVersion=False
 result=[]
 global ubitname
 # This var will decide if user is on the main channel or preview
-branch="main"
+branch="beta"
 supported_PAs=2
-SCRIPT_API_level=3
-bug_fixes=6
-suffix="final_opensource"
+SCRIPT_API_level=4
+bug_fixes=0
+suffix="beta-opensource"
 version=str(supported_PAs)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
 # For binary auto-update only, beta features only bump revision number
 revision=10000*supported_PAs+10*SCRIPT_API_level+bug_fixes
+default_value_of_test_template = {"format_level": 1,
+"debug": False,
+"generated_from": version,
+"UBITname": "replace_with_your_ubitname_here",
+"FullName": "replace_with_your_full_name",
+"timeout":190,
+"quiet":False,
+"gradMode":False,
+"suppressHeader":False,
+"semester":"Fall_9999",
+"Person_Number":12345678
+}
+data=default_value_of_test_template
+def load_user_value(suppress):
+    # suppress = True, then NO print statements
+    global data
+    if not os.path.exists('../framework/CSE4589.config.json'):
+        if not suppress:
+            print("WARNING: You do not have \"CSE4589.config.json\" in your HOME directory")
+            print("Using default values")
+        return
+    with open('../framework/CSE4589.config.json', 'r') as json_file:
+        data=json.load(json_file)
+    #print(data)
+def generate_default_config():
+    with open('../framework/CSE4589.config.json', 'w+') as json_file:
+        json.dump(default_value_of_test_template, json_file,indent=4,sort_keys=True)
 def checkDirs():
     if not os.path.exists("../framework/report"):
         os.makedirs("../framework/report")
@@ -136,13 +163,14 @@ if len(sys.argv)>1 and sys.argv[1]=="update":
         sys.exit(1)
     os.system("rm -rf testTemplate.py testTemplate_bin;wget -O testTemplate.py https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/testTemplate.py; wget -O testTemplate_bin https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/testTemplate_bin; chmod u+x testTemplate_bin")
     sys.exit()        
+load_user_value(False)
 try:
-    ubitname=os.environ["ubitname"]
-    debug=bool(os.environ["debug"])
-    global_timeout=int(os.environ["timeout"])
-    quiet=bool(os.environ["quiet"])
+    ubitname=data["UBITname"]
+    debug=bool(data["debug"])
+    global_timeout=int(data["timeout"])
+    quiet=bool(data["quiet"])
     shell_version=os.environ["version_number"]
-    personNumber=os.environ["personNumber"]
+    personNumber=data["Person_Number"]
 except:
     print("ERROR: You need to launch this program from shell scripts provided with it!")
     print("Usage can be found in https://github.com/johnkramorbhz/Scripts/blob/main/unit_tests/CSE489/usage.md")
@@ -152,12 +180,12 @@ experimentsData=[]
 unusedVar=[]
 fail=False
 try:
-    suppressHeader=bool(os.environ["suppressHeader"])
+    suppressHeader=bool(data["suppressHeader"])
 except:
     # PA1 does not require this option, so set it to False.
     suppressHeader=False
 try:
-    gradMode=bool(os.environ["gradMode"])
+    gradMode=bool(data["gradMode"])
 except:
     # PA1 have same score regardless undergrad and grad, so set it to False.
     # Also ensures compatibility with older version of shell scripts
@@ -230,7 +258,7 @@ class colours:
 def printGrade():
     print("Current grade: "+"{:0.4f}".format(grade)+", passes: "+str(passed)+", partially passes: "+str(partialPass)+", fails: "+str(failed))
 # Make sure the UBITname is actually valid since many functions rely on the correct UBITname
-def validUBITname(ubitname):
+def validUBITname():
     if len(ubitname)>8 or len(ubitname)<3:
         return False
     return True
@@ -433,7 +461,7 @@ def callShellCommandsPA2(command,filename,timeouts,PAX,testTypes):
     except subprocess.CalledProcessError as e:
         print(colours.fg.red+"ERROR: Test crashed! Dumping stdout...",colours.reset)
         print(e.stdout.decode('ascii'))
-def build_tarPA1(ubitname):
+def build_tarPA1():
     ifRunningInLinux()
     if os.path.exists("../cse489589_assignment1/"+ubitname+"_pa1.tar"):
         #print_info("File: "+ubitname+"_pa1.tar"+" exists! Deleting...")
@@ -461,7 +489,7 @@ def build_tarPA1(ubitname):
         sys.exit(1)
     else:
         print("INFO: Packing "+ubitname+"_pa1.tar successfully")
-def buildPA2(ubitname):
+def buildPA2():
     ifRunningInLinux()
     print("INFO: Compiling... ",end='')
     if not os.path.exists("../cse489589_assignment2/"+ubitname+"/object"):
@@ -483,10 +511,10 @@ def buildPA1(ubitname):
         print("ERROR: make failed to run!")
         sys.exit(1)
     print("done")
-def build_tarPA2(ubitname):
+def build_tarPA2():
     ifRunningInLinux()
     global fail
-    if not validUBITname(ubitname):
+    if not validUBITname():
         print("ERROR: Your UBITname is invalid!")
         fail=True
     if not os.path.exists("../cse489589_assignment2/"+ubitname):
@@ -785,7 +813,7 @@ def run_individual_testPA1(filename_csv,ubitname,testcase,mode,PAX):
     ifRunningInLinux()
     readCSV(filename_csv)
     if not os.path.exists("../cse489589_assignment1/"+ubitname+"_pa1.tar"):
-        build_tarPA1(ubitname)
+        build_tarPA1()
     callShellCommandsPA1(testcase,"../cse489589_assignment1/"+ubitname+"_pa1.tar",global_timeout,PAX)
     if len(timedoutitems)>0:
         for items in timedoutitems:
@@ -795,7 +823,7 @@ def run_individual_testPA2(filename_csv,ubitname,testcase,testType,PAX):
     ifRunningInLinux()
     if len(tests)==0:
         readCSV(filename_csv)
-    buildPA2(ubitname)
+    buildPA2()
     callShellCommandsPA2(testcase,"../cse489589_assignment2/"+ubitname+"/"+testcase.lower(),global_timeout,PAX,testType)
     report(PAX)
 
@@ -805,7 +833,7 @@ def run_all_testsPA1(filename_csv,ubitname,PAX):
     print_info("Running all tests defined in the csv file.")
     readCSV(filename_csv)
     temp_lists=copy.deepcopy(tests)
-    build_tarPA1(ubitname)
+    build_tarPA1()
     counter=0
     for indv_item in temp_lists:
         counter+=1
@@ -845,9 +873,9 @@ def run_all_testsPA1(filename_csv,ubitname,PAX):
 #         clearAll()
 #     report("PA2_all")
 # End of deprecated function
-def test_all_PA2(ubitname,testType,PAX):
+def test_all_PA2(testType,PAX):
     ifRunningInLinux()
-    buildPA2(ubitname)
+    buildPA2()
     filenames=[("../framework/PA2_basic.csv","basic"),("../framework/PA2_advanced.csv","advanced"),("../framework/PA2_sanity.csv","sanity")]
     #filenames=[("../framework/PA2_basic.csv","basic")]
     for currentTest in filenames:
@@ -891,7 +919,7 @@ def repeatTest(filename_csv,ubitname,testcase,times,PAX):
             subtractSeconds+=sleep_sec
             print("Waiting",sleep_sec,"(s)")
             time.sleep(sleep_sec)
-            build_tarPA1(ubitname)
+            build_tarPA1()
             run_individual_testPA1(filename_csv,ubitname,testcase,"repeat",PAX)
             print("It takes",time.perf_counter()-t1_instance_start,"(s) in order to finish this script, where running programs takes",str(getSumOfRunTime())+"(s)")
             clearAll()
@@ -908,7 +936,7 @@ def prompt():
         print("Program Version:",version)
         print("Shell Code Version:",shell_version)
         print("Copyright sxht4 under MIT Licence")
-        print("Welcome,",os.environ["fullname"]+"!")
+        print("Welcome,",data["FullName"]+"!")
         if debug:
             print("Running in debug mode\n")
             print("Python version: "+str(sys.version_info[0])+"."+str(sys.version_info[1])+"."+str(sys.version_info[2])+"_"+str(sys.version_info[3]))
@@ -917,7 +945,7 @@ def prompt():
             print("User:",getpass.getuser())
             print("Hostname:",platform.node())
             print("IP:",socket.gethostbyname(socket.gethostname()))
-            print("UBITname:",os.environ["ubitname"])
+            print("UBITname:",ubitname)
             if sys.platform.startswith('linux'):
                 if not int(sys.version_info[0])>3 or not int(sys.version_info[0])==3 and not int(sys.version_info[1])>=8:
                     os.system("lsb_release -a")
@@ -935,7 +963,7 @@ def prompt():
         print("Program Version:",version)
         print("Shell Code Version:",shell_version)
         print("Copyright sxht4 under MIT Licence")
-        print("Welcome,",os.environ["fullname"]+"!")
+        print("Welcome,",data["FullName"]+"!")
         if debug:
             print("Running in debug mode\n")
             print("Python version: "+str(sys.version_info[0])+"."+str(sys.version_info[1])+"."+str(sys.version_info[2])+"_"+str(sys.version_info[3]))
@@ -944,7 +972,7 @@ def prompt():
             print("User:",getpass.getuser())
             print("Hostname:",platform.node())
             print("IP:",socket.gethostbyname(socket.gethostname()))
-            print("UBITname:",os.environ["ubitname"])
+            print("UBITname:",ubitname)
             if sys.platform.startswith('linux'):
                 if not int(sys.version_info[0])>3 or not int(sys.version_info[0])==3 and not int(sys.version_info[1])>=8:
                     os.system("lsb_release -a")
@@ -1171,7 +1199,7 @@ elif sys.argv[1]=="test-all-PA1":
     isHostReachable()
     #ubitname=sys.argv[3]
     # sys.argv[2]= csvlocation [3]=ubitname [4]=PAX
-    run_all_testsPA1(sys.argv[2],sys.argv[3],sys.argv[4])
+    run_all_testsPA1(sys.argv[2],ubitname,sys.argv[4])
     t1_end = time.perf_counter()
     print("It takes",str(t1_end-t1_start-float(subtractSeconds))+"(s) to finish this script, where program total runtime is",str(getSumOfRunTime())+"(s)")
 elif sys.argv[1]=="repeat-PA1":
@@ -1222,29 +1250,29 @@ elif sys.argv[1]=="build-PA1":
     if sys.argv[-1]=="test":
         print(sys.argv)
         sys.exit()
-    if len(sys.argv)!=3 or len(sys.argv[2])==0 or len(sys.argv[2])>8:
+    if not validUBITname():
         print(colours.fg.red+"ERROR: Arguments incorrect for build-PA1!",colours.reset)
         print("Make sure UBITname is configured properly!")
         sys.exit(1)
-    build_tarPA1(sys.argv[2])
+    build_tarPA1()
 elif sys.argv[1]=="build-PA2":
     if sys.argv[-1]=="test":
         print(sys.argv)
         sys.exit()
-    if len(sys.argv)!=3 or len(sys.argv[2])==0 or len(sys.argv[2])>8:
+    if not validUBITname():
         print(colours.fg.red+"ERROR: Arguments incorrect for build-PA2!",colours.reset)
         print("Make sure UBITname is configured properly!")
         sys.exit(1)
-    build_tarPA2(sys.argv[2])
+    build_tarPA2()
 elif sys.argv[1]=="compile-PA2":
     if sys.argv[-1]=="test":
         print(sys.argv)
         sys.exit()
-    if len(sys.argv)!=3 or len(sys.argv[2])==0 or len(sys.argv[2])>8:
+    if not validUBITname():
         print(colours.fg.red+"ERROR: Arguments incorrect for build-PA2!",colours.reset)
         print("Make sure UBITname is configured properly!")
         sys.exit(1)
-    buildPA2(sys.argv[2])
+    buildPA2()
     #ubitname=sys.argv[2]
 elif sys.argv[1]=="test-all-PA2":
     if sys.argv[-1]=="test":
@@ -1255,7 +1283,7 @@ elif sys.argv[1]=="test-all-PA2":
     isHostReachable()
     # sys.argv[2]=ubitname [3]=PAX
     #ubitname=sys.argv[2]
-    test_all_PA2(sys.argv[2],sys.argv[3],"PA2_all")
+    test_all_PA2(sys.argv[2],"PA2_all")
     t1_end = time.perf_counter()
     print("It takes",str(t1_end-t1_start-float(subtractSeconds))+"(s) to finish this script")
 # elif sys.argv[1]=="test-file-PA2":
@@ -1300,48 +1328,48 @@ elif sys.argv[1]=="getHost":
     if sys.argv[-1]=="test":
         print(sys.argv)
         sys.exit()
-    if int(sys.argv[2]) % 5 == 0:
+    if int(personNumber) % 5 == 0:
         print("embankment.cse.buffalo.edu")
-    elif int(sys.argv[2]) % 5 == 1:
+    elif int(personNumber) % 5 == 1:
         print("euston.cse.buffalo.edu")
-    elif int(sys.argv[2]) % 5 == 2:
+    elif int(personNumber) % 5 == 2:
         print("highgate.cse.buffalo.edu")
-    elif int(sys.argv[2]) % 5 == 3:
+    elif int(personNumber) % 5 == 3:
         print("stones.cse.buffalo.edu")
-    elif int(sys.argv[2]) % 5 == 4:
+    elif int(personNumber) % 5 == 4:
         print("underground.cse.buffalo.edu")
 elif sys.argv[1]=="check-parameter-PA2":
     if sys.argv[-1]=="test":
         print(sys.argv)
         sys.exit()
-    if len(os.environ["ubitname"])>8 or len(os.environ["ubitname"])<2:
+    if len(ubitname)>8 or len(ubitname)<2:
         print("UBITname error!")
         sys.exit(1)
-    if len(os.environ["semester"])==0:
+    if len(data["semester"])==0:
         print("semester cannot be blank!")
         sys.exit(1)
-    if len(str(sys.argv[4]))<8:
+    if len(str(personNumber))<8:
         print("Person number cannot be blank!")
         sys.exit(1)
 elif sys.argv[1]=="check-parameter-PA1":
     if sys.argv[-1]=="test":
         print(sys.argv)
         sys.exit()
-    if len(os.environ["ubitname"])>8 or len(os.environ["ubitname"])<2:
+    if len(ubitname)>8 or len(ubitname)<2:
         print("UBITname error!")
         sys.exit(1)
-    if len(os.environ["semester"])==0:
+    if len(data["semester"])==0:
         print("semester cannot be blank!")
         sys.exit(1)
 elif sys.argv[1]=="run-experiments-batch":
     if sys.argv[-1]=="test":
         print(sys.argv)
         sys.exit()
-    suppressHeader=bool(os.environ["suppressHeader"])
-    buildPA2(os.environ["ubitname"])
-    print("ABT binary SHA256:"+getFileChecksum("../cse489589_assignment2/"+os.environ["ubitname"]+"/abt")[0])
-    print("GBN binary SHA256:"+getFileChecksum("../cse489589_assignment2/"+os.environ["ubitname"]+"/gbn")[0])
-    print("SR  binary SHA256:"+getFileChecksum("../cse489589_assignment2/"+os.environ["ubitname"]+"/sr")[0])
+    suppressHeader=bool(data["suppressHeader"])
+    buildPA2()
+    print("ABT binary SHA256:"+getFileChecksum("../cse489589_assignment2/"+ubitname+"/abt")[0])
+    print("GBN binary SHA256:"+getFileChecksum("../cse489589_assignment2/"+ubitname+"/gbn")[0])
+    print("SR  binary SHA256:"+getFileChecksum("../cse489589_assignment2/"+ubitname+"/sr")[0])
     print()
     count=0
     with open(sys.argv[2],'r') as openfile:
@@ -1467,7 +1495,6 @@ elif sys.argv[1]=="add-headers-to-all-files":
 elif sys.argv[1]=="self-check":
     print(sys.argv[-1])
 elif sys.argv[1]=="clean-all-binaries":
-    validUBITname(ubitname)
     if os.path.exists("../cse489589_assignment1/"+ubitname+"_pa1.tar"):
         os.remove("../cse489589_assignment1/"+ubitname+"_pa1.tar")
     if os.path.exists("../cse489589_assignment2/"+ubitname+"_pa2.tar"):
@@ -1548,7 +1575,7 @@ elif sys.argv[1]=="update-PA1-grader":
 elif sys.argv[1]=="update-PA2-grader":
     os.system("cd ../cse489589_assignment2/grader/;wget --no-check-certificate -r --no-parent -nH --cut-dirs=3 -R index.html https://ubwins.cse.buffalo.edu/cse-489_589/pa2/grader/")
 elif sys.argv[1]=="retrieve-sys-info":
-    print(os.environ["ubitname"])
+    print(ubitname)
 elif sys.argv[1]=="prompt":
     prompt()
 elif sys.argv[1]=="autocompile":
@@ -1569,7 +1596,7 @@ elif sys.argv[1]=="determine-whether-binary-is-needed":
 elif sys.argv[1]=="test-category-PA2":
     #print("ubitname:",ubitname,"case:",testcase,"PAX:",PAX)
     ifRunningInLinux()
-    buildPA2(ubitname)
+    buildPA2()
     filenames=[("../framework/PA2_basic.csv","basic"),("../framework/PA2_advanced.csv","advanced"),("../framework/PA2_sanity.csv","sanity")]
     #filenames=[("../framework/PA2_basic.csv","basic")]
     for currentTest in filenames:

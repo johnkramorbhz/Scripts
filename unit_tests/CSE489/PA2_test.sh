@@ -1,20 +1,6 @@
 #!/bin/bash
-# Only set gradMode to true if you are taking CSE589 instead of CSE489!
-gradMode="" # Put anything inside "" to set it to be true
-
-# Change it to YOUR UBITName and your full legal name.
-ubitname=""
-fullname=""
-semester=""
-personNumber=""
-debug="" # Put anything inside "" to set it to be true
-suppressHeader="" # Put anything inside "" to set it to be true
-quiet="" # Put anything inside "" to set it to be true
-timeout=200
-# End of personalisation section
-
 filename="${ubitname}_pa2.tar"
-version_number="2.0.6_PA2_opensource"
+version_number="2.0.7_PA2_opensource"
 pathofpythonscript="../framework/testTemplate.py"
 pathofbinary="../framework/testTemplate_bin"
 checksumFile=""
@@ -38,7 +24,7 @@ fi
 if [ "$use_binary" != "false" ]; then
 python3 $pathofpythonscript prompt
 python3 $pathofpythonscript check-required-software
-python3 $pathofpythonscript check-parameter-PA2 $ubitname $semester $personNumber
+python3 $pathofpythonscript check-parameter-PA2
 if [ $? -ne 0 ]; then
 echo "Make sure UBITname, person number, semester are configured!"
 exit 1
@@ -94,7 +80,7 @@ python3 $pathofpythonscript build-PA2 $ubitname
 python3 $pathofpythonscript checksum $filename
 elif [ "$1" = "--build" ]; then
 if [ "$use_binary" != "false" ]; then
-python3 $pathofpythonscript build-PA2 $ubitname
+python3 $pathofpythonscript build-PA2
 else
 $pathofbinary build-PA2 $ubitname
 fi
@@ -228,12 +214,4 @@ $pathofbinary version
 else
 pinfo "Usage can be found in the README file in GitHub"
 fi
-unset ubitname
-unset fullname
-unset semester
-unset debug
-unset timeout
-unset quiet
-unset personNumber
 unset version_number
-unset gradMode
