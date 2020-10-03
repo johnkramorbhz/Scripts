@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-echo "Last Updated at 2020-09-30 22:48 EDT/EST"
+echo "Last Updated at 2020-09-30 23:10 EDT/EST"
 sleep 3
 echo "INFO: Hello there, $USER@$HOSTNAME!"
 echo -e "INFO: Script started at $(date '+%d %h %Y %H:%M:%S')"
@@ -127,8 +127,7 @@ rm -rf entry.sh
 rm -rf ubuntu_setup.sh
 exit 0
 fi
-chmod u+x ubuntu_setup.sh
-./ubuntu_setup.sh
+bash ./ubuntu_setup.sh
 # if [ "$(lsb_release -c -s)" = "focal" ]; then
 # echo "INFO: Checking ROS installation"
 # cat ~/.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null
