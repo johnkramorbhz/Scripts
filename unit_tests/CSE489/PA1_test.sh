@@ -181,5 +181,6 @@ elif [ "$1" = "--update" ]; then
 python3 $pathofpythonscript update
 else
 pinfo "Usage can be found in the README file in GitHub"
+echo "https://github.com/johnkramorbhz/Scripts/blob/main/unit_tests/CSE489/usage.md"
 fi
 unset version_number
