@@ -51,7 +51,7 @@ global ubitname
 branch="main"
 supported_PAs=2
 SCRIPT_API_level=4
-bug_fixes=8
+bug_fixes=9
 suffix="final_opensource"
 version=str(supported_PAs)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
 # For binary auto-update only, beta features only bump revision number
@@ -75,7 +75,7 @@ def load_user_value(suppress):
     global data
     if not os.path.exists('../framework/CSE4589.config.json'):
         if not suppress:
-            print("WARNING: You do not have \"CSE4589.config.json\" in your HOME directory")
+            print("WARNING: Test script cannot find \"../framework/CSE4589.config.json\"")
             print("Using default values")
         return
     with open('../framework/CSE4589.config.json', 'r') as json_file:
