@@ -51,7 +51,7 @@ global ubitname
 branch="main"
 supported_PAs=2
 SCRIPT_API_level=4
-bug_fixes=5
+bug_fixes=6
 suffix="final_opensource"
 version=str(supported_PAs)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
 # For binary auto-update only, beta features only bump revision number
@@ -169,7 +169,7 @@ if len(sys.argv)>1 and sys.argv[1]=="update":
             branch=data["Upgrade_Path"]
     except:
         branch="main"
-    os.system("wget -q -O ../framework/testTemplate.py "+urlprefix+branch+"/unit_tests/CSE489/testTemplate.py && echo \"Download for testTemplate.py is complete\";"+"wget -q -O ../framework/testTemplate_bin "+urlprefix+branch+"/unit_tests/CSE489/testTemplate_bin && chmod u+x testTemplate_bin && echo \"Download for testTemplate_bin is complete\";")
+    os.system("wget -q -O ../framework/testTemplate.py "+urlprefix+branch+"/unit_tests/CSE489/testTemplate.py && echo \"Download for testTemplate.py is complete\";"+"wget -q -O ../framework/testTemplate_bin "+urlprefix+branch+"/unit_tests/CSE489/testTemplate_bin && chmod u+x ../framework/testTemplate_bin && echo \"Download for testTemplate_bin is complete\";")
     os.system("wget -q -O ../cse489589_assignment1/test.sh https://github.com/johnkramorbhz/Scripts/raw/"+branch+"/unit_tests/CSE489/PA1_test.sh && chmod 777 ../cse489589_assignment1/test.sh && echo \"Update PA1 test.sh complete\"")
     os.system("wget -q -O ../cse489589_assignment2/test.sh https://github.com/johnkramorbhz/Scripts/raw/"+branch+"/unit_tests/CSE489/PA2_test.sh && chmod 777 ../cse489589_assignment2/test.sh && echo \"Update PA2 test.sh complete\"")
     sys.exit()        
