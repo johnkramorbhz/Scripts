@@ -28,20 +28,22 @@ You can use an older shell script with the new python script or binary but not t
 
 Why here? It will take care of populating PA1 & PA2 for you. In addition, it will also prepare test scripts for both PA1 and PA2. After installation, you will need to add the following info in these scripts.
 
-```bash
-ubitname=""
-fullname=""
-semester="" #e.g. semester="Spring_2020"
-personNumber=""
-#PA2 only
-suppressHeader="" # Put anything inside "" to set it to be true
-#End of PA2 only
-```
-
-For PA2, if you are grad student, add the following
-
-```bash
-gradMode="" # Put anything inside "" to set it to be true
+After installation, run `./test.sh --generate-json-config` in either one of the CSE489 or CSE589 assignment folder. Then it will produce a json file called `CSE4589.config.json`, which contains following options.
+```json
+{
+    "FullName": "replace_with_your_full_name",
+    "Person_Number": 12345678,
+    "UBITname": "replace_with_your_ubitname_here",
+    "Upgrade_Path": "main",
+    "debug": false,
+    "format_level": 2,
+    "generated_from": "2.4.2_final_opensource",
+    "gradMode": false,
+    "quiet": false,
+    "semester": "Fall_9999",
+    "suppressHeader": false,
+    "timeout": 190
+}
 ```
 
 If you do not want to use `python3` (A backup solution)
