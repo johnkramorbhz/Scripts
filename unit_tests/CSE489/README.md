@@ -22,8 +22,6 @@ SHA256 checksum by running `sha256sum testTemplate_bin`:
 
 *If you have Ubuntu version higher than 18.04, it is not guaranteed that the python script version will work correctly, since python is an interpreted programming language. Even though I patched the python 3.8 deprecated function, I have not test anything else. In this case, you might need to use the binary instead if the outcome is incorrect, and you might need to link them to the script by yourself.*
 
-You can use an older shell script with the new python script or binary but not the other way around. If you have the pre-opensource version, you will have to manually replace all scripts as there are many changes implemented.
-
 ## Installation
 
 Why here? It will take care of populating PA1 & PA2 for you. In addition, it will also prepare test scripts for both PA1 and PA2. After installation, you will need to add the following info in these scripts.
@@ -56,9 +54,12 @@ If you want to use `python3` **Preferred**
 After installation, the directory structure looks like this
 
 ```
-cse489589_assignment1/
-cse489589_assignment2/
-framework/
+.
+├── cse489589_assignment1
+├── cse489589_assignment2
+└── framework
+
+3 directories
 ```
 
 It requires `python3` on CentOS 7 and later(e.g. Ubuntu 18.04 and later). If it does not work for whatever reason or you prefer one of the modes, find these lines in the `test.sh`
