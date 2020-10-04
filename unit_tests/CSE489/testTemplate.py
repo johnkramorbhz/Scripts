@@ -51,7 +51,7 @@ global ubitname
 branch="main"
 supported_PAs=2
 SCRIPT_API_level=4
-bug_fixes=6
+bug_fixes=7
 suffix="final_opensource"
 version=str(supported_PAs)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
 # For binary auto-update only, beta features only bump revision number
@@ -753,20 +753,26 @@ def report(PAX):
             print("")
             if len(passeditems)!=0:
                 print(colours.fg.green+"Passed tests:",str(len(passeditems))+", total score:",passgrade,colours.reset)
+                print(f'{"Passed Tests":20}  {"Run Time":20}')
                 for items in passeditems:
-                    print(colours.fg.green+str(items[1]),colours.reset,"Elapsed(in seconds):",items[5])
+                    print(f'{colours.fg.green+str(items[1])+colours.reset:26}  {"{:0.9f}".format(float(items[5])):9}(s)')
+                    #print(colours.fg.green+str(items[1]),colours.reset,"Elapsed(in seconds):",items[5])
                 print("")
     
             if len(partialitems)!=0:
                 print(colours.fg.yellow+"Partially passed tests:",str(len(partialitems))+", total score:",partialgrade,colours.reset)
+                print(f'{"Partially Passed Tests":30}  {"Run Time":20}')
                 for items in partialitems:
-                    print(colours.fg.yellow+str(items[3]),"out of",str(items[2]),colours.reset,str(items[1]),"Elapsed(in seconds):",items[5])
+                    print(f'{colours.fg.yellow+str(items[1])+colours.reset:30}  {"{:0.9f}".format(float(items[5])):9}(s)')
+                    #print(colours.fg.yellow+str(items[3]),"out of",str(items[2]),colours.reset,str(items[1]),"Elapsed(in seconds):",items[5])
                 print("")
 
             if len(faileditems)!=0:
                 print(colours.fg.red+"Failed tests:",len(faileditems),colours.reset)
+                print(f'{"Failed Tests":30}  {"Run Time":20}')
                 for items in faileditems:
-                    print(colours.fg.red+str(items[1])+colours.reset+", scores:",str(items[2]),"Elapsed(in seconds):",items[5])
+                    print(f'{colours.fg.red+str(items[1])+colours.reset:30}  {"{:0.9f}".format(float(items[5])):9}(s)')
+                    #print(colours.fg.red+str(items[1])+colours.reset+", scores:",str(items[2]),"Elapsed(in seconds):",items[5])
                     #print("stdout of this item")
                     #print(items[4])
             if len(timedoutitems)!=0:
@@ -799,20 +805,27 @@ def report(PAX):
         print("")
         if len(passeditems)!=0:
             print(colours.fg.green+"Passed tests:",str(len(passeditems))+", total score:",passgrade,colours.reset)
+            print(f'{"Passed Tests":20}  {"Run Time":20}')
             for items in passeditems:
-                print(colours.fg.green+str(items[1]),colours.reset,"Execution time(in seconds):",items[5])
+                print(f'{colours.fg.green+str(items[1])+colours.reset:26}  {"{:0.9f}".format(float(items[5])):9}(s)')
+                #print(colours.fg.green+str(items[1]),colours.reset,"Elapsed(in seconds):",items[5])
             print("")
-    
         if len(partialitems)!=0:
             print(colours.fg.yellow+"Partially passed tests:",str(len(partialitems))+", total score:",partialgrade,colours.reset)
+            print(f'{"Partially Passed Tests":30}  {"Run Time":20}')
             for items in partialitems:
-                print(colours.fg.yellow+str(items[3]),"out of",str(items[2]),colours.reset,str(items[1]),"Execution time(in seconds):",items[5])
+                print(f'{colours.fg.yellow+str(items[1])+colours.reset:30}  {"{:0.9f}".format(float(items[5])):9}(s)')
+                #print(colours.fg.yellow+str(items[3]),"out of",str(items[2]),colours.reset,str(items[1]),"Elapsed(in seconds):",items[5])
             print("")
 
         if len(faileditems)!=0:
             print(colours.fg.red+"Failed tests:",len(faileditems),colours.reset)
+            print(f'{"Failed Tests":30}  {"Run Time":20}')
             for items in faileditems:
-                print(colours.fg.red+str(items[1])+colours.reset+", scores:",str(items[2]),"Execution time(in seconds):",items[5])
+                print(f'{colours.fg.red+str(items[1])+colours.reset:30}  {"{:0.9f}".format(float(items[5])):9}(s)')
+                #print(colours.fg.red+str(items[1])+colours.reset+", scores:",str(items[2]),"Elapsed(in seconds):",items[5])
+                #print("stdout of this item")
+                #print(items[4])
         if len(timedoutitems)!=0:
             print(colours.fg.lightblue+"Skipped tests:",len(timedoutitems),colours.reset)
             for items in timedoutitems:
