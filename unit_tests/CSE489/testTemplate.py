@@ -51,12 +51,12 @@ global ubitname
 branch="main"
 supported_PAs=2
 SCRIPT_API_level=4
-bug_fixes=0
+bug_fixes=1
 suffix="final_opensource"
 version=str(supported_PAs)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
 # For binary auto-update only, beta features only bump revision number
 revision=10000*supported_PAs+10*SCRIPT_API_level+bug_fixes
-default_value_of_test_template = {"format_level": 1,
+default_value_of_test_template = {"format_level": 2,
 "debug": False,
 "generated_from": version,
 "UBITname": "replace_with_your_ubitname_here",
@@ -66,7 +66,8 @@ default_value_of_test_template = {"format_level": 1,
 "gradMode":False,
 "suppressHeader":False,
 "semester":"Fall_9999",
-"Person_Number":12345678
+"Person_Number":12345678,
+"Upgrade_Path": "main"
 }
 data=default_value_of_test_template
 def load_user_value(suppress):
@@ -161,7 +162,16 @@ if len(sys.argv)>1 and sys.argv[1]=="update":
     if os.system("wget -q --spider https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/testTemplate.py")!=0:
         print("ERROR: You do NOT have wget installed or You do NOT have Internet access!")
         sys.exit(1)
-    os.system("rm -rf testTemplate.py testTemplate_bin;wget -O testTemplate.py https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/testTemplate.py; wget -O testTemplate_bin https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/testTemplate_bin; chmod u+x testTemplate_bin")
+    load_user_value(False)
+    urlprefix="https://github.com/johnkramorbhz/Scripts/raw/"
+    try:
+        if data["Upgrade_Path"] != "" and data["format_level"]>1:
+            branch=data["Upgrade_Path"]
+    except:
+        branch="main"
+    os.system("wget -O testTemplate.py "+urlprefix+branch+"/unit_tests/CSE489/testTemplate.py && echo \"Download for testTemplate.py is complete\";"+"wget -O testTemplate.py "+urlprefix+branch+"/unit_tests/CSE489/testTemplate_bin && chmod u+x testTemplate_bin && echo \"Download for testTemplate_bin is complete\";")
+    os.system("wget -O ../cse489589_assignment1/test.sh https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA1_test.sh && chmod 777 ../cse489589_assignment1/test.sh && echo \"Update PA1 test.sh complete\"")
+    os.system("wget -O ../cse489589_assignment2/test.sh https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA2_test.sh && chmod 777 ../cse489589_assignment2/test.sh && echo \"Update PA2 test.sh complete\"")
     sys.exit()        
 load_user_value(False)
 try:
@@ -1608,6 +1618,8 @@ elif sys.argv[1]=="test-category-PA2":
     report("PA2")    
 elif sys.argv[1]=="test-AIS-PA1":
     checkPA1AIStatement()
+elif sys.argv[1]=="gc":
+    generate_default_config()
 else:
     # This case will only be reached when the user modifies the script, especially the python argument.
     print("ERROR: Backend cannot understand your request!")

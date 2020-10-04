@@ -1,6 +1,6 @@
 #!/bin/bash
 filename="${ubitname}_pa2.tar"
-version_number="2.0.7_PA2_opensource"
+version_number="2.0.8_PA2_opensource"
 pathofpythonscript="../framework/testTemplate.py"
 pathofbinary="../framework/testTemplate_bin"
 checksumFile=""
@@ -195,6 +195,8 @@ python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment2_
 checkErrorCode $?
 python3 $pathofpythonscript add-headers-to-all-files $ubitname
 checkErrorCode $?
+elif [ "$1" = "--generate-config" ]; then
+python3 $pathofpythonscript gc
 elif [ "$1" = "--compile-binary" ]; then
 python3 $pathofpythonscript autocompile
 elif [ "$1" = "--version" ]; then

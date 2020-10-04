@@ -3,7 +3,7 @@ pathofpythonscript="../framework/testTemplate.py"
 pathofbinary="../framework/testTemplate_bin"
 filename="${ubitname}_pa1.tar"
 csvlocation="../framework/PA1.csv"
-version_number="1.4.6_PA1_opensource"
+version_number="1.4.7_PA1_opensource"
 export version_number
 if hash python3 2>/dev/null; then
 use_binary=$(python3 $pathofpythonscript determine-whether-binary-is-needed)
@@ -176,6 +176,8 @@ python3 $pathofpythonscript test-AIS-PA1
 else
 $pathofbinary test-AIS-PA1
 fi
+elif [ "$1" = "--generate-config" ]; then
+python3 $pathofpythonscript gc
 else
 pinfo "Usage can be found in the README file in GitHub"
 fi
