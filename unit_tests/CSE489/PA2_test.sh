@@ -195,8 +195,10 @@ python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment2_
 checkErrorCode $?
 python3 $pathofpythonscript add-headers-to-all-files $ubitname
 checkErrorCode $?
-elif [ "$1" = "--generate-config" ]; then
+elif [ "$1" = "--generate-json-config" ]; then
 python3 $pathofpythonscript gc
+elif [ "$1" = "--update" ]; then
+python3 $pathofpythonscript update
 elif [ "$1" = "--compile-binary" ]; then
 python3 $pathofpythonscript autocompile
 elif [ "$1" = "--version" ]; then

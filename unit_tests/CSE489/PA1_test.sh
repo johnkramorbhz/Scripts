@@ -176,8 +176,10 @@ python3 $pathofpythonscript test-AIS-PA1
 else
 $pathofbinary test-AIS-PA1
 fi
-elif [ "$1" = "--generate-config" ]; then
+elif [ "$1" = "--generate-json-config" ]; then
 python3 $pathofpythonscript gc
+elif [ "$1" = "--update" ]; then
+python3 $pathofpythonscript update
 else
 pinfo "Usage can be found in the README file in GitHub"
 fi
