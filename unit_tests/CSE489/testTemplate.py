@@ -641,6 +641,7 @@ def generateReportInText(fileToExport,PAX):
             openfile.write("Passed items: "+str(len(passeditems))+", scored: "+str(passgrade)+"\n")
             for items in passeditems:
                 openfile.write(str(items[1])+"\n")
+        openfile.write("\nThis run was based on the following settings\n"+json.dumps(data,indent=4,sort_keys=True)+"\n")
     openfile.close()
 # PA2_all has a different data structure from every other so I need to put it in a separate function.
 def generateReportInTextPA2ALL(fileToExport):
@@ -706,6 +707,7 @@ def generateReportInTextPA2ALL(fileToExport):
                     openfile.write("*********************************\n**End of advanced tests\n")
                 elif x==2:
                     openfile.write("*********************************\n**End of sanity tests\n")
+            openfile.write("\nThis run was based on the following settings\n"+json.dumps(data,indent=4,sort_keys=True)+"\n")
                     #openfile.write("RAW: "+str(result)+"\n")
 # This functin is to generate a text report because running these tests takes a very long time, which usually lasts an hour.
 # This is very useful when the repeat option is used since it will take hours to run.
