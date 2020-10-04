@@ -1,6 +1,5 @@
 #!/bin/bash
-filename="${ubitname}_pa2.tar"
-version_number="2.0.8_PA2_opensource"
+version_number="2.0.9_PA2_opensource"
 pathofpythonscript="../framework/testTemplate.py"
 pathofbinary="../framework/testTemplate_bin"
 checksumFile=""
@@ -23,7 +22,7 @@ fi
 else
 $pathofbinary prompt
 $pathofbinary check-required-software
-$pathofbinary check-parameter-PA2 $ubitname $semester $personNumber
+$pathofbinary check-parameter-PA2 ubitname_placeholder semester_placeholder personNumber_placeholder
 if [ $? -ne 0 ]; then
 echo "Make sure UBITname, person number, semester are configured!"
 exit 1
@@ -44,7 +43,7 @@ echo "INFO:  Use the open source version instead!"
 exit 1
 fi
 fi
-hosts=$(python3 $pathofpythonscript getHost $personNumber $ubitname)
+# hosts=$(python3 $pathofpythonscript getHost personNumber_placeholder ubitname_placeholder)
 function pinfo(){
     echo -e "\e[36mINFO: $1\e[0m"
 }
@@ -53,54 +52,50 @@ function cleanup(){
 python3 $pathofpythonscript clean-all-binaries
 }
 function get_checksum(){
-md5sum $1
+md5sum "$1"
 }
 function version_string_friendly(){
 echo "$version_number"
 }
 function checkErrorCode(){
-if [ $1 -ne 0 ]; then
+if [ "$1" -ne 0 ]; then
 echo "ERROR: Test script threw an error!"
 exit 1
 fi
 }
 # Launcher
-if [ "$1" = "--submit" ]; then
-pinfo "Building tarball for $ubitname"
-python3 $pathofpythonscript build-PA2 $ubitname
-python3 $pathofpythonscript checksum $filename
-elif [ "$1" = "--build" ]; then
+if [ "$1" = "--build" ]; then
 if [ "$use_binary" != "false" ]; then
 python3 $pathofpythonscript build-PA2
 else
-$pathofbinary build-PA2 $ubitname
+$pathofbinary build-PA2 ubitname_placeholder
 fi
 elif [ "$1" = "--compile" ]; then
 if [ "$use_binary" != "false" ]; then
-python3 $pathofpythonscript compile-PA2 $ubitname
+python3 $pathofpythonscript compile-PA2 ubitname_placeholder
 else
-$pathofbinary compile-PA2 $ubitname
+$pathofbinary compile-PA2 ubitname_placeholder
 fi
 elif [ "$1" = "--clean" ]; then
 cleanup
 elif [ "$1" = "--test-indv" ]; then
 if [ "$2" = "basic" ]; then
 if [ "$use_binary" != "false" ]; then
-python3 $pathofpythonscript test-indv-PA2 "../framework/PA2_basic.csv" $ubitname $3 basic
+python3 $pathofpythonscript test-indv-PA2 "../framework/PA2_basic.csv" ubitname_placeholder "$3" basic
 else
-$pathofbinary test-indv-PA2 "../framework/PA2_basic.csv" $ubitname $3 basic
+$pathofbinary test-indv-PA2 "../framework/PA2_basic.csv" ubitname_placeholder "$3" basic
 fi
 elif [ "$2" = "advanced" ]; then
 if [ "$use_binary" != "false" ]; then
-python3 $pathofpythonscript test-indv-PA2 "../framework/PA2_advanced.csv" $ubitname $3 advanced
+python3 $pathofpythonscript test-indv-PA2 "../framework/PA2_advanced.csv" ubitname_placeholder "$3" advanced
 else
-$pathofbinary test-indv-PA2 "../framework/PA2_advanced.csv" $ubitname $3 advanced
+$pathofbinary test-indv-PA2 "../framework/PA2_advanced.csv" ubitname_placeholder "$3" advanced
 fi
 elif [ "$2" = "sanity" ]; then
 if [ "$use_binary" != "false" ]; then
-python3 $pathofpythonscript test-indv-PA2 "../framework/PA2_sanity.csv" $ubitname $3 sanity
+python3 $pathofpythonscript test-indv-PA2 "../framework/PA2_sanity.csv" ubitname_placeholder "$3" sanity
 else
-$pathofbinary test-indv-PA2 "../framework/PA2_sanity.csv" $ubitname $3 sanity
+$pathofbinary test-indv-PA2 "../framework/PA2_sanity.csv" ubitname_placeholder "$3" sanity
 fi
 else
 echo "ERROR: Cannot find your test type!"
@@ -139,35 +134,33 @@ echo -e "INFO: Test finished on: \c"
 date
 elif [ "$1" = "--test-all" ]; then
 if [ "$use_binary" != "false" ]; then
-python3 $pathofpythonscript test-all-PA2 $ubitname PA1
+python3 $pathofpythonscript test-all-PA2 ubitname_placeholder PA1
 else
-$pathofbinary test-all-PA2 $ubitname PA1
+$pathofbinary test-all-PA2 ubitname_placeholder PA1
 fi
 cleanup
 echo -e "INFO: Test finished on: \c"
 date
 elif [ "$1" = "--get-host" ]; then
-python3 $pathofpythonscript getHost $personNumber $ubitname
+python3 $pathofpythonscript getHost personNumber_placeholder ubitname_placeholder
 cleanup
-elif [ "$1" = "--get-checksum" ]; then
-python3 $pathofpythonscript checksum "../cse489589_assignment2/$filename" $ubitname
 # elif [ "$1" = "--test-file" ]; then
-# python3 $pathofpythonscript test-file-PA2 $ubitname $2
+# python3 $pathofpythonscript test-file-PA2 ubitname_placeholder $2
 elif [ "$1" = "--test-experiment" ]; then
-python3 $pathofpythonscript test-experiment-one $ubitname
+python3 $pathofpythonscript test-experiment-one ubitname_placeholder
 elif [ "$1" = "--run-experiment-1" ]; then
-python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment1_10_ds.csv" $ubitname 1
+python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment1_10_ds.csv" ubitname_placeholder 1
 checkErrorCode $?
-python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment1_50_ds.csv" $ubitname 1
+python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment1_50_ds.csv" ubitname_placeholder 1
 checkErrorCode $?
-python3 $pathofpythonscript add-headers-to-all-files $ubitname
+python3 $pathofpythonscript add-headers-to-all-files ubitname_placeholder
 checkErrorCode $?
 elif [ "$1" = "--run-experiment-2" ]; then
-python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment2_0.2_ds.csv" $ubitname 2
+python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment2_0.2_ds.csv" ubitname_placeholder 2
 checkErrorCode $?
-python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment2_0.5_ds.csv" $ubitname 2
+python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment2_0.5_ds.csv" ubitname_placeholder 2
 checkErrorCode $?
-python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment2_0.8_ds.csv" $ubitname 2
+python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment2_0.8_ds.csv" ubitname_placeholder 2
 checkErrorCode $?
 python3 $pathofpythonscript add-headers-to-all-files
 checkErrorCode $?
@@ -183,17 +176,17 @@ checkErrorCode $?
 elif [ "$1" = "--clean-all" ]; then
 python3 $pathofpythonscript clean-all-binaries
 elif [ "$1" = "--run-all-experiments" ]; then
-python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment1_10_ds.csv" $ubitname 1
+python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment1_10_ds.csv" ubitname_placeholder 1
 checkErrorCode $?
-python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment1_50_ds.csv" $ubitname 1
+python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment1_50_ds.csv" ubitname_placeholder 1
 checkErrorCode $?
-python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment2_0.2_ds.csv" $ubitname 2
+python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment2_0.2_ds.csv" ubitname_placeholder 2
 checkErrorCode $?
-python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment2_0.5_ds.csv" $ubitname 2
+python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment2_0.5_ds.csv" ubitname_placeholder 2
 checkErrorCode $?
-python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment2_0.8_ds.csv" $ubitname 2
+python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment2_0.8_ds.csv" ubitname_placeholder 2
 checkErrorCode $?
-python3 $pathofpythonscript add-headers-to-all-files $ubitname
+python3 $pathofpythonscript add-headers-to-all-files ubitname_placeholder
 checkErrorCode $?
 elif [ "$1" = "--generate-json-config" ]; then
 python3 $pathofpythonscript gc

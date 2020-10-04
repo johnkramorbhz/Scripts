@@ -1,7 +1,6 @@
 #!/bin/bash
 pathofpythonscript="../framework/testTemplate.py"
 pathofbinary="../framework/testTemplate_bin"
-filename="${ubitname}_pa1.tar"
 csvlocation="../framework/PA1.csv"
 version_number="1.4.7_PA1_opensource"
 export version_number
@@ -55,7 +54,7 @@ function cleanup(){
 python3 $pathofpythonscript clean-all-binaries
 }
 function get_checksum(){
-md5sum $1
+md5sum "$1"
 }
 # Launcher
 if [ "$1" = "--submit" ]; then
@@ -82,12 +81,12 @@ cleanup
 elif [ "$1" = "--test-indv" ]; then
 config_check
 if [ "$use_binary" != "false" ]; then
-python3 $pathofpythonscript test-indv-PA1 $csvlocation placeholder_ubitname $2
+python3 $pathofpythonscript test-indv-PA1 $csvlocation placeholder_ubitname "$2"
 cleanup
 echo "INFO: Test finished on:"
 date
 else
-$pathofbinary test-indv-PA1 $csvlocation placeholder_ubitname $2
+$pathofbinary test-indv-PA1 $csvlocation placeholder_ubitname "$2"
 cleanup
 echo "INFO: Test finished on:"
 date
@@ -121,12 +120,12 @@ fi
 elif [ "$1" = "--repeat" ]; then
 config_check
 if [ "$use_binary" != "false" ]; then
-python3 $pathofpythonscript repeat-PA1 $csvlocation placeholder_ubitname $2 $3 PA1
+python3 $pathofpythonscript repeat-PA1 $csvlocation placeholder_ubitname "$2" "$3" PA1
 cleanup
 echo "INFO: Test finished on:"
 date
 else
-$pathofbinary repeat-PA1 $csvlocation placeholder_ubitname $2 $3 PA1
+$pathofbinary repeat-PA1 $csvlocation placeholder_ubitname "$2" "$3" PA1
 cleanup
 echo "INFO: Test finished on:"
 date
@@ -134,12 +133,12 @@ fi
 elif [ "$1" = "--repeat-all" ]; then
 config_check
 if [ "$use_binary" != "false" ]; then
-python3 $pathofpythonscript repeat-test-all-PA1 $csvlocation placeholder_ubitname PA1 $2
+python3 $pathofpythonscript repeat-test-all-PA1 $csvlocation placeholder_ubitname PA1 "$2"
 cleanup
 echo "INFO: Test finished on:"
 date
 else
-$pathofbinary repeat-test-all-PA1 $csvlocation placeholder_ubitname PA1 $2
+$pathofbinary repeat-test-all-PA1 $csvlocation placeholder_ubitname PA1 "$2"
 cleanup
 echo "INFO: Test finished on:"
 date
