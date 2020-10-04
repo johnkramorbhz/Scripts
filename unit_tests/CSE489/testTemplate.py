@@ -51,7 +51,7 @@ global ubitname
 branch="main"
 supported_PAs=2
 SCRIPT_API_level=4
-bug_fixes=9
+bug_fixes=10
 suffix="final_opensource"
 version=str(supported_PAs)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
 # For binary auto-update only, beta features only bump revision number
@@ -1607,11 +1607,11 @@ elif sys.argv[1]=="autocompile":
     print("Recompiling this script as a blob")
     try:
         #import pyinstaller
-        if os.system("pyinstaller -F ../framework/testTemplate.py && staticx dist/testTemplate ../framework/testTemplate_bin && rm -rf build dist testTemplate testTemplate.spec ../framework/__pycache__")!=0:
-            print("pyinstaller is NOT installed!")
+        if os.system("pyinstaller -F ../framework/testTemplate.py && echo \"INFO: Generating binary done\" && staticx dist/testTemplate ../framework/testTemplate_bin && echo \"INFO: Making binary static done\" && rm -rf build dist testTemplate testTemplate.spec ../framework/__pycache__ && echo \"INFO: Process complete\"")!=0:
+            print("ERROR: Failed to compile!")
             sys.exit(1)
     except:
-        print("pyinstaller is NOT installed!")
+        print("ERROR: Failed to compile!")
         sys.exit(1)
 elif sys.argv[1]=="determine-whether-binary-is-needed":
     if int(sys.version_info[0])>=3 and int(sys.version_info[1])>=4:
