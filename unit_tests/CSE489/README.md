@@ -37,7 +37,6 @@ After installation, run `./test.sh --generate-json-config` in either one of the 
     "Upgrade_Path": "main",
     "debug": false,
     "format_level": 2,
-    "generated_from": "2.4.2_final_opensource",
     "gradMode": false,
     "quiet": false,
     "semester": "Fall_9999",
