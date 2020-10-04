@@ -28,6 +28,8 @@ sudo pip3 install pyinstaller staticx patchelf-wrapper
 
 `./test.sh --generate-json-config` Generate JSON file for all test scripts options for FIRST USE ONLY.
 
+`./test.sh --update` An easier way to update shell scripts and auto test program.
+
 `./test.sh --build` Packing up and prepare to submit
 
 `./test.sh --compile` Build `./assignment1` for this project
@@ -48,6 +50,8 @@ sudo pip3 install pyinstaller staticx patchelf-wrapper
 ## Test script usage for PA2
 
 `./test.sh --generate-json-config` Generate JSON file for all test scripts options for FIRST USE ONLY.
+
+`./test.sh --update` An easier way to update shell scripts and auto test program.
 
 `./test.sh --compile` Build binaries for this project
 
