@@ -10,6 +10,8 @@ PROVIDED AS IS WITHOUT WARRANTY OR SERVICE. You may fork this project and contin
 
 The report file also saves a copy of your configuration file at the end of the report for diagnosis purposes. If you plan on sharing the report file, please remove your personal info.
 
+After 2.4.x, the update function will overwrite both `test.sh` files in addition to the python code and its binary. You will need to run the `./test.sh --generate-json-config` after the upgrade is completed.
+
 SHA256 checksum by running `sha256sum testTemplate_bin`:
 
 `5eaa5d7167ada2a8ab78888e71abb4881dc06f53ca282065d1de476db3f8d34f  testTemplate_bin`
@@ -54,7 +56,7 @@ After installation, the directory structure looks like this
 3 directories
 ```
 
-It requires `python3` on CentOS 7 and later(e.g. Ubuntu 18.04 and later). If it does not work for whatever reason or you prefer one of the modes, find these lines in the `test.sh`
+It requires `python3` on CentOS 7 and later(e.g. Ubuntu 18.04, Ubuntu 20.04, and later). If it does not work for whatever reason or you prefer one of the modes, find these lines in the `test.sh`. **If you run `--update` function, you WILL need to set these options again as updating process will overwrite all settings embedded in shell code!**
 
 ```bash
 #use_binary="false" #Uncomment this line to force binary
@@ -104,35 +106,3 @@ The `test.sh` in each Programming Assignment directory is a high level abstracti
 The python script is unified instead of dividing it into each individual PA test script, because the enhancement will benefit both PAs.
 
 The main goal of this script is to save time for debugging, and have some estimation of final grade.
-
-## Run Experiments Code Example
-
-```python
-def run_experiments(messages,loss,corruption,time,window,binary,outputfile,supressHeader,ubitname):
-    checkDirs()
-    if supressHeader==True:
-        if os.system("../cse489589_assignment2/grader/run_experiments -m "+str(messages)+" -l "+str(loss)+" -c "+str(corruption)+" -t "+str(time)+" -w "+str(window)+" -p ../cse489589_assignment2/"+str(ubitname)+"/"+str(binary)+" -o ../framework/report/PA2_experiments/"+str(outputfile)+" -n") !=0:
-            print(colours.fg.red+"ERROR: ./run_experiments returned a non-zero exit code!",colours.reset)
-            print("For your safety, this program will terminate!")
-            sys.exit(1)
-    else:
-        if os.system("../cse489589_assignment2/grader/run_experiments -m "+str(messages)+" -l "+str(loss)+" -c "+str(corruption)+" -t "+str(time)+" -w "+str(window)+" -p ../cse489589_assignment2/"+str(ubitname)+"/"+str(binary)+" -o ../framework/report/PA2_experiments/"+str(outputfile)) !=0:
-            print(colours.fg.red+"ERROR: ./run_experiments returned a non-zero exit code!",colours.reset)
-            print("For your safety, this program will terminate!")
-            sys.exit(1)
-```
-
-Invoke part(Python)
-
-```python
-#Experiment 1
-run_experiments(1000,line[0],0.2,50,line[1],line[2],str(line[2])+"_"+str(line[1])+"_experiment1.csv",suppressHeader,sys.argv[3])
-#Experiment 2
-run_experiments(1000,line[0],0.2,50,line[1],line[2],str(line[2])+"_"+str(line[0])+"_experiment2.csv",suppressHeader,sys.argv[3])
-```
-
-Invoke part(bash)
-
-```bash
-python3 $pathofpythonscript run-experiments-batch "../framework/PA2_experiment2_0.2_ds.csv" $ubitname 2
-```
