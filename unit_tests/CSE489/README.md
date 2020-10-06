@@ -8,25 +8,17 @@ PROVIDED AS IS WITHOUT WARRANTY OR SERVICE. You may fork this project and contin
 
 ## Please Note
 
-Even though the static binary is built from Ubuntu 20.04, running in Ubuntu 20.04 is not formally tested.
-
-To reduce the problem of dynamically linked binary(if you have a newer build system than the target system, it will not run), I require `staticx` in addition to the `pyinstaller`. This is a 64-bit binary, which only works on 64-bit Linux OSes. By running `file testTemplate_bin`, here is the output:
-
-```bash
-testTemplate_bin: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, not stripped
-```
+The report file also saves a copy of your configuration file at the end of the report for diagnosis purposes. If you plan on sharing the report file, please remove your personal info.
 
 SHA256 checksum by running `sha256sum testTemplate_bin`:
 
 `5eaa5d7167ada2a8ab78888e71abb4881dc06f53ca282065d1de476db3f8d34f  testTemplate_bin`
 
-*If you have Ubuntu version higher than 18.04, it is not guaranteed that the python script version will work correctly, since python is an interpreted programming language. Even though I patched the python 3.8 deprecated function, I have not test anything else. In this case, you might need to use the binary instead if the outcome is incorrect, and you might need to link them to the script by yourself.*
-
 ## Installation
 
 Why here? It will take care of populating PA1 & PA2 for you. In addition, it will also prepare test scripts for both PA1 and PA2. After installation, you will need to add the following info in these scripts.
 
-After installation, run `./test.sh --generate-json-config` in either one of the CSE489 or CSE589 assignment folder. Then it will produce a json file called `CSE4589.config.json`, which contains following options.
+After installation, run `./test.sh --generate-json-config` in either one of the CSE489 or CSE589 assignment folder. Then it will produce a json file called `CSE4589.config.json` in the `framework` folder, which contains following options.
 ```json
 {
     "FullName": "replace_with_your_full_name",
