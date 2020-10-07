@@ -51,7 +51,7 @@ global ubitname
 branch="main"
 supported_PAs=2
 SCRIPT_API_level=4
-bug_fixes=10
+bug_fixes=11
 suffix="final_opensource"
 version=str(supported_PAs)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
 # For binary auto-update only, beta features only bump revision number
@@ -763,9 +763,9 @@ def report(PAX):
     
             if len(partialitems)!=0:
                 print(colours.fg.yellow+"Partially passed tests:",str(len(partialitems))+", total score:",partialgrade,colours.reset)
-                print(f'{"Partially Passed Tests":30}  {"Run Time":20}')
+                print(f'{"Partially Passed Tests":30}  {"Run Time":20}  {"Score":20}')
                 for items in partialitems:
-                    print(f'{colours.fg.yellow+str(items[1])+colours.reset:30}  {"{:0.9f}".format(float(items[5])):9}(s)')
+                    print(f'{colours.fg.yellow+str(items[1])+colours.reset:30}  {"{:0.9f}".format(float(items[5])):9}(s)  {str(items[3]):20}')
                     #print(colours.fg.yellow+str(items[3]),"out of",str(items[2]),colours.reset,str(items[1]),"Elapsed(in seconds):",items[5])
                 print("")
 
@@ -814,9 +814,9 @@ def report(PAX):
             print("")
         if len(partialitems)!=0:
             print(colours.fg.yellow+"Partially passed tests:",str(len(partialitems))+", total score:",partialgrade,colours.reset)
-            print(f'{"Partially Passed Tests":30}  {"Run Time":20}')
+            print(f'{"Partially Passed Tests":30}  {"Run Time":20}  {"Score":20}')
             for items in partialitems:
-                print(f'{colours.fg.yellow+str(items[1])+colours.reset:30}  {"{:0.9f}".format(float(items[5])):9}(s)')
+                print(f'{colours.fg.yellow+str(items[1])+colours.reset:30}  {"{:0.9f}".format(float(items[5])):9}(s)  {str(items[3]):20}')
                 #print(colours.fg.yellow+str(items[3]),"out of",str(items[2]),colours.reset,str(items[1]),"Elapsed(in seconds):",items[5])
             print("")
 
@@ -834,7 +834,7 @@ def report(PAX):
                 print(colours.fg.red+str(items[1])+colours.reset+", scores:",str(getScore(items)))
         generateReportInText("../framework/report/"+PAX+"/"+PAX+"_"+str(datetime.date.today())+"_"+str(time.strftime("%H.%M.%S"))+".txt",PAX)
 
-def run_individual_testPA1(filename_csv,ubitname,testcase,mode,PAX):
+def run_individual_testPA1(filename_csv,ubitname_,testcase,mode,PAX):
     ifRunningInLinux()
     readCSV(filename_csv)
     if not os.path.exists("../cse489589_assignment1/"+ubitname+"_pa1.tar"):
@@ -844,7 +844,7 @@ def run_individual_testPA1(filename_csv,ubitname,testcase,mode,PAX):
         for items in timedoutitems:
             callShellCommandsPA1(items,"../cse489589_assignment1/"+ubitname+"_pa1.tar",global_timeout,PAX)
     report(PAX)
-def run_individual_testPA2(filename_csv,ubitname,testcase,testType,PAX):
+def run_individual_testPA2(filename_csv,ubitname_,testcase,testType,PAX):
     ifRunningInLinux()
     if len(tests)==0:
         readCSV(filename_csv)
@@ -852,7 +852,7 @@ def run_individual_testPA2(filename_csv,ubitname,testcase,testType,PAX):
     callShellCommandsPA2(testcase,"../cse489589_assignment2/"+ubitname+"/"+testcase.lower(),global_timeout,PAX,testType)
     report(PAX)
 
-def run_all_testsPA1(filename_csv,ubitname,PAX):
+def run_all_testsPA1(filename_csv,ubitname_,PAX):
     ifRunningInLinux()
     global subtractSeconds
     print_info("Running all tests defined in the csv file.")
@@ -881,23 +881,6 @@ def run_all_testsPA1(filename_csv,ubitname,PAX):
             timedoutitems.remove(items)
             callShellCommandsPA1(items,"../cse489589_assignment1/"+ubitname+"_pa1.tar",global_timeout,PAX)    
     report(PAX)
-# Deprecated, because test-category replaces this function. It does not seem to work properly as there were many major changes happened.
-# def run_file_testPA2(ubitnames,testcase,PAX):
-#     #print("ubitname:",ubitname,"case:",testcase,"PAX:",PAX)
-#     ifRunningInLinux()
-#     buildPA2(ubitname)
-#     filenames=[("../framework/PA2_basic.csv","basic"),("../framework/PA2_advanced.csv","advanced"),("../framework/PA2_sanity.csv","sanity")]
-#     #filenames=[("../framework/PA2_basic.csv","basic")]
-#     for currentTest in filenames:
-#         readCSV(currentTest[0])
-#         temp_lists=copy.deepcopy(tests)
-#         for indv_item in temp_lists:
-#             if indv_item[1]==testcase:
-#                 callShellCommandsPA2(indv_item[1],"../cse489589_assignment2/"+ubitname+"/"+indv_item[1].lower(),global_timeout,PAX,currentTest[1])
-#         result.append(copy.deepcopy(tests))
-#         clearAll()
-#     report("PA2_all")
-# End of deprecated function
 def test_all_PA2(testType,PAX):
     ifRunningInLinux()
     buildPA2()
@@ -920,7 +903,7 @@ def isHostReachable():
     if exitCodeSum>0:
         print(colours.fg.red+"ERROR: It seems that at least one of the host is not reachable",colours.reset)
         sys.exit(1)
-def ifFileExecutesPA1(ubitname):
+def ifFileExecutesPA1(ubitname_):
     ifRunningInLinux()
     os.system("cd ../cse489589_assignment1/"+ubitname+";make;./assignment1 c AUTHOR")
 def getSumOfRunTime():
@@ -929,7 +912,7 @@ def getSumOfRunTime():
         length+=items[5]
     return length
 
-def repeatTest(filename_csv,ubitname,testcase,times,PAX):
+def repeatTest(filename_csv,ubitname_,testcase,times,PAX):
     global subtractSeconds
     try:
         int(times)
@@ -945,7 +928,7 @@ def repeatTest(filename_csv,ubitname,testcase,times,PAX):
             print("Waiting",sleep_sec,"(s)")
             time.sleep(sleep_sec)
             build_tarPA1()
-            run_individual_testPA1(filename_csv,ubitname,testcase,"repeat",PAX)
+            run_individual_testPA1(filename_csv,ubitname_,testcase,"repeat",PAX)
             print("It takes",time.perf_counter()-t1_instance_start,"(s) in order to finish this script, where running programs takes",str(getSumOfRunTime())+"(s)")
             clearAll()
     else:
@@ -955,7 +938,7 @@ def readGeneratedCSV(fileToExport):
 def prompt():
     if int(sys.version_info[0])>=3 and int(sys.version_info[1])>=4:
         if not gradMode:
-            print("CSE489/CSE589 Auto Test Program")
+            print("CSE489 Auto Test Program")
         else:
             print("CSE589 Auto Test Program")
         print("Program Version:",version)
@@ -982,7 +965,7 @@ def prompt():
         global lowerPythonVersion
         lowerPythonVersion=True
         if not gradMode:
-            print("CSE489/CSE589 Auto Test Program in COMPATIBILITY MODE")
+            print("CSE489 Auto Test Program in COMPATIBILITY MODE")
         else:
             print("CSE589 Auto Test Program in COMPATIBILITY MODE")
         print("Program Version:",version)
@@ -1132,10 +1115,18 @@ def checkPA1AIStatement():
                 print(colours.fg.green+"INFO: Server mode AI Statement check out",colours.reset)
                 serverMode=True
             else:
-                print("INFO: Correct string should look like this")
+                print("Correct statement should look like this")
+                print("=======================================")
+                print(common[0])
                 print(correct_string)
-                print("INFO: Your string looks like this")
-                print(temp[1])        
+                print(common[1])
+                print("=======================================")
+                print("Your string looks like this")
+                print("=======================================")
+                print(common[0])
+                print(temp[1])
+                print(common[1])
+                print("=======================================")         
             #print(temp)
     else:
         print("File: "+"../cse489589_assignment1/"+ubitname+"/logs/assignment_log__"+str(serverport)+" does NOT exist!")
@@ -1188,11 +1179,6 @@ def checkPA1AIStatement():
             print("INFO: You made an error in Client Mode")
         sys.exit(1)
 #Launcher portion
-# Usage moved up
-# if len(sys.argv)<2:
-#     prompt()
-#     print("Usage can be found in https://github.com/johnkramorbhz/Scripts/blob/main/unit_tests/CSE489/usage.md")
-#     sys.exit(1)
 if sys.argv[1]=="test-indv-PA1":
     if sys.argv[-1]=="test":
         print(sys.argv)
@@ -1311,16 +1297,6 @@ elif sys.argv[1]=="test-all-PA2":
     test_all_PA2(sys.argv[2],"PA2_all")
     t1_end = time.perf_counter()
     print("It takes",str(t1_end-t1_start-float(subtractSeconds))+"(s) to finish this script")
-# elif sys.argv[1]=="test-file-PA2":
-#     if sys.argv[-1]=="test":
-#         print(sys.argv)
-#         sys.exit()
-#     t1_start = time.perf_counter()
-#     isHostReachable()
-#     #run_individual_testPA2(filename_csv,ubitname,testcase,testType,PAX)
-#     run_file_testPA2(sys.argv[2],sys.argv[3],"PA2")
-#     t1_end = time.perf_counter()
-#     print("It takes",str(t1_end-t1_start-float(subtractSeconds))+"(s) to finish this script")
 elif sys.argv[1]=="test-indv-PA2":
     if sys.argv[-1]=="test":
         print(sys.argv)
@@ -1332,8 +1308,6 @@ elif sys.argv[1]=="test-indv-PA2":
     t1_start = time.perf_counter()
     readCSV(sys.argv[2])
     if item_exist(sys.argv[4]):
-        #isHostReachable()
-        #run_individual_testPA2(filename_csv,ubitname,testcase,testType,PAX)
         run_individual_testPA2(sys.argv[2],ubitname,sys.argv[4],sys.argv[5],"PA2")
         t1_end = time.perf_counter()
         print("It takes",str(t1_end-t1_start-float(subtractSeconds))+"(s) to finish this script, where program total runtime is",str(getSumOfRunTime())+"(s)")
@@ -1376,6 +1350,28 @@ elif sys.argv[1]=="check-parameter-PA2":
     if len(str(personNumber))<8:
         print("Person number cannot be blank!")
         sys.exit(1)
+    if len(data['FullName'])==0 or "_" in str(data['FullName']):
+        print("You need to replace the placeholder with your full name")
+        sys.exit(1)
+    if len(data['Upgrade_Path'])==0:
+        print("Upgrade Path should not be None")
+        print("Put either \"main\" or \"beta\" in this field")
+        sys.exit(1)
+    try:
+        if int(data['timeout'])<0:
+            print("timeout should be more than 0(s)")
+            sys.exit(1)
+    except:
+        print("timeout need to be an integer that is more than 0")
+        sys.exit(1)
+    try:
+        bool(data['gradMode'])
+    except:
+        print("gradMode is bool that can be either true or false")
+        sys.exit(1)
+    if data['format_level']<2:
+        print("Your JSON config is too old.")
+        print("Use ./test.sh --generate-json-config to reset your config file.")
 elif sys.argv[1]=="check-parameter-PA1":
     if sys.argv[-1]=="test":
         print(sys.argv)
@@ -1386,6 +1382,28 @@ elif sys.argv[1]=="check-parameter-PA1":
     if len(data["semester"])==0:
         print("semester cannot be blank!")
         sys.exit(1)
+    if len(data['FullName'])==0 or "_" in str(data['FullName']):
+        print("You need to replace the placeholder with your full name")
+        sys.exit(1)  
+    if len(data['Upgrade_Path'])==0:
+        print("Upgrade Path should not be None")
+        print("Put either \"main\" or \"beta\" in this field")
+        sys.exit(1)  
+    try:
+        if int(data['timeout'])<0:
+            print("timeout should be more than 0(s)")
+            sys.exit(1)
+    except:
+        print("timeout need to be an integer that is more than 0")
+        sys.exit(1)  
+    try:
+        bool(data['gradMode'])
+    except:
+        print("gradMode is bool that can be either true or false")
+        sys.exit(1)
+    if data['format_level']<2:
+        print("Your JSON config is too old.")
+        print("Use ./test.sh --generate-json-config to reset your config file.")
 elif sys.argv[1]=="run-experiments-batch":
     if sys.argv[-1]=="test":
         print(sys.argv)
@@ -1415,16 +1433,7 @@ elif sys.argv[1]=="run-experiments-batch":
                 print("*********************************")
                 #run_experiments(messages,loss,corruption,time,window,binary,outputfile,supressHeader,ubitname):
                 run_experiments(1000,line[0],0.2,50,line[1],line[2],str(line[2])+"_"+str(line[0])+"_experiment2.csv",suppressHeader)
-# elif sys.argv[1]=="test-experiment-one":
-#     if sys.argv[-1]=="test":
-#         print(sys.argv)
-#         sys.exit()
-#     buildPA2(sys.argv[2])
-#     print("ABT binary SHA256:"+getFileChecksum("../cse489589_assignment2/"+sys.argv[2]+"/abt")[0])
-#     print("GBN binary SHA256:"+getFileChecksum("../cse489589_assignment2/"+sys.argv[2]+"/gbn")[0])
-#     print("SR  binary SHA256:"+getFileChecksum("../cse489589_assignment2/"+sys.argv[2]+"/sr")[0])
-#     print()
-#     run_experiments(1000,0.1,0.2,50,10,"sr","result_sr.csv",suppressHeader,sys.argv[2])   
+                  
 elif sys.argv[1]=="trim-all-reports":
     if sys.argv[-1]=="test":
         print(sys.argv)
@@ -1529,16 +1538,7 @@ elif sys.argv[1]=="clean-all-binaries":
     if os.path.exists("../cse489589_assignment1/"+ubitname+"/Makefile"):
         os.system("cd ../cse489589_assignment1/"+ubitname+"; make clean >> /dev/null")
 elif sys.argv[1]=="compile-PA1":
-    # if sys.argv[-1]=="test":
-    #     print(sys.argv)
-    #     sys.exit()
-    # if len(sys.argv)!=3 or len(sys.argv[2])==0 or len(sys.argv[2])>8:
-    #     print(colours.fg.red+"ERROR: Arguments incorrect for compile-PA1!",colours.reset)
-    #     print("Make sure UBITname is configured properly!")
-    #     sys.exit(1)
     buildPA1()
-# elif sys.argv[1]=="version":
-#     print(version)
 elif sys.argv[1]=="pre-auth":
     sys.exit(0)
 elif sys.argv[1]=="check-PA1-grader-cfg":
