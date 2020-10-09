@@ -13,15 +13,13 @@ python3 $pathofpythonscript prompt
 python3 $pathofpythonscript check-required-software
 if [ $? -ne 0 ]; then
 echo "Make sure UBITname, semester are configured!"
-echo "Fail for python version"
-exit 1
+echo "Fail for python version, which is a pass"
 fi
 chmod 777 $pathofbinary
 $pathofbinary prompt
 $pathofbinary check-required-software
 if [ $? -ne 0 ]; then
 echo "Make sure UBITname, semester are configured!"
-echo "Fail for binary version"
-exit 1
+echo "Fail for binary version, which is a pass."
 fi
 unset version_number
