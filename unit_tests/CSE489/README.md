@@ -1,12 +1,12 @@
 # CSE489 & CSE589 Auto Tester Framework
 
-**Dropped support as of 8 May 2020.**
-
 PROVIDED AS IS WITHOUT WARRANTY OR SERVICE. You may fork this project and continue on your own. However, I will not push any more changes unless it is a bugfix. Only work with these projects in these links. [Link1](https://docs.google.com/document/u/1/d/135usaNDMnJ5pEDG-UbspZameDPmOH0DmXLrMVrLVJ88/pub) [Link2](https://docs.google.com/document/u/1/d/19I8-TrLNcfaCGX1L-KSx5xFYEoiFAN3F9o_jQlOgsFM/pub)
 
 ### [Click here for usage](https://github.com/johnkramorbhz/Scripts/blob/main/unit_tests/CSE489/usage.md)
 
 ## Please Note
+
+**If you have the pre-JSON rewrite version(below 2.4.x), you will need to run [this update method](https://github.com/johnkramorbhz/Scripts/tree/main/unit_tests/CSE489#update) TWICE to fully upgrade everything!** After that, run `./test.sh --generate-json-config` to regeenerate the profile as variables in shell scripts are deprecated. Otherwise, use the `./test.sh --update` will be enough(introduced in 2.4.0).
 
 The report file also saves a copy of your configuration file at the end of the report for diagnosis purposes. If you plan on sharing the report file, please remove your personal info.
 
@@ -21,6 +21,8 @@ SHA256 checksum by running `sha256sum testTemplate_bin`:
 Why here? It will take care of populating PA1 & PA2 for you. In addition, it will also prepare test scripts for both PA1 and PA2. After installation, you will need to add the following info in these scripts.
 
 After installation, run `./test.sh --generate-json-config` in either one of the CSE489 or CSE589 assignment folder. Then it will produce a json file called `CSE4589.config.json` in the `framework` folder, which contains following options.
+
+You will need to fill out `FullName`, `UBITname`, `Person_Number`, and `semester`. You can keep other values default as those are script options.
 ```json
 {
     "FullName": "replace_with_your_full_name",
@@ -64,6 +66,8 @@ It requires `python3` on CentOS 7 and later(e.g. Ubuntu 18.04, Ubuntu 20.04, and
 ```
 
 ## Update
+
+**If you have the test script below 2.4.x, use this method because the shell script did not enable `--update` flag yet.**
 
 Both script version and binary version in this repo supports update from themselves. AFTER go to `framework` directory, use the command below
 
