@@ -53,7 +53,10 @@ supported_PAs=2
 SCRIPT_API_level=4
 bug_fixes=11
 suffix="final_opensource"
-version=str(supported_PAs)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
+if suffix != "":
+    version=str(supported_PAs)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
+else:
+    version=str(supported_PAs)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)
 # For binary auto-update only, beta features only bump revision number
 revision=10000*supported_PAs+10*SCRIPT_API_level+bug_fixes
 default_value_of_test_template = {"format_level": 2,
@@ -75,9 +78,9 @@ def load_user_value(suppress):
     global data
     if not os.path.exists('../framework/CSE4589.config.json'):
         if not suppress:
-            print("WARNING: Test script cannot find \"../framework/CSE4589.config.json\"")
-            print("Using default values")
-        return
+            print("ERROR: Test script cannot find \"../framework/CSE4589.config.json\"")
+            print("Exit this program for your safety.")            
+        sys.exit(1)
     with open('../framework/CSE4589.config.json', 'r') as json_file:
         data=json.load(json_file)
     #print(data)
@@ -173,7 +176,7 @@ if len(sys.argv)>1 and sys.argv[1]=="update":
     os.system("wget -q -O ../cse489589_assignment1/test.sh https://github.com/johnkramorbhz/Scripts/raw/"+branch+"/unit_tests/CSE489/PA1_test.sh && chmod 777 ../cse489589_assignment1/test.sh && echo \"Update PA1 test.sh complete\"")
     os.system("wget -q -O ../cse489589_assignment2/test.sh https://github.com/johnkramorbhz/Scripts/raw/"+branch+"/unit_tests/CSE489/PA2_test.sh && chmod 777 ../cse489589_assignment2/test.sh && echo \"Update PA2 test.sh complete\"")
     sys.exit()        
-load_user_value(False)
+load_user_value(True)
 try:
     ubitname=data["UBITname"]
     debug=bool(data["debug"])
