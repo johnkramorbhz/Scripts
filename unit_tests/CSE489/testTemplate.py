@@ -51,7 +51,7 @@ global ubitname
 branch="main"
 supported_PAs=2
 SCRIPT_API_level=4
-bug_fixes=12
+bug_fixes=13
 suffix="final_opensource"
 if suffix != "":
     version=str(supported_PAs)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
@@ -837,7 +837,7 @@ def report(PAX):
                 print(colours.fg.red+str(items[1])+colours.reset+", scores:",str(getScore(items)))
         generateReportInText("../framework/report/"+PAX+"/"+PAX+"_"+str(datetime.date.today())+"_"+str(time.strftime("%H.%M.%S"))+".txt",PAX)
 
-def run_individual_testPA1(filename_csv,ubitname_,testcase,mode,PAX):
+def run_individual_testPA1(filename_csv,testcase,mode,PAX):
     ifRunningInLinux()
     readCSV(filename_csv)
     if not os.path.exists("../cse489589_assignment1/"+ubitname+"_pa1.tar"):
@@ -847,7 +847,7 @@ def run_individual_testPA1(filename_csv,ubitname_,testcase,mode,PAX):
         for items in timedoutitems:
             callShellCommandsPA1(items,"../cse489589_assignment1/"+ubitname+"_pa1.tar",global_timeout,PAX)
     report(PAX)
-def run_individual_testPA2(filename_csv,ubitname_,testcase,testType,PAX):
+def run_individual_testPA2(filename_csv,testcase,testType,PAX):
     ifRunningInLinux()
     if len(tests)==0:
         readCSV(filename_csv)
@@ -855,7 +855,7 @@ def run_individual_testPA2(filename_csv,ubitname_,testcase,testType,PAX):
     callShellCommandsPA2(testcase,"../cse489589_assignment2/"+ubitname+"/"+testcase.lower(),global_timeout,PAX,testType)
     report(PAX)
 
-def run_all_testsPA1(filename_csv,ubitname_,PAX):
+def run_all_testsPA1(filename_csv,PAX):
     ifRunningInLinux()
     global subtractSeconds
     print_info("Running all tests defined in the csv file.")
@@ -906,7 +906,7 @@ def isHostReachable():
     if exitCodeSum>0:
         print(colours.fg.red+"ERROR: It seems that at least one of the host is not reachable",colours.reset)
         sys.exit(1)
-def ifFileExecutesPA1(ubitname_):
+def ifFileExecutesPA1():
     ifRunningInLinux()
     os.system("cd ../cse489589_assignment1/"+ubitname+";make;./assignment1 c AUTHOR")
 def getSumOfRunTime():
@@ -915,7 +915,7 @@ def getSumOfRunTime():
         length+=items[5]
     return length
 
-def repeatTest(filename_csv,ubitname_,testcase,times,PAX):
+def repeatTest(filename_csv,testcase,times,PAX):
     global subtractSeconds
     try:
         int(times)
@@ -931,7 +931,7 @@ def repeatTest(filename_csv,ubitname_,testcase,times,PAX):
             print("Waiting",sleep_sec,"(s)")
             time.sleep(sleep_sec)
             build_tarPA1()
-            run_individual_testPA1(filename_csv,ubitname_,testcase,"repeat",PAX)
+            run_individual_testPA1(filename_csv,testcase,"repeat",PAX)
             print("It takes",time.perf_counter()-t1_instance_start,"(s) in order to finish this script, where running programs takes",str(getSumOfRunTime())+"(s)")
             clearAll()
     else:
@@ -1195,7 +1195,7 @@ if sys.argv[1]=="test-indv-PA1":
     #ubitname=sys.argv[3]
     if item_exist(sys.argv[4]):
         isHostReachable()
-        run_individual_testPA1(sys.argv[2],sys.argv[3],sys.argv[4],"fresh","PA1")
+        run_individual_testPA1(sys.argv[2],sys.argv[4],"fresh","PA1")
         t1_end = time.perf_counter()
         print("It takes",str(t1_end-t1_start-float(subtractSeconds))+"(s) to finish this script, where program total runtime is",str(getSumOfRunTime())+"(s)")
     else:
@@ -1213,7 +1213,7 @@ elif sys.argv[1]=="test-all-PA1":
     isHostReachable()
     #ubitname=sys.argv[3]
     # sys.argv[2]= csvlocation [3]=ubitname [4]=PAX
-    run_all_testsPA1(sys.argv[2],ubitname,sys.argv[4])
+    run_all_testsPA1(sys.argv[2],sys.argv[4])
     t1_end = time.perf_counter()
     print("It takes",str(t1_end-t1_start-float(subtractSeconds))+"(s) to finish this script, where program total runtime is",str(getSumOfRunTime())+"(s)")
 elif sys.argv[1]=="repeat-PA1":
@@ -1227,7 +1227,7 @@ elif sys.argv[1]=="repeat-PA1":
     t1_start = time.perf_counter()
     readCSV(sys.argv[2])
     #ubitname=sys.argv[3]
-    repeatTest(sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6])
+    repeatTest(sys.argv[2],sys.argv[4],sys.argv[5],sys.argv[6])
     t1_end = time.perf_counter()
     print("It takes",str(t1_end-t1_start-float(subtractSeconds))+"(s) to finish this script, where program total runtime is",str(getSumOfRunTime())+"(s)")
 elif sys.argv[1]=="repeat-test-all-PA1":
@@ -1256,7 +1256,7 @@ elif sys.argv[1]=="repeat-test-all-PA1":
     for x in range(0,int(sys.argv[5])):
         count+=1
         print("Overall progress:",count,"out of",int(sys.argv[5]))
-        run_all_testsPA1(sys.argv[2],sys.argv[3],sys.argv[4])
+        run_all_testsPA1(sys.argv[2],sys.argv[4])
         clearAll()
     t1_end = time.perf_counter()
     print("It takes",str(t1_end-t1_start-float(subtractSeconds))+"(s) to finish this script, where program total runtime is",str(getSumOfRunTime())+"(s)")
@@ -1294,7 +1294,7 @@ elif sys.argv[1]=="test-all-PA2":
         sys.exit()
     # Changes needs to be made here since PAX need to select appropriate test functions
     t1_start = time.perf_counter() 
-    isHostReachable()
+    #isHostReachable()
     # sys.argv[2]=ubitname [3]=PAX
     #ubitname=sys.argv[2]
     test_all_PA2(sys.argv[2],"PA2_all")
@@ -1311,7 +1311,7 @@ elif sys.argv[1]=="test-indv-PA2":
     t1_start = time.perf_counter()
     readCSV(sys.argv[2])
     if item_exist(sys.argv[4]):
-        run_individual_testPA2(sys.argv[2],ubitname,sys.argv[4],sys.argv[5],"PA2")
+        run_individual_testPA2(sys.argv[2],sys.argv[4],sys.argv[5],"PA2")
         t1_end = time.perf_counter()
         print("It takes",str(t1_end-t1_start-float(subtractSeconds))+"(s) to finish this script, where program total runtime is",str(getSumOfRunTime())+"(s)")
     else:
