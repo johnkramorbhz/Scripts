@@ -23,7 +23,7 @@
 pathofpythonscript="../framework/testTemplate.py"
 pathofbinary="../framework/testTemplate_bin"
 csvlocation="../framework/PA1.csv"
-version_number="1.4.7_PA1_opensource"
+version_number="1.5.0_PA1_opensource"
 export version_number
 if hash python3 2>/dev/null; then
 use_binary=$(python3 $pathofpythonscript determine-whether-binary-is-needed)
@@ -200,8 +200,13 @@ elif [ "$1" = "--generate-json-config" ]; then
 python3 $pathofpythonscript gc
 elif [ "$1" = "--update" ]; then
 python3 $pathofpythonscript update
+elif [ "$1" = "--version" ]; then
+echo -e "INFO: Python script version: \c"
+python3 $pathofpythonscript version
+echo -e "INFO: Binary version: \c"
+$pathofbinary version
 else
-pinfo "Usage can be found in the README file in GitHub"
-echo "https://github.com/johnkramorbhz/Scripts/blob/main/unit_tests/CSE489/usage.md"
+pinfo "Usage can be found in the link on GitHub"
+python3 $pathofpythonscript print-usage
 fi
 unset version_number

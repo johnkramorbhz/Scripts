@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-version_number="2.0.9_PA2_opensource"
+version_number="2.1.0_PA2_opensource"
 pathofpythonscript="../framework/testTemplate.py"
 pathofbinary="../framework/testTemplate_bin"
 checksumFile=""
@@ -221,7 +221,7 @@ python3 $pathofpythonscript version
 echo -e "INFO: Binary version: \c"
 $pathofbinary version
 else
-pinfo "Usage can be found in the README file in GitHub"
-echo "https://github.com/johnkramorbhz/Scripts/blob/main/unit_tests/CSE489/usage.md"
+pinfo "Usage can be found in the link on GitHub"
+python3 $pathofpythonscript print-usage
 fi
 unset version_number

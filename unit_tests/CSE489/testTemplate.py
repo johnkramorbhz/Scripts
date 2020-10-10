@@ -51,7 +51,7 @@ global ubitname
 branch="main"
 supported_PAs=2
 SCRIPT_API_level=4
-bug_fixes=13
+bug_fixes=14
 suffix="final_opensource"
 if suffix != "":
     version=str(supported_PAs)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
@@ -1638,6 +1638,10 @@ elif sys.argv[1]=="test-AIS-PA1":
     checkPA1AIStatement()
 elif sys.argv[1]=="gc":
     generate_default_config()
+elif sys.argv[1]=="print-usage":
+    repo_URL_prefix="https://github.com/johnkramorbhz/Scripts"
+    readme_URL=repo_URL_prefix+branch+"/unit_tests/CSE489/usage.md"
+    print(readme_URL)
 else:
     # This case will only be reached when the user modifies the script, especially the python argument.
     print("ERROR: Backend cannot understand your request!")
