@@ -51,7 +51,7 @@ global ubitname
 branch="main"
 supported_PAs=2
 SCRIPT_API_level=4
-bug_fixes=15
+bug_fixes=16
 suffix="final_opensource"
 if suffix != "":
     version=str(supported_PAs)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
@@ -1639,7 +1639,12 @@ elif sys.argv[1]=="test-AIS-PA1":
 elif sys.argv[1]=="gc":
     generate_default_config()
 elif sys.argv[1]=="print-usage":
-    repo_URL_prefix="https://github.com/johnkramorbhz/Scripts/"
+    try:
+        if data["Upgrade_Path"] != "" and data["format_level"]>1:
+            branch=data["Upgrade_Path"]
+    except:
+        branch="main"
+    repo_URL_prefix="https://github.com/johnkramorbhz/Scripts/tree/"
     readme_URL=repo_URL_prefix+branch+"/unit_tests/CSE489/usage.md"
     print(readme_URL)
 else:
