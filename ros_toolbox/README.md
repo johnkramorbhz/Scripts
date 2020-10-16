@@ -1,31 +1,5 @@
 # Scripts/ROS Toolbox
 
-## Usage
+This project is now an independent project under the name of ROS_Toolbox. The code will be kept for older updater to work correctly.
 
-TODO
-
-`ros_tools --compile` It compiles packages in `~/catkin_ws/` if there is no `$HOME/ros_tools.config.json` detected. Otherwise it will be whatever directory you want to go to.
-
-`ros_tools --version` Prints version string
-
-`ros_tools --upgrade` Upgrade this script
-
-`ros_tools --lab1` Test lab1 default setting
-
-`sudo ros_tools --makews` Make a workspace
-
-`ros_tools -gc` Generate a JSON config in your HOME folder e.g. `{'format_level': 1, 'debug': False, 'catkin_path': '$HOME/catkin_ws'}`
-
-## Installation
-
-```bash
-sudo wget --no-cache -O /bin/ros_tools https://raw.githubusercontent.com/johnkramorbhz/Scripts/main/ros_toolbox/ros_tools.py && sudo chmod 777 /bin/ros_tools && sudo wget --no-cache -O /bin/ros_bashtools https://raw.githubusercontent.com/johnkramorbhz/Scripts/main/ros_toolbox/ros_tools.sh && sudo chmod 777 /bin/ros_bashtools
-```
-
-## Why bashtools in addition to ros tools
-
-ROS only support bash instead of sh that python uses, so it's required to use bashtools as an interface.
-
-## Purpose
-
-TODO
+URL: https://github.com/johnkramorbhz/ROS_Toolbox

@@ -17,7 +17,7 @@ default_value_of_rostools = {"format_level": 1,
 }
 home = expanduser("~")
 data = default_value_of_rostools
-timestamp="2020-09-26 06:21"
+timestamp="2020-10-09 03:33"
 #print(default_value_of_rostools)
 def print_start():
     print("ROS Tools")
@@ -39,10 +39,10 @@ def upgrade_this_script():
         print("ERROR: You must run this script as root or sudo in order to upgrade")
         sys.exit(1)
     else:
-        print("Exit code:",os.system("wget -q --no-cache -O /bin/ros_tools https://raw.githubusercontent.com/johnkramorbhz/Scripts/main/ros_toolbox/ros_tools.py && chmod 777 /bin/ros_tools && echo \"Update ROS Tools successfully\" && wget -O /bin/ros_bashtools --no-cache -q https://raw.githubusercontent.com/johnkramorbhz/Scripts/main/ros_toolbox/ros_tools.sh && chmod 777 /bin/ros_bashtools && echo \"Update Complete!\" ; echo \"ROS Tools version:\" ; ros_tools -v; echo \"ROS Bash Tools version:\"; ros_bashtools -v"))       
+        print("Exit code:",os.system("wget -q --no-cache -O /bin/ros_tools https://raw.githubusercontent.com/johnkramorbhz/ROS_Toolbox/main/ros_tools.py && chmod 777 /bin/ros_tools && echo \"Update ROS Tools successfully\" && wget -O /bin/ros_bashtools --no-cache -q https://raw.githubusercontent.com/johnkramorbhz/ROS_Toolbox/main/ros_tools.sh && chmod 777 /bin/ros_bashtools && echo \"Update Complete!\" ; echo \"ROS Tools version:\" ; ros_tools -v; echo \"ROS Bash Tools version:\"; ros_bashtools -v"))       
 def print_help():
     print("ROS Toolbox Help")
-    print("Usage can be found on https://github.com/johnkramorbhz/Scripts/tree/main/ros_toolbox")
+    print("Usage can be found on https://github.com/johnkramorbhz/ROS_Toolbox")
 def generate_default_config():
     with open(home+'/ros_tools.config.json', 'w+') as json_file:
         json.dump(default_value_of_rostools, json_file,indent=4,sort_keys=True)
@@ -59,6 +59,8 @@ def load_user_value(suppress):
     #print(data)
 def get_catkin_path():
     return data['catkin_path']
+def check_lab2_sf_packages():
+    import apt
 print_start()
 if len(sys.argv)==1:
     print_help()
