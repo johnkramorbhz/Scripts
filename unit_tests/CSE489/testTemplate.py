@@ -51,7 +51,7 @@ global ubitname
 branch="main"
 supported_PAs=2
 SCRIPT_API_level=4
-bug_fixes=16
+bug_fixes=17
 suffix="final_opensource"
 if suffix != "":
     version=str(supported_PAs)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
@@ -59,6 +59,7 @@ else:
     version=str(supported_PAs)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)
 # For binary auto-update only, beta features only bump revision number
 revision=10000*supported_PAs+10*SCRIPT_API_level+bug_fixes
+repo_URL_prefix="https://github.com/johnkramorbhz/CSE4589_testlib"
 default_value_of_test_template = {"format_level": 2,
 "debug": False,
 "generated_from": version,
@@ -113,8 +114,10 @@ if len(sys.argv)>1 and sys.argv[1]=="revision":
 if len(sys.argv)>1 and sys.argv[1]=="install":
     wget_useragent='"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.92 Safari/537.36"'
     wget_friendly="wget -q -U "+wget_useragent+" "
-    repo_URL_prefix="https://github.com/johnkramorbhz/Scripts"
-    repo_URL=repo_URL_prefix+"/raw/"+branch+"/unit_tests/CSE489/"
+    if repo_URL_prefix=="https://github.com/johnkramorbhz/CSE4589_testlib":
+        repo_URL=repo_URL_prefix+"/raw/"+branch+"/"
+    else:
+        repo_URL=repo_URL_prefix+"/raw/"+branch+"/unit_tests/CSE489/"
     # Filenames
     pa1CSV_URL=wget_friendly+repo_URL+"PA1.csv;"
     pa2bas_URL=wget_friendly+repo_URL+"PA2_basic.csv;"
@@ -129,8 +132,8 @@ if len(sys.argv)>1 and sys.argv[1]=="install":
     binary_URL=wget_friendly+repo_URL+"testTemplate_bin;"
     a1_init_sc="https://ubwins.cse.buffalo.edu/cse-489_589/assignment1_init_script.sh && chmod +x assignment1_init_script.sh;"
     a2_init_sc="https://ubwins.cse.buffalo.edu/cse-489_589/pa2/assignment2_init_script.sh && chmod +x assignment2_init_script.sh;"
-    pa1_test_s="-O test.sh https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA1_test.sh;"
-    pa2_test_s="-O test.sh https://github.com/johnkramorbhz/Scripts/raw/main/unit_tests/CSE489/PA2_test.sh;"
+    pa1_test_s="-O test.sh https://raw.githubusercontent.com/johnkramorbhz/CSE4589_testlib/"+branch+"/PA1_test.sh;"
+    pa2_test_s="-O test.sh https://raw.githubusercontent.com/johnkramorbhz/CSE4589_testlib/"+branch+"/PA2_test.sh;"
     if not sys.platform.startswith('linux'):
         print("ERROR: Make sure you are running it in Linux")
         sys.exit(1)
@@ -1644,8 +1647,7 @@ elif sys.argv[1]=="print-usage":
             branch=data["Upgrade_Path"]
     except:
         branch="main"
-    repo_URL_prefix="https://github.com/johnkramorbhz/Scripts/tree/"
-    readme_URL=repo_URL_prefix+branch+"/unit_tests/CSE489/usage.md"
+    readme_URL=repo_URL_prefix+"/blob/"+branch+"/usage.md"
     print(readme_URL)
 else:
     # This case will only be reached when the user modifies the script, especially the python argument.
