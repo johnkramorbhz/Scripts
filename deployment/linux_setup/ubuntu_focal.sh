@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-echo "Last Updated at 2020-09-30 16:26 EDT/EST"
+echo "Last Updated at 2020-11-05 13:36 EDT/EST"
 sleep 3
 start=$SECONDS
 echo -e "INFO: Are you running this script as root or sudo? \c"
@@ -71,6 +71,7 @@ add-apt-repository -y multiverse
 curl -sL https://deb.nodesource.com/setup_14.x | bash -
 apt install -y curl python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool
 snap install --classic kotlin
+snap install htop
 }
 echo 'INFO: Installing all needed compilers packages'
 if [ "$1" = "--no-GUI" ]; then

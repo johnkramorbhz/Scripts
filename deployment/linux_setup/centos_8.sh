@@ -37,7 +37,7 @@ dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarc
 # Enable PowerTools since Fedora wiki recommends it.
 dnf config-manager --set-enabled PowerTools
 # LAMP Stack
-dnf install -y php php-opcache php-gd php-curl php-mysqlnd mariadb-server httpd python3 wget
+dnf install -y php php-opcache php-gd php-curl php-mysqlnd mariadb-server httpd python3 wget htop
 # Allow PHP code to be executed on SELinux, even though it does not solve the problem. 
 # It looks like disabling SELinux is necessary.
 setsebool -P httpd_execmem 1 

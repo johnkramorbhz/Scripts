@@ -22,7 +22,7 @@
 # SOFTWARE.
 
 start=$SECONDS
-echo "Last Updated at 2020-09-30 16:26 EDT/EST"
+echo "Last Updated at 2020-11-05 13:36 EDT/EST"
 sleep 3
 echo -e "INFO: Are you running this script as root or sudo? \c"
 if [[ $EUID -ne 0 ]]; then
@@ -105,6 +105,7 @@ install_swift
 # End of install_swift()
 post_install_ROS
 snap install --classic kotlin
+snap install htop
 #pip3 install --upgrade tensorflow requests
 exit 0
 fi
@@ -151,6 +152,7 @@ snap install libreoffice
 snap install code --classic
 #npm install -g npm mocha chai mocha-simple-html-reporter
 snap install vlc
+snap install htop
 if [ "$1" = "--nvidia" ]; then
 # wget -O nvidia_driver.run https://us.download.nvidia.com/XFree86/Linux-x86_64/455.23.04/NVIDIA-Linux-x86_64-455.23.04.run
 # sh nvidia_driver.run
