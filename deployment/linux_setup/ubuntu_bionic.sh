@@ -99,7 +99,7 @@ gdebi-core libxmu-dev libxi-dev libglu1-mesa \
 libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev \
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
 python-imaging-tk docker.io unattended-upgrades binutils qemu-kvm qemu virt-manager virt-viewer libvirt-bin bochs \
-r-base gdb libpython2.7 libpython2.7-dev ros-melodic-desktop-full
+r-base gdb libpython2.7 libpython2.7-dev ros-melodic-desktop-full libcanberra-gtk-module
 # Go to install_swift()
 install_swift
 # End of install_swift()
@@ -138,7 +138,8 @@ filezilla transmission gnome-shell-extensions gdebi-core grub-customizer libxmu-
 libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev \
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
 python-imaging-tk docker.io unattended-upgrades binutils qemu-kvm qemu virt-manager virt-viewer libvirt-bin bochs \
-r-base libncurses5-dev libncursesw5-dev libncurses5-dev:i386 libncursesw5-dev:i386 libx11-6:i386 libxpm4:i386 gdb libpython2.7 libpython2.7-dev
+r-base libncurses5-dev libncursesw5-dev libncurses5-dev:i386 libncursesw5-dev:i386 libx11-6:i386 libxpm4:i386 gdb libpython2.7 libpython2.7-dev \
+libcanberra-gtk-module
 # Go to install_swift()
 install_swift
 # End of install_swift()
