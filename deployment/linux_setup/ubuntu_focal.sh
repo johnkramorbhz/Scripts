@@ -69,7 +69,8 @@ add-apt-repository -y universe
 add-apt-repository -y restricted
 add-apt-repository -y multiverse
 curl -sL https://deb.nodesource.com/setup_14.x | bash -
-apt install -y curl python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool libcanberra-gtk-module libcanberra-gtk3-module
+apt install -y curl python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool \
+packagekit-gtk3-module libcanberra-gtk-module libcanberra-gtk3-module
 snap install --classic kotlin
 snap install htop
 }
