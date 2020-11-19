@@ -22,7 +22,7 @@
 # SOFTWARE.
 
 start=$SECONDS
-echo "Last Updated at 2020-11-13 15:50 EDT/EST"
+echo "Last Updated at 2020-11-19 17:38 EDT/EST"
 sleep 3
 echo -e "INFO: Are you running this script as root or sudo? \c"
 if [[ $EUID -ne 0 ]]; then
@@ -47,7 +47,7 @@ add-apt-repository -y ppa:graphics-drivers/ppa
 apt update
 dpkg --add-architecture i386
 apt update
-apt install build-essential libc6:i386 -y
+apt install build-essential libc6:i386 -y --install-suggests
 ubuntu-drivers autoinstall
 duration=$(( SECONDS - start ))
 echo "It takes $duration second(s) to finish above operations"
@@ -84,7 +84,7 @@ apt-get update -y
 apt-get upgrade -y
 add-apt-repository -y ppa:wireshark-dev/stable
 add-apt-repository -y ppa:kelleyk/emacs
-apt install -y curl python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool
+apt install -y curl python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool --install-suggests
 curl -sL https://deb.nodesource.com/setup_14.x | bash -
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 apt install -y utop ocaml iverilog wget libtool-bin cmake libproxy-dev uuid-dev liblzo2-dev autoconf automake bash bison \
@@ -99,7 +99,7 @@ gdebi-core libxmu-dev libxi-dev libglu1-mesa \
 libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev \
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
 python-imaging-tk docker.io unattended-upgrades binutils qemu-kvm qemu virt-manager virt-viewer libvirt-bin bochs \
-r-base gdb libpython2.7 libpython2.7-dev ros-melodic-desktop-full libcanberra-gtk-module
+r-base gdb libpython2.7 libpython2.7-dev ros-melodic-desktop-full libcanberra-gtk-module --install-suggests
 # Go to install_swift()
 install_swift
 # End of install_swift()
@@ -122,7 +122,7 @@ add-apt-repository -y ppa:kelleyk/emacs
 add-apt-repository -y universe
 add-apt-repository -y ppa:communitheme/ppa
 add-apt-repository -y ppa:danielrichter2007/grub-customizer
-apt install -y curl
+apt install -y curl --install-suggests
 curl -sL https://deb.nodesource.com/setup_14.x | bash -
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'
@@ -139,7 +139,7 @@ libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
 python-imaging-tk docker.io unattended-upgrades binutils qemu-kvm qemu virt-manager virt-viewer libvirt-bin bochs \
 r-base libncurses5-dev libncursesw5-dev libncurses5-dev:i386 libncursesw5-dev:i386 libx11-6:i386 libxpm4:i386 gdb libpython2.7 libpython2.7-dev \
-libcanberra-gtk-module
+libcanberra-gtk-module --install-suggests
 # Go to install_swift()
 install_swift
 # End of install_swift()
@@ -163,7 +163,7 @@ echo 'export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}' >> /etc/bash.bashrc
 source /etc/bash.bashrc
 fi
 echo "INFO: Installing wireshark..."
-apt install -y wireshark
+apt install -y wireshark --install-suggests
 echo "INFO: Cleaning up..."
 apt-get clean -y
 apt-get autoremove -y

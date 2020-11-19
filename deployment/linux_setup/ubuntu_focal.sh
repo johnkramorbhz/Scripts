@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-echo "Last Updated at 2020-11-13 15:50 EDT/EST"
+echo "Last Updated at 2020-11-19 17:39 EDT/EST"
 sleep 3
 start=$SECONDS
 echo -e "INFO: Are you running this script as root or sudo? \c"
@@ -64,13 +64,13 @@ apt upgrade -y
 apt dist-upgrade -y
 apt-get update -y
 apt-get upgrade -y
-apt install -y curl
+apt install -y curl --install-suggests
 add-apt-repository -y universe
 add-apt-repository -y restricted
 add-apt-repository -y multiverse
 curl -sL https://deb.nodesource.com/setup_14.x | bash -
 apt install -y curl python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool \
-packagekit-gtk3-module libcanberra-gtk-module libcanberra-gtk3-module
+packagekit-gtk3-module libcanberra-gtk-module libcanberra-gtk3-module --install-suggests
 snap install --classic kotlin
 snap install htop
 }
@@ -96,7 +96,7 @@ gdebi-core libxmu-dev libxi-dev libglu1-mesa python3-pip \
 libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev \
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
 python-imaging-tk docker.io unattended-upgrades binutils bochs \
-r-base gdb
+r-base gdb --install-suggests
 # Post installation of ROS
 post_install_ROS
 cat /etc/bash.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null || post_install_ROS
@@ -115,7 +115,7 @@ fi
 sh -c 'echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda.list'
 apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub
 apt update
-apt install -y cuda-toolkit-11-0
+apt install -y cuda-toolkit-11-0 --install-suggests
 exit 0
 fi
 if [ "$1" = "--init-ROS" ]; then
@@ -137,7 +137,7 @@ libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
 python-imaging-tk docker.io unattended-upgrades binutils qemu-kvm qemu virt-manager bochs python3-pip \
 r-base libncurses5-dev libncursesw5-dev libncurses5-dev:i386 libncursesw5-dev:i386 libx11-6:i386 libxpm4:i386 gdb
-pip3 install --upgrade tensorflow requests
+pip3 install --upgrade tensorflow requests --install-suggests
 # Post installation of ROS
 post_install_ROS
 cat /etc/bash.bashrc| grep "source /opt/ros/noetic/setup.bash" >> /dev/null || post_install_ROS
@@ -160,7 +160,7 @@ echo 'export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}' >> /etc/bash.bashrc
 source /etc/bash.bashrc
 fi
 echo "INFO: Installing wireshark..."
-apt install -y wireshark
+apt install -y wireshark --install-suggests
 echo "INFO: Cleaning up..."
 apt-get clean -y
 apt-get autoremove -y
