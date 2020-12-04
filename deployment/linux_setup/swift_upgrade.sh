@@ -11,7 +11,7 @@ fi
 echo -e "INFO: Are you running this script on x86_64 architecture? \c"
 if [[ $(uname -m) != "x86_64" ]]; then
    echo -e "\e[31mNo \e[0m"
-   echo "ERROR: You cannot use this script on a non x86_64 machines like ARM, x86, or etc."
+   echo "ERROR: You cannot use this script on a non x86_64 machines like ARM, x86(32bit), et al."
    exit 2
 else
 echo -e "\e[32mYes \e[0m"
