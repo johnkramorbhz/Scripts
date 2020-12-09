@@ -37,8 +37,8 @@ dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarc
 # Enable PowerTools since Fedora wiki recommends it.
 dnf config-manager --set-enabled PowerTools
 # Convert CentOS 8 into CentOS 8 Stream.
-dnf install centos-release-stream
-dnf distro-sync
+dnf install -y centos-release-stream
+dnf distro-sync -y
 # LAMP Stack
 dnf install -y php php-opcache php-gd php-curl php-mysqlnd mariadb-server httpd python3 wget htop php-devel php-pear make automake gcc gcc-c++
 pecl install imagick
