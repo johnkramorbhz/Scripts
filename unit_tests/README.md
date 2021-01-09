@@ -3,6 +3,4 @@ Here are all classes that I took that used my customised scripts. I will only re
 
 ### Currently Available
 
-`CSE331` C++ HWs compile and test
-
 `CSE489` & `CSE589` Project auto-test
