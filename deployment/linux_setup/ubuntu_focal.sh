@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-echo "Last Updated at 2020-11-19 17:39 EDT/EST"
+echo "Last Updated at 2021-01-09 15:00"
 sleep 3
 start=$SECONDS
 echo -e "INFO: Are you running this script as root or sudo? \c"
@@ -41,12 +41,19 @@ else
 echo -e "\e[32mYes \e[0m"
 fi
 function install_swift(){
-wget https://swift.org/builds/swift-5.3-release/ubuntu2004/swift-5.3-RELEASE/swift-5.3-RELEASE-ubuntu20.04.tar.gz
-tar xzf swift-5.3-RELEASE-ubuntu20.04.tar.gz
-mv swift-5.3-RELEASE-ubuntu20.04 /usr/share/swift
+swift_version="5.3.2"
+wget https://swift.org/builds/swift-$swift_version-release/ubuntu2004/swift-$swift_version-RELEASE/swift-$swift_version-RELEASE-ubuntu20.04.tar.gz
+tar xzf swift-$swift_version-RELEASE-ubuntu20.04.tar.gz
+mv swift-$swift_version-RELEASE-ubuntu20.04 /usr/share/swift
 echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> /etc/bash.bashrc
 source /etc/bash.bashrc
-rm -rf swift-5.3-RELEASE-ubuntu20.04.tar.gz
+rm -rf swift-$swift_version-RELEASE-ubuntu20.04.tar.gz
+}
+function install_virtualbox_official(){
+echo "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib" | tee /etc/apt/sources.list.d/virtualbox.list
+wget https://www.virtualbox.org/download/oracle_vbox_2016.asc
+apt-key add oracle_vbox_2016.asc && rm -rf oracle_vbox_2016.asc
+apt update
 }
 function post_install_ROS(){
 echo "INFO: Doing post-installation of ROS"
@@ -123,6 +130,7 @@ cat /etc/bash.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null || 
 fi
 # Everything else
 common_pre_reqs
+install_virtualbox_official
 
 apt install -y utop ocaml iverilog wget libtool-bin cmake libproxy-dev uuid-dev liblzo2-dev autoconf automake bash bison \
 bzip2 diffutils file flex m4 g++ gawk groff-base libncurses-dev libtool libslang2 make patch perl pkg-config shtool \
@@ -136,7 +144,7 @@ filezilla transmission gnome-shell-extensions gdebi-core grub-customizer libxmu-
 libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev \
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
 python-imaging-tk docker.io unattended-upgrades binutils qemu-kvm qemu virt-manager bochs python3-pip \
-r-base libncurses5-dev libncursesw5-dev libncurses5-dev:i386 libncursesw5-dev:i386 libx11-6:i386 libxpm4:i386 gdb
+r-base libncurses5-dev libncursesw5-dev libncurses5-dev:i386 libncursesw5-dev:i386 libx11-6:i386 libxpm4:i386 gdb virtualbox-6.1
 pip3 install --upgrade tensorflow requests --install-suggests
 # Post installation of ROS
 post_install_ROS
