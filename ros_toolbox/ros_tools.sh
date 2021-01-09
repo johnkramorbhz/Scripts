@@ -1,5 +1,5 @@
 #!/bin/bash
-version="1.0.1"
+version="3.1.0"
 version_suffix="beta"
 update_path="main"
 # Default path
@@ -31,6 +31,9 @@ elif [ "$(lsb_release -c -s)" = "focal" ]; then
 source /opt/ros/noetic/setup.bash
 fi
 }
+if [ "$3" = "True" ]; then
+export LIBGL_ALWAYS_SOFTWARE=1
+fi
 if [ "$1" = "--install" ]; then
 # Since it's not so feasible to keep the shell script in lots of directories, I provide --install option
 echo -e "INFO: Are you running installation mode as root or sudo? \c"
@@ -101,6 +104,17 @@ elif [ "$1" = "--print-directory" ] || [ "$1" = "-pwd" ]; then
 pwd
 elif [ "$1" = "--clean-log" ] || [ "$1" = "-clog" ]; then
 rm -rf $HOME/.ros/log
+# Lab2 stuff
+elif [ "$1" = "--launch-perception" ]; then
+include_environment_vars
+rm -rf $HOME/.ros/log
+compile_and_update_custom_dir $2
+time roslaunch lab2 perception.launch
+elif [ "$1" = "--launch-lab4" ]; then
+include_environment_vars
+rm -rf $HOME/.ros/log
+compile_and_update_custom_dir $2
+time roslaunch lab4 lab4.launch
 else
 # Literlly else
 echo "ERROR: You need to provide an argument!"
