@@ -22,7 +22,7 @@
 # SOFTWARE.
 
 start=$SECONDS
-echo "Last Updated at 2020-11-19 17:38 EDT/EST"
+echo "Last Updated at 2021-01-20 12:21"
 sleep 3
 echo -e "INFO: Are you running this script as root or sudo? \c"
 if [[ $EUID -ne 0 ]]; then
