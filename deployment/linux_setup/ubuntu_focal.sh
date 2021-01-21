@@ -53,7 +53,7 @@ function install_virtualbox_official(){
 echo "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib" | tee /etc/apt/sources.list.d/virtualbox.list
 wget https://www.virtualbox.org/download/oracle_vbox_2016.asc
 apt-key add oracle_vbox_2016.asc && rm -rf oracle_vbox_2016.asc
-apt update
+apt update -y
 }
 function post_install_ROS(){
 echo "INFO: Doing post-installation of ROS"
