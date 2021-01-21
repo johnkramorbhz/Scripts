@@ -22,7 +22,7 @@
 # SOFTWARE.
 
 start=$SECONDS
-echo "Last Updated at 2021-01-21 00:10"
+echo "Last Updated at 2021-01-21 01:21"
 sleep 3
 echo -e "INFO: Are you running this script as root or sudo? \c"
 if [[ $EUID -ne 0 ]]; then
@@ -84,7 +84,7 @@ apt-get update -y
 apt-get upgrade -y
 add-apt-repository -y ppa:wireshark-dev/stable
 add-apt-repository -y ppa:kelleyk/emacs
-apt install -y curl python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool --install-suggests
+apt install -y curl python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool
 curl -sL https://deb.nodesource.com/setup_14.x | bash -
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 apt install -y utop ocaml iverilog wget libtool-bin cmake libproxy-dev uuid-dev liblzo2-dev autoconf automake bash bison \
