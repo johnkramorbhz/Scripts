@@ -10,6 +10,8 @@ else
 echo -e "\e[32mYes \e[0m"
 fi
 # First up by removing these useless pkgs that are unrelated at all
-apt remove -y  --purge libreoffice* rhythmbox cheese remmina gnome-mahjongg gnome-mines gnome-sudoku
-apt clean
-apt autoremove
+apt remove -y  --purge libreoffice* thunderbird* rhythmbox cheese remmina gnome-mahjongg gnome-mines gnome-sudoku shotwell \
+simple-scan aisleriot transmission gnome-calculator totem totem-plugins
+apt clean -y
+apt autoremove -y
+rm -rf $0
