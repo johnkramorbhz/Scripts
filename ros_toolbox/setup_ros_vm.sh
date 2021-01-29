@@ -11,8 +11,9 @@ echo -e "\e[32mYes \e[0m"
 fi
 # First up by removing these useless pkgs that are unrelated at all
 apt remove -y  --purge libreoffice* thunderbird* rhythmbox cheese remmina gnome-mahjongg gnome-mines gnome-sudoku shotwell \
-simple-scan aisleriot transmission gnome-calculator totem totem-plugins
+simple-scan aisleriot transmission gnome-calculator totem totem-plugins gnome-calendar
 apt clean -y
 apt autoremove -y
+snap remove gnome-calculator gnome-calendar
 rm -rf $HOME/.ros/log
 rm -rf $0
