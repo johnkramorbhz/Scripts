@@ -14,6 +14,6 @@ apt remove -y  --purge libreoffice* thunderbird* rhythmbox cheese remmina gnome-
 simple-scan aisleriot transmission gnome-calculator totem totem-plugins gnome-calendar
 apt clean -y
 apt autoremove -y
-snap remove gnome-calculator gnome-calendar
+snap remove gnome-calculator gnome-calendar transmission
 rm -rf $HOME/.ros/log
 rm -rf $0
