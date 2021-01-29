@@ -3,22 +3,26 @@ import os,sys,json
 from os.path import expanduser
 branch="main"
 major=3
-SCRIPT_API_level=1
-bug_fixes=1
-suffix="development"
+SCRIPT_API_level=2
+bug_fixes=0
+suffix=""
 if suffix != "":
     version=str(major)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)+"_"+suffix
 else:
     version=str(major)+"."+str(SCRIPT_API_level)+"."+str(bug_fixes)
-default_value_of_rostools = {"format_level": 2,
+default_value_of_rostools = {"format_level": 3,
 "debug": False,
 "generated_from": version,
 "no_HW_acceleration": False,
-"catkin_path": "$HOME/catkin_ws"
+"catkin_path": "$HOME/catkin_ws",
+"override_updater": False,
+"shell_url":"",
+"pycode_url":"",
+"usage_url":""
 }
 home = expanduser("~")
 data = default_value_of_rostools
-timestamp="2020-10-22 22:00"
+timestamp="2021-01-28 19:00"
 #print(default_value_of_rostools)
 def print_start():
     print("ROS Tools")
@@ -40,10 +44,12 @@ def upgrade_this_script():
         print("ERROR: You must run this script as root or sudo in order to upgrade")
         sys.exit(1)
     else:
-        print("Exit code:",os.system("wget -q --no-cache -O /bin/ros_tools https://raw.githubusercontent.com/johnkramorbhz/ROS_Toolbox/main/ros_tools.py && chmod 777 /bin/ros_tools && echo \"Update ROS Tools successfully\" && wget -O /bin/ros_bashtools --no-cache -q https://raw.githubusercontent.com/johnkramorbhz/ROS_Toolbox/main/ros_tools.sh && chmod 777 /bin/ros_bashtools && echo \"Update Complete!\" ; echo \"ROS Tools version:\" ; ros_tools -v; echo \"ROS Bash Tools version:\"; ros_bashtools -v"))       
+        pycode_url=""
+        shell_url=""
+        print("Exit code:",os.system("wget -q --no-cache -O /usr/bin/rostools "+pycode_url+" && chmod 777 /usr/bin/rostools && echo \"Update ROS Tools successfully\" && wget -O /usr/bin/ros_bashtools --no-cache -q "+shell_url+" && chmod 777 /usr/bin/ros_bashtools && echo \"Update Complete!\" ; echo \"ROS Tools version:\" ; ros_tools -v; echo \"ROS Bash Tools version:\"; ros_bashtools -v"))       
 def print_help():
     print("ROS Toolbox Help")
-    print("Usage can be found on https://github.com/johnkramorbhz/ROS_Toolbox")
+    print("Usage can be found on https://github.com/johnkramorbhz/Scripts/tree/main/ros_toolbox")
 def generate_default_config():
     with open(home+'/ros_tools.config.json', 'w+') as json_file:
         json.dump(default_value_of_rostools, json_file,indent=4,sort_keys=True)
