@@ -21,9 +21,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-start=$SECONDS
-echo "Last Updated at 2021-01-21 01:21"
+echo "Last Updated at 2021-01-30 16:50"
 sleep 3
+start=$SECONDS
 echo -e "INFO: Are you running this script as root or sudo? \c"
 if [[ $EUID -ne 0 ]]; then
    echo -e "\e[31mNo \e[0m"
@@ -55,12 +55,12 @@ exit 0
 fi
 echo 'INFO: Installing all needed compilers packages'
 function install_swift(){
-wget https://swift.org/builds/swift-5.3.2-release/ubuntu1804/swift-5.3.2-RELEASE/swift-5.3.2-RELEASE-ubuntu18.04.tar.gz
-tar xzf swift-5.3.2-RELEASE-ubuntu18.04.tar.gz
-mv swift-5.3.2-RELEASE-ubuntu18.04 /usr/share/swift
+wget https://swift.org/builds/swift-5.3.3-release/ubuntu1804/swift-5.3.3-RELEASE/swift-5.3.3-RELEASE-ubuntu18.04.tar.gz
+tar xzf swift-5.3.3-RELEASE-ubuntu18.04.tar.gz
+mv swift-5.3.3-RELEASE-ubuntu18.04 /usr/share/swift
 echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> /etc/bash.bashrc
 source  /etc/bash.bashrc
-rm -rf swift-5.3.2-RELEASE-ubuntu20.04.tar.gz
+rm -rf swift-5.3.3-RELEASE-ubuntu20.04.tar.gz
 }
 function install_ROS_pre_reqs(){
 sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
