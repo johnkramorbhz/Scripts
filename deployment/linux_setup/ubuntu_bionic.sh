@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-echo "Last Updated at 2021-01-30 16:50"
+echo "Last Updated at 2021-01-30 16:51"
 sleep 3
 start=$SECONDS
 echo -e "INFO: Are you running this script as root or sudo? \c"
@@ -60,7 +60,7 @@ tar xzf swift-5.3.3-RELEASE-ubuntu18.04.tar.gz
 mv swift-5.3.3-RELEASE-ubuntu18.04 /usr/share/swift
 echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> /etc/bash.bashrc
 source  /etc/bash.bashrc
-rm -rf swift-5.3.3-RELEASE-ubuntu20.04.tar.gz
+rm -rf swift-5.3.3-RELEASE-ubuntu18.04.tar.gz
 }
 function install_ROS_pre_reqs(){
 sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
