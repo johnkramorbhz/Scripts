@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-echo "Last Updated at 2021-01-29 19:30"
+echo "Last Updated at 2021-01-30 16:50"
 sleep 3
 start=$SECONDS
 echo -e "INFO: Are you running this script as root or sudo? \c"
@@ -41,7 +41,7 @@ else
 echo -e "\e[32mYes \e[0m"
 fi
 function install_swift(){
-swift_version="5.3.2"
+swift_version="5.3.3"
 wget https://swift.org/builds/swift-$swift_version-release/ubuntu2004/swift-$swift_version-RELEASE/swift-$swift_version-RELEASE-ubuntu20.04.tar.gz
 tar xzf swift-$swift_version-RELEASE-ubuntu20.04.tar.gz
 mv swift-$swift_version-RELEASE-ubuntu20.04 /usr/share/swift
@@ -66,17 +66,20 @@ function common_pre_reqs(){
 #ROS packages
 sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+# ROS2 packages
+sh -c 'echo "deb [arch=$(dpkg --print-architecture)] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2-latest.list'
 # END of ROS packages
 apt update -y
 apt upgrade -y
 apt dist-upgrade -y
 apt-get update -y
 apt-get upgrade -y
-apt install -y curl --install-suggests
+apt install -y curl gnupg2 lsb-release --install-suggests
 add-apt-repository -y universe
 add-apt-repository -y restricted
 add-apt-repository -y multiverse
 curl -sL https://deb.nodesource.com/setup_14.x | bash -
+curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 apt install -y curl python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool \
 packagekit-gtk3-module libcanberra-gtk-module libcanberra-gtk3-module
 snap install --classic kotlin
@@ -99,7 +102,7 @@ libxml-parser-perl gcc-multilib gconf-editor libxml2-dev g++-multilib gitk libnc
 libncurses5-dev libvorbis-dev git autopoint autogen sed build-essential intltool libglib2.0-dev \
 xutils-dev lib32z1-dev lib32stdc++6 xsltproc gtk-doc-tools clang gdb valgrind default-jdk ruby-full libglu1-mesa-dev \
 texlive-full texmaker network-manager-openconnect-gnome vpnc ros-noetic-desktop-full \
-network-manager-vpnc network-manager-vpnc-gnome nodejs \
+network-manager-vpnc network-manager-vpnc-gnome nodejs ros-foxy-desktop\
 gdebi-core libxmu-dev libxi-dev libglu1-mesa python3-pip \
 libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev \
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
@@ -117,7 +120,9 @@ pip3 install --upgrade tensorflow requests
 # Skip CUDA installation if not in WSL2
 cat /proc/version | grep "5.4" >> /dev/null
 if [ "$?" -ne 0 ]; then
-echo "INFO: Not in WSL2" 
+echo "INFO: Not in WSL2 or your WSL2 kernel is not up to date." 
+echo "INFO: Here is your kernel version"
+uname -r
 exit 0
 fi
 sh -c 'echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda.list'
@@ -135,7 +140,7 @@ install_virtualbox_official
 
 apt install -y utop ocaml iverilog wget libtool-bin cmake libproxy-dev uuid-dev liblzo2-dev autoconf automake bash bison \
 bzip2 diffutils file flex m4 g++ gawk groff-base libncurses-dev libtool libslang2 make patch perl pkg-config shtool \
-subversion tar texinfo zlib1g zlib1g-dev git-core gettext libexpat1-dev libssl-dev cvs gperf unzip \
+subversion tar texinfo zlib1g zlib1g-dev git-core gettext libexpat1-dev libssl-dev cvs gperf unzip ros-foxy-desktop \
 libxml-parser-perl gcc-multilib gconf-editor libxml2-dev g++-multilib gitk libncurses5 mtd-utils \
 libncurses5-dev libvorbis-dev git autopoint autogen sed build-essential intltool libelf1:i386 libglib2.0-dev \
 xutils-dev lib32z1-dev lib32stdc++6 xsltproc gtk-doc-tools clang gdb valgrind default-jdk ruby-full libglu1-mesa-dev \
