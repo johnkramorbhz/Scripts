@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-echo "Last Updated at 2021-01-21 01:21"
+echo "Last Updated at 2021-01-29 19:30"
 sleep 3
 start=$SECONDS
 echo -e "INFO: Are you running this script as root or sudo? \c"
@@ -115,7 +115,7 @@ install_swift
 # End of install_swift()
 pip3 install --upgrade tensorflow requests
 # Skip CUDA installation if not in WSL2
-cat /proc/version | grep "4.19" >> /dev/null
+cat /proc/version | grep "5.4" >> /dev/null
 if [ "$?" -ne 0 ]; then
 echo "INFO: Not in WSL2" 
 exit 0
