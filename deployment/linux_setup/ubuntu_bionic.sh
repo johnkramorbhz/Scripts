@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-echo "Last Updated at 2021-01-30 16:51"
+echo "Last Updated at 2021-02-01 15:55"
 sleep 3
 start=$SECONDS
 echo -e "INFO: Are you running this script as root or sudo? \c"
@@ -99,7 +99,7 @@ gdebi-core libxmu-dev libxi-dev libglu1-mesa \
 libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev \
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
 python-imaging-tk docker.io unattended-upgrades binutils qemu-kvm qemu virt-manager virt-viewer libvirt-bin bochs \
-r-base gdb libpython2.7 libpython2.7-dev ros-melodic-desktop-full libcanberra-gtk-module 
+r-base gdb libpython2.7 libpython2.7-dev ros-melodic-desktop-full libcanberra-gtk-module scala
 # Go to install_swift()
 install_swift
 # End of install_swift()
@@ -139,7 +139,7 @@ libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
 python-imaging-tk docker.io unattended-upgrades binutils qemu-kvm qemu virt-manager virt-viewer libvirt-bin bochs \
 r-base libncurses5-dev libncursesw5-dev libncurses5-dev:i386 libncursesw5-dev:i386 libx11-6:i386 libxpm4:i386 gdb libpython2.7 libpython2.7-dev \
-libcanberra-gtk-module
+libcanberra-gtk-module scala
 # Go to install_swift()
 install_swift
 # End of install_swift()

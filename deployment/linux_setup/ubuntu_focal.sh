@@ -20,7 +20,8 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-echo "Last Updated at 2021-01-30 16:50"
+
+echo "Last Updated at 2021-02-01 15:55"
 sleep 3
 start=$SECONDS
 echo -e "INFO: Are you running this script as root or sudo? \c"
@@ -81,7 +82,7 @@ add-apt-repository -y multiverse
 curl -sL https://deb.nodesource.com/setup_14.x | bash -
 curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 apt install -y curl python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool \
-packagekit-gtk3-module libcanberra-gtk-module libcanberra-gtk3-module
+packagekit-gtk3-module libcanberra-gtk-module libcanberra-gtk3-module scala
 snap install --classic kotlin
 snap install htop
 }
