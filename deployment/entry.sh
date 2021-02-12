@@ -1,7 +1,7 @@
 #!/bin/bash
 # MIT License
 
-# Copyright (c) 2020 johnkramorbhz
+# Copyright (c) 2018-2021 johnkramorbhz
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-echo "Last Updated at 2020-09-30 23:10 EDT/EST"
+echo "Last Updated at 2021-02-11 21:52"
 sleep 3
 echo "INFO: Hello there, $USER@$HOSTNAME!"
 echo -e "INFO: Script started at $(date '+%d %h %Y %H:%M:%S')"
@@ -122,7 +122,7 @@ echo "ERROR: Failed to download"
 exit 1
 fi
 # Only CentOS is officially supported
-elif [ '$OSID" = "ID="centos"' ]; then
+elif [ "$OSID" = "ID=\"centos\"" ]; then
 echo -e "INFO: Starting installer for CentOS $(cat /etc/centos-release | tr -dc '0-9.'|cut -d \. -f1)"
 wget -O centos_setup.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/linux_setup/centos_$(cat /etc/centos-release | tr -dc '0-9.'|cut -d \. -f1).sh
 if [ "$?" -ne 0 ]; then
