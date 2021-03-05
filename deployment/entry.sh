@@ -130,6 +130,9 @@ echo "ERROR: Your CentOS version is not supported."
 echo -e "Your major version is $(cat /etc/centos-release | tr -dc '0-9.'|cut -d \. -f1), and I support 8 at this time."
 exit 1
 fi
+# As CentOS announced in 8th December 2020, CentOS 8 retires at the end of 2021.
+# https://blog.centos.org/2020/12/future-is-centos-stream/
+warning_eol
 if [ -e "centos_setup.sh" ]; then
 bash ./centos_setup.sh
 echo "INFO: Cleaning up..."
