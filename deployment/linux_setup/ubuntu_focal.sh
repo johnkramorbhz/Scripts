@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-echo "Last Updated at 2021-02-01 15:55"
+echo "Last Updated at 2021-03-27 00:42"
 sleep 3
 start=$SECONDS
 echo -e "INFO: Are you running this script as root or sudo? \c"
@@ -151,7 +151,7 @@ filezilla transmission gnome-shell-extensions gdebi-core grub-customizer libxmu-
 libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev \
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
 python-imaging-tk docker.io unattended-upgrades binutils qemu-kvm qemu virt-manager bochs python3-pip \
-r-base libncurses5-dev libncursesw5-dev libncurses5-dev:i386 libncursesw5-dev:i386 libx11-6:i386 libxpm4:i386 gdb
+r-base libncurses5-dev libncursesw5-dev libncurses5-dev:i386 libncursesw5-dev:i386 libx11-6:i386 libxpm4:i386 gdb lm-sensors
 pip3 install --upgrade tensorflow requests
 # Post installation of ROS
 post_install_ROS
@@ -167,12 +167,14 @@ snap install libreoffice
 snap install code --classic
 snap install vlc
 if [ "$1" = "--nvidia" ]; then
+add-apt-repository ppa:graphics-drivers/ppa
+ubuntu-drivers install
 # wget -O nvidia_driver.run https://us.download.nvidia.com/XFree86/Linux-x86_64/455.23.04/NVIDIA-Linux-x86_64-455.23.04.run
 # sh nvidia_driver.run
-wget -O cuda.run https://developer.download.nvidia.com/compute/cuda/11.2.0/local_installers/cuda_11.2.0_460.27.04_linux.run
-sh cuda.run
-echo 'export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}' >> /etc/bash.bashrc
-source /etc/bash.bashrc
+# wget -O cuda.run https://developer.download.nvidia.com/compute/cuda/11.2.0/local_installers/cuda_11.2.0_460.27.04_linux.run
+# sh cuda.run
+# echo 'export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}' >> /etc/bash.bashrc
+# source /etc/bash.bashrc
 fi
 echo "INFO: Installing wireshark..."
 apt install -y wireshark --install-suggests
