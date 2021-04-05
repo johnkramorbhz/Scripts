@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-echo "Last Updated at 2021-03-27 00:42"
+echo "Last Updated at 2021-04-04 23:22"
 sleep 3
 start=$SECONDS
 echo -e "INFO: Are you running this script as root or sudo? \c"
@@ -84,7 +84,7 @@ curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo ap
 apt install -y curl python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool \
 packagekit-gtk3-module libcanberra-gtk-module libcanberra-gtk3-module scala
 snap install --classic kotlin
-snap install htop
+snap install htop tree
 }
 echo 'INFO: Installing all needed compilers packages'
 if [ "$1" = "--no-GUI" ]; then
