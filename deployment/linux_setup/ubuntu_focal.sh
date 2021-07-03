@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-echo "Last Updated at 2021-05-09 02:09"
+echo "Last Updated at 2021-07-02 21:10"
 sleep 3
 start=$SECONDS
 echo -e "INFO: Are you running this script as root or sudo? \c"
@@ -42,7 +42,7 @@ else
 echo -e "\e[32mYes \e[0m"
 fi
 function install_swift(){
-swift_version="5.3.3"
+swift_version="5.4.2"
 wget https://swift.org/builds/swift-$swift_version-release/ubuntu2004/swift-$swift_version-RELEASE/swift-$swift_version-RELEASE-ubuntu20.04.tar.gz
 tar xzf swift-$swift_version-RELEASE-ubuntu20.04.tar.gz
 mv swift-$swift_version-RELEASE-ubuntu20.04 /usr/share/swift
@@ -66,7 +66,6 @@ source /etc/bash.bashrc
 function common_pre_reqs(){
 #ROS packages
 sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 # ROS2 packages
 sh -c 'echo "deb [arch=$(dpkg --print-architecture)] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2-latest.list'
 # END of ROS packages
@@ -79,8 +78,9 @@ apt install -y curl gnupg2 lsb-release --install-suggests
 add-apt-repository -y universe
 add-apt-repository -y restricted
 add-apt-repository -y multiverse
-curl -sL https://deb.nodesource.com/setup_14.x | bash -
+curl -sL https://deb.nodesource.com/setup_16.x | bash -
 curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg
 apt install -y curl python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool \
 packagekit-gtk3-module libcanberra-gtk-module libcanberra-gtk3-module scala
 snap install --classic kotlin
