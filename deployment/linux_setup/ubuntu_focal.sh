@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-echo "Last Updated at 2021-04-04 23:22"
+echo "Last Updated at 2021-05-09 02:09"
 sleep 3
 start=$SECONDS
 echo -e "INFO: Are you running this script as root or sudo? \c"
@@ -109,6 +109,7 @@ libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
 python-imaging-tk docker.io unattended-upgrades binutils bochs \
 r-base gdb
+pip3 install numpy matplotlib
 # Post installation of ROS
 post_install_ROS
 cat /etc/bash.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null || post_install_ROS
@@ -152,7 +153,7 @@ libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev
 libgtk-3-dev libopenblas-dev libatlas-base-dev liblapack-dev gfortran libhdf5-serial-dev python3-dev python3-tk \
 python-imaging-tk docker.io unattended-upgrades binutils qemu-kvm qemu virt-manager bochs python3-pip \
 r-base libncurses5-dev libncursesw5-dev libncurses5-dev:i386 libncursesw5-dev:i386 libx11-6:i386 libxpm4:i386 gdb lm-sensors
-pip3 install --upgrade tensorflow requests
+pip3 install --upgrade tensorflow requests numpy matplotlib
 # Post installation of ROS
 post_install_ROS
 cat /etc/bash.bashrc| grep "source /opt/ros/noetic/setup.bash" >> /dev/null || post_install_ROS
