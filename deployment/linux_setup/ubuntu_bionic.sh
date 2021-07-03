@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-echo "Last Updated at 2021-02-01 15:55"
+echo "Last Updated at 2021-07-02 21:17"
 sleep 3
 start=$SECONDS
 echo -e "INFO: Are you running this script as root or sudo? \c"
@@ -55,16 +55,16 @@ exit 0
 fi
 echo 'INFO: Installing all needed compilers packages'
 function install_swift(){
-wget https://swift.org/builds/swift-5.3.3-release/ubuntu1804/swift-5.3.3-RELEASE/swift-5.3.3-RELEASE-ubuntu18.04.tar.gz
-tar xzf swift-5.3.3-RELEASE-ubuntu18.04.tar.gz
-mv swift-5.3.3-RELEASE-ubuntu18.04 /usr/share/swift
+wget https://swift.org/builds/swift-5.4.2-release/ubuntu1804/swift-5.4.2-RELEASE/swift-5.4.2-RELEASE-ubuntu18.04.tar.gz
+tar xzf swift-5.4.2-RELEASE-ubuntu18.04.tar.gz
+mv swift-5.4.2-RELEASE-ubuntu18.04 /usr/share/swift
 echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> /etc/bash.bashrc
 source  /etc/bash.bashrc
-rm -rf swift-5.3.3-RELEASE-ubuntu18.04.tar.gz
+rm -rf swift-5.4.2-RELEASE-ubuntu18.04.tar.gz
 }
 function install_ROS_pre_reqs(){
 sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 }
 function post_install_ROS(){
 echo "source /opt/ros/melodic/setup.bash" >> /etc/bash.bashrc
@@ -76,7 +76,6 @@ fi
 if [ "$1" = "--no-GUI" ]; then
 echo "INFO: Running in no GUI mode..."
 sleep 3
-install_ROS_pre_reqs
 apt update -y
 apt upgrade -y
 apt dist-upgrade -y
@@ -85,7 +84,8 @@ apt-get upgrade -y
 add-apt-repository -y ppa:wireshark-dev/stable
 add-apt-repository -y ppa:kelleyk/emacs
 apt install -y curl python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool
-curl -sL https://deb.nodesource.com/setup_14.x | bash -
+curl -sL https://deb.nodesource.com/setup_16.x | bash -
+install_ROS_pre_reqs
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 apt install -y utop ocaml iverilog wget libtool-bin cmake libproxy-dev uuid-dev liblzo2-dev autoconf automake bash bison \
 bzip2 diffutils file flex m4 g++ gawk groff-base libncurses-dev libtool libslang2 make patch perl pkg-config shtool \
@@ -123,7 +123,7 @@ add-apt-repository -y universe
 add-apt-repository -y ppa:communitheme/ppa
 add-apt-repository -y ppa:danielrichter2007/grub-customizer
 apt install -y curl --install-suggests
-curl -sL https://deb.nodesource.com/setup_14.x | bash -
+curl -sL https://deb.nodesource.com/setup_16.x | bash -
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'
 apt install -y utop ocaml iverilog wget libtool-bin cmake libproxy-dev uuid-dev liblzo2-dev autoconf automake bash bison \
@@ -172,4 +172,3 @@ rm -rf google-chrome-stable_current_amd64.deb
 duration=$(( SECONDS - start ))
 echo -e "\nINFO: Installing all packages is now finished"
 echo "It takes $duration second(s) to finish above operations"
-echo "Run 'pintos_ubuntu.sh' as yourself to install Pintos"
