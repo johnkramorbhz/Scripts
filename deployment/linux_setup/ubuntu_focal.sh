@@ -56,7 +56,7 @@ function CUDA_WSL2_pkgs(){
 sh -c 'echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda.list'
 apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub
 apt update
-apt install -y cuda-toolkit-11-0 --install-suggests
+apt install -y cuda-toolkit-11-4 --install-suggests
 }
 function install_swift(){
 if [ -e "swift-$swift_version-RELEASE-ubuntu20.04.tar.gz" ]; then   
