@@ -20,8 +20,8 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
-echo "Last Updated at 2021-07-02 21:10"
+swift_version="5.4.2"
+echo "Last Updated at 2021-08-09 22:17"
 sleep 3
 start=$SECONDS
 echo -e "INFO: Are you running this script as root or sudo? \c"
@@ -35,20 +35,38 @@ echo -e "\e[32mYes \e[0m"
 fi
 echo -e "INFO: Are you running this script on x86_64 architecture? \c"
 if [[ $(uname -m) != "x86_64" ]]; then
-   echo -e "\e[31mNo \e[0m"
+   echo -e "\e[31mNo\e[0m"
    echo "ERROR: You cannot use this script on a non x86_64 machines like ARM, x86, or etc."
    exit 2
 else
-echo -e "\e[32mYes \e[0m"
+echo -e "\e[32mYes\e[0m"
 fi
+function post_cleanup(){
+echo "INFO: Cleaning up..."
+apt-get clean -y
+apt-get autoremove -y
+rm -rf swift-$swift_version-RELEASE-ubuntu20.04.tar.gz
+rm -rf /usr/share/applications/ocaml.desktop
+rm -rf google-chrome-stable_current_amd64.deb
+duration=$(( SECONDS - start ))
+echo -e "\nINFO: Installing all packages is now finished"
+echo "It takes $duration second(s) to finish above operations"
+}
+function CUDA_WSL2_pkgs(){
+sh -c 'echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda.list'
+apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub
+apt update
+apt install -y cuda-toolkit-11-0 --install-suggests
+}
 function install_swift(){
-swift_version="5.4.2"
-wget https://swift.org/builds/swift-$swift_version-release/ubuntu2004/swift-$swift_version-RELEASE/swift-$swift_version-RELEASE-ubuntu20.04.tar.gz
+if [ -e "swift-$swift_version-RELEASE-ubuntu20.04.tar.gz" ]; then   
 tar xzf swift-$swift_version-RELEASE-ubuntu20.04.tar.gz
 mv swift-$swift_version-RELEASE-ubuntu20.04 /usr/share/swift
 echo "export PATH=/usr/share/swift/usr/bin:$PATH" >> /etc/bash.bashrc
 source /etc/bash.bashrc
-rm -rf swift-$swift_version-RELEASE-ubuntu20.04.tar.gz
+else
+echo "INFO: Cannot see the swift binaries, skip"
+fi
 }
 function install_virtualbox_official(){
 echo "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib" | tee /etc/apt/sources.list.d/virtualbox.list
@@ -64,6 +82,7 @@ echo "source /opt/ros/noetic/setup.bash" >> /etc/bash.bashrc
 source /etc/bash.bashrc
 }
 function common_pre_reqs(){
+wget -bqc https://swift.org/builds/swift-$swift_version-release/ubuntu2004/swift-$swift_version-RELEASE/swift-$swift_version-RELEASE-ubuntu20.04.tar.gz   
 #ROS packages
 sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 # ROS2 packages
@@ -86,13 +105,8 @@ packagekit-gtk3-module libcanberra-gtk-module libcanberra-gtk3-module scala
 snap install --classic kotlin
 snap install htop tree
 }
-echo 'INFO: Installing all needed compilers packages'
-if [ "$1" = "--no-GUI" ]; then
-cat /proc/version | grep microsoft >> /dev/null
-if [ "$?" -ne 0 ]; then
-echo "ERROR: It is not WSL"
-exit 1
-fi
+# Traditional WSL and WSL2 packages.
+function install_headless_pkgs(){
 echo "INFO: Running in no GUI mode..."
 sleep 3
 common_pre_reqs
@@ -119,24 +133,10 @@ cat /etc/bash.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null || 
 install_swift
 # End of install_swift()
 pip3 install --upgrade tensorflow requests
-# Skip CUDA installation if not in WSL2
-cat /proc/version | grep "5.4" >> /dev/null
-if [ "$?" -ne 0 ]; then
-echo "INFO: Not in WSL2 or your WSL2 kernel is not up to date." 
-echo "INFO: Here is your kernel version"
-uname -r
-exit 0
-fi
-sh -c 'echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda.list'
-apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub
-apt update
-apt install -y cuda-toolkit-11-0 --install-suggests
-exit 0
-fi
-if [ "$1" = "--init-ROS" ]; then
-cat /etc/bash.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null || post_install_ROS
-fi
-# Everything else
+
+}
+# The WSL2 with Windows 11 support both X.Org and Wayland display servers so just install standard packages and also CUDA WSL2 libraries.
+function install_full_pkgs(){
 common_pre_reqs
 install_virtualbox_official
 
@@ -167,7 +167,11 @@ snap install slack --classic
 snap install libreoffice
 snap install code --classic
 snap install vlc
-if [ "$1" = "--nvidia" ]; then
+cat /proc/version | grep "5.10" >> /dev/null && cat /proc/version | grep "WSL2" >> /dev/null && CUDA_WSL2_pkgs
+}
+function install_nv_drivers_and_full_pkgs(){
+# Everything else
+install_full_pkgs
 add-apt-repository ppa:graphics-drivers/ppa
 ubuntu-drivers install
 # wget -O nvidia_driver.run https://us.download.nvidia.com/XFree86/Linux-x86_64/455.23.04/NVIDIA-Linux-x86_64-455.23.04.run
@@ -176,14 +180,35 @@ ubuntu-drivers install
 # sh cuda.run
 # echo 'export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}' >> /etc/bash.bashrc
 # source /etc/bash.bashrc
-fi
 echo "INFO: Installing wireshark..."
 apt install -y wireshark --install-suggests
-echo "INFO: Cleaning up..."
-apt-get clean -y
-apt-get autoremove -y
-rm -rf /usr/share/applications/ocaml.desktop
-rm -rf google-chrome-stable_current_amd64.deb
-duration=$(( SECONDS - start ))
-echo -e "\nINFO: Installing all packages is now finished"
-echo "It takes $duration second(s) to finish above operations"
+}
+
+echo 'INFO: Installing all needed compilers packages'
+if [ "$1" = "--no-GUI" ]; then
+cat /proc/version | grep microsoft >> /dev/null
+if [ "$?" -ne 0 ]; then
+echo "ERROR: It is not WSL"
+exit 1
+fi
+install_headless_pkgs
+# Skip CUDA installation if not in WSL2
+cat /proc/version | grep "5.4" >> /dev/null || cat /proc/version | grep "5.10" >> /dev/null && cat /proc/version | grep "WSL2" >> /dev/null
+if [ "$?" -ne 0 ]; then
+echo "INFO: Your WSL 2 kernel is not up to date." 
+echo "INFO: Here is your kernel version"
+uname -r
+exit 0
+else
+CUDA_WSL2_pkgs
+fi
+fi
+if [ "$1" = "--init-ROS" ]; then
+cat /etc/bash.bashrc | grep "source /opt/ros/noetic/setup.bash" >> /dev/null || post_install_ROS
+fi
+if [ "$1" = "--nvidia" ]; then
+install_nv_drivers_and_full_pkgs
+fi
+if [ "$1" = "--full-pkgs" ]; then
+install_full_pkgs
+fi

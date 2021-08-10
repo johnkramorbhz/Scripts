@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-echo "Last Updated at 2021-03-05 03:11"
+echo "Last Updated at 2021-08-09 22:17"
 sleep 3
 echo "INFO: Hello there, $USER@$HOSTNAME!"
 echo -e "INFO: Script started at $(date '+%d %h %Y %H:%M:%S')"
@@ -111,7 +111,7 @@ rm -rf entry.sh
 rm -rf ubuntu_setup.sh
 exit 0
 fi
-bash ./ubuntu_setup.sh
+bash ./ubuntu_setup.sh --full-pkgs
 echo "INFO: Cleaning up installation scripts..."
 rm -rf entry.sh
 rm -rf ubuntu_setup.sh
