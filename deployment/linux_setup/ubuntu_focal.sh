@@ -1,7 +1,7 @@
 #!/bin/bash
 # MIT License
 
-# Copyright (c) 2020 johnkramorbhz
+# Copyright (c) 2020-2022 johnkramorbhz
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-swift_version="5.4.2"
-echo "Last Updated at 2021-08-09 22:17"
+swift_version="5.5.3"
+echo "Last Updated at 2022-03-01 17:35"
 sleep 3
 start=$SECONDS
 echo -e "INFO: Are you running this script as root or sudo? \c"
