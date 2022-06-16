@@ -32,11 +32,7 @@ c.com
 ## Important notice
 If you want pintos binaries, you have to use 18.04 LTS instead of anything newer than 18.04 LTS that are supported right now, because Ubuntu dropped `i386` packages in 2019.
 
-So the `cse421.sh` will only work with Ubuntu 18.04 LTS(Bionic Beaver). If you are intent to use this script anyway, you probably already know what you are doing and you probably already inspecting this script.
-
 ## What are these?
 `ubuntu_bionic.sh` is the Ubuntu 18.04 install script, which is the first Ubuntu LTS distribution that I support.
 
 `ubuntu_focal.sh` is the Ubuntu 20.04 install script.
-
-`cse4521.sh` is a mini script that only setup the `pintos` environment used by many OS classes around the universities. 

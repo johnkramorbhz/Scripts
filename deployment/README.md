@@ -28,11 +28,11 @@ source ~/.bashrc
 ```
 
 ## How to run this script
-Intel, AMD Display Adapter, and WSL2 on Windows 10 (21H2 or later) / Windows 11 `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh && sudo bash entry.sh`
+Intel GPUs, [certain NVIDIA GPUs](https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus), AMD GPUs, and WSL2 on Windows 10 (21H2 or later) / Windows 11 `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh && sudo bash entry.sh`
 
-NVIDIA Display Adapter `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh && sudo bash entry.sh --nvidia`
+All other NVIDIA GPUs that require NVIDIA Proprietary Driver (This option is no longer available Ubuntu 22.04 and above) `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh && sudo bash entry.sh --nvidia`
 
-WSL & WSL2 without GUI support `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh && sudo bash entry.sh --no-GUI`
+WSL & WSL2 without GUI applications `wget -O entry.sh https://github.com/johnkramorbhz/Scripts/raw/main/deployment/entry.sh && sudo bash entry.sh --no-GUI`
 
 ## If you have older setup scripts that installs older `nodejs`, use the following command to upgrade to the latest LTS.
 
