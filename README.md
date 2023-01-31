@@ -11,11 +11,11 @@
 
 ## Interesting project(s) inside this repo
 
-[CSE489 & CSE589 auto-test scripts](https://github.com/johnkramorbhz/Scripts/tree/main/unit_tests/CSE489) **No longer in an active development**
+[CSE489 & CSE589 auto-test scripts](./unit_tests/CSE489) 
 
-[Ubuntu automatic setup script](https://github.com/johnkramorbhz/Scripts/tree/main/deployment)
+[Ubuntu automatic setup script](./deployment)
 
-[ROS Toolbox](https://github.com/johnkramorbhz/Scripts/tree/main/ros_toolbox) **In active development**
+[ROS Toolbox](./ros_toolbox) 
 
 ## Licence
 
